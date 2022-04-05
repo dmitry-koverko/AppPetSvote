@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
 }
 
 android {
@@ -32,16 +31,8 @@ android {
 
 dependencies {
 
-    //DAGGER
-    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
-
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-
-    testImplementation "junit:junit:$junitVersion1"
-    androidTestImplementation "androidx.test.ext:junit:$junitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
 }
