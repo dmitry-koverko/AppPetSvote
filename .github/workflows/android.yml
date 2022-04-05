@@ -17,8 +17,13 @@ jobs:
             ./gradlew bundleDebug
             ./gradlew assembleRelease
             ./gradlew bundleRelease
-      - name: Upload APK
+      - name: Upload Degug APK
         uses: actions/upload-artifact@v3
         with:
           name: app-debug.apk
-          path: app/app-debug.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Upload Release-Unsigned APK
+        uses: actions/upload-artifact@v3
+        with:
+            name: app-release-unsigned.apk
+            path: app/build/outputs/apk/release/app-release-unsigned.apk
