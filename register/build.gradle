@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,6 +40,7 @@ dependencies {
     //DAGGER
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     implementation project(path: ':core')
+    implementation project(path: ':ui')
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"

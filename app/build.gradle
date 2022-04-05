@@ -37,6 +37,7 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     implementation 'androidx.navigation:navigation-fragment:2.4.1'
     implementation project(path: ':register')
+    implementation project(path: ':splash')
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"

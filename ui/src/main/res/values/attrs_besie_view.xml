@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="BesieView">
+        <attr name="bv_background_color" format="color" />
+        <attr name="bv_ripple_color" format="color" />
+    </declare-styleable>
+</resources>
