@@ -21,4 +21,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: app-debug.apk
-          path: app/app-debug-unsigned.apk
+          path: app/app-debug.apk
