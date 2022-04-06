@@ -1,13 +1,9 @@
-###  Вы можете использовать библиотеки или инструменты.
-- RxJava2, RxAndroid2
-- Модернизация, OkHttp, ведение журнала OkHttp
-- Гсон
-- Кинжал 2
+###  UI theme state day
+!(https://github.com/dmitry-koverko/AppPetSvote/blob/dev/src/images/splash_dark.png?raw=true)
 
-### Платформа  тестирования
-- Юнит
-- Мокито
-- Jacoco (тестовое покрытие)
-- Эспрессо (тестирование пользовательского интерфейса от Google )
+###  UI theme state night
+!(https://github.com/dmitry-koverko/AppPetSvote/blob/dev/src/images/splash_dark.png?raw=true)
 
-!(../src/images/splash)
+###  Fragment state
+- видимая картинка (скрывается по таймеру через 2 сек)
+- прогрессбар (виден, пока все данные во viewMode не подгрузятся)
