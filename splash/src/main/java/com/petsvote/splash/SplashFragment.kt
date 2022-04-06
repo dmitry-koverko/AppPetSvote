@@ -13,6 +13,7 @@ import com.petsvote.ui.ext.loadUrl
 
 class SplashFragment: BaseFragment(R.layout.fragment_splash), View.OnClickListener {
 
+    private val ICON_TIME: Long = 2000
     private var binding: FragmentSplashBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,7 +27,7 @@ class SplashFragment: BaseFragment(R.layout.fragment_splash), View.OnClickListen
         binding?.icon?.loadFromResources(com.petsvote.ui.R.drawable.icon)
         binding?.ripple?.mOnClickListener = this
 
-        object : CountDownTimer(1000, 1000) {
+        object : CountDownTimer(ICON_TIME, ICON_TIME) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {
                 binding?.icon?.isInvisible = true
