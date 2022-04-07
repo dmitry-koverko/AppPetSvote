@@ -1,0 +1,85 @@
+package com.petsvote.retrofit.di
+
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.petsvote.retrofit.SettingsApi
+import com.petsvote.retrofit.adapter.NetworkResponseAdapterFactory
+import com.petsvote.retrofit.api.UserApi
+import dagger.Module
+import dagger.Provides
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import java.util.concurrent.TimeUnit
+import javax.inject.Scope
+import javax.net.ssl.HttpsURLConnection
+
+private val contentType = "application/json".toMediaType()
+private val json = Json {
+    ignoreUnknownKeys = true
+}
+private val converterFactory = json.asConverterFactory(contentType)
+
+
+@Module
+class RetrofitModule {
+
+    @Provides
+    fun provideUserRetrofitApi(): UserApi {
+        return buildRetrofit(
+            getOkHttpClient(getHttpLoggingInterceptor()),
+            SettingsApi.BASE_URL)
+            .create(UserApi::class.java)
+    }
+
+    fun buildRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
+        return Retrofit.Builder().run {
+            baseUrl(url)
+            client(okHttpClient)
+            addCallAdapterFactory(NetworkResponseAdapterFactory())
+            addConverterFactory(converterFactory)
+            build()
+        }
+    }
+
+
+    fun getOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+    ): OkHttpClient {
+        val client: OkHttpClient.Builder = OkHttpClient().newBuilder()
+        client.apply {
+            readTimeout(SettingsApi.READ_TIMEOUT, TimeUnit.SECONDS)
+            connectTimeout(SettingsApi.CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            writeTimeout(SettingsApi.WRITE_TIMEOUT, TimeUnit.SECONDS)
+        }
+        client.addInterceptor(httpLoggingInterceptor).hostnameVerifier { p0, p1 ->
+            val hv = HttpsURLConnection.getDefaultHostnameVerifier()
+            hv.verify(SettingsApi.BASE_URL, p1)
+        }
+        return client.build()
+    }
+
+    fun getInstagramOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
+        val client: OkHttpClient.Builder = OkHttpClient().newBuilder()
+        client.apply {
+            readTimeout(SettingsApi.READ_TIMEOUT, TimeUnit.SECONDS)
+            connectTimeout(SettingsApi.CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            writeTimeout(SettingsApi.WRITE_TIMEOUT, TimeUnit.SECONDS)
+        }
+        client.addInterceptor(httpLoggingInterceptor).hostnameVerifier { p0, p1 ->
+            val hv = HttpsURLConnection.getDefaultHostnameVerifier()
+            hv.verify(SettingsApi.BASE_URL_INSTAGRAM, p1)
+        }
+        return client.build()
+    }
+
+    fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return httpLoggingInterceptor
+    }
+
+
+}

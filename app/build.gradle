@@ -32,12 +32,16 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':register')
+    implementation project(path: ':splash')
+    implementation project(path: ':retrofit')
+    implementation project(path: ':room')
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
 
     //DAGGER
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
-    implementation 'androidx.navigation:navigation-fragment:2.4.1'
-    implementation project(path: ':register')
-    implementation project(path: ':splash')
+    implementation "androidx.navigation:navigation-fragment:$navigationFragmentVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"

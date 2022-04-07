@@ -36,12 +36,15 @@ android {
 
 dependencies {
 
-    //DAGGER
-    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     implementation project(path: ':core')
     implementation project(path: ':ui')
+    implementation project(path: ':domain')
+
+    //DAGGER
+    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
+    implementation "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"

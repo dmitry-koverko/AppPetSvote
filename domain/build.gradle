@@ -36,6 +36,9 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxCoroutinesAndroidVersion"
+
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$junitVersionExt"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
