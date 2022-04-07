@@ -7,7 +7,11 @@
     <color name="bg_layers_4">#FFFFFF</color>
     <color name="status_bar_color">#1AFF2D55</color>
     <color name="progress_bar">#FF2D55</color>
+    <color name="text_color">#87000000</color>
 
+    //sign_in
+    <color name="bg_sign_in_with_google">#000000</color>
+    <color name="text_sign_in_with_google">#FFFFFF</color>
 
     <color name="ui_primary">#FF2D55</color>
     <color name="white">#FFFFFF</color>

@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <com.petsvote.ui.views.BesieView
-        android:id="@+id/sign_in"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        app:bv_background_color="@color/ui_primary"/>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/logo"
+            android:src="@drawable/icon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"/>
+
+        <com.petsvote.ui.views.SimpleSFTextView
+            style="@style/RegisterAppName"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.petsvote.ui.views.SimpleSFTextView
+            style="@style/RegisterDescriptionAppName"
+            android:layout_marginTop="6dp"
+            android:id="@+id/descr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.petsvote.ui.views.BesieLayout
+        style="@style/SignInWithGoogle"
+        android:id="@+id/signInWithGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <com.petsvote.ui.views.SimpleSFTextView
+            style="@style/SignButtonText"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </com.petsvote.ui.views.BesieLayout>
+
+</FrameLayout>

@@ -27,9 +27,9 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentRegisterBinding.bind(view)
-        binding?.signIn?.mOnClickListener = (View.OnClickListener {
-            signInGoogle()
-        })
+//        binding?.signInWithGoogle?.mOnClickListener = (View.OnClickListener {
+//            signInGoogle()
+//        })
     }
 
     private  fun signInGoogle(){

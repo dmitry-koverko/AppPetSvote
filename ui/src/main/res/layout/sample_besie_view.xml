@@ -10,4 +10,6 @@
         android:paddingBottom="40dp"
         app:bv_background_color="@color/ui_primary"/>
 
+
+
 </FrameLayout>
