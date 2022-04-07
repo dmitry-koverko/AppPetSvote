@@ -6,10 +6,9 @@
 
 
     <com.petsvote.ui.views.BesieView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:paddingLeft="20dp"
-        android:paddingBottom="40dp"
+        android:id="@+id/sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
         app:bv_background_color="@color/ui_primary"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

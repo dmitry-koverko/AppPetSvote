@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.log
 import com.petsvote.splash.databinding.FragmentSplashBinding
@@ -45,6 +46,7 @@ class SplashFragment: BaseFragment(R.layout.fragment_splash) {
             override fun onFinish() {
                 binding?.icon?.isInvisible = true
                 binding?.progressBar?.isVisible = true
+                findNavController().navigate(com.petsvote.navigation.R.id.action_splashFragment_to_registerFragment)
             }
         }.start()
     }

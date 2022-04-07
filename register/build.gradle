@@ -37,18 +37,19 @@ android {
 
 dependencies {
 
-    //DAGGER
-    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     implementation project(path: ':core')
     implementation project(path: ':ui')
+    implementation project(path: ':navigation')
+
+    //DAGGER
+    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
+    implementation "androidx.navigation:navigation-fragment:$navigationFragmentVersion"
 
-    testImplementation "junit:junit:$junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$junitVersionExt"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 }
