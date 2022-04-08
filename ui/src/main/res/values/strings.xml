@@ -5,4 +5,8 @@
     //REGISTER
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="app_description">Pet popularity rating</string>
+    <string name="legal_button_text">Legal information</string>
+
+    <string name="month1">мес.</string>
+
 </resources>

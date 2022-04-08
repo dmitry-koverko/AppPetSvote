@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="Shape">
+        <attr name="besie_text" format="string"/>
+        <attr name="besie_text_size" format="integer"/>
+        <attr name="besie_text_color" format="color"/>
+        <attr name="besie_background" format="color"/>
+        <attr name="besie_ripple" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="BesieButton">
+        <attr name="button_type" format="enum">
+            <enum name="REGISTER" value="0"/>
+            <enum name="LEGAL" value="1"/>
+            <enum name="LOGIN" value="2"/>
+        </attr>
+        <attr name="button_left_logo" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="DialView">
+        <attr name="fanColor1" format="color" />
+        <attr name="fanColor2" format="color" />
+        <attr name="fanColor3" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="CircleButton">
+        <attr name="icon_src" format="reference"/>
+        <attr name="cb_ripple_color" format="color"/>
+        <attr name="cb_color" format="color"/>
+        <attr name="cb_icon_size" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="DotIndicator">
+        <attr name="dot_background" format="color"/>
+        <attr name="dot_ripple" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="PageIndicator">
+        <attr name="page_orientation" format="enum">
+            <enum name="ver" value="0"/>
+            <enum name="hor" value="1"/>
+        </attr>
+        <attr name="count_indicators" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="Star">
+        <attr name="type_star" format="enum">
+            <enum name="MINI" value="0"/>
+            <enum name="MINI2" value="1"/>
+            <enum name="MIDDLE" value="2"/>
+            <enum name="MAX" value="3"/>
+            <enum name="MAX2" value="4"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="SFTextView">
+        <attr name="android:textSize" format="integer"/>
+        <attr name="android:textColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="BesieLayout">
+        <attr name="bl_background" format="color"/>
+        <attr name="bl_ripple" format="boolean"/>
+        <attr name="bl_ripple_color" format="color"/>
+        <attr name="bl_change_layout" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="BesieTab">
+        <attr name="bt_text" format="string"></attr>
+        <attr name="bt_type" format="enum">
+            <enum name="DEFAULT" value="0"/>
+            <enum name="ACTIVE" value="1"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="BesieTabLayout">
+        <attr name="btl_count_tabs" format="integer"/>
+        <attr name="btl_type" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="BesieImage">
+        <attr name="bi_ripple_color" format="color"/>
+        <attr name="bi_background_color" format="color"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="ParallaxView">
+        <attr name="pv_orientation" format="enum">
+            <enum value="0" name="VERTICAL"/>
+            <enum value="1" name="HORIZONTAL"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="ImageCropView">
+        <attr format="dimension" name="gridInnerStroke"/>
+        <attr format="color" name="gridInnerColor"/>
+        <attr format="integer" name="setInnerGridMode">
+            <enum name="off" value="0"/>
+            <enum name="on" value="1"/>
+        </attr>
+
+        <attr format="dimension" name="gridOuterStroke"/>
+        <attr format="color" name="gridOuterColor"/>
+        <attr format="integer" name="setOuterGridMode">
+            <enum name="off" value="0"/>
+            <enum name="on" value="1"/>
+        </attr>
+        <attr format="dimension" name="gridLeftRightMargin"/>
+        <attr format="dimension" name="gridTopBottomMargin"/>
+        <attr format="color" name="outsideLayerColor"/>
+    </declare-styleable>
+</resources>

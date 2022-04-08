@@ -12,7 +12,14 @@
 
     //sign_in
     <color name="bg_sign_in_with_google">#FFFFFF</color>
-    <color name="text_sign_in_with_google">#87000000</color>
+    <color name="text_sign_in_with_google">#000000</color>
+    <color name="register_app_name_color">#FFFFFF</color>
+    <color name="ripple_sign_in_with_google">#14000000</color>
+
+    //Legal
+    <color name="bg_legal_button">#1FFFFFFF</color>
+    <color name="legal_ripple_color">#08FFFFFF</color>
+    <color name="text_legal_button">#DEFFFFFF</color>
 
     <color name="ui_primary">#FF2D55</color>
     <color name="white">#FFFFFF</color>

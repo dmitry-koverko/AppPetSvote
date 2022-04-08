@@ -4,15 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
-        <entry key="..\:/clean-petsvote/register/src/main/res/layout/fragment_register.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/register/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/clean-petsvote/splash/src/main/res/layout/fragment_splash.xml" value="0.2" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic___title.xml" value="0.2285" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/icon.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font-v26/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_layout.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/page_indicator_view.xml" value="0.23020833333333332" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/parallax_item_image.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/parallax_view.xml" value="0.23020833333333332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_besie_button.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_besie_layout.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_besie_view.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_my_view.xml" value="0.358695652173913" />
       </map>
     </option>
   </component>

@@ -1,4 +1,4 @@
-package com.petsvote.ui.views
+package com.petsvote.ui
 
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
@@ -10,7 +10,6 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
-import com.petsvote.ui.R
 
 @SuppressLint("ResourceType")
 class SimpleSFTextView @JvmOverloads constructor(
