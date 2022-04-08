@@ -19,6 +19,7 @@ buildscript {
         kotlinxCoroutinesAndroidVersion = '1.5.2'
         navigationFragmentVersion = '2.4.1'
         fragmentKtxVersion = '1.4.1'
+        roomVersion = '2.4.2'
     }
 
     repositories {

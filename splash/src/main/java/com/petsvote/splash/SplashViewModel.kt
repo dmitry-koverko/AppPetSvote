@@ -16,8 +16,8 @@ class SplashViewModel @Inject constructor(
     fun get() {
         log("call get function in viewModel")
         viewModelScope.launch {
-            val res = registerUserUseCase.getData()
-            log(res.toString())
+//            val res = registerUserUseCase.getData()
+//            log(res.toString())
         }
     }
 

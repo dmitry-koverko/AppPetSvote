@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -17,6 +18,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.petsvote.core.BaseFragment
 import com.petsvote.register.databinding.FragmentRegisterBinding
+import com.petsvote.register.di.RegisterComponentViewModel
+import dagger.Lazy
+import javax.inject.Inject
 
 class RegisterFragment: BaseFragment(R.layout.fragment_register) {
 
@@ -24,6 +28,14 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
 
     lateinit var mGoogleSignInClient: GoogleSignInClient
     val RC_SIGN_IN:Int= 123
+
+    @Inject
+    internal lateinit var splashViewModelFactory: Lazy<RegisterViewModel.Factory>
+
+    private val splashComponentViewModel: RegisterComponentViewModel by viewModels()
+    private val viewModel: RegisterViewModel by viewModels {
+        splashViewModelFactory.get()
+    }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,20 +67,19 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
                 saveAccount(account)
             }
         } catch (e:ApiException){
-            //firebaseAuthWithGoogle()
-            //registerViewModel.getCurrensies("12345")
-            Toast.makeText(context, e.message,Toast.LENGTH_SHORT).show()
+
+            //Toast.makeText(context, e.message,Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun saveAccount(account: GoogleSignInAccount) {
-//        account.id?.let {
+        account.id?.let {
 //            binding.legalContainer.visibility = View.GONE
 //            binding.containerMiddle.visibility = View.GONE
 //            binding.containerBottom.visibility = View.GONE
 //            binding.progress.visibility = View.VISIBLE
 //            registerViewModel.getCurrensies(it)
-//        }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,6 +106,8 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
             this,
             callback
         )
+        splashComponentViewModel.registerComponent.inject(this)
     }
+
 
 }

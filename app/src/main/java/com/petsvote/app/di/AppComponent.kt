@@ -4,16 +4,21 @@ import android.app.Application
 import com.petsvote.data.di.DataModule
 import com.petsvote.domain.di.UseCaseModule
 import com.petsvote.domain.usecases.RegisterUserUseCase
+import com.petsvote.register.di.RegisterDeps
 import com.petsvote.retrofit.di.RetrofitModule
+import com.petsvote.room.RoomModule
 import com.petsvote.splash.di.SplashDeps
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
+import dagger.Provides
 import javax.inject.Scope
 
 @[AppScope Component(
-    modules = [AppModule::class, DataModule::class, UseCaseModule::class, RetrofitModule::class])]
-interface AppComponent: SplashDeps {
+    modules = [AppModule::class, DataModule::class, UseCaseModule::class, RetrofitModule::class,
+        RoomModule::class]
+)]
+interface AppComponent : SplashDeps, RegisterDeps {
 
     override val registerUserUseCase: RegisterUserUseCase
 
@@ -32,11 +37,6 @@ interface AppComponent: SplashDeps {
 @Module
 class AppModule {
 
-//    @Provides
-//    @AppScope
-//    fun provideUserRemoteRepository(userApi: UserApi): UserRemoteRepository{
-//        return com.petsvote.data.repository.UserRemoteRepository(userApi = userApi)
-//    }
 //
 //    @Provides
 //    @AppScope
