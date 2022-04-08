@@ -2,10 +2,12 @@ package com.petsvote.register
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -23,13 +25,14 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     val RC_SIGN_IN:Int= 123
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentRegisterBinding.bind(view)
-//        binding?.signInWithGoogle?.mOnClickListener = (View.OnClickListener {
-//            signInGoogle()
-//        })
+        binding?.register?.setOnClickListener {
+            signInGoogle()
+        }
     }
 
     private  fun signInGoogle(){
