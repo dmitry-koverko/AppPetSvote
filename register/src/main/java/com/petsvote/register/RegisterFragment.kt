@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.petsvote.core.BaseFragment
+import com.petsvote.core.ext.stateLoading
 import com.petsvote.register.databinding.FragmentRegisterBinding
 import com.petsvote.register.di.RegisterComponentViewModel
 import dagger.Lazy
@@ -45,6 +46,7 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         binding?.register?.setOnClickListener {
             signInGoogle()
         }
+
     }
 
     private  fun signInGoogle(){

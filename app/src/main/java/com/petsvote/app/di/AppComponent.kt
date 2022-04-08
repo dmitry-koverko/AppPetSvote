@@ -6,6 +6,7 @@ import com.petsvote.domain.di.UseCaseModule
 import com.petsvote.domain.usecases.RegisterUserUseCase
 import com.petsvote.register.di.RegisterDeps
 import com.petsvote.retrofit.di.RetrofitModule
+import com.petsvote.room.RoomDeps
 import com.petsvote.room.RoomModule
 import com.petsvote.splash.di.SplashDeps
 import dagger.BindsInstance
@@ -18,7 +19,7 @@ import javax.inject.Scope
     modules = [AppModule::class, DataModule::class, UseCaseModule::class, RetrofitModule::class,
         RoomModule::class]
 )]
-interface AppComponent : SplashDeps, RegisterDeps {
+interface AppComponent : SplashDeps, RegisterDeps, RoomDeps {
 
     override val registerUserUseCase: RegisterUserUseCase
 
@@ -37,12 +38,9 @@ interface AppComponent : SplashDeps, RegisterDeps {
 @Module
 class AppModule {
 
-//
 //    @Provides
 //    @AppScope
-//    fun provideRegisterUserUseCase(userRemoteRepository: UserRemoteRepository): RegisterUserUseCase{
-//        return RegisterUserUseCaseImpl(userRemoteRepository = userRemoteRepository)
-//    }
+//    fun provideApplication(application: Application) = application
 
 //    @Provides
 //    @AppScope
