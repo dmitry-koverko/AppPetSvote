@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -21,7 +22,9 @@ import com.petsvote.core.ext.stateLoading
 import com.petsvote.register.databinding.FragmentRegisterBinding
 import com.petsvote.register.di.RegisterComponentViewModel
 import dagger.Lazy
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
+import kotlin.random.Random
 
 class RegisterFragment: BaseFragment(R.layout.fragment_register) {
 
@@ -47,6 +50,8 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
             signInGoogle()
         }
 
+        initObservers()
+
     }
 
     private  fun signInGoogle(){
@@ -54,6 +59,21 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         startActivityForResult(signInIntent, RC_SIGN_IN)
 
     }
+
+    override fun initObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel._isLoading.collect {
+                stateView(it)
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel._isRegister.collect {
+                if(it) {TODO("navigateToTabsFragment") }
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode === RC_SIGN_IN) {
@@ -69,18 +89,14 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
                 saveAccount(account)
             }
         } catch (e:ApiException){
-
+            viewModel.registerUser(Random.nextInt(2489441, 8999898).toString())
             //Toast.makeText(context, e.message,Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun saveAccount(account: GoogleSignInAccount) {
         account.id?.let {
-//            binding.legalContainer.visibility = View.GONE
-//            binding.containerMiddle.visibility = View.GONE
-//            binding.containerBottom.visibility = View.GONE
-//            binding.progress.visibility = View.VISIBLE
-//            registerViewModel.getCurrensies(it)
+            viewModel.registerUser(it)
         }
     }
 
@@ -111,5 +127,15 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         splashComponentViewModel.registerComponent.inject(this)
     }
 
+    private fun stateView(isLoading: Boolean){
+
+        var contentVisible = if(isLoading) View.GONE else View.VISIBLE
+        var progressVisible = if(isLoading) View.VISIBLE else View.GONE
+
+        binding?.progress?.visibility = progressVisible
+        binding?.containerMiddle?.visibility = contentVisible
+        binding?.containerBottom?.visibility = contentVisible
+        binding?.legalContainer?.visibility = contentVisible
+    }
 
 }

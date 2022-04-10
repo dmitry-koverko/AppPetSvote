@@ -2,8 +2,10 @@ package com.petsvote.room.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.serialization.Serializable
 
 @Entity
+@Serializable
 data class EntityLocation(
     @PrimaryKey
     var city_id: Int? = null,

@@ -4,6 +4,7 @@ import com.petsvote.domain.entity.user.UserInfo
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.UserPet
 import com.petsvote.room.entity.user.EntityUserInfo
+import com.petsvote.room.entity.user.EntityUserPet
 
 fun Register.toUserInfoUC(): UserInfo {
     return UserInfo(
@@ -39,6 +40,24 @@ fun UserPet.remoteToUserPet(): com.petsvote.domain.entity.user.UserPet {
     )
 }
 
+fun com.petsvote.domain.entity.user.UserPet.toLocalUserPet(): EntityUserPet {
+    return EntityUserPet(
+        id = this.id,
+        name = this.name,
+        pets_id = this.pets_id,
+        global_range = this.global_range,
+        country_range = this.country_range,
+        city_range = this.city_range,
+        global_score = this.global_score,
+        global_dynamic = this.global_dynamic,
+        country_dynamic = this.country_dynamic,
+        city_dynamic = this.city_dynamic,
+        mark_dynamic = this.mark_dynamic,
+        has_paid_votes = this.has_paid_votes,
+        photos = this.photos?.toLocalPhotoList(),
+    )
+}
+
 fun List<UserPet>.remoteToUserPetList(): List<com.petsvote.domain.entity.user.UserPet> {
     var list = mutableListOf<com.petsvote.domain.entity.user.UserPet>()
     this.onEach {
@@ -47,8 +66,27 @@ fun List<UserPet>.remoteToUserPetList(): List<com.petsvote.domain.entity.user.Us
     return list
 }
 
-fun UserInfo.toLocalUser(): EntityUserInfo {
-    return EntityUserInfo(
+fun List<com.petsvote.domain.entity.user.UserPet>.toLocalUserPetList(): List<EntityUserPet> {
+    var list = mutableListOf<EntityUserPet>()
+    this.onEach {
+        list.add(it.toLocalUserPet())
+    }
+    return list
+}
 
+fun com.petsvote.domain.entity.user.UserInfo.toLocalUser(): EntityUserInfo {
+    return EntityUserInfo(
+        id = this.id,
+        bearer = this.bearer,
+        first_name = this.first_name,
+        has_blocked = this.has_blocked,
+        last_name = this.last_name,
+        avatar = this.avatar,
+        first_vote = this.first_vote,
+        has_paid_votes = this.has_paid_votes,
+        notify_status = this.notify_status,
+        official = this.official,
+        pet = this.pet.toLocalUserPetList(),
+        location = this.location?.toLocalLocation()
     )
 }

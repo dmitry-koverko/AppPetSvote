@@ -6,9 +6,11 @@ import androidx.room.TypeConverters
 import com.petsvote.room.converters.LocationConverter
 import com.petsvote.room.converters.UserPetConverter
 import com.petsvote.room.entity.EntityLocation
+import kotlinx.serialization.Serializable
 import org.jetbrains.annotations.NotNull
 
 @Entity
+@Serializable
 data class EntityUserInfo(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = 1,

@@ -10,8 +10,8 @@ import kotlinx.serialization.json.Json
 class LocationConverter {
 
     @TypeConverter
-    fun locationToString(location: EntityLocation): String {
-        return Json.encodeToString(location)
+    fun locationToString(location: EntityLocation?): String {
+        return if(location != null) Json.encodeToString(location) else ""
     }
 
     @TypeConverter

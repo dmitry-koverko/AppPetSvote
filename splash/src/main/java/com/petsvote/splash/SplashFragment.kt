@@ -39,7 +39,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         lifecycleScope.launchWhenResumed { viewModel.checkLogin() }
     }
 
-    private fun initObservers() {
+    override fun initObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel._isLoginUser.collect { it ->
                 if (it == null) return@collect

@@ -10,4 +10,7 @@ object SettingsApi {
     val CONNECT_TIMEOUT: Long = 60L
     val WRITE_TIMEOUT: Long = 60L
 
+    val X_HEADER_API_KEY = "X-Api-Key"
+    val X_KEY = "r0ReOEO3749jg3rg"
+
 }

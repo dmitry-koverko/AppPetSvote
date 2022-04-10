@@ -1,6 +1,7 @@
 package com.petsvote.data.repository
 
 import com.petsvote.data.mappers.checkResult
+import com.petsvote.data.mappers.toLocalUser
 import com.petsvote.data.mappers.toUserInfoUC
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
@@ -24,7 +25,7 @@ class UserRepository @Inject constructor (
     }
 
     override suspend fun saveUserToLocal(user: UserInfo) {
-
+        userDao.insert(user.toLocalUser())
     }
 
 

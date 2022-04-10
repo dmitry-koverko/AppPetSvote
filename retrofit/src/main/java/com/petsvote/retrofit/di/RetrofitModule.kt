@@ -29,7 +29,8 @@ class RetrofitModule {
     fun provideUserRetrofitApi(): UserApi {
         return buildRetrofit(
             getOkHttpClient(getHttpLoggingInterceptor()),
-            SettingsApi.BASE_URL)
+            SettingsApi.BASE_URL
+        )
             .create(UserApi::class.java)
     }
 
@@ -57,6 +58,13 @@ class RetrofitModule {
             val hv = HttpsURLConnection.getDefaultHostnameVerifier()
             hv.verify(SettingsApi.BASE_URL, p1)
         }
+
+        client.addInterceptor { chain ->
+            chain.proceed(
+                chain.request().newBuilder().header(SettingsApi.X_HEADER_API_KEY, SettingsApi.X_KEY)
+                    .build()
+            )
+        }.build()
         return client.build()
     }
 

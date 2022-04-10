@@ -6,9 +6,11 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.petsvote.room.converters.PhotoConverter
 import com.petsvote.room.entity.EntityPhoto
+import kotlinx.serialization.Serializable
 import org.jetbrains.annotations.NotNull
 
 @Entity
+@Serializable
 data class EntityUserPet(
 
     @PrimaryKey(autoGenerate = true)
@@ -43,5 +45,5 @@ data class EntityUserPet(
     @NotNull
     @Ignore
     @TypeConverters(PhotoConverter::class)
-    var photos: List<EntityPhoto> = listOf()
+    var photos: List<EntityPhoto>? = listOf()
 )

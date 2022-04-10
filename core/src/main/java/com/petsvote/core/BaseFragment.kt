@@ -5,4 +5,6 @@ import androidx.lifecycle.ViewModel
 
 abstract class BaseFragment(id: Int): Fragment(id) {
 
+    abstract fun initObservers()
+
 }
