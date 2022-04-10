@@ -1,20 +1,15 @@
 package com.petsvote.register
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.petsvote.core.BaseViewModel
-import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.entity.user.RegisterUserParams
-import com.petsvote.domain.entity.user.UserInfo
-import com.petsvote.domain.usecases.RegisterUserUseCase
+import com.petsvote.domain.usecases.user.RegisterUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
-import javax.inject.Provider
 
 class RegisterViewModel @Inject constructor(
     private val registerUserUseCase: RegisterUserUseCase

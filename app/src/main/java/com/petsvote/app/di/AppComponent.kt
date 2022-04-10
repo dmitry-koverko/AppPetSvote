@@ -3,7 +3,8 @@ package com.petsvote.app.di
 import android.app.Application
 import com.petsvote.data.di.DataModule
 import com.petsvote.domain.di.UseCaseModule
-import com.petsvote.domain.usecases.RegisterUserUseCase
+import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
+import com.petsvote.domain.usecases.user.RegisterUserUseCase
 import com.petsvote.register.di.RegisterDeps
 import com.petsvote.retrofit.di.RetrofitModule
 import com.petsvote.room.RoomDeps
@@ -12,7 +13,6 @@ import com.petsvote.splash.di.SplashDeps
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
-import dagger.Provides
 import javax.inject.Scope
 
 @[AppScope Component(
@@ -22,6 +22,7 @@ import javax.inject.Scope
 interface AppComponent : SplashDeps, RegisterDeps, RoomDeps {
 
     override val registerUserUseCase: RegisterUserUseCase
+    override val checkLoginUserUseCase: CheckLoginUserUseCase
 
     @Component.Builder
     interface Builder {

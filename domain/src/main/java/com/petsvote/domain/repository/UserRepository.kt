@@ -8,5 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
 
     suspend fun registerUser(params: RegisterUserParams): UserInfo?
+    suspend fun checkLoginUser(): Boolean
+    suspend fun saveUserToLocal(user: UserInfo)
 
 }

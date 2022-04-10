@@ -7,17 +7,17 @@ import android.view.View
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.petsvote.core.BaseFragment
-import com.petsvote.core.ext.log
 import com.petsvote.splash.databinding.FragmentSplashBinding
 import com.petsvote.splash.di.SplashComponentViewModel
-import com.petsvote.ui.ext.loadFromResources
-import com.petsvote.ui.ext.loadUrl
 import javax.inject.Inject
 import dagger.Lazy
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 
-class SplashFragment: BaseFragment(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment(R.layout.fragment_splash) {
 
     private val ICON_TIME: Long = 2000
     private var binding: FragmentSplashBinding? = null
@@ -35,10 +35,22 @@ class SplashFragment: BaseFragment(R.layout.fragment_splash) {
         binding = FragmentSplashBinding.bind(view)
 
         setUIStart()
-        viewModel.get()
+        initObservers()
+        lifecycleScope.launchWhenResumed { viewModel.checkLogin() }
     }
 
-    private fun setUIStart(){
+    private fun initObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel._isLoginUser.collect { it ->
+                if (it == null) return@collect
+                else if (it == false)
+                    findNavController()
+                        .navigate(com.petsvote.navigation.R.id.action_splashFragment_to_registerFragment)
+            }
+        }
+    }
+
+    private fun setUIStart() {
         //binding?.icon?.loadFromResources(com.petsvote.ui.R.drawable.icon)
 
         object : CountDownTimer(ICON_TIME, ICON_TIME) {
@@ -46,7 +58,6 @@ class SplashFragment: BaseFragment(R.layout.fragment_splash) {
             override fun onFinish() {
                 binding?.icon?.isInvisible = true
                 binding?.progressBar?.isVisible = true
-                findNavController().navigate(com.petsvote.navigation.R.id.action_splashFragment_to_registerFragment)
             }
         }.start()
     }

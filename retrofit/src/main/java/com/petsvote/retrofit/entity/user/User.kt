@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 data class User(
     //val is_blocked: Boolean,
     val location: Location? = null,
-    val pets: List<UserPet>? = listOf(),
+    val pets: List<UserPet> = listOf(),
     val id: Int? = -1,
     //val bearer: String,
     var first_name: String? = "",

@@ -18,6 +18,14 @@ class UserRepository @Inject constructor (
         return checkResult<Register>(userApi.registerUser(code = params.code))?.toUserInfoUC()
     }
 
+    override suspend fun checkLoginUser(): Boolean {
+        val user = userDao.getUser()
+        return user != null
+    }
+
+    override suspend fun saveUserToLocal(user: UserInfo) {
+
+    }
 
 
 }

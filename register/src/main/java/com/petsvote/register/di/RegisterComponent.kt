@@ -2,7 +2,7 @@ package com.petsvote.register.di
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.domain.usecases.RegisterUserUseCase
+import com.petsvote.domain.usecases.user.RegisterUserUseCase
 import com.petsvote.register.RegisterFragment
 import dagger.Component
 import dagger.Module
