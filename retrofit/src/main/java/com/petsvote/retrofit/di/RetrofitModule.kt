@@ -3,6 +3,7 @@ package com.petsvote.retrofit.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.petsvote.retrofit.SettingsApi
 import com.petsvote.retrofit.adapter.NetworkResponseAdapterFactory
+import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.UserApi
 import dagger.Module
 import dagger.Provides
@@ -30,8 +31,15 @@ class RetrofitModule {
         return buildRetrofit(
             getOkHttpClient(getHttpLoggingInterceptor()),
             SettingsApi.BASE_URL
-        )
-            .create(UserApi::class.java)
+        ).create(UserApi::class.java)
+    }
+
+    @Provides
+    fun provideConfigurationRetrofitApi(): ConfigurationApi {
+        return buildRetrofit(
+            getOkHttpClient(getHttpLoggingInterceptor()),
+            SettingsApi.BASE_URL
+        ).create(ConfigurationApi::class.java)
     }
 
     fun buildRetrofit(okHttpClient: OkHttpClient, url: String): Retrofit {
