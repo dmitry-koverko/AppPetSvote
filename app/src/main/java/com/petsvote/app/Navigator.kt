@@ -25,7 +25,7 @@ class Navigator: MainNavigation {
     }
 
     override fun startInfoTerms(bundle: Bundle) {
-        navController?.navigate(R.id.action_termsFragment_to_termsInfoFragment)
+        navController?.navigate(R.id.action_termsFragment_to_termsInfoFragment, bundle)
     }
 
     override fun back() {

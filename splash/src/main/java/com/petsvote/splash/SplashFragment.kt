@@ -21,7 +21,6 @@ import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 class SplashFragment : BaseFragment(R.layout.fragment_splash) {
 
-    private val ICON_TIME: Long = 2000
     private var binding: FragmentSplashBinding? = null
 
     private val navigation: MainNavigation by lazy {
@@ -39,17 +38,14 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSplashBinding.bind(view)
-
-        setUIStart()
-        initObservers()
         lifecycleScope.launchWhenStarted { viewModel.checkLogin() }
     }
+
 
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel._isLoginUser.collect { it ->
                 if (it == null) return@collect
-
                 if (it == false) {
                     try {navigation.startRegister()} catch (e: Exception) {}
                 }
@@ -57,16 +53,6 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
         }
     }
 
-    private fun setUIStart() {
-
-        object : CountDownTimer(ICON_TIME, ICON_TIME) {
-            override fun onTick(millisUntilFinished: Long) {}
-            override fun onFinish() {
-                binding?.icon?.isInvisible = true
-                binding?.progressBar?.isVisible = true
-            }
-        }.start()
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    android:background="@color/bg_layers_2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion"
@@ -46,7 +48,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:ellipsize="end"
-        android:textColor="@color/title_color"
+        android:textColor="@color/text_legal_button"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/scroll"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -71,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:textColor="@color/title_color"
+                android:textColor="@color/text_legal_description"
                 android:textSize="15sp"
                 app:layout_constraintTop_toTopOf="parent" />
 

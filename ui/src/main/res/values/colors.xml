@@ -20,6 +20,7 @@
     <color name="bg_legal_button">#0A121212</color>
     <color name="legal_ripple_color">#10000000</color>
     <color name="text_legal_button">#DE000000</color>
+    <color name="text_legal_description">#99000000</color>
 
     <color name="ui_primary">#FF2D55</color>
     <color name="white">#FFFFFF</color>
@@ -33,7 +34,7 @@
     <color name="sub_text_color">#99000000</color>
 
     // ripple
-    <color name="ripple_primary">#10FFFFFF</color>
+    <color name="ripple_primary">#1AFF1E70</color>
     <color name="ripple_bold">#1AFFFFFF</color>
     <color name="ripple_gray">#1A000000</color>
     <color name="ripple_text">#57666666</color>

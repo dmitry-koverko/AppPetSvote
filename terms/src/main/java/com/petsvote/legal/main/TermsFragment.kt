@@ -38,11 +38,11 @@ open class TermsFragment: BaseFragment(R.layout.fragment_terms) {
     private var binding: FragmentTermsBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentTermsBinding.bind(view)
         initViews()
-        initObservers()
+
+        super.onViewCreated(view, savedInstanceState)
     }
 
     private fun initViews() {

@@ -37,7 +37,7 @@ class TermsInfoViewModel @Inject constructor(
     class Factory @Inject constructor(private val getStringResourcesUseCase: GetStringResourcesUseCase) :
         ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == TermsViewModel::class.java)
+            require(modelClass == TermsInfoViewModel::class.java)
             return TermsInfoViewModel(getStringResourcesUseCase = getStringResourcesUseCase) as T
         }
 

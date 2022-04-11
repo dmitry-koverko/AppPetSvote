@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_splash.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/core/src/main/res/layout/progress.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/register/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/clean-petsvote/splash/src/main/res/layout/fragment_splash.xml" value="0.2" />
