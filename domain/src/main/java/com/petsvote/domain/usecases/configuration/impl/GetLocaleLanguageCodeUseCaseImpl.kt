@@ -5,13 +5,13 @@ import android.os.Build
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import javax.inject.Inject
 
-class GetLocaleLanguageCodeUseCase @Inject constructor(
+class GetLocaleLanguageCodeUseCaseImpl @Inject constructor(
     private var configuration: Configuration
 ) : GetLocaleLanguageCodeUseCase {
 
     override fun getLanguage(): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            configuration.locales[0].country
+            configuration.locales[0].country.lowercase()
         } else {
             "en"
         }

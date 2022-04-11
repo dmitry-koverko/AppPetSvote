@@ -15,8 +15,8 @@ class LocationConverter {
     }
 
     @TypeConverter
-    fun stringToLocation(data: String): EntityLocation {
-        return Json.decodeFromString(data)
+    fun stringToLocation(data: String): EntityLocation? {
+        return if(data.isNotEmpty()) Json.decodeFromString(data) else null
     }
 
 }

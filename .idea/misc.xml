@@ -7,8 +7,20 @@
         <entry key="..\:/clean-petsvote/core/src/main/res/layout/progress.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/register/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/clean-petsvote/splash/src/main/res/layout/fragment_splash.xml" value="0.2" />
+        <entry key="..\:/clean-petsvote/terms/src/main/res/layout/fragment_terms.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/terms/src/main/res/layout/fragment_terms_info.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/terms/src/main/res/xml/fragment_terms_scene.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable-night/ic_close.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable-night/ic_home.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable-night/ic_people.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic___title.xml" value="0.2285" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_close.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_close_white.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_expand_right.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_home.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_people.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/icon.xml" value="0.2985" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/item_list_state.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font-v26/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_layout.xml" value="0.358695652173913" />

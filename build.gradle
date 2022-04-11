@@ -1,3 +1,6 @@
+ext {
+    navigatorVersion = '2.0.1'
+}
 buildscript {
     ext {
         daggerCompilerVersion = '2.40.5'

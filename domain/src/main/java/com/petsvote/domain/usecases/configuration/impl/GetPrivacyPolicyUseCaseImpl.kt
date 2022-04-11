@@ -4,7 +4,7 @@ import com.petsvote.domain.repository.ConfigurationRepository
 import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
 import javax.inject.Inject
 
-class GetPrivacyPolicyUseCase @Inject constructor(
+class GetPrivacyPolicyUseCaseImpl @Inject constructor(
     private val configurationRepository: ConfigurationRepository
 ): GetPrivacyPolicyUseCase {
 

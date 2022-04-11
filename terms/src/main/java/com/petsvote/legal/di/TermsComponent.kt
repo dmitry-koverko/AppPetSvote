@@ -2,8 +2,11 @@ package com.petsvote.legal.di
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
-import com.petsvote.domain.usecases.user.RegisterUserUseCase
+import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
+import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
+import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
+import com.petsvote.legal.main.TermsFragment
+import com.petsvote.legal.info.TermsInfoFragment
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -17,7 +20,8 @@ internal annotation class TermsScope
 
 interface TermsComponent {
 
-    //fun inject(splashFragment: SplashFragment)
+    fun inject(termsFragment: TermsFragment)
+    fun injectTermsInfo(fragment: TermsInfoFragment)
 
     @Component.Builder
     interface Builder{
@@ -41,6 +45,11 @@ interface TermsDepsProvider {
 }
 
 interface TermsDeps{
+
+    val getUserAgreementUseCase: GetUserAgreementUseCase
+    val getPrivacyPolicyUseCase: GetPrivacyPolicyUseCase
+    val getStringResourcesUseCase: GetStringResourcesUseCase
+
 }
 
 val Context.termsDepsProvider: TermsDepsProvider

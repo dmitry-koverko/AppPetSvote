@@ -2,8 +2,14 @@ package com.petsvote.app.di
 
 import android.app.Application
 import android.content.res.Configuration
+import android.content.res.Resources
 import com.petsvote.data.di.DataModule
+import com.petsvote.domain.di.ConfigurationModule
+import com.petsvote.domain.di.ResourcesModule
 import com.petsvote.domain.di.UserUseCaseModule
+import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
+import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
+import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
 import com.petsvote.domain.usecases.user.RegisterUserUseCase
 import com.petsvote.domain.usecases.user.SaveUserToLocalUseCase
@@ -13,6 +19,7 @@ import com.petsvote.retrofit.di.RetrofitModule
 import com.petsvote.room.RoomDeps
 import com.petsvote.room.RoomModule
 import com.petsvote.splash.di.SplashDeps
+import com.petsvote.ui.di.UIModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -21,13 +28,16 @@ import javax.inject.Scope
 
 @[AppScope Component(
     modules = [AppModule::class, DataModule::class, UserUseCaseModule::class, RetrofitModule::class,
-        RoomModule::class]
+        RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class]
 )]
 interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps {
 
     override val registerUserUseCase: RegisterUserUseCase
     override val checkLoginUserUseCase: CheckLoginUserUseCase
     override val saveUserUseCase: SaveUserToLocalUseCase
+    override val getUserAgreementUseCase: GetUserAgreementUseCase
+    override val getPrivacyPolicyUseCase: GetPrivacyPolicyUseCase
+    override val getStringResourcesUseCase: GetStringResourcesUseCase
 
     @Component.Builder
     interface Builder {
@@ -50,11 +60,6 @@ class AppModule {
         return application.resources.configuration
     }
 
-//    @Provides
-//    @AppScope
-//    fun providesRoomRepository(application: Application): RoomRepository {
-//        return RoomRepository(application)
-//    }
 }
 
 @Scope

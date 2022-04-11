@@ -40,11 +40,17 @@ dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':data')
     implementation project(path: ':navigation')
+    implementation project(path: ':terms')
+    implementation project(path: ':ui')
 
     //DAGGER
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
-    implementation project(path: ':terms')
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
+
+    //Navigator
+    implementation "com.github.valeryponomarenko.componentsmanager:androidx:$navigatorVersion"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"

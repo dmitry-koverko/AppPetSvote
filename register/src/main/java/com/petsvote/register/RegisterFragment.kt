@@ -19,14 +19,20 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.stateLoading
+import com.petsvote.navigation.MainNavigation
 import com.petsvote.register.databinding.FragmentRegisterBinding
 import com.petsvote.register.di.RegisterComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 import kotlin.random.Random
 
 class RegisterFragment: BaseFragment(R.layout.fragment_register) {
+
+    private val navigation: MainNavigation by lazy {
+        XInjectionManager.findComponent<MainNavigation>()
+    }
 
     private var binding: FragmentRegisterBinding? = null
 
@@ -46,12 +52,20 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentRegisterBinding.bind(view)
+        initViews()
+        initObservers()
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun initViews() {
         binding?.register?.setOnClickListener {
             signInGoogle()
         }
 
-        initObservers()
-
+        binding?.legalBl?.setOnClickListener {
+           navigation.startTerms()
+        }
     }
 
     private  fun signInGoogle(){

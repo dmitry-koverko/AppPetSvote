@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -31,6 +32,9 @@ android {
 
 dependencies {
 
+    //DAGGER
+    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     implementation "com.github.bumptech.glide:glide:$glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"

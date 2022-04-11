@@ -2,7 +2,6 @@ package com.petsvote.data.di
 
 import com.petsvote.data.repository.ConfigurationRepository
 import com.petsvote.domain.repository.UserRepository
-import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.UserApi
 import com.petsvote.room.dao.UserDao
@@ -20,7 +19,7 @@ class DataModule {
     @Provides
     fun provideConfigurationRemoteRepository(
         configurationApi: ConfigurationApi,
-        getLocaleLanguageCodeUseCaseImpl: com.petsvote.domain.usecases.configuration.impl.GetLocaleLanguageCodeUseCase
+        getLocaleLanguageCodeUseCaseImpl: com.petsvote.domain.usecases.configuration.impl.GetLocaleLanguageCodeUseCaseImpl
     ): com.petsvote.domain.repository.ConfigurationRepository {
         return ConfigurationRepository(
             configurationApi = configurationApi,

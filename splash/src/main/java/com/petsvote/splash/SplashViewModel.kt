@@ -26,6 +26,7 @@ class SplashViewModel @Inject constructor(
             checkLoginUserUseCase.checkLoginUser()
         }
         val isLogin = checkLogin.await()
+
         if(!isLogin) isLoginUser.value = false
         else{
 

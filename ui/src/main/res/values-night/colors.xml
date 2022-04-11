@@ -9,6 +9,7 @@
     <color name="status_bar_color">#08121212</color>
     <color name="progress_bar">#FF2D55</color>
     <color name="text_color">#87FFFFFF</color>
+    <color name="bg_item_color">#14FF347F</color>
 
     //sign_in
     <color name="bg_sign_in_with_google">#FFFFFF</color>
@@ -33,7 +34,7 @@
     <color name="sub_text_color">#99000000</color>
 
     // ripple
-    <color name="ripple_primary">#1AFF2D55</color>
+    <color name="ripple_primary">#08FF347F</color>
     <color name="ripple_bold">#1AFFFFFF</color>
     <color name="ripple_gray">#1A000000</color>
     <color name="ripple_text">#57666666</color>
@@ -46,6 +47,10 @@
     <color name="et_text_color">#61000000</color>
     <color name="et_title_color">#99000000</color>
     <color name="cursor_color">#38A6E2</color>
+
+    //ICONS
+    <color name="more_icons">#99FFFFFF</color>
+    <color name="ic_close_color">#99FFFFFF</color>
 
 
 </resources>

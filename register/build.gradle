@@ -46,6 +46,9 @@ dependencies {
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
+    //Navigation
+    implementation "com.github.valeryponomarenko.componentsmanager:androidx:$navigatorVersion"
+
     implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"

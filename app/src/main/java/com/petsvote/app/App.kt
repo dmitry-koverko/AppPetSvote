@@ -10,6 +10,8 @@ import com.petsvote.room.RoomDeps
 import com.petsvote.room.RoomDepsProvider
 import com.petsvote.splash.di.SplashDeps
 import com.petsvote.splash.di.SplashDepsProvider
+import me.vponomarenko.injectionmanager.IHasComponent
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProvider, TermsDepsProvider {
 
@@ -22,9 +24,9 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
     override fun onCreate() {
         super.onCreate()
 //        AndroidThreeTen.init(this);
-//        XInjectionManager.bindComponentToCustomLifecycle(object : IHasComponent<Navigator> {
-//            override fun getComponent(): Navigator = Navigator()
-//        })
+        XInjectionManager.bindComponentToCustomLifecycle(object : IHasComponent<Navigator> {
+            override fun getComponent(): Navigator = Navigator()
+        })
     }
 
 
