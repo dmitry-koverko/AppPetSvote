@@ -8,6 +8,8 @@
         <entry key="..\:/clean-petsvote/core/src/main/res/layout/progress.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/register/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/clean-petsvote/splash/src/main/res/layout/fragment_splash.xml" value="0.2" />
+        <entry key="..\:/clean-petsvote/tabs/src/main/res/layout/fragment_blank.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/tabs/src/main/res/layout/fragment_tabs.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/terms/src/main/res/layout/fragment_terms.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/terms/src/main/res/layout/fragment_terms_info.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/terms/src/main/res/xml/fragment_terms_scene.xml" value="0.358695652173913" />
@@ -25,6 +27,8 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/font-v26/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_layout.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/item_tab.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/main_tabs_layout.xml" value="0.33" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/page_indicator_view.xml" value="0.23020833333333332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/parallax_item_image.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/parallax_view.xml" value="0.23020833333333332" />
