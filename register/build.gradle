@@ -6,6 +6,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('F:\\clean-petsvote\\outputs\\keypath.jks')
+            storePassword '123456'
+            keyAlias 'key'
+            keyPassword '123456'
+        }
+        release {
+        storeFile file('F:\\clean-petsvote\\outputs\\keypath_release.jks')
+            storePassword '12345678'
+            keyAlias 'key'
+            keyPassword '12345678'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -20,6 +34,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {

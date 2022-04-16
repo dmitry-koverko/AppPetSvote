@@ -27,10 +27,7 @@ class SplashViewModel @Inject constructor(
         }
         val isLogin = checkLogin.await()
 
-        if(!isLogin) isLoginUser.value = false
-        else{
-
-        }
+        isLoginUser.value = isLogin
     }
 
     @Suppress("UNCHECKED_CAST")

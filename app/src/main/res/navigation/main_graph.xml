@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_graph"
     app:startDestination="@id/splashFragment">
 
@@ -11,6 +12,12 @@
         <action
             android:id="@+id/action_splashFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_tabsFragment"
+            app:destination="@id/tabsFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -19,6 +26,9 @@
         <action
             android:id="@+id/action_registerFragment_to_termsFragment"
             app:destination="@id/termsFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
     </fragment>
     <fragment
         android:id="@+id/termsFragment"
@@ -32,4 +42,15 @@
         android:id="@+id/termsInfoFragment"
         android:name="com.petsvote.legal.info.TermsInfoFragment"
         android:label="TermsInfoFragment" />
+    <fragment
+        tools:layout="@layout/fragment_tabs"
+        android:id="@+id/tabsFragment"
+        android:name="com.petsvote.tabs.TabsFragment"
+        android:label="TabsFragment" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.petsvote.tabs.BlankFragment"
+        android:label="BlankFragment" />
+
+
 </navigation>

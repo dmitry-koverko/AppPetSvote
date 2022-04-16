@@ -28,6 +28,14 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_termsFragment_to_termsInfoFragment, bundle)
     }
 
+    override fun backSplashFromRegister() {
+        navController?.navigate(R.id.action_registerFragment_to_splashFragment)
+    }
+
+    override fun startTabs() {
+        navController?.navigate(R.id.action_splashFragment_to_tabsFragment)
+    }
+
     override fun back() {
         navController?.popBackStack()
     }

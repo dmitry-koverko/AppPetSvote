@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.petsvote.core.BaseFragment
+import com.petsvote.core.ext.log
 import com.petsvote.core.ext.stateLoading
 import com.petsvote.navigation.MainNavigation
 import com.petsvote.register.databinding.FragmentRegisterBinding
@@ -53,8 +54,6 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
 
         binding = FragmentRegisterBinding.bind(view)
         initViews()
-        initObservers()
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -83,7 +82,7 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
 
         lifecycleScope.launchWhenStarted {
             viewModel._isRegister.collect {
-                if(it) {TODO("navigateToTabsFragment") }
+                if(it) navigation.backSplashFromRegister()
             }
         }
     }
@@ -103,8 +102,7 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
                 saveAccount(account)
             }
         } catch (e:ApiException){
-            viewModel.registerUser(Random.nextInt(2489441, 8999898).toString())
-            //Toast.makeText(context, e.message,Toast.LENGTH_SHORT).show()
+            log(e.toString())
         }
     }
 
