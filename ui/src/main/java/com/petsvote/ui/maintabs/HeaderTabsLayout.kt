@@ -24,6 +24,7 @@ class HeaderTabsLayout @JvmOverloads constructor(
     private var tabProfile: TabLayout.Tab
 
     private var screenWidth = resources.displayMetrics.widthPixels
+    private var padding = screenWidth / 2
     private var tabDefaultWith = resources.displayMetrics.density * 24
     private var defaultPadding = resources.displayMetrics.density * 24
     private var defaultMargin = resources.displayMetrics.density * 24
@@ -33,6 +34,7 @@ class HeaderTabsLayout @JvmOverloads constructor(
     init {
 
         Log.d("HEADERS_TABS", "screenSize = $screenWidth")
+        Log.d("HEADERS_TABS", "padding = $padding")
         Log.d("HEADERS_TABS", "tabDefaultWith = $tabDefaultWith")
         Log.d("HEADERS_TABS", "tabDefaultCenterWidth = $tabDefaultCenterWidth")
 
@@ -41,7 +43,7 @@ class HeaderTabsLayout @JvmOverloads constructor(
         tabRating.customView?.findViewById<ImageView>(R.id.ic_icon)
             ?.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_icon_rating))
         var lpRating = LinearLayout.LayoutParams(tabDefaultWith.toInt(), tabDefaultIconHeight.toInt())
-        lpRating.leftMargin = (screenWidth / 2 / resources.displayMetrics.density).toInt()
+        lpRating.leftMargin = (padding / resources.displayMetrics.density).toInt() - 36
         tabRating.customView?.layoutParams = lpRating
 
 
@@ -60,7 +62,7 @@ class HeaderTabsLayout @JvmOverloads constructor(
             LinearLayout.LayoutParams(tabDefaultWith.toInt(), tabDefaultIconHeight.toInt())
 
         this.addTab(tabRating)
-        this.addTab(tabVote)
+        this.addTab(tabVote, true)
         this.addTab(tabProfile)
 
         initDefaultTabs()
@@ -111,7 +113,7 @@ class HeaderTabsLayout @JvmOverloads constructor(
 
     override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
         Log.d("HEADERS_TABS", "onLayout: l = $l ||| r =$r")
-        Log.d("HEADERS_TABS", "onLayout: $paddingLeft.")
+        Log.d("HEADERS_TABS", "onLayout: ${tabRating.view.width}.")
         super.onLayout(changed, l, t, r, b)
     }
 
