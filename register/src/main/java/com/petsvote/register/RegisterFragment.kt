@@ -82,7 +82,7 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
 
         lifecycleScope.launchWhenStarted {
             viewModel._isRegister.collect {
-                if(it) navigation.backSplashFromRegister()
+                if(it) try {navigation.backSplashFromRegister()} catch (e: Exception){}
             }
         }
     }
