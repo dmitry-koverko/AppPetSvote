@@ -48,7 +48,6 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         splashViewModelFactory.get()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -56,9 +55,8 @@ class RegisterFragment: BaseFragment(R.layout.fragment_register) {
         initViews()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun initViews() {
-        binding?.register?.setOnClickListener {
+        binding?.containerBottom?.setOnClickListener {
             signInGoogle()
         }
 

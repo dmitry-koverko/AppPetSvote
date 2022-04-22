@@ -43,16 +43,16 @@ class TermsInfoFragment: BaseFragment(R.layout.fragment_terms_info) {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun initViews() {
-
-        var motionLayout = view?.findViewById<MotionLayout>(R.id.motion)
-
-        binding?.scroll?.setOnScrollChangeListener(@RequiresApi(Build.VERSION_CODES.M)
-        object: View.OnScrollChangeListener{
-            override fun onScrollChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int) {
-                if(p2 in -50 .. 15) motionLayout?.transitionToStart()
-                else if(p2 > p4){ motionLayout?.transitionToEnd()}
-            }
-        })
+//
+//        var motionLayout = view?.findViewById<MotionLayout>(R.id.motion)
+//
+//        binding?.scroll?.setOnScrollChangeListener(@RequiresApi(Build.VERSION_CODES.M)
+//        object: View.OnScrollChangeListener{
+//            override fun onScrollChange(p0: View?, p1: Int, p2: Int, p3: Int, p4: Int) {
+//                if(p2 in -50 .. 15) motionLayout?.transitionToStart()
+//                else if(p2 > p4){ motionLayout?.transitionToEnd()}
+//            }
+//        })
 
         binding?.home?.setOnClickListener {
             navigation.back()

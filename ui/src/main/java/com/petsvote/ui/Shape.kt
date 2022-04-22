@@ -20,7 +20,6 @@ import android.graphics.Paint
 import android.widget.FrameLayout
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 open class Shape @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
@@ -39,7 +38,6 @@ open class Shape @JvmOverloads constructor(
     private var animator: ValueAnimator? = null
 
     var text: String = ""
-        @RequiresApi(Build.VERSION_CODES.O)
         set(value) {
             field = value
             draw(canvas)
@@ -79,7 +77,7 @@ open class Shape @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.Shape) {
             p!!.setColor(getInt(R.styleable.Shape_besie_background, Color.BLACK))
             pRipple!!.setColor(getInt(R.styleable.Shape_besie_ripple, Color.DKGRAY))
-            text = getString(R.styleable.Shape_besie_text) as String
+            //text = resources.getString(R.string.sign_in_with_google)
             textSize = getInt(R.styleable.Shape_besie_text_size, 15)
             paintText!!.setColor(getInt(R.styleable.Shape_besie_text_color, Color.WHITE))
         }
@@ -117,7 +115,6 @@ open class Shape @JvmOverloads constructor(
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onDraw(canvas: Canvas?) {
         try{
             this.canvas = canvas
@@ -128,7 +125,6 @@ open class Shape @JvmOverloads constructor(
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun drawText(){
         paintText!!.textSize = textSize * resources.displayMetrics.density
         canvas!!.getClipBounds(r)

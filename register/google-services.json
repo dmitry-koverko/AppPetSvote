@@ -83,6 +83,45 @@
           "other_platform_oauth_client": []
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464364548284:android:fec1cd9bea5047f128a0b9",
+        "android_client_info": {
+          "package_name": "com.petsvote.register"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464364548284-l6uboicsie3l4fhhtfk4uiddk46mk3kq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.register",
+            "certificate_hash": "9a9893d6f0d505c5a0153269fc5f6e1373e004ad"
+          }
+        },
+        {
+          "client_id": "464364548284-t87ilvgd9iefpq7n5v3ibp4ua1pfonin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.register",
+            "certificate_hash": "6cc3afab8e573415d3f3545c73a4c7d263364799"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAMXFnw1DaaLSJ-CTzA37FSJaiX3xR5Ag"
+        },
+        {
+          "current_key": "AIzaSyDOCXAgPgE_TVzksqd_Yp9GQtUSCXhgvCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
     }
   ],
   "configuration_version": "1"

@@ -6,6 +6,7 @@
     app:startDestination="@id/splashFragment">
 
     <fragment
+        tools:layout="@layout/fragment_splash"
         android:id="@+id/splashFragment"
         android:name="com.petsvote.splash.SplashFragment"
         android:label="SplashFragment" >
@@ -15,11 +16,9 @@
         <action
             android:id="@+id/action_splashFragment_to_tabsFragment"
             app:destination="@id/tabsFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_register"
         android:id="@+id/registerFragment"
         android:name="com.petsvote.register.RegisterFragment"
         android:label="RegisterFragment" >
@@ -31,14 +30,19 @@
             app:destination="@id/splashFragment" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_terms"
         android:id="@+id/termsFragment"
         android:name="com.petsvote.legal.main.TermsFragment"
         android:label="TermsFragment" >
         <action
             android:id="@+id/action_termsFragment_to_termsInfoFragment"
-            app:destination="@id/termsInfoFragment" />
+            app:destination="@id/termsInfoFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
+        tools:layout="@layout/fragment_terms_info"
         android:id="@+id/termsInfoFragment"
         android:name="com.petsvote.legal.info.TermsInfoFragment"
         android:label="TermsInfoFragment" />
@@ -47,10 +51,6 @@
         android:id="@+id/tabsFragment"
         android:name="com.petsvote.tabs.TabsFragment"
         android:label="TabsFragment" />
-    <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.petsvote.tabs.BlankFragment"
-        android:label="BlankFragment" />
 
 
 </navigation>

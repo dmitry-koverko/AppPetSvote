@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="Shape">
-        <attr name="besie_text" format="string"/>
+        <attr name="besie_text" format="reference"/>
         <attr name="besie_text_size" format="integer"/>
         <attr name="besie_text_color" format="color"/>
         <attr name="besie_background" format="color"/>

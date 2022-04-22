@@ -5,43 +5,18 @@
     android:background="@color/bg_layers_1"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <com.petsvote.ui.maintabs.HeaderTabsLayout
-        android:id="@+id/headerTabs"
-        app:tabRippleColor="@android:color/transparent"
-        app:tabPaddingEnd="-1dp"
-        app:tabPaddingStart="-1dp"
-        app:tabMode="scrollable"
-        app:tabIndicatorHeight="0dp"
+    <com.petsvote.ui.maintabs.TopTabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="56dp"/>
+        android:layout_height="32dp"/>
 
-    <com.google.android.material.tabs.TabLayout
-        app:tabPaddingStart="-1dp"
-        app:tabMode="scrollable"
-        app:layout_constraintTop_toBottomOf="@id/headerTabs"
+    <androidx.viewpager.widget.ViewPager
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tabs"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout="@layout/item_tab_1"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout="@layout/item_tab"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout="@layout/item_tab_2"
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            />
-
-    </com.google.android.material.tabs.TabLayout>
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,8 +6,9 @@
     <color name="bg_layers_2">#08121212</color>
     <color name="bg_layers_3">#12121212</color>
     <color name="bg_layers_4">#16121212</color>
-    <color name="status_bar_color">#08121212</color>
+    <color name="status_bar_color">#121212</color>
     <color name="progress_bar">#FF2D55</color>
+    <color name="my_primary">#1AFF1E70</color>
     <color name="text_color">#87FFFFFF</color>
     <color name="bg_item_color">#14FF347F</color>
 
@@ -52,6 +53,10 @@
     //ICONS
     <color name="more_icons">#99FFFFFF</color>
     <color name="ic_close_color">#99FFFFFF</color>
+
+    //TABS
+    <color name="selected_tab_icon">#FF347F</color>
+    <color name="unselected_tab_icon">#B5B5B5</color>
 
 
 </resources>

@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     android:background="@color/bg_layers_2"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/fragment_terms_scene">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bar"
@@ -39,35 +38,42 @@
 
         </com.petsvote.ui.BesieLayout>
 
+        <com.petsvote.ui.SimpleSFTextView
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/home"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="20sp"
+            tools:text="FSFSDFSDFFfdsfffffffffffffdsssssssDFSF"
+            android:id="@+id/expandedImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textColor="@color/text_legal_button"
+            android:visibility="visible"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.petsvote.ui.SimpleSFTextView
-        android:id="@+id/expandedImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:ellipsize="end"
-        android:textColor="@color/text_legal_button"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@id/scroll"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bar" />
 
     <ScrollView
         android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/expandedImage">
+        app:layout_constraintTop_toBottomOf="@id/bar">
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
+                tools:text="@tools:sample/lorem/random"
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,4 +87,4 @@
 
     </ScrollView>
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

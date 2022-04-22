@@ -85,6 +85,7 @@ class DotIndicator @JvmOverloads constructor(
             invalidate()
         }
     var changeLayout = true
+    private val BESIEDOT = 128
 
     init {
         context.withStyledAttributes(attrs, R.styleable.DotIndicator){
@@ -100,15 +101,15 @@ class DotIndicator @JvmOverloads constructor(
         Log.d("DOTINDICATOR", "heightView =$heightView | radius = $radius")
         path.reset()
         path.moveTo(radius, 0f)
-        path.quadTo(radius /16, radius /16, 0f, radius)
+        path.quadTo(radius /BESIEDOT, radius /BESIEDOT, 0f, radius)
         path.lineTo(0f, heightView - radius)
-        path.quadTo((radius /16).toFloat(), heightView -  (radius /16).toFloat(),
+        path.quadTo((radius /BESIEDOT).toFloat(), heightView -  (radius /BESIEDOT).toFloat(),
             radius, heightView.toFloat())
         path.lineTo(widthView - radius, heightView.toFloat());
-        path.quadTo(widthView - radius/16, heightView - radius/16,
+        path.quadTo(widthView - radius/BESIEDOT, heightView - radius/BESIEDOT,
                     widthView.toFloat(), heightView - radius)
         path.lineTo(widthView.toFloat(), radius)
-        path.quadTo(widthView - radius/16, radius/16,
+        path.quadTo(widthView - radius/BESIEDOT, radius/BESIEDOT,
             widthView - radius, 0f);
         path.lineTo(radius, 0f)
 

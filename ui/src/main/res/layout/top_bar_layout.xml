@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarSize="0dp"
+    android:id="@+id/scroll">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/fr_rating">
+
+            <ImageView
+                android:alpha="0"
+                android:id="@+id/fr_rating_icon_selected"
+                android:layout_gravity="right|bottom"
+                android:layout_width="24dp"
+                android:src="@drawable/ic_rating_selected"
+                android:layout_height="24dp"/>
+
+            <ImageView
+                android:id="@+id/fr_rating_icon"
+                android:layout_gravity="right|bottom"
+                android:layout_width="24dp"
+                android:src="@drawable/ic_icon_rating"
+                android:layout_height="24dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/fr_vote">
+
+            <ImageView
+                android:id="@+id/fr_vote_icon_selected"
+                android:layout_gravity="center|bottom"
+                android:layout_width="32dp"
+                android:src="@drawable/ic_icon_vote_selected"
+                android:layout_height="32dp"/>
+
+            <ImageView
+                android:alpha="0"
+                android:id="@+id/fr_vote_icon"
+                android:layout_gravity="center|bottom"
+                android:layout_width="32dp"
+                android:src="@drawable/ic_icon_vote"
+                android:layout_height="32dp"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:id="@+id/fr_profile">
+
+            <ImageView
+                android:alpha="0"
+                android:id="@+id/fr_profile_icon_selected"
+                android:layout_gravity="left|bottom"
+                android:layout_width="24dp"
+                android:src="@drawable/ic_profile_selected"
+                android:layout_height="24dp"/>
+
+            <ImageView
+                android:id="@+id/fr_profile_icon"
+                android:layout_gravity="left|bottom"
+                android:layout_width="24dp"
+                android:src="@drawable/ic_icon_profile"
+                android:layout_height="24dp"/>
+
+        </FrameLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</HorizontalScrollView>
