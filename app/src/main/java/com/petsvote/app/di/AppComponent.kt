@@ -14,6 +14,7 @@ import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
 import com.petsvote.domain.usecases.user.RegisterUserUseCase
 import com.petsvote.domain.usecases.user.SaveUserToLocalUseCase
 import com.petsvote.legal.di.TermsDeps
+import com.petsvote.rating.di.RatingDeps
 import com.petsvote.register.di.RegisterDeps
 import com.petsvote.retrofit.di.RetrofitModule
 import com.petsvote.room.RoomDeps
@@ -30,7 +31,7 @@ import javax.inject.Scope
     modules = [AppModule::class, DataModule::class, UserUseCaseModule::class, RetrofitModule::class,
         RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class]
 )]
-interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps {
+interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps {
 
     override val registerUserUseCase: RegisterUserUseCase
     override val checkLoginUserUseCase: CheckLoginUserUseCase

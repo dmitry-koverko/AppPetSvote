@@ -4,6 +4,8 @@ import com.petsvote.app.di.AppComponent
 import com.petsvote.app.di.DaggerAppComponent
 import com.petsvote.legal.di.TermsDeps
 import com.petsvote.legal.di.TermsDepsProvider
+import com.petsvote.rating.di.RatingDeps
+import com.petsvote.rating.di.RatingDepsProvider
 import com.petsvote.register.di.RegisterDeps
 import com.petsvote.register.di.RegisterDepsProvider
 import com.petsvote.room.RoomDeps
@@ -13,7 +15,8 @@ import com.petsvote.splash.di.SplashDepsProvider
 import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 
-class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProvider, TermsDepsProvider {
+class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProvider,
+    TermsDepsProvider, RatingDepsProvider {
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
@@ -23,7 +26,6 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
 
     override fun onCreate() {
         super.onCreate()
-//        AndroidThreeTen.init(this);
         XInjectionManager.bindComponentToCustomLifecycle(object : IHasComponent<Navigator> {
             override fun getComponent(): Navigator = Navigator()
         })
@@ -34,10 +36,5 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
     override var depsRegister: RegisterDeps = appComponent
     override var depsRoom: RoomDeps = appComponent
     override var depsTerms: TermsDeps = appComponent
-
-//    override var depsRating: RatingDeps = appComponent
-//    override var depsFilter: FilterDeps = appComponent
-//    override var depsVote: VoteDeps = appComponent
-//    override var depsUP: UPDeps = appComponent
-//    override var depsPet: PetDeps = appComponent
+    override var depsRating: RatingDeps = appComponent
 }

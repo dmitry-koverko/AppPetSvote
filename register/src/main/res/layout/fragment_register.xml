@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <com.petsvote.ui.SimpleSFTextView
+        <com.petsvote.ui.textview.SimpleSFTextView
             android:layout_marginTop="6dp"
             app:layout_constraintTop_toBottomOf="@id/name"
             android:id="@+id/descr"
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp">
 
-        <com.petsvote.ui.SimpleSFTextView
+        <com.petsvote.ui.textview.SimpleSFTextView
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -101,7 +101,7 @@
             android:layout_width="0dp"
             android:layout_height="32dp">
 
-            <com.petsvote.ui.SemiboldText
+            <com.petsvote.ui.textview.SemiboldText
                 android:clickable="false"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"

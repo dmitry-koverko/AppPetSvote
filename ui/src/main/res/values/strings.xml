@@ -15,4 +15,19 @@
 
     <string name="month1">мес.</string>
 
+    //TABS
+    <string name="city">Город</string>
+    <string name="country">Страна</string>
+    <string name="world">Мир</string>
+    <string name="sex_all">Любой</string>
+    <string name="sex_girl">Девочки</string>
+    <string name="sex_man">Мальчики</string>
+    <string name="sex_girl_one">Девочка</string>
+    <string name="sex_man_one">Мальчик</string>
+    <string name="sex_no">Бесполое</string>
+
+    //RATING
+    <string name="rating">Рейтинг</string>
+    <string name="default_filter_text">Мир, кошки, все породы, дм, 0-30</string>
+
 </resources>

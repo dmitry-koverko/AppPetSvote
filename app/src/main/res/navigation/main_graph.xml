@@ -37,9 +37,9 @@
         <action
             android:id="@+id/action_termsFragment_to_termsInfoFragment"
             app:destination="@id/termsInfoFragment"
-            app:enterAnim="@android:anim/slide_in_left"
+            app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_out_right"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_terms_info"

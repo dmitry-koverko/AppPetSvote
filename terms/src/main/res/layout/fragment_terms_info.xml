@@ -38,7 +38,7 @@
 
         </com.petsvote.ui.BesieLayout>
 
-        <com.petsvote.ui.SimpleSFTextView
+        <com.petsvote.ui.textview.SimpleSFTextView
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/home"
             app:layout_constraintBottom_toBottomOf="parent"

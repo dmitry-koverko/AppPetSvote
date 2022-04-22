@@ -1,22 +1,17 @@
-package com.petsvote.ui
+package com.petsvote.ui.textview
 
-import android.animation.PropertyValuesHolder
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Paint
 import android.util.AttributeSet
-import android.view.MotionEvent
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.petsvote.ui.R
 
 @SuppressLint("ResourceType")
-class SemiboldText @JvmOverloads constructor(
+class SimpleSFTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : androidx.appcompat.widget.AppCompatTextView(context, attrs) {
 
-    private var typeFaceSF = ResourcesCompat.getFont(context, R.font.semibold)
+    private var typeFaceSF = ResourcesCompat.getFont(context, R.font.myfont)
     init {
         includeFontPadding = false
         typeface = typeFaceSF

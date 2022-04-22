@@ -61,5 +61,16 @@
     <color name="selected_tab_icon">#FF1E70</color>
     <color name="unselected_tab_icon">#61000000</color>
 
+    //RATING
+    <color name="filter_color">#FF1E70</color>
+    <color name="card_text_color">#FFFFFF</color>
+    <color name="card_icon_color">#FFFFFF</color>
+
+    //BesieTabs
+    <color name="besie_tabs_bg">#0A121212</color>
+    <color name="besie_tab_bg">#FF1E70</color>
+    <color name="besie_tab_text_selected_color">#FFFFFF</color>
+    <color name="besie_tab_text_unselected_color">#61000000</color>
+
 
 </resources>
