@@ -62,6 +62,9 @@
     <color name="filter_color">#FF347F</color>
     <color name="card_text_color">#DEFFFFFF</color>
     <color name="card_icon_color">#DEFFFFFF</color>
+    <color name="item_bg_color">#1FFFFFFF</color>
+    <color name="item_card_rating_add_pet_ripple">#14FFFFFF</color>
+    <color name="add_pet_icon_color">#99FFFFFF</color>
 
     //BesieTabs
     <color name="besie_tabs_bg">#1FFFFFFF</color>

@@ -5,10 +5,12 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import com.petsvote.data.di.DataModule
 import com.petsvote.domain.di.ConfigurationModule
+import com.petsvote.domain.di.RatingModule
 import com.petsvote.domain.di.ResourcesModule
 import com.petsvote.domain.di.UserUseCaseModule
 import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
 import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
+import com.petsvote.domain.usecases.rating.GetRatingUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
 import com.petsvote.domain.usecases.user.RegisterUserUseCase
@@ -29,7 +31,8 @@ import javax.inject.Scope
 
 @[AppScope Component(
     modules = [AppModule::class, DataModule::class, UserUseCaseModule::class, RetrofitModule::class,
-        RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class]
+        RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class,
+        RatingModule::class]
 )]
 interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps {
 
@@ -39,6 +42,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val getUserAgreementUseCase: GetUserAgreementUseCase
     override val getPrivacyPolicyUseCase: GetPrivacyPolicyUseCase
     override val getStringResourcesUseCase: GetStringResourcesUseCase
+    override val getRatingUseCase: GetRatingUseCase
 
     @Component.Builder
     interface Builder {

@@ -3,16 +3,16 @@ package com.petsvote.app
 import android.animation.Animator
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
+import android.view.Window
+import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         setUIStart()
     }
 
@@ -74,4 +73,5 @@ class MainActivity : AppCompatActivity() {
         })
         animatorLP.start()
     }
+
 }

@@ -65,6 +65,9 @@
     <color name="filter_color">#FF1E70</color>
     <color name="card_text_color">#FFFFFF</color>
     <color name="card_icon_color">#FFFFFF</color>
+    <color name="item_bg_color">#0A121212</color>
+    <color name="item_card_rating_add_pet_ripple">#1A000000</color>
+    <color name="add_pet_icon_color">#61000000</color>
 
     //BesieTabs
     <color name="besie_tabs_bg">#0A121212</color>
@@ -72,5 +75,10 @@
     <color name="besie_tab_text_selected_color">#FFFFFF</color>
     <color name="besie_tab_text_unselected_color">#61000000</color>
 
+    //MASK
+    <color name="linear_mask_default_color_top">#03000000</color>
+    <color name="linear_mask_default_color_bottom">#80000000</color>
+    <color name="linear_mask_user_color_top">#03FF1E70</color>
+    <color name="linear_mask_user_color_bottom">#FF1E70</color>
 
 </resources>

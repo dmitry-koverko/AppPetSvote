@@ -13,10 +13,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <com.petsvote.ui.RoundedImage
+    <ImageView
         android:id="@+id/mask"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:src="@drawable/mask_default"
+        android:src="@drawable/linear_mask_default"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="112dp"/>

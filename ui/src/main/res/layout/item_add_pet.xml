@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/default_item_drawable"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.petsvote.ui.textview.SFTextView
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/add_pet_icon_color"
+            android:id="@+id/textNoPet"
+            android:textSize="15sp"
+            android:text="@string/no_user_pet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="4dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/containerMiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.petsvote.ui.textview.SimpleSFTextView
+                android:textColor="@color/add_pet_icon_color"
+                android:layout_marginLeft="8dp"
+                app:layout_constraintLeft_toRightOf="@id/addImg"
+                android:id="@+id/textAdd"
+                android:textSize="19sp"
+                android:text="@string/add_pet"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <ImageView
+                android:id="@+id/addImg"
+                android:layout_marginRight="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_add_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <com.petsvote.ui.textview.SFTextView
+        android:id="@+id/sfClick"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+</FrameLayout>

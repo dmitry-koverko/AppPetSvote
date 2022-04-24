@@ -37,15 +37,20 @@
         <action
             android:id="@+id/action_termsFragment_to_termsInfoFragment"
             app:destination="@id/termsInfoFragment"
-            app:enterAnim="@android:anim/slide_out_right"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/to_term_info"
+            app:exitAnim="@anim/from_term"
+            app:popEnterAnim="@anim/to_term"
+            app:popExitAnim="@anim/from_term_info" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_terms_info"
         android:id="@+id/termsInfoFragment"
         android:name="com.petsvote.legal.info.TermsInfoFragment"
-        android:label="TermsInfoFragment" />
+        android:label="TermsInfoFragment" >
+        <action
+            android:id="@+id/action_termsInfoFragment_to_termsFragment"
+            app:destination="@id/termsFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_tabs"
         android:id="@+id/tabsFragment"

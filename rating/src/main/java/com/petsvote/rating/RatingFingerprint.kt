@@ -1,5 +1,4 @@
 package com.petsvote.rating
-
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,7 +10,7 @@ import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.rating.databinding.ItemRatingBinding
 import com.petsvote.rating.databinding.ItemTopBinding
 
-class TopRatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
+class RatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
 
     override fun isRelativeItem(item: Item) = item is RatingPet
 
@@ -22,7 +21,7 @@ class TopRatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
         parent: ViewGroup
     ): BaseViewHolder<ItemRatingBinding, RatingPet> {
         val binding = ItemRatingBinding.inflate(layoutInflater, parent, false)
-        return TopRatingViewHolder(binding)
+        return RatingViewHolder(binding)
     }
 
     override fun getDiffUtil() = diffUtil
@@ -37,7 +36,7 @@ class TopRatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
 
 }
 
-class TopRatingViewHolder(
+class RatingViewHolder(
     binding: ItemRatingBinding
 ) : BaseViewHolder<ItemRatingBinding, RatingPet>(binding) {
 
@@ -45,26 +44,11 @@ class TopRatingViewHolder(
     override fun onBind(item: RatingPet) {
         super.onBind(item)
         with(binding) {
-            binding.root.setType(item.itemType)
-//            tvCommentCount.text = item.commentsCount
-//            tvLikesCount.text = item.likesCount
-//            tvTitle.text = item.mainComment
-//            ivPostImage.setImageDrawable(item.image)
-            //binding.mask.setMask(item.isUserPet)
         }
     }
 
     override fun onBind(item: RatingPet, payloads: List<Any>) {
         super.onBind(item, payloads)
-       //binding.mask.setMask(item.isUserPet)
-    }
-
-    private fun ImageView.setMask(isUserPet: Boolean) {
-        val icon = when (isUserPet) {
-            true -> com.petsvote.ui.R.drawable.linear_mask_user
-            false -> com.petsvote.ui.R.drawable.linear_mask_default
-        }
-        setImageResource(icon)
     }
 
 }

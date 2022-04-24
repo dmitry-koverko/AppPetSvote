@@ -29,5 +29,7 @@
     //RATING
     <string name="rating">Рейтинг</string>
     <string name="default_filter_text">Мир, кошки, все породы, дм, 0-30</string>
+    <string name="no_user_pet">У вас нет питомца</string>
+    <string name="add_pet">Добавить</string>
 
 </resources>

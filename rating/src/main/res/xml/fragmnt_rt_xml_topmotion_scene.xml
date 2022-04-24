@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/defaultTohideHeaderAndFooter"
+        motion:constraintSetEnd="@+id/hideHeaderAndFooterState"
+        motion:constraintSetStart="@id/defaultState"
+        motion:duration="500">
+        <KeyFrameSet></KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/defaultState">
+        <Constraint
+            android:id="@+id/linearHeader"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/linearFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@id/list_rating"
+            motion:layout_constraintTop_toBottomOf="@id/linearHeader" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/hideHeaderAndFooterState">
+        <Constraint
+            android:id="@+id/linearHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/linearFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@id/list_rating"
+            motion:layout_constraintTop_toBottomOf="@id/linearHeader" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/hideAllState">
+        <Constraint
+            android:id="@+id/linearHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/linearFilter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/showHeaderAndFooter">
+        <Constraint
+            android:id="@+id/linearFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="@id/list_rating"
+            motion:layout_constraintTop_toBottomOf="@id/linearHeader" />
+        <Constraint
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:visibility="visible"
+            motion:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:id="@+id/linearHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            motion:layout_constraintBottom_toTopOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+
+</MotionScene>

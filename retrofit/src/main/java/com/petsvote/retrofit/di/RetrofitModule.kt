@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.petsvote.retrofit.SettingsApi
 import com.petsvote.retrofit.adapter.NetworkResponseAdapterFactory
 import com.petsvote.retrofit.api.ConfigurationApi
+import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
 import dagger.Module
 import dagger.Provides
@@ -25,6 +26,14 @@ private val converterFactory = json.asConverterFactory(contentType)
 
 @Module
 class RetrofitModule {
+
+    @Provides
+    fun provideRatingRetrofitApi(): RatingApi {
+        return buildRetrofit(
+            getOkHttpClient(getHttpLoggingInterceptor()),
+            SettingsApi.BASE_URL
+        ).create(RatingApi::class.java)
+    }
 
     @Provides
     fun provideUserRetrofitApi(): UserApi {

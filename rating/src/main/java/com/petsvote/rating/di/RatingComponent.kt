@@ -1,6 +1,7 @@
 package com.petsvote.rating.di
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.rating.GetRatingUseCase
 import com.petsvote.domain.usecases.user.RegisterUserUseCase
 import com.petsvote.domain.usecases.user.SaveUserToLocalUseCase
 import com.petsvote.rating.RatingFragment
@@ -40,7 +41,7 @@ interface RatingDepsProvider {
 }
 
 interface RatingDeps{
-    val registerUserUseCase: RegisterUserUseCase
+    val getRatingUseCase: GetRatingUseCase
     val saveUserUseCase: SaveUserToLocalUseCase
 }
 
