@@ -40,7 +40,6 @@ class RatingFragment : BaseFragment(R.layout.fragmnt_rt), MotionLayout.Transitio
     }
 
     var binding: FragmntRtBinding? = null
-    private val topAdapter = FingerprintListAdapter(listOf(TopRatingFingerprint()))
     private val ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint()))
 
     private var topLinearHeight = 0
@@ -75,10 +74,6 @@ class RatingFragment : BaseFragment(R.layout.fragmnt_rt), MotionLayout.Transitio
             adapter = ratingAdapter
         }
 
-        binding?.listRating?.postDelayed({
-            topAdapter.submitList(list)
-        }, 300L)
-
         binding?.linearHeader?.viewTreeObserver?.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -88,136 +83,101 @@ class RatingFragment : BaseFragment(R.layout.fragmnt_rt), MotionLayout.Transitio
             }
         })
 
-        binding?.listRating?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-//                var h = binding?.listRating?.computeVerticalScrollOffset()
-//                h?.let {
-//                    var positionTopHeader = it * 100 / topLinearHeight
-//                    binding?.topMotion?.progress = positionTopHeader / 100f
-//                }
-
-            }
-        })
-
         var motion = binding?.topMotion
         motion?.addTransitionListener(this)
 
-        binding?.listRating?.setOnScrollChangeListener(
-            (View.OnScrollChangeListener { p0, scrollX, scrollY, oldScrollX, oldScrollY ->
-                if(isAnim) return@OnScrollChangeListener
-                var offset = binding?.listRating?.computeVerticalScrollOffset()
-                offset?.let {
-                    log("current state = ${currentState.name}")
-                    if (scrollY < oldScrollY) {
-                        when(currentState){
-                            ViewStateFragment.HIDE_ALL -> {
-                                if(offset >= topLinearHeight + 50){
-                                    motion?.setTransition(
-                                        R.id.hideAllState,
-                                        R.id.showHeaderAndFooter
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.SHOW_FILTER_AND_FOOTER
-                                }else if (offset >= 50 && offset <= topLinearHeight) {
-                                    motion?.setTransition(
-                                        R.id.hideAllState,
-                                        R.id.showHeaderAndFooter
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.SHOW_FILTER_AND_FOOTER
-                                }else {
-                                    motion?.setTransition(
-                                        R.id.showHeaderAndFooter,
-                                        R.id.defaultState
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.DEFAULT
-                                }
-                            }
-                            ViewStateFragment.SHOW_FILTER_AND_FOOTER -> {
-                                if (offset < topLinearHeight) {
-                                    motion?.setTransition(
-                                        R.id.showHeaderAndFooter,
-                                        R.id.defaultState
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.DEFAULT
-                                }
-                            }
-                            ViewStateFragment.HIDE_HEADER_AND_FOOTER -> {
-                                if (offset <= 0) {
-                                    motion?.setTransition(
-                                        R.id.hideHeaderAndFooterState,
-                                        R.id.defaultState
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.DEFAULT
-                                }
-                            }
-                        }
-
-                    } else {
-                        when (currentState) {
-                            ViewStateFragment.DEFAULT -> {
-                                if (offset > 70) {
-                                    motion?.setTransition(
-                                        R.id.defaultState,
-                                        R.id.hideHeaderAndFooterState
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.HIDE_HEADER_AND_FOOTER
-                                }
-                            }
-                            ViewStateFragment.HIDE_HEADER_AND_FOOTER -> {
-                                if (offset >= topLinearHeight) {
-                                    motion?.setTransition(
-                                        R.id.hideHeaderAndFooterState,
-                                        R.id.hideAllState
-                                    )
-                                    motion?.transitionToEnd()
-                                    currentState = ViewStateFragment.HIDE_ALL
-                                }
-                            }
-
-                            ViewStateFragment.SHOW_FILTER_AND_FOOTER -> {
-                                motion?.setTransition(
-                                    R.id.showHeaderAndFooter,
-                                    R.id.hideAllState
-                                )
-                                motion?.transitionToEnd()
-                                currentState = ViewStateFragment.HIDE_ALL
-                            }
-                        }
-                    }
-                }
-            })
-        )
+//        binding?.listRating?.setOnScrollChangeListener(
+//            (View.OnScrollChangeListener { p0, scrollX, scrollY, oldScrollX, oldScrollY ->
+//                if(isAnim) return@OnScrollChangeListener
+//                var offset = binding?.listRating?.computeVerticalScrollOffset()
+//                offset?.let {
+//                    log("current state = ${currentState.name}")
+//                    if (scrollY < oldScrollY) {
+//                        when(currentState){
+//                            ViewStateFragment.HIDE_ALL -> {
+//                                if(offset >= topLinearHeight + 50){
+//                                    motion?.setTransition(
+//                                        R.id.hideAllState,
+//                                        R.id.showHeaderAndFooter
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.SHOW_FILTER_AND_FOOTER
+//                                }else if (offset >= 50 && offset <= topLinearHeight) {
+//                                    motion?.setTransition(
+//                                        R.id.hideAllState,
+//                                        R.id.showHeaderAndFooter
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.SHOW_FILTER_AND_FOOTER
+//                                }else {
+//                                    motion?.setTransition(
+//                                        R.id.showHeaderAndFooter,
+//                                        R.id.defaultState
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.DEFAULT
+//                                }
+//                            }
+//                            ViewStateFragment.SHOW_FILTER_AND_FOOTER -> {
+//                                if (offset < topLinearHeight) {
+//                                    motion?.setTransition(
+//                                        R.id.showHeaderAndFooter,
+//                                        R.id.defaultState
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.DEFAULT
+//                                }
+//                            }
+//                            ViewStateFragment.HIDE_HEADER_AND_FOOTER -> {
+//                                if (offset <= 0) {
+//                                    motion?.setTransition(
+//                                        R.id.hideHeaderAndFooterState,
+//                                        R.id.defaultState
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.DEFAULT
+//                                }
+//                            }
+//                        }
+//
+//                    } else {
+//                        when (currentState) {
+//                            ViewStateFragment.DEFAULT -> {
+//                                if (offset > 70) {
+//                                    motion?.setTransition(
+//                                        R.id.defaultState,
+//                                        R.id.hideHeaderAndFooterState
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.HIDE_HEADER_AND_FOOTER
+//                                }
+//                            }
+//                            ViewStateFragment.HIDE_HEADER_AND_FOOTER -> {
+//                                if (offset >= topLinearHeight) {
+//                                    motion?.setTransition(
+//                                        R.id.hideHeaderAndFooterState,
+//                                        R.id.hideAllState
+//                                    )
+//                                    motion?.transitionToEnd()
+//                                    currentState = ViewStateFragment.HIDE_ALL
+//                                }
+//                            }
+//
+//                            ViewStateFragment.SHOW_FILTER_AND_FOOTER -> {
+//                                motion?.setTransition(
+//                                    R.id.showHeaderAndFooter,
+//                                    R.id.hideAllState
+//                                )
+//                                motion?.transitionToEnd()
+//                                currentState = ViewStateFragment.HIDE_ALL
+//                            }
+//                        }
+//                    }
+//                }
+//            })
+//        )
 
     }
-
-//    fun animBottomBar(show: Boolean){
-//        var dnst: Float = context?.resources?.displayMetrics?.density ?: 0f
-//        var heightBottomBar = dnst * 72
-//
-//        val slideAnimator = ValueAnimator
-//            .ofInt(heightBottomBar.toInt(), 0)
-//            .setDuration(300)
-//
-//        slideAnimator.addUpdateListener { animation -> // get the value the interpolator is at
-//            val value = animation.animatedValue as Int
-//            //var lp = binding?.bottomBar?.layoutParams
-//            //lp?.height = value
-//            //binding?.bottomBar?.layoutParams = lp
-//            binding?.bottomBar?.translationY = value.toFloat()
-//            binding?.bottomBar?.requestLayout()
-//        }
-//
-//        val set = AnimatorSet()
-//        set.play(slideAnimator)
-//        set.setInterpolator(AccelerateDecelerateInterpolator())
-//        set.start()
-//    }
 
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
@@ -229,27 +189,6 @@ class RatingFragment : BaseFragment(R.layout.fragmnt_rt), MotionLayout.Transitio
         }
     }
 
-    private var list = mutableListOf<Item>(
-        RatingPet(1, true, RatingPetItemType.TOPADDPET),
-        RatingPet(2, false),
-        RatingPet(0, true, RatingPetItemType.ADDPET),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, true),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false),
-        RatingPet(0, false)
-    )
 
     enum class ViewStateFragment {
         DEFAULT,

@@ -1,8 +1,9 @@
 package com.petsvote.data.di
 
 import com.petsvote.data.repository.ConfigurationRepository
-import com.petsvote.domain.repository.RatingRepository
+import com.petsvote.domain.repository.rating.RatingPagingRepository
 import com.petsvote.domain.repository.UserRepository
+import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
@@ -14,8 +15,16 @@ import dagger.Provides
 class DataModule {
 
     @Provides
-    fun provideRatingRemoteRepository(ratingApi: RatingApi): RatingRepository {
-        return com.petsvote.data.repository.RatingRepository(ratingApi = ratingApi)
+    fun provideRatingRemoteRepository(ratingApi: RatingApi, userRepository: UserRepository): RatingRepository {
+        return com.petsvote.data.repository.paging.RatingRepository(
+            ratingApi = ratingApi,
+            userRepository = userRepository
+        )
+    }
+
+    @Provides
+    fun provideRatingPagingRepository(ratingRepository: RatingRepository): RatingPagingRepository {
+        return com.petsvote.data.repository.paging.RatingPagingRepository(ratingRepository = ratingRepository)
     }
 
     @Provides

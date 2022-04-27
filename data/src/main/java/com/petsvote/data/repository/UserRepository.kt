@@ -31,5 +31,9 @@ class UserRepository @Inject constructor (
         userDao.insert(user.toLocalUser())
     }
 
+    override suspend fun getToken(): String {
+        return userDao.getToken()
+    }
+
 
 }

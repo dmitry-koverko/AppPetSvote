@@ -1,15 +1,18 @@
 package com.petsvote.retrofit.api
 
+import com.petsvote.retrofit.SettingsApi
 import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.rating.Rating
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Query
 
 interface RatingApi {
 
     @GET("get-rating-list")
     suspend fun getRating(
+        @Header("Authorization") token: String,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
         @Query("lang") lang: String?,

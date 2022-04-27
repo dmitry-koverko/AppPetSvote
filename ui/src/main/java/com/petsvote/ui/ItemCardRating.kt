@@ -4,7 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.ImageView
 import com.petsvote.domain.entity.pet.RatingPetItemType
+import com.petsvote.ui.textview.SimpleSFTextView
 
 class ItemCardRating @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
@@ -32,6 +34,10 @@ class ItemCardRating @JvmOverloads constructor(
             RatingPetItemType.ADDPET -> setAppPetLP()
             RatingPetItemType.TOPADDPET -> setTopAppPetLP()
         }
+    }
+
+    fun setText(text: String){
+        findViewById<SimpleSFTextView>(R.id.name).text = text
     }
 
     private fun setTopLP() {
@@ -68,4 +74,11 @@ class ItemCardRating @JvmOverloads constructor(
 
     }
 
+    private fun ImageView.setMask(isUserPet: Boolean) {
+        val icon = when (isUserPet) {
+            true -> R.drawable.linear_mask_user
+            false -> R.drawable.linear_mask_default
+        }
+        setImageResource(icon)
+    }
 }

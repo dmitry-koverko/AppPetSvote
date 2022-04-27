@@ -82,6 +82,7 @@ class RetrofitModule {
                     .build()
             )
         }.build()
+
         return client.build()
     }
 

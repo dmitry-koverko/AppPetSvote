@@ -12,6 +12,9 @@ interface UserDao {
     @Query("SELECT * FROM entityuserinfo")
     fun getUser(): EntityUserInfo
 
+    @Query("SELECT bearer FROM entityuserinfo")
+    suspend fun getToken(): String
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(userInfo: EntityUserInfo)
 

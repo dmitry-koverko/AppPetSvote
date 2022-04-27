@@ -17,7 +17,6 @@
     <ImageView
         android:layout_gravity="bottom"
         android:id="@+id/mask"
-        android:src="@drawable/linear_mask_default"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="112dp"/>
@@ -34,7 +33,6 @@
             app:layout_constraintBottom_toTopOf="@id/name"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="11dp"
-            android:src="@drawable/ic_corona"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

@@ -10,5 +10,6 @@ interface UserRepository {
     suspend fun registerUser(params: RegisterUserParams): UserInfo?
     suspend fun checkLoginUser(): Boolean
     suspend fun saveUserToLocal(user: UserInfo)
+    suspend fun getToken(): String
 
 }

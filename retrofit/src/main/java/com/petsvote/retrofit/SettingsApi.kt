@@ -13,4 +13,6 @@ object SettingsApi {
     val X_HEADER_API_KEY = "X-Api-Key"
     val X_KEY = "r0ReOEO3749jg3rg"
 
+    val HEADER_AUTH = "Authorization"
+
 }

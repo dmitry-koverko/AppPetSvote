@@ -3,15 +3,15 @@ package com.petsvote.data.repository.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.petsvote.core.adapter.Item
-import com.petsvote.data.repository.RatingRepository.Companion.NETWORK_PAGE_SIZE
+import com.petsvote.data.repository.paging.RatingPagingRepository.Companion.NETWORK_PAGE_SIZE
 import com.petsvote.domain.entity.pet.RatingPet
-import com.petsvote.retrofit.api.RatingApi
+import com.petsvote.domain.repository.rating.RatingRepository
 import java.io.IOException
 import javax.inject.Inject
 
 class RatingPagingSource @Inject constructor(
-    private val ratingApi: RatingApi
-): PagingSource<Int, Item>() {
+    private val ratingRepository: RatingRepository
+) : PagingSource<Int, Item>() {
 
     override fun getRefreshKey(state: PagingState<Int, Item>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -21,20 +21,21 @@ class RatingPagingSource @Inject constructor(
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
-        val position = params.key ?: Companion.GITHUB_STARTING_PAGE_INDEX
+        val offset = params.key ?: DEFAULT_OFFSET
         return try {
-            //val response = service.searchRepos(apiQuery, position, params.loadSize)
-            //val repos = response.items
-            val repos = generateRatingPet(position)
+            val repos = ratingRepository.getRating(
+                limit = null,
+                offset = offset)
+
             val nextKey = if (repos.isEmpty()) {
                 null
             } else {
-                position + (params.loadSize / NETWORK_PAGE_SIZE)
+                offset + NETWORK_PAGE_SIZE
             }
             LoadResult.Page(
                 data = repos,
-                prevKey = if (position == Companion.GITHUB_STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = nextKey
+                prevKey = if (offset == Companion.DEFAULT_OFFSET) null else offset - NETWORK_PAGE_SIZE,
+                nextKey = nextKey,
             )
         } catch (exception: IOException) {
             return LoadResult.Error(exception)
@@ -42,12 +43,13 @@ class RatingPagingSource @Inject constructor(
     }
 
     companion object {
-        private const val GITHUB_STARTING_PAGE_INDEX = 1
+        private const val DEFAULT_OFFSET = 0
     }
 
     fun generateRatingPet(postion: Int): List<Item> {
         var list = mutableListOf<RatingPet>()
-        for (i in postion..postion + 50) list.add(RatingPet(i, false))
+        for (i in postion until postion + NETWORK_PAGE_SIZE)
+            list.add(RatingPet(i, false))
         return list
     }
 }

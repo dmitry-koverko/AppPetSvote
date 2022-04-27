@@ -1,27 +1,25 @@
-package com.petsvote.data.repository
+package com.petsvote.data.repository.paging
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.petsvote.core.adapter.Item
-import com.petsvote.data.repository.paging.RatingPagingSource
-import com.petsvote.domain.entity.pet.RatingPet
-import com.petsvote.domain.repository.RatingRepository
-import com.petsvote.retrofit.api.RatingApi
+import com.petsvote.domain.repository.rating.RatingPagingRepository
+import com.petsvote.domain.repository.rating.RatingRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class RatingRepository @Inject constructor(
-    private val ratingApi: RatingApi
-) : RatingRepository {
+class RatingPagingRepository @Inject constructor(
+    private val ratingRepository: RatingRepository
+) : RatingPagingRepository {
 
     override fun getRating(): Flow<PagingData<Item>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
             ),
-            pagingSourceFactory = { RatingPagingSource(ratingApi) }
+            pagingSourceFactory = { RatingPagingSource(ratingRepository) }
         ).flow
     }
 

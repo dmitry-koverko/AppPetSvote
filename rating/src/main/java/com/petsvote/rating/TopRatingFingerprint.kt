@@ -46,6 +46,7 @@ class TopRatingViewHolder(
         super.onBind(item)
         with(binding) {
             binding.root.setType(item.itemType)
+            binding.root.setText(item.pet_id.toString())
 //            tvCommentCount.text = item.commentsCount
 //            tvLikesCount.text = item.likesCount
 //            tvTitle.text = item.mainComment
@@ -57,14 +58,6 @@ class TopRatingViewHolder(
     override fun onBind(item: RatingPet, payloads: List<Any>) {
         super.onBind(item, payloads)
        //binding.mask.setMask(item.isUserPet)
-    }
-
-    private fun ImageView.setMask(isUserPet: Boolean) {
-        val icon = when (isUserPet) {
-            true -> com.petsvote.ui.R.drawable.linear_mask_user
-            false -> com.petsvote.ui.R.drawable.linear_mask_default
-        }
-        setImageResource(icon)
     }
 
 }
