@@ -1,5 +1,6 @@
 package com.petsvote.data.mappers
 
+import com.petsvote.domain.entity.pet.RatingFilterLocationType
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.RatingPetItemType
 import com.petsvote.retrofit.entity.rating.PetRating
@@ -14,6 +15,12 @@ fun List<PetRating>.remoteToRatingList(): List<RatingPet>{
 
 fun PetRating.remoteToRating(): RatingPet{
     return RatingPet(
-        this.pet_id, false, RatingPetItemType.DEFAULT
+        this.pet_id,
+        this.name,
+        this.country_name,
+        this.city_name,
+        RatingFilterLocationType.WORLD,
+        this.photos.remoteToPhotoList(),false,
+        if(this.index != 1) RatingPetItemType.DEFAULT else RatingPetItemType.TOP
     )
 }

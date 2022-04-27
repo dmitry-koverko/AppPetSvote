@@ -1,11 +1,22 @@
 package com.petsvote.ui
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
 import com.petsvote.domain.entity.pet.RatingPetItemType
+import com.petsvote.ui.ext.loadFromResources
+import com.petsvote.ui.ext.loadUrl
+import com.petsvote.ui.ext.loadUrlListeners
+import com.petsvote.ui.textview.SFTextView
 import com.petsvote.ui.textview.SimpleSFTextView
 
 class ItemCardRating @JvmOverloads constructor(
@@ -22,8 +33,17 @@ class ItemCardRating @JvmOverloads constructor(
     private var inflater: LayoutInflater =
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    private var maskImage: ImageView?
+    private var carImage: ImageView?
+    private var nameTextView: TextView?
+    private var locationTextView: TextView?
+
     init {
         inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
+        maskImage = findViewById<ImageView>(R.id.mask)
+        carImage = findViewById<ImageView>(R.id.image)
+        nameTextView = findViewById<TextView>(R.id.name)
+        locationTextView = findViewById<TextView>(R.id.location)
     }
 
     fun setType(type: RatingPetItemType) {
@@ -36,14 +56,25 @@ class ItemCardRating @JvmOverloads constructor(
         }
     }
 
-    fun setText(text: String){
+    fun setText(text: String) {
         findViewById<SimpleSFTextView>(R.id.name).text = text
     }
 
     private fun setTopLP() {
 
-        findViewById<FrameLayout>(R.id.root).layoutParams =
-            LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+        lpTop.rightMargin = dpToPx(8f, context)
+        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
+
+
+        var lpName = nameTextView?.layoutParams as MarginLayoutParams
+        lpName.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+        nameTextView?.layoutParams = lpName
+
+        var lpLocation = locationTextView?.layoutParams as MarginLayoutParams
+        lpLocation.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+        locationTextView?.layoutParams = lpLocation
+
     }
 
     private fun setNullableLP() {
@@ -64,6 +95,7 @@ class ItemCardRating @JvmOverloads constructor(
         this.removeAllViews()
         setDefaultLP()
         inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
+        initSFTextViewParams()
 
     }
 
@@ -71,14 +103,30 @@ class ItemCardRating @JvmOverloads constructor(
         this.removeAllViews()
         setTopLP()
         inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
-
+        initSFTextViewParams()
     }
 
-    private fun ImageView.setMask(isUserPet: Boolean) {
+    private fun initSFTextViewParams() {
+        findViewById<SFTextView>(R.id.sfClick).animation = true
+    }
+
+    fun setImageCat(url: String) {
+        carImage?.loadUrl(url)
+    }
+
+    fun setName(name: String){
+        nameTextView?.text = name
+    }
+
+    fun setLocation(location: String){
+        locationTextView?.text = location
+    }
+
+    fun setMask(isUserPet: Boolean) {
         val icon = when (isUserPet) {
             true -> R.drawable.linear_mask_user
             false -> R.drawable.linear_mask_default
         }
-        setImageResource(icon)
+        maskImage?.loadFromResources(icon)
     }
 }
