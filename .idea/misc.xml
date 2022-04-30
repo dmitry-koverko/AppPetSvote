@@ -11,7 +11,9 @@
         <entry key="..\:/clean-petsvote/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />
         <entry key="..\:/clean-petsvote/core/src/main/res/layout/progress.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragment_rating.xml" value="0.25" />
-        <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragmnt_rt.xml" value="0.2" />
+        <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragment_rating_collapsing.xml" value="0.1903114186851211" />
+        <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragmnt_rt.xml" value="0.1" />
+        <entry key="..\:/clean-petsvote/rating/src/main/res/layout/item_find.xml" value="0.136" />
         <entry key="..\:/clean-petsvote/rating/src/main/res/layout/item_rating.xml" value="0.25416666666666665" />
         <entry key="..\:/clean-petsvote/rating/src/main/res/layout/item_top.xml" value="0.2" />
         <entry key="..\:/clean-petsvote/register/src/main/res/layout/fragment_register.xml" value="0.264" />

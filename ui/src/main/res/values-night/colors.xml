@@ -65,6 +65,8 @@
     <color name="item_bg_color">#1FFFFFFF</color>
     <color name="item_card_rating_add_pet_ripple">#14FFFFFF</color>
     <color name="add_pet_icon_color">#99FFFFFF</color>
+    <color name="bottom_view_bg">#000000</color>
+    <color name="icon_scroll_to_top">#99FFFFFF</color>
 
     //BesieTabs
     <color name="besie_tabs_bg">#1FFFFFFF</color>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <com.petsvote.ui.BesieLayout
+        app:bl_ripple="true"
+        app:bl_ripple_color="@android:color/transparent"
+        android:id="@+id/blFind"
+        android:layout_gravity="center_vertical"
+        app:bl_background="@color/ui_primary"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:src="@drawable/ic_find_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </com.petsvote.ui.BesieLayout>
+
+</FrameLayout>

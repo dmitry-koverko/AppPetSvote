@@ -12,6 +12,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.petsvote.domain.entity.pet.RatingFilterLocationType
 import com.petsvote.domain.entity.pet.RatingPetItemType
 import com.petsvote.ui.ext.loadFromResources
 import com.petsvote.ui.ext.loadUrl
@@ -37,6 +38,7 @@ class ItemCardRating @JvmOverloads constructor(
     private var carImage: ImageView?
     private var nameTextView: TextView?
     private var locationTextView: TextView?
+    private var corona: ImageView?
 
     init {
         inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
@@ -44,24 +46,31 @@ class ItemCardRating @JvmOverloads constructor(
         carImage = findViewById<ImageView>(R.id.image)
         nameTextView = findViewById<TextView>(R.id.name)
         locationTextView = findViewById<TextView>(R.id.location)
+        corona = findViewById<ImageView>(R.id.corona)
     }
-
-    fun setType(type: RatingPetItemType) {
-        when (type) {
-            RatingPetItemType.DEFAULT -> setDefaultLP()
-            RatingPetItemType.TOP -> setTopLP()
-            RatingPetItemType.NULLABLE -> setNullableLP()
-            RatingPetItemType.ADDPET -> setAppPetLP()
-            RatingPetItemType.TOPADDPET -> setTopAppPetLP()
-        }
-    }
+//
+//    fun setType(type: RatingPetItemType) {
+//        when (type) {
+//            RatingPetItemType.DEFAULT -> setDefaultLP()
+//            RatingPetItemType.TOP -> setTopLP()
+//            RatingPetItemType.NULLABLE -> setNullableLP()
+//            RatingPetItemType.ADDPET -> setAppPetLP()
+//            RatingPetItemType.TOPADDPET -> setTopAppPetLP()
+//        }
+//    }
 
     fun setText(text: String) {
         findViewById<SimpleSFTextView>(R.id.name).text = text
     }
 
-    private fun setTopLP() {
-
+    fun setTopLP() {
+        removeAllViews()
+        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
+        maskImage = findViewById<ImageView>(R.id.mask)
+        carImage = findViewById<ImageView>(R.id.image)
+        nameTextView = findViewById<TextView>(R.id.name)
+        locationTextView = findViewById<TextView>(R.id.location)
+        corona = findViewById<ImageView>(R.id.corona)
         var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
         lpTop.rightMargin = dpToPx(8f, context)
         findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
@@ -77,32 +86,48 @@ class ItemCardRating @JvmOverloads constructor(
 
     }
 
-    private fun setNullableLP() {
+    fun setNullableLP() {
+        removeAllViews()
+        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
 
         findViewById<FrameLayout>(R.id.root).layoutParams =
             LayoutParams(0, 0)
 
     }
 
-    private fun setDefaultLP() {
-
+    fun setDefaultLP() {
+        removeAllViews()
+        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
+        maskImage = findViewById<ImageView>(R.id.mask)
+        carImage = findViewById<ImageView>(R.id.image)
+        nameTextView = findViewById<TextView>(R.id.name)
+        locationTextView = findViewById<TextView>(R.id.location)
+        corona = findViewById<ImageView>(R.id.corona)
         findViewById<FrameLayout>(R.id.root).layoutParams =
             LayoutParams(itemWidth.toInt(), itemHeight.toInt())
 
     }
 
-    private fun setAppPetLP() {
+    fun setAppPetLP() {
         this.removeAllViews()
-        setDefaultLP()
         inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
+
+        findViewById<FrameLayout>(R.id.root).layoutParams =
+            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
+
         initSFTextViewParams()
 
     }
 
-    private fun setTopAppPetLP() {
+    fun setTopAppPetLP() {
         this.removeAllViews()
-        setTopLP()
+
         inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
+
+        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+        lpTop.rightMargin = dpToPx(8f, context)
+
+        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
         initSFTextViewParams()
     }
 
@@ -128,5 +153,9 @@ class ItemCardRating @JvmOverloads constructor(
             false -> R.drawable.linear_mask_default
         }
         maskImage?.loadFromResources(icon)
+    }
+
+    fun setCorona(isShow: Boolean = false){
+        corona?.visibility = if(isShow) View.VISIBLE else View.GONE
     }
 }

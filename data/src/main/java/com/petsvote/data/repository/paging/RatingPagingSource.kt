@@ -25,12 +25,11 @@ class RatingPagingSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
         val offset = params.key ?: DEFAULT_OFFSET
         val countUserPets = 0;
+        val isWorlTop = false
         return try {
             var repos: MutableList<RatingPet> = ratingRepository.getRating(
                 limit = null,
                 offset = offset).toMutableList()
-
-            repos = repos.subList(0,2)
 
             val nextKey = if (repos.size < NETWORK_PAGE_SIZE) {
                 null
@@ -38,7 +37,12 @@ class RatingPagingSource @Inject constructor(
                 offset + NETWORK_PAGE_SIZE
             }
 
-            if(countUserPets == 0 && repos.size <= NETWORK_PAGE_SIZE){
+            val itemIndex1: RatingPet? = repos.find { it.index == 1}
+            itemIndex1?.let {
+                repos.find { it.index == 1 }?.itemType ?: RatingPetItemType.TOP
+            }
+
+            if(countUserPets == 0 && itemIndex1 != null){
                 when(repos.size){
                     0 -> repos.add(generateNullableRatingPet(true))
                     1 -> repos.add(1, generateNullableRatingPet())
@@ -46,6 +50,10 @@ class RatingPagingSource @Inject constructor(
                     3 -> repos.add(3, generateNullableRatingPet())
                     else -> repos.add(3, generateNullableRatingPet())
                 }
+            }
+
+            if(itemIndex1 != null && isWorlTop){
+                repos.find { it.index == 1 }?.locationType ?:RatingFilterLocationType.WORLD
             }
 
             LoadResult.Page(
@@ -59,7 +67,7 @@ class RatingPagingSource @Inject constructor(
     }
 
     private fun generateNullableRatingPet(isTop: Boolean = false): RatingPet{
-        return RatingPet(-1, "", "", "", RatingFilterLocationType.WORLD,
+        return RatingPet(-1, -1, "", "", "", RatingFilterLocationType.COUNTRY,
             emptyList(), false, if(!isTop) RatingPetItemType.ADDPET else RatingPetItemType.TOPADDPET)
     }
 

@@ -15,11 +15,12 @@ fun List<PetRating>.remoteToRatingList(): List<RatingPet>{
 
 fun PetRating.remoteToRating(): RatingPet{
     return RatingPet(
+        this.index,
         this.pet_id,
         this.name,
         this.country_name,
         this.city_name,
-        RatingFilterLocationType.WORLD,
+        RatingFilterLocationType.CITY,
         this.photos.remoteToPhotoList(),false,
         if(this.index != 1) RatingPetItemType.DEFAULT else RatingPetItemType.TOP
     )
