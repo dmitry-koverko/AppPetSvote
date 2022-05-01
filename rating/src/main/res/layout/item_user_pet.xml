@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="50dp"
+    android:layout_width="50dp"
+    android:layout_gravity="center_vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.petsvote.ui.BesieImage
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:id="@+id/pet_image_small"
+        android:src="@drawable/cat_example"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+
+</FrameLayout>

@@ -1,5 +1,6 @@
 package com.petsvote.domain.entity.user
 
+import com.petsvote.core.adapter.Item
 import org.jetbrains.annotations.NotNull
 
 data class UserPet(
@@ -16,4 +17,4 @@ data class UserPet(
     val mark_dynamic: Int? = null,
     val has_paid_votes: Int? = null,
     var photos: List<Photo>? = listOf()
-)
+): Item

@@ -18,9 +18,11 @@ import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.core.adapter.FingerprintPagingAdapter
 import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.pet.SimpleItem
+import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.rating.databinding.FragmentRatingCollapsingBinding
 import com.petsvote.rating.di.RatingComponentViewModel
 import com.petsvote.rating.fingerprints.FindPetFingerprint
+import com.petsvote.rating.fingerprints.UserPetFingerprint
 import com.petsvote.ui.ext.hide
 import com.petsvote.ui.ext.show
 import dagger.Lazy
@@ -40,6 +42,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     var binding: FragmentRatingCollapsingBinding? = null
     private val ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint()))
     private val findPetAdapter = FingerprintListAdapter(listOf(FindPetFingerprint(::onFindPet)))
+    private val userPetsAdapter = FingerprintListAdapter(listOf(UserPetFingerprint(::onClickUserPet)))
 
     private var topLinearHeight = 0
     private var currentState = ViewStateFragment.DEFAULT
@@ -54,6 +57,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
         initRatingRecycler()
         initBottomRecycler()
+
         lifecycleScope.launchWhenStarted {
             viewModel.getRating()
         }
@@ -162,6 +166,12 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
+
+         lifecycleScope.launchWhenResumed {
+             viewModel.userPets.collect {
+                 userPetsAdapter.submitList(it)
+             }
+         }
     }
 
 
@@ -180,4 +190,8 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private fun onFindPet(item: SimpleItem) {
         log("click findPet")
     }
+    private fun onClickUserPet(item: UserPet) {
+        log("click findPet")
+    }
+
 }
