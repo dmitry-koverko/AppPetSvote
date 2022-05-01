@@ -1,12 +1,11 @@
 package com.petsvote.domain.di
 
-import com.petsvote.domain.repository.UserRepository
-import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
-import com.petsvote.domain.usecases.user.RegisterUserUseCase
-import com.petsvote.domain.usecases.user.SaveUserToLocalUseCase
-import com.petsvote.domain.usecases.user.impl.CheckLoginUserUseCaseImpl
-import com.petsvote.domain.usecases.user.impl.RegisterUserUseCaseImpl
-import com.petsvote.domain.usecases.user.impl.SaveUserToLocalUseCaseImpl
+import com.petsvote.domain.repository.IUserRepository
+import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
+import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
+import com.petsvote.domain.usecases.user.IRegisterUserUseCase
+import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
+import com.petsvote.domain.usecases.user.impl.*
 import dagger.Module
 import dagger.Provides
 
@@ -14,18 +13,28 @@ import dagger.Provides
 class UserUseCaseModule {
 
     @Provides
-    fun provideRegisterUserUseCase(userRepository: UserRepository): RegisterUserUseCase {
-        return RegisterUserUseCaseImpl(userRepository)
+    fun provideGetUserPetsUseCase(userRepository: IUserRepository): IGetUserPetsUseCase {
+        return GetUserPetsUseCase(userRepository)
     }
 
     @Provides
-    fun provideCheckLoginUserUseCase(userRepository: UserRepository): CheckLoginUserUseCase {
-        return CheckLoginUserUseCaseImpl(userRepository)
+    fun provideGetCurrentUserUseCase(userRepository: IUserRepository): IGetCurrentUserUseCase {
+        return GetCurrentUserUseCase(userRepository)
     }
 
     @Provides
-    fun provideSaveLocalUserUseCase(userRepository: UserRepository): SaveUserToLocalUseCase {
-        return SaveUserToLocalUseCaseImpl(userRepository)
+    fun provideRegisterUserUseCase(userRepository: IUserRepository): IRegisterUserUseCase {
+        return RegisterUserUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideCheckLoginUserUseCase(userRepository: IUserRepository): com.petsvote.domain.usecases.user.ICheckLoginUserUseCase {
+        return CheckLoginUserUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideSaveLocalUserUseCase(userRepository: IUserRepository): ISaveUserToLocalUseCase {
+        return SaveUserToLocalUseCase(userRepository)
     }
 
 

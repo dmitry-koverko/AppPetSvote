@@ -16,6 +16,7 @@ interface UserApi {
 
     @GET("get-current-user")
     suspend fun getCurrentUser(
+        @Header("Authorization") token: String,
         @Query("lang") lang: String?,
     ): NetworkResponse<User, ApiError>
 

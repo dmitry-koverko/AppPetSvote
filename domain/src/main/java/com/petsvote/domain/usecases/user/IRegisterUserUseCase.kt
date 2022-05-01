@@ -5,6 +5,6 @@ import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
 import kotlinx.coroutines.flow.Flow
 
-interface RegisterUserUseCase {
+interface IRegisterUserUseCase {
     suspend fun registerUser(params: RegisterUserParams): Flow<DataResponse<UserInfo>>
 }

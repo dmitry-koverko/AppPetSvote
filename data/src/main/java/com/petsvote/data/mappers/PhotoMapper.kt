@@ -30,3 +30,31 @@ fun List<com.petsvote.domain.entity.user.Photo>.toLocalPhotoList(): List<EntityP
     this.onEach { list.add(it.toLocalPhoto()) }
     return list
 }
+
+fun Photo.toLocalPhoto(): EntityPhoto {
+    return EntityPhoto(
+        id = this.id,
+        num = this.num,
+        url = this.url
+    )
+}
+
+fun List<Photo>.remoteToLocalPhotoList(): List<EntityPhoto> {
+    var list = mutableListOf<EntityPhoto>()
+    this.onEach { list.add(it.toLocalPhoto()) }
+    return list
+}
+
+fun EntityPhoto.toPhoto(): com.petsvote.domain.entity.user.Photo{
+    return com.petsvote.domain.entity.user.Photo(
+        id = this.id,
+        num = this.num,
+        url = this.url
+    )
+}
+
+fun List<EntityPhoto>.toPhotoList(): List<com.petsvote.domain.entity.user.Photo> {
+    var list = mutableListOf<com.petsvote.domain.entity.user.Photo>()
+    this.onEach { list.add(it.toPhoto()) }
+    return list
+}

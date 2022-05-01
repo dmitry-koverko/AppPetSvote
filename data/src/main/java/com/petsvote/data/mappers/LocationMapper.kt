@@ -20,3 +20,12 @@ fun com.petsvote.domain.entity.user.Location.toLocalLocation(): EntityLocation {
         city = this.city
     )
 }
+
+fun Location.toLocalLocation(): EntityLocation {
+    return EntityLocation(
+        city_id = this.city_id,
+        country_id = this.country_id,
+        country = this.country,
+        city = this.city
+    )
+}

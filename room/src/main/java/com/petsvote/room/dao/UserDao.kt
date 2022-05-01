@@ -5,6 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.petsvote.room.entity.user.EntityUserInfo
+import com.petsvote.room.entity.user.EntityUserPet
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDao {
@@ -14,6 +16,9 @@ interface UserDao {
 
     @Query("SELECT bearer FROM entityuserinfo")
     suspend fun getToken(): String
+
+    @Query("SELECT * FROM entityuserinfo")
+    fun getUserFlow(): Flow<EntityUserInfo>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(userInfo: EntityUserInfo)

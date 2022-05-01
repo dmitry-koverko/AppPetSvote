@@ -57,6 +57,9 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         lifecycleScope.launchWhenStarted {
             viewModel.getRating()
         }
+        lifecycleScope.launchWhenStarted {
+            viewModel.getUserPets()
+        }
     }
 
     private fun initBottomRecycler() {
@@ -115,8 +118,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                                 AnimationUtils.loadAnimation(
                                     context,
                                     com.petsvote.ui.R.anim.trans_downwards
-                                )
-                            )
+                                ))
                             binding?.scrollToTop?.visibility = View.VISIBLE
                             check_ScrollingUp = false;
                         }

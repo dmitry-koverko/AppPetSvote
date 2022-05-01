@@ -2,8 +2,9 @@ package com.petsvote.rating.di
 import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
-import com.petsvote.domain.usecases.user.RegisterUserUseCase
-import com.petsvote.domain.usecases.user.SaveUserToLocalUseCase
+import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
+import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
+import com.petsvote.domain.usecases.user.impl.GetUserPetsUseCase
 import com.petsvote.rating.RatingFragment
 import dagger.Component
 import dagger.Module
@@ -42,7 +43,8 @@ interface RatingDepsProvider {
 
 interface RatingDeps{
     val getRatingUseCase: GetRatingUseCase
-    val saveUserUseCase: SaveUserToLocalUseCase
+    val saveUserUseCase: ISaveUserToLocalUseCase
+    val getUserPetsUseCase: IGetUserPetsUseCase
 }
 
 val Context.ratingDepsProvider: RatingDepsProvider

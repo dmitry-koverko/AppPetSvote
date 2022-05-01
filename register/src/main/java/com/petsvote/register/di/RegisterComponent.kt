@@ -2,8 +2,8 @@ package com.petsvote.register.di
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.domain.usecases.user.RegisterUserUseCase
-import com.petsvote.domain.usecases.user.SaveUserToLocalUseCase
+import com.petsvote.domain.usecases.user.IRegisterUserUseCase
+import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import com.petsvote.register.RegisterFragment
 import dagger.Component
 import dagger.Module
@@ -41,8 +41,8 @@ interface RegisterDepsProvider {
 }
 
 interface RegisterDeps{
-    val registerUserUseCase: RegisterUserUseCase
-    val saveUserUseCase: SaveUserToLocalUseCase
+    val registerUserUseCase: IRegisterUserUseCase
+    val saveUserUseCase: ISaveUserToLocalUseCase
 }
 
 val Context.registerDepsProvider: RegisterDepsProvider

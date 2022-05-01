@@ -1,5 +1,5 @@
 package com.petsvote.domain.usecases.user
 
-interface CheckLoginUserUseCase {
+interface ICheckLoginUserUseCase {
     suspend fun checkLoginUser(): Boolean
 }

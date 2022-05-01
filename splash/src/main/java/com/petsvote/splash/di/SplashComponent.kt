@@ -2,8 +2,9 @@ package com.petsvote.splash.di
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.domain.usecases.user.CheckLoginUserUseCase
-import com.petsvote.domain.usecases.user.RegisterUserUseCase
+import com.petsvote.domain.usecases.user.ICheckLoginUserUseCase
+import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
+import com.petsvote.domain.usecases.user.IRegisterUserUseCase
 import com.petsvote.splash.SplashFragment
 import dagger.Component
 import dagger.Module
@@ -42,8 +43,9 @@ interface SplashDepsProvider {
 }
 
 interface SplashDeps{
-    val registerUserUseCase: RegisterUserUseCase
-    val checkLoginUserUseCase: CheckLoginUserUseCase
+    val registerUserUseCase: IRegisterUserUseCase
+    val checkLoginUserUseCase: ICheckLoginUserUseCase
+    val getCurrentUserUseCase: IGetCurrentUserUseCase
 }
 
 val Context.splashDepsProvider: SplashDepsProvider
