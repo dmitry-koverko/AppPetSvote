@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 interface RatingFilterDao {
 
     @Query("SELECT * FROM entityratingfilter")
-    fun getUser(): Flow<EntityRatingFilter?>
+    fun getFilter(): Flow<EntityRatingFilter?>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(ratingFilter: EntityRatingFilter)

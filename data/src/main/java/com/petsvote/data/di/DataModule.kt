@@ -1,20 +1,28 @@
 package com.petsvote.data.di
 
 import com.petsvote.data.repository.ConfigurationRepository
+import com.petsvote.data.repository.RatingFilterRepository
 import com.petsvote.data.repository.UserRepository
 import com.petsvote.domain.repository.rating.RatingPagingRepository
 import com.petsvote.domain.repository.IUserRepository
+import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
+import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
 import dagger.Module
 import dagger.Provides
 
 @Module
 class DataModule {
+
+    @Provides
+    fun provideRatingFilterRepository(
+        ratingFilterDao: RatingFilterDao
+    ): IRatingFilterRepository { return RatingFilterRepository(ratingFilterDao = ratingFilterDao) }
 
     @Provides
     fun provideRatingRemoteRepository(
