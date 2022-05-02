@@ -2,6 +2,7 @@ package com.petsvote.room
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
 import dagger.Component
 import dagger.Module
@@ -47,6 +48,11 @@ class RoomModule {
     @Provides
     fun provideUserDao(application: Application): UserDao{
         return AppDatabase.getDatabase(application).userDao()
+    }
+
+    @Provides
+    fun provideRatingFilterDao(application: Application): RatingFilterDao{
+        return AppDatabase.getDatabase(application).ratingFilterDao()
     }
 
 }

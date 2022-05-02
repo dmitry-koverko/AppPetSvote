@@ -98,7 +98,6 @@ class DotIndicator @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         this.canvas = canvas
-        Log.d("DOTINDICATOR", "heightView =$heightView | radius = $radius")
         path.reset()
         path.moveTo(radius, 0f)
         path.quadTo(radius /BESIEDOT, radius /BESIEDOT, 0f, radius)

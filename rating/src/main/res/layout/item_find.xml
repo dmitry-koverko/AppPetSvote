@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent">
+    android:layout_width="56dp"
+    android:layout_height="50dp">
 
     <com.petsvote.ui.BesieLayout
         app:bl_ripple="true"
         app:bl_ripple_color="@android:color/transparent"
         android:id="@+id/blFind"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="bottom"
         app:bl_background="@color/ui_primary"
         android:layout_width="40dp"
         android:layout_height="40dp"

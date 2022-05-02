@@ -16,5 +16,7 @@ data class UserPet(
     val city_dynamic: Int? = null,
     val mark_dynamic: Int? = null,
     val has_paid_votes: Int? = null,
-    var photos: List<Photo>? = listOf()
+    var photos: List<Photo>? = listOf(),
+    var isClickPet: Boolean = false,
+    var position: Int = 0
 ): Item

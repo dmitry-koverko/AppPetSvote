@@ -10,12 +10,14 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.core.adapter.FingerprintPagingAdapter
+import com.petsvote.core.adapter.Item
 import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.pet.SimpleItem
 import com.petsvote.domain.entity.user.UserPet
@@ -43,9 +45,15 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private val ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint()))
     private val findPetAdapter = FingerprintListAdapter(listOf(FindPetFingerprint(::onFindPet)))
     private val userPetsAdapter = FingerprintListAdapter(listOf(UserPetFingerprint(::onClickUserPet)))
+    private val concatAdapter = ConcatAdapter(
+        ConcatAdapter.Config.Builder()
+            .setIsolateViewTypes(false)
+            .build(),
+        findPetAdapter,
+        userPetsAdapter
+    )
 
     private var topLinearHeight = 0
-    private var currentState = ViewStateFragment.DEFAULT
     private var check_ScrollingUp = false
 
 
@@ -70,7 +78,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         binding?.listPetsUser?.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            adapter = findPetAdapter
+            adapter = concatAdapter
         }
         findPetAdapter.submitList(listOf(SimpleItem()))
 
@@ -106,9 +114,6 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             }
         })
 
-//        var motion = binding?.topMotion
-//        motion?.addTransitionListener(this)
-
         binding?.listRating?.setOnScrollChangeListener(
             (View.OnScrollChangeListener { p0, scrollX, scrollY, oldScrollX, oldScrollY ->
                 //if (isAnim) return@OnScrollChangeListener
@@ -138,20 +143,6 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
                         }
                     }
-
-//                    if (scrollY < oldScrollY && binding?.linearFilter?.measuredHeight == 1 && !isFilterShow) {
-//                        isAnim = true
-//                        binding?.linearFilter?.show(callback = {
-//                            isAnim = false
-//                            isFilterShow = true
-//                        })
-//                    } else if (offset > topLinearHeight && isFilterShow) {
-//                        isAnim = true
-//                        binding?.linearFilter?.hide(callback = {
-//                            isAnim = false
-//                            isFilterShow = false
-//                        })
-//                    }
                 }
             })
         )
@@ -169,17 +160,15 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
          lifecycleScope.launchWhenResumed {
              viewModel.userPets.collect {
+                 for (i in 0 until it.size){
+                     if(i == 0){
+                         it[0].isClickPet = true
+                     }
+                     it[i].position = i
+                 }
                  userPetsAdapter.submitList(it)
              }
          }
-    }
-
-
-    enum class ViewStateFragment {
-        DEFAULT,
-        HIDE_HEADER_AND_FOOTER,
-        HIDE_ALL,
-        SHOW_FILTER_AND_FOOTER
     }
 
     override fun onAttach(context: Context) {
@@ -190,8 +179,14 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private fun onFindPet(item: SimpleItem) {
         log("click findPet")
     }
-    private fun onClickUserPet(item: UserPet) {
+    private fun onClickUserPet(clickItem: UserPet) {
         log("click findPet")
+        log(userPetsAdapter.currentList.toString())
+        var newList = userPetsAdapter.currentList
+        newList.onEach { item: Item? ->  (item as UserPet).isClickPet = false}
+        (newList.find { (it as UserPet).pets_id == clickItem.pets_id} as UserPet).isClickPet = true
+        log(newList.toString())
+        userPetsAdapter.notifyDataSetChanged()
     }
 
 }
