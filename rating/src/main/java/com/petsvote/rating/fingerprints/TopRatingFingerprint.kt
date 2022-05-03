@@ -58,7 +58,8 @@ class TopRatingViewHolder(
                     binding.root.setLocation(
                         if (item.locationType == RatingFilterLocationType.WORLD)
                             "${item.city_name}, ${item.country_name}"
-                        else item.city_name
+                        else if(item.locationType == RatingFilterLocationType.COUNTRY) item.city_name
+                        else ""
                     )
                     binding.root.setPosition(item.index)
                     binding.root.setCorona()
@@ -72,7 +73,8 @@ class TopRatingViewHolder(
                     binding.root.setLocation(
                         if (item.locationType == RatingFilterLocationType.WORLD)
                             "${item.city_name}, ${item.country_name}"
-                        else item.city_name
+                        else if(item.locationType == RatingFilterLocationType.COUNTRY) item.city_name
+                        else ""
                     )
                     binding.root.setPosition(item.index)
                     binding.root.setCorona(

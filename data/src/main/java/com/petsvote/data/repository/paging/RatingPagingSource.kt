@@ -6,6 +6,7 @@ import androidx.paging.PagingState
 import com.petsvote.core.adapter.Item
 import com.petsvote.data.repository.paging.RatingPagingRepository.Companion.NETWORK_PAGE_SIZE
 import com.petsvote.domain.entity.filter.RatingFilter
+import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.pet.RatingFilterLocationType
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.RatingPetItemType
@@ -37,23 +38,22 @@ class RatingPagingSource @Inject constructor(
 
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Item> {
-        val isWorldTop = false
 
         val userPets = scoupe.async { userRepository.getSimpleUserPets() }.await()
         val countUserPets = userPets.size
         val ratingFilter = scoupe.async { ratingFilterRepository.getSimpleRatingFilter() }.await()
-
-        Log.d("RatingpagingSources", "param key = ${params.key}")
-        Log.d("RatingpagingSources", "load size = ${params.loadSize}}")
+        Log.d("RATINGPAGINGSOURCES", ratingFilter.rating_type?.nameParams.toString())
+        val isWorldTop = ratingFilter.rating_type == RatingFilterType.GLOBAL
 
         var offset = params.key ?: DEFAULT_OFFSET
-        if(ratingFilter.breed_id != null) offset = 0
+        if (ratingFilter.breed_id != null) offset = 0
         return try {
 
             var repos: MutableList<RatingPet> = ratingRepository.getRating(
-                limit = if(offset < NETWORK_PAGE_SIZE) offset else NETWORK_PAGE_SIZE,
-                offset = if(offset < NETWORK_PAGE_SIZE) 0 else offset,
-                breedId = ratingFilter.breed_id
+                limit = if (offset < NETWORK_PAGE_SIZE && offset!= 0) offset else NETWORK_PAGE_SIZE,
+                offset = if (offset < NETWORK_PAGE_SIZE) 0 else offset,
+                breedId = ratingFilter.breed_id,
+                rating_type = ratingFilter.rating_type?.nameParams ?: RatingFilterType.GLOBAL.nameParams
             ).toMutableList()
             ratingFilterRepository.setBredIdRatingFilter(null)
 
@@ -82,14 +82,20 @@ class RatingPagingSource @Inject constructor(
                     repos.find { it.pet_id == userPet.pets_id }?.isUserPet = true
                 }
             }
+            repos.onEach { it.locationType = when(ratingFilter.rating_type){
+                RatingFilterType.GLOBAL -> RatingFilterLocationType.WORLD
+                RatingFilterType.COUNTRY -> RatingFilterLocationType.COUNTRY
+                RatingFilterType.CITY -> RatingFilterLocationType.CITY
+                else -> RatingFilterLocationType.WORLD
+            } }
 
             if (itemIndex1 != null && isWorldTop) {
-                repos.find { it.index == 1 }?.locationType ?: RatingFilterLocationType.WORLD
+                repos.find { it.index == 1 }?.locationType = RatingFilterLocationType.WORLD
             }
-            //TODO range in 0..49
+
             var prev = if (repos.first().index < NETWORK_PAGE_SIZE && repos.first().index == 1) null
-            else if(repos.first().index < NETWORK_PAGE_SIZE && repos.first().index != 1) repos.first().index
-            else repos.first().index -1 - NETWORK_PAGE_SIZE
+            else if (repos.first().index < NETWORK_PAGE_SIZE && repos.first().index != 1) repos.first().index
+            else repos.first().index - 1 - NETWORK_PAGE_SIZE
 
             LoadResult.Page(
                 data = repos,

@@ -38,6 +38,7 @@ class ItemCardRating @JvmOverloads constructor(
     private var carImage: ImageView?
     private var nameTextView: TextView?
     private var locationTextView: TextView?
+    private var positionTextView: TextView?
     private var corona: ImageView?
 
     init {
@@ -46,6 +47,7 @@ class ItemCardRating @JvmOverloads constructor(
         carImage = findViewById<ImageView>(R.id.image)
         nameTextView = findViewById<TextView>(R.id.name)
         locationTextView = findViewById<TextView>(R.id.location)
+        positionTextView = findViewById<TextView>(R.id.position)
         corona = findViewById<ImageView>(R.id.corona)
     }
 //
@@ -71,6 +73,8 @@ class ItemCardRating @JvmOverloads constructor(
         nameTextView = findViewById<TextView>(R.id.name)
         locationTextView = findViewById<TextView>(R.id.location)
         corona = findViewById<ImageView>(R.id.corona)
+        positionTextView = findViewById<TextView>(R.id.position)
+
         var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
         lpTop.rightMargin = dpToPx(8f, context)
         findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
@@ -83,6 +87,10 @@ class ItemCardRating @JvmOverloads constructor(
         var lpLocation = locationTextView?.layoutParams as MarginLayoutParams
         lpLocation.leftMargin = com.petsvote.ui.dpToPx(16f, context)
         locationTextView?.layoutParams = lpLocation
+
+        var lpPosition = positionTextView?.layoutParams as MarginLayoutParams
+        lpPosition.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+        positionTextView?.layoutParams = lpPosition
 
     }
 
@@ -132,7 +140,10 @@ class ItemCardRating @JvmOverloads constructor(
     }
 
     private fun initSFTextViewParams() {
-        findViewById<SFTextView>(R.id.sfClick).animation = true
+        findViewById<SFTextView>(R.id.sfClick).apply {
+            animation = true
+            defaultRipple = 50f
+        }
     }
 
     fun setImageCat(url: String) {
@@ -145,6 +156,8 @@ class ItemCardRating @JvmOverloads constructor(
 
     fun setLocation(location: String){
         locationTextView?.text = location
+        if(location.isEmpty()) locationTextView?.visibility = View.GONE
+        else locationTextView?.visibility = View.VISIBLE
     }
 
     fun setPosition(position: Int){
@@ -161,5 +174,6 @@ class ItemCardRating @JvmOverloads constructor(
 
     fun setCorona(isShow: Boolean = false){
         corona?.visibility = if(isShow) View.VISIBLE else View.GONE
+        positionTextView?.visibility = if(!isShow) View.VISIBLE else View.GONE
     }
 }

@@ -1,7 +1,7 @@
-package com.petsvote.domain.usecases.rating.impl
+package com.petsvote.domain.usecases.filter.impl
 
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
-import com.petsvote.domain.usecases.rating.ISetBreedIdInRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.ISetBreedIdInRatingFilterUseCase
 import javax.inject.Inject
 
 class SetBreedIdInRatingFilterUseCase @Inject constructor(

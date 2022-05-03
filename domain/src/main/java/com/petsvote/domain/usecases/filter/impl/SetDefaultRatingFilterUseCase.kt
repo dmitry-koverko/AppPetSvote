@@ -1,7 +1,7 @@
-package com.petsvote.domain.usecases.rating.impl
+package com.petsvote.domain.usecases.filter.impl
 
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
-import com.petsvote.domain.usecases.rating.ISetDefaultRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.ISetDefaultRatingFilterUseCase
 import javax.inject.Inject
 
 class SetDefaultRatingFilterUseCase @Inject constructor(

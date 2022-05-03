@@ -74,4 +74,11 @@
     <color name="besie_tab_text_selected_color">#DEFFFFFF</color>
     <color name="besie_tab_text_unselected_color">#99FFFFFF</color>
 
+    //DIALOGS
+    <color name="dialog_backgrount">#D6121212</color>
+    <color name="dialog_title_color">#DEFFFFFF</color>
+    <color name="dialog_sub_text_color">#99FFFFFF</color>
+    <color name="dialog_divider_color">#1FFFFFFF</color>
+    <color name="dialog_button_text_color">#FF347F</color>
+
 </resources>

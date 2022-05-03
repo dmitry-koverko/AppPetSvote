@@ -1,8 +1,8 @@
-package com.petsvote.domain.usecases.rating.impl
+package com.petsvote.domain.usecases.filter.impl
 
 import com.petsvote.domain.entity.filter.RatingFilter
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
-import com.petsvote.domain.usecases.rating.IGetRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.IGetRatingFilterUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

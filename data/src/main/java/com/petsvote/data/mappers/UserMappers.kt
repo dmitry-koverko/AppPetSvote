@@ -37,7 +37,8 @@ fun User.toUserInfoUC(): UserInfo {
         has_paid_votes = false,
         notify_status = 0,
         official = official,
-        pet = pets.remoteToUserPetList()
+        pet = pets.remoteToUserPetList(),
+        location = location?.toLocation()
     )
 }
 
@@ -172,4 +173,20 @@ fun List<EntityUserPet>.toUserPets(): List<com.petsvote.domain.entity.user.UserP
     var list = mutableListOf<com.petsvote.domain.entity.user.UserPet>()
     this.onEach { list.add(it.toUserPet()) }
     return list
+}
+
+fun EntityUserInfo.toUserInfo(): UserInfo{
+    return UserInfo(
+        id = id,
+        first_name = first_name,
+        has_blocked = false,
+        last_name = last_name,
+        avatar = avatar,
+        first_vote = first_vote,
+        has_paid_votes = false,
+        notify_status = 0,
+        official = official,
+        pet = pet.toUserPets(),
+        location = location?.toLocation()
+    )
 }

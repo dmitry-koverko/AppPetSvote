@@ -9,7 +9,7 @@ data class RatingPet(
     val name: String,
     val country_name: String,
     val city_name: String,
-    var locationType: RatingFilterLocationType = RatingFilterLocationType.COUNTRY,
+    var locationType: RatingFilterLocationType = RatingFilterLocationType.WORLD,
     val photos: List<Photo>,
     var isUserPet: Boolean,
     val itemType: RatingPetItemType = RatingPetItemType.DEFAULT

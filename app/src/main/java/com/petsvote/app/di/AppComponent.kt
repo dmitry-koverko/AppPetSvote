@@ -9,10 +9,8 @@ import com.petsvote.domain.di.ResourcesModule
 import com.petsvote.domain.di.UserUseCaseModule
 import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
 import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
+import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
-import com.petsvote.domain.usecases.rating.IGetRatingFilterUseCase
-import com.petsvote.domain.usecases.rating.ISetBreedIdInRatingFilterUseCase
-import com.petsvote.domain.usecases.rating.ISetDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.*
 import com.petsvote.legal.di.TermsDeps
@@ -47,6 +45,9 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val getRatingFilterUseCase: IGetRatingFilterUseCase
     override val setBreedIdInRatingFilterUseCase: ISetBreedIdInRatingFilterUseCase
     override val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
+    override val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase
+    override val checkLocationUserUseCase: ICheckLocationUserUseCase
+    override val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
 
     @Component.Builder
     interface Builder {

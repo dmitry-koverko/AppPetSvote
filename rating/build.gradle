@@ -43,6 +43,7 @@ dependencies {
 
     //DAGGER
     implementation "com.google.dagger:dagger:$daggerCompilerVersion"
+    implementation project(path: ':dialog')
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     //Navigation

@@ -1,9 +1,6 @@
 package com.petsvote.data.repository
 
-import com.petsvote.data.mappers.checkResult
-import com.petsvote.data.mappers.toLocalUser
-import com.petsvote.data.mappers.toUserInfoUC
-import com.petsvote.data.mappers.toUserPets
+import com.petsvote.data.mappers.*
 import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
@@ -37,6 +34,10 @@ class UserRepository @Inject constructor(
             userDao.update(user.toLocalUser(token))
         }
         return user
+    }
+
+    override suspend fun getCurrentUser(): UserInfo {
+        return userDao.getUser().toUserInfo()
     }
 
     override suspend fun getCountUserPets(): Int {

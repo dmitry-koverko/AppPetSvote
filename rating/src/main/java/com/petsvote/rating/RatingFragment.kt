@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.core.adapter.FingerprintPagingAdapter
 import com.petsvote.core.adapter.Item
 import com.petsvote.core.ext.log
+import com.petsvote.dialog.UserLocationDialog
+import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.SimpleItem
 import com.petsvote.domain.entity.user.UserPet
@@ -29,9 +32,13 @@ import com.petsvote.rating.fingerprints.FindPetFingerprint
 import com.petsvote.rating.fingerprints.UserPetFingerprint
 import com.petsvote.ui.ext.hide
 import com.petsvote.ui.ext.show
+import com.petsvote.ui.maintabs.BesieTabLayout
+import com.petsvote.ui.maintabs.BesieTabLayoutSelectedListener
+import com.petsvote.ui.maintabs.BesieTabSelected
 import dagger.Lazy
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import java.lang.Runnable
 import javax.inject.Inject
 
@@ -72,8 +79,10 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
         binding = FragmentRatingCollapsingBinding.bind(view)
 
+        initSwipeRefresh()
         initRatingRecycler()
         initBottomRecycler()
+        initTabs()
 
         lifecycleScope.launchWhenStarted {
             viewModel.getRating()
@@ -85,6 +94,37 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         lifecycleScope.launchWhenStarted {
             viewModel.getRatingFilter()
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.getRatingFilterType()
+        }
+
+        lifecycleScope.launchWhenResumed {
+            viewModel.checkLocation()
+        }
+    }
+
+    private fun initTabs() {
+        binding?.tabs?.setTabSelectedListener(object : BesieTabLayoutSelectedListener{
+            override fun selected(tab: BesieTabSelected) {
+                if(tab == BesieTabSelected.NullUserLocation){
+                    UserLocationDialog().show(childFragmentManager, UserLocationDialog.TAG)
+                    return
+                }else {
+                    viewModel.setFilterType(tab)
+                    refresh()
+                }
+            }
+        })
+    }
+
+    private fun initSwipeRefresh() {
+        binding?.swipeRefresh?.setColorSchemeResources(com.petsvote.ui.R.color.ui_primary)
+        binding?.swipeRefresh?.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener{
+            override fun onRefresh() {
+                swipeRefresh()
+            }
+        })
     }
 
     private fun initBottomRecycler() {
@@ -105,7 +145,6 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun initRatingRecycler() {
-        //binding?.refresh?.setColorSchemeResources(com.petsvote.ui.R.color.progress_bar)
         var manager = GridLayoutManager(context, 2)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int) = when (position) {
@@ -129,7 +168,6 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
         binding?.listRating?.setOnScrollChangeListener(
             (View.OnScrollChangeListener { p0, scrollX, scrollY, oldScrollX, oldScrollY ->
-                //if (isAnim) return@OnScrollChangeListener
                 var offset = binding?.listRating?.computeVerticalScrollOffset()
                 offset?.let {
                     if (scrollY < oldScrollY) {
@@ -163,18 +201,14 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 if (currentClickUserPetId != -1) {
                     var list = ratingAdapter.snapshot().items
-                    log("Update list = ${list.toString()}")
-                    log("currentClickPetId = $currentClickUserPetId")
                     var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
-                    log("myPet = ${myPet.toString()}")
-                    var first = (list[0] as RatingPet)
-                    log(first.toString())
-                    var deff = (myPet as RatingPet).index - first.index
-                    log(deff.toString())
-                    var line = deff / 2
-                    log("position to scroll = $line")
-                    binding?.listRating?.smoothScrollToPosition(deff + 2)
-                    currentClickUserPetId = -1
+                    if(myPet != null){
+                        var first = (list[0] as RatingPet)
+                        var deff = (myPet as RatingPet).index - first.index
+                        binding?.listRating?.smoothScrollToPosition(deff + 2)
+                        currentClickUserPetId = -1
+                        binding?.progressBar?.visibility = View.GONE
+                    }
                 }
             }
         })
@@ -185,38 +219,9 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         lifecycleScope.launchWhenStarted {
             viewModel.pages.collect {
                 it?.let { page ->
-                    log("Update data")
                     ratingAdapter.submitData(page)
-//
-//                    if (list.isNotEmpty()) {
-//                        var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
-//                        log("myPet = ${myPet.toString()}")
-//                        if (myPet != null && currentClickUserPetId != -1
-//                        ) {
-//                            log("click is my pet")
-//                            var first = (list[0] as RatingPet)
-//                            var my =
-//                                (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
-//                            my?.let {
-//                                log(first.toString())
-//                                log(it.toString())
-//                                var deff = (it as RatingPet).index - first.index
-//                                log(deff.toString())
-//                                var line = deff / 2
-//                                var position = line * (resources.displayMetrics.heightPixels * 0.36)
-//                                log(position.toString())
-//                                binding?.listRating?.postDelayed(
-//                                    Runnable {
-//                                        binding?.listRating?.scrollToPosition(position.toInt())
-//                                             },
-//                                    10
-//                                )
-//                                currentClickUserPetId = -1
-//                            }
-//
-//                        }
-//                    }
-
+                    binding?.progressBar?.visibility = View.GONE
+                    binding?.swipeRefresh?.isRefreshing = false
                 }
             }
         }
@@ -232,6 +237,21 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 userPetsAdapter.submitList(it)
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.filterType.collect {
+                when(it){
+                    RatingFilterType.GLOBAL -> binding?.tabs?.initWorldTab()
+                    RatingFilterType.COUNTRY -> binding?.tabs?.initCountryTabs()
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.isLocationUser.collect {
+                binding?.tabs?.isUserLocation = it
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -240,7 +260,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun onFindPet(item: SimpleItem) {
-        log("click findPet")
+        TODO("click findPet")
     }
 
     private fun onClickUserPet(clickItem: UserPet) {
@@ -249,14 +269,22 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             10
         )
         clickItem.pets_id?.let { currentClickUserPetId = it }
-        log("click findPet")
         var newList = userPetsAdapter.currentList
         newList.onEach { item: Item? -> (item as UserPet).isClickPet = false }
         (newList.find { (it as UserPet).pets_id == clickItem.pets_id } as UserPet).isClickPet = true
         userPetsAdapter.notifyDataSetChanged()
-
-
         clickItem.id?.let { viewModel.setBreedId(it) }
+        refresh()
+
+    }
+
+    private fun refresh(){
+        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
+        ratingAdapter.refresh()
+        binding?.progressBar?.visibility = View.VISIBLE
+    }
+
+    private fun swipeRefresh(){
         fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
         ratingAdapter.refresh()
     }

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.petsvote.room.entity.filter.EntityRatingFilter
+import com.petsvote.room.entity.filter.EntityRatingFilterType
 import com.petsvote.room.entity.user.EntityUserInfo
 import kotlinx.coroutines.flow.Flow
 
@@ -22,5 +23,8 @@ interface RatingFilterDao {
 
     @Query("UPDATE entityratingfilter SET breed_id =:breedId")
     suspend fun updateBreedId(breedId: Int?)
+
+    @Query("UPDATE entityratingfilter SET rating_type =:type")
+    suspend fun updateFilterType(type: EntityRatingFilterType)
 
 }

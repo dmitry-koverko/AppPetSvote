@@ -1,12 +1,14 @@
 package com.petsvote.rating.di
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.filter.IGetRatingFilterTypeUseCase
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
-import com.petsvote.domain.usecases.rating.IGetRatingFilterUseCase
-import com.petsvote.domain.usecases.rating.ISetBreedIdInRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.IGetRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.ISetBreedIdInRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.ISetRatingFilterTypeUseCase
+import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
-import com.petsvote.domain.usecases.user.impl.GetUserPetsUseCase
 import com.petsvote.rating.RatingFragment
 import dagger.Component
 import dagger.Module
@@ -49,6 +51,9 @@ interface RatingDeps{
     val getUserPetsUseCase: IGetUserPetsUseCase
     val getRatingFilterUseCase: IGetRatingFilterUseCase
     val setBreedIdInRatingFilterUseCase: ISetBreedIdInRatingFilterUseCase
+    val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase
+    val checkLocationUserUseCase: ICheckLocationUserUseCase
+    val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
 }
 
 val Context.ratingDepsProvider: RatingDepsProvider

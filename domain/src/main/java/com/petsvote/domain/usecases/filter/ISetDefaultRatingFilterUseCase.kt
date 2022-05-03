@@ -1,4 +1,4 @@
-package com.petsvote.domain.usecases.rating
+package com.petsvote.domain.usecases.filter
 
 interface ISetDefaultRatingFilterUseCase {
 

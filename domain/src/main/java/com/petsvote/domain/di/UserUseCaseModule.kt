@@ -1,16 +1,18 @@
 package com.petsvote.domain.di
 
 import com.petsvote.domain.repository.IUserRepository
-import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
-import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
-import com.petsvote.domain.usecases.user.IRegisterUserUseCase
-import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
+import com.petsvote.domain.usecases.user.*
 import com.petsvote.domain.usecases.user.impl.*
 import dagger.Module
 import dagger.Provides
 
 @Module
 class UserUseCaseModule {
+
+    @Provides
+    fun provideCheckUserLocationUseCase(userRepository: IUserRepository): ICheckLocationUserUseCase {
+        return CheckLocationUserUseCase(userRepository)
+    }
 
     @Provides
     fun provideGetUserPetsUseCase(userRepository: IUserRepository): IGetUserPetsUseCase {

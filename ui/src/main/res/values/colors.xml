@@ -82,5 +82,10 @@
     <color name="linear_mask_default_color_bottom">#80000000</color>
     <color name="linear_mask_user_color_top">#03FF1E70</color>
     <color name="linear_mask_user_color_bottom">#FF1E70</color>
+    <color name="dialog_backgrount">#FFFFFF</color>
+    <color name="dialog_title_color">#DE000000</color>
+    <color name="dialog_sub_text_color">#99000000</color>
+    <color name="dialog_divider_color">#14212121</color>
+    <color name="dialog_button_text_color">#FF1E70</color>
 
 </resources>

@@ -6,7 +6,13 @@ data class RatingFilter(
     val city_id: Int?,
     val country_id: Int?,
     val age_between: String?,
-    val rating_type: String?,
+    val rating_type: RatingFilterType? = RatingFilterType.GLOBAL,
     val id: Int?,
     val breed_id: Int?,
 )
+
+enum class RatingFilterType(val nameParams: String){
+    GLOBAL("global"),
+    COUNTRY("country"),
+    CITY("city")
+}

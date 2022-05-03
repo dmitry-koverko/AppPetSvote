@@ -5,8 +5,7 @@ import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
-import com.petsvote.domain.usecases.rating.ISetDefaultRatingFilterUseCase
-import com.petsvote.domain.usecases.rating.impl.SetDefaultRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.ISetDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.user.IRegisterUserUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -9,6 +9,15 @@
     android:background="@color/bg_layers_1"
     android:clickable="true"
     android:focusable="true">
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:theme="@style/CircularProgress"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <com.google.android.material.appbar.AppBarLayout
 
         android:background="@android:color/transparent"
@@ -126,12 +135,15 @@
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefresh"
             app:layout_constraintTop_toBottomOf="@id/filter"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:background="@color/bg_layers_1"
+                android:paddingTop="8dp"
                 android:id="@+id/list_rating"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -176,6 +188,8 @@
         </FrameLayout>
 
     </FrameLayout>
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

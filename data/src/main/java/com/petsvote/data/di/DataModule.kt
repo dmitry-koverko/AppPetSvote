@@ -30,12 +30,14 @@ class DataModule {
     fun provideRatingRemoteRepository(
         ratingApi: RatingApi,
         IUserRepository: IUserRepository,
-        languageCodeUseCase: GetLocaleLanguageCodeUseCase
+        languageCodeUseCase: GetLocaleLanguageCodeUseCase,
+        ratingFilterRepository: IRatingFilterRepository
     ): RatingRepository {
         return com.petsvote.data.repository.paging.RatingRepository(
             ratingApi = ratingApi,
             userRepository = IUserRepository,
-            languageCodeUseCase = languageCodeUseCase
+            languageCodeUseCase = languageCodeUseCase,
+            ratingFilterRepository = ratingFilterRepository
         )
     }
 

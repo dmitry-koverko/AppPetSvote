@@ -29,12 +29,15 @@ class SFTextView @JvmOverloads constructor(
 
     var isAmim = false
     var animation = false
+    var defaultRipple = 0f
+
     private var xTouch = 0f;
     private var yTouth = 0f;
 
     init {
         includeFontPadding = false
         typeface = typeFaceSF
+        defaultRipple = 30f
     }
 
     var pRipple =
@@ -59,7 +62,7 @@ class SFTextView @JvmOverloads constructor(
     private fun drawRipple(){
         if(animation){
             canvas!!.drawCircle(xTouch, yTouth, rippleRadius, pRipple!!);
-            if(rippleRadius >= height/2){
+            if(rippleRadius >= defaultRipple){
                 mOnClickListener?.onClick(this)
                 isAmim = false
                 invalidate()
@@ -69,7 +72,7 @@ class SFTextView @JvmOverloads constructor(
 
     fun animRipple(){
         val propertyXLeft: PropertyValuesHolder =
-            PropertyValuesHolder.ofFloat("PROPERTY_RADIUS", 0f, height/2.toFloat())
+            PropertyValuesHolder.ofFloat("PROPERTY_RADIUS", 0f, defaultRipple)
 
         animator = ValueAnimator()
         animator!!.setValues(propertyXLeft)

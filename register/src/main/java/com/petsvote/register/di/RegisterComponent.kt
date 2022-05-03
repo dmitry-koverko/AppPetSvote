@@ -2,7 +2,7 @@ package com.petsvote.register.di
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.domain.usecases.rating.ISetDefaultRatingFilterUseCase
+import com.petsvote.domain.usecases.filter.ISetDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.user.IRegisterUserUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import com.petsvote.register.RegisterFragment

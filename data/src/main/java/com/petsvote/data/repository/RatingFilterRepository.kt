@@ -2,9 +2,11 @@ package com.petsvote.data.repository
 
 import com.petsvote.data.mappers.toRatingFilter
 import com.petsvote.domain.entity.filter.RatingFilter
+import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.entity.filter.EntityRatingFilter
+import com.petsvote.room.entity.filter.EntityRatingFilterType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -41,5 +43,15 @@ class RatingFilterRepository @Inject constructor(
             id = null,
             breed_id = null
         ))
+    }
+
+    override suspend fun setRatingFilterType(typeRating: RatingFilterType) {
+        ratingFilterDao.updateFilterType(
+            when(typeRating){
+                RatingFilterType.GLOBAL -> EntityRatingFilterType.GLOBAL
+                RatingFilterType.COUNTRY -> EntityRatingFilterType.COUNTRY
+                RatingFilterType.CITY -> EntityRatingFilterType.CITY
+            }
+        )
     }
 }

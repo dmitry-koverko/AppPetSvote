@@ -5,6 +5,12 @@
         <item name="colorAccent">@color/progress_bar</item>
     </style>
 
+    <style name="MyDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
+
     <style name="SignInWithGoogle" parent="Theme.AppCompat.DayNight">
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginEnd">16dp</item>
