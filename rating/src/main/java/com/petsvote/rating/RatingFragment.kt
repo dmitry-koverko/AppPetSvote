@@ -63,7 +63,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
     private var topLinearHeight = 0
     private var check_ScrollingUp = false
-    private var currentClickUserPetId = 0
+    private var currentClickUserPetId = -1
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -159,40 +159,63 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             })
         )
 
+        ratingAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                if (currentClickUserPetId != -1) {
+                    var list = ratingAdapter.snapshot().items
+                    log("Update list = ${list.toString()}")
+                    log("currentClickPetId = $currentClickUserPetId")
+                    var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
+                    log("myPet = ${myPet.toString()}")
+                    var first = (list[0] as RatingPet)
+                    log(first.toString())
+                    var deff = (myPet as RatingPet).index - first.index
+                    log(deff.toString())
+                    var line = deff / 2
+                    log("position to scroll = $line")
+                    binding?.listRating?.smoothScrollToPosition(deff + 2)
+                    currentClickUserPetId = -1
+                }
+            }
+        })
+
     }
 
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.pages.collect {
                 it?.let { page ->
+                    log("Update data")
                     ratingAdapter.submitData(page)
-                    var list = ratingAdapter.snapshot().items
-                    if (list.isNotEmpty()) {
-                        var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
-                        if ((ratingAdapter.snapshot().items.first() as RatingPet).index != 1
-                            && myPet != null && list.size <= 50
-                        ) {
-                            log("click is my pet")
-                            var first = (list[0] as RatingPet)
-                            var my =
-                                (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
-                            my?.let {
-                                log(first.toString())
-                                log(it.toString())
-                                var deff = (it as RatingPet).index - first.index
-                                log(deff.toString())
-                                var line = deff / 2
-                                var position = line * (resources.displayMetrics.heightPixels * 0.36)
-                                log(position.toString())
-                                binding?.listRating?.postDelayed(
-                                    Runnable { binding?.listRating?.scrollToPosition(position.toInt()) },
-                                    1000
-                                )
-                                currentClickUserPetId = -1
-                            }
-
-                        }
-                    }
+//
+//                    if (list.isNotEmpty()) {
+//                        var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
+//                        log("myPet = ${myPet.toString()}")
+//                        if (myPet != null && currentClickUserPetId != -1
+//                        ) {
+//                            log("click is my pet")
+//                            var first = (list[0] as RatingPet)
+//                            var my =
+//                                (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
+//                            my?.let {
+//                                log(first.toString())
+//                                log(it.toString())
+//                                var deff = (it as RatingPet).index - first.index
+//                                log(deff.toString())
+//                                var line = deff / 2
+//                                var position = line * (resources.displayMetrics.heightPixels * 0.36)
+//                                log(position.toString())
+//                                binding?.listRating?.postDelayed(
+//                                    Runnable {
+//                                        binding?.listRating?.scrollToPosition(position.toInt())
+//                                             },
+//                                    10
+//                                )
+//                                currentClickUserPetId = -1
+//                            }
+//
+//                        }
+//                    }
 
                 }
             }
@@ -221,16 +244,20 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun onClickUserPet(clickItem: UserPet) {
+        binding?.listRating?.postDelayed(
+            Runnable { binding?.listRating?.scrollToPosition(0) },
+            10
+        )
         clickItem.pets_id?.let { currentClickUserPetId = it }
         log("click findPet")
-        log(userPetsAdapter.currentList.toString())
         var newList = userPetsAdapter.currentList
         newList.onEach { item: Item? -> (item as UserPet).isClickPet = false }
         (newList.find { (it as UserPet).pets_id == clickItem.pets_id } as UserPet).isClickPet = true
-        log(newList.toString())
         userPetsAdapter.notifyDataSetChanged()
 
+
         clickItem.id?.let { viewModel.setBreedId(it) }
+        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
         ratingAdapter.refresh()
     }
 }
