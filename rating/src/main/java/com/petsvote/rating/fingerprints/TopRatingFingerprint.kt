@@ -60,6 +60,7 @@ class TopRatingViewHolder(
                             "${item.city_name}, ${item.country_name}"
                         else item.city_name
                     )
+                    binding.root.setPosition(item.index)
                     binding.root.setCorona()
                 }
                 RatingPetItemType.TOP -> {
@@ -73,6 +74,7 @@ class TopRatingViewHolder(
                             "${item.city_name}, ${item.country_name}"
                         else item.city_name
                     )
+                    binding.root.setPosition(item.index)
                     binding.root.setCorona(
                         item.locationType == RatingFilterLocationType.WORLD
                     )

@@ -14,7 +14,13 @@ interface RatingFilterDao {
     @Query("SELECT * FROM entityratingfilter")
     fun getFilter(): Flow<EntityRatingFilter?>
 
+    @Query("SELECT * FROM entityratingfilter")
+    fun getSimpleFilter(): EntityRatingFilter
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(ratingFilter: EntityRatingFilter)
+
+    @Query("UPDATE entityratingfilter SET breed_id =:breedId")
+    suspend fun updateBreedId(breedId: Int?)
 
 }

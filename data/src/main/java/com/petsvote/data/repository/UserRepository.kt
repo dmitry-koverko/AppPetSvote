@@ -34,10 +34,13 @@ class UserRepository @Inject constructor(
             ?.toUserInfoUC()
         if (user != null) {
             var token = userDao.getToken()
-            userDao.deleteUser()
-            userDao.insert(user.toLocalUser(token))
+            userDao.update(user.toLocalUser(token))
         }
         return user
+    }
+
+    override suspend fun getCountUserPets(): Int {
+        return userDao.getUser().pet.size
     }
 
     override suspend fun getUserPets(): Flow<List<UserPet>> =
@@ -50,10 +53,16 @@ class UserRepository @Inject constructor(
             }
         }
 
+    override suspend fun getSimpleUserPets(): List<UserPet> {
+        return userDao.getUser().pet.toUserPets()
+    }
+
     override suspend fun checkLoginUser(): Boolean {
         val user = userDao.getUser()
         return user != null
     }
+
+
 
     override suspend fun saveUserToLocal(user: UserInfo) {
         userDao.insert(user.toLocalUser())

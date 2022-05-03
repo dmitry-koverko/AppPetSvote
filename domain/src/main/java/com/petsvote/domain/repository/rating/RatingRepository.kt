@@ -6,5 +6,5 @@ import com.petsvote.domain.entity.pet.RatingPet
 import kotlinx.coroutines.flow.Flow
 
 interface RatingRepository {
-    suspend fun getRating(offset: Int, limit: Int?): List<RatingPet>
+    suspend fun getRating(offset: Int, limit: Int?,breedId: Int?): List<RatingPet>
 }

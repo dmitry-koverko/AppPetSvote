@@ -5,6 +5,8 @@ import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
+import com.petsvote.domain.usecases.rating.ISetDefaultRatingFilterUseCase
+import com.petsvote.domain.usecases.rating.impl.SetDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.user.IRegisterUserUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,8 @@ import javax.inject.Inject
 
 class RegisterViewModel @Inject constructor(
     private val IRegisterUserUseCase: IRegisterUserUseCase,
-    private val ISaveUserToLocalUseCase: ISaveUserToLocalUseCase
+    private val ISaveUserToLocalUseCase: ISaveUserToLocalUseCase,
+    private val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
 ) : BaseViewModel() {
 
     private val isLoading = MutableStateFlow(false)
@@ -31,6 +34,7 @@ class RegisterViewModel @Inject constructor(
                     is DataResponse.Loading -> isLoading.value = true
                     is DataResponse.Success<UserInfo> -> {
                         ISaveUserToLocalUseCase.saveUserToLocal(it.data)
+                        setDefaultRatingFilterUseCase.setDefaultRatingFilter()
                         isRegister.value = true
                     }
                     is DataResponse.Error -> isLoading.value = false
@@ -42,14 +46,16 @@ class RegisterViewModel @Inject constructor(
     @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(
         private val IRegisterUserUseCase: IRegisterUserUseCase,
-        private val ISaveUserToLocalUseCase: ISaveUserToLocalUseCase
+        private val ISaveUserToLocalUseCase: ISaveUserToLocalUseCase,
+        private val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
     )
         : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == RegisterViewModel::class.java)
             return RegisterViewModel(
                 IRegisterUserUseCase = IRegisterUserUseCase,
-                ISaveUserToLocalUseCase = ISaveUserToLocalUseCase
+                ISaveUserToLocalUseCase = ISaveUserToLocalUseCase,
+                setDefaultRatingFilterUseCase = setDefaultRatingFilterUseCase
                 ) as T
         }
 

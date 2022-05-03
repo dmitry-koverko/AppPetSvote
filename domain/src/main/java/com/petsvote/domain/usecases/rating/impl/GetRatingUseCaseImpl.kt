@@ -14,4 +14,5 @@ class GetRatingUseCaseImpl @Inject constructor(
     override suspend fun getRating(): Flow<PagingData<Item>> {
         return ratingRepository.getRating()
     }
+
 }

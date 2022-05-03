@@ -10,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.core.adapter.FingerprintPagingAdapter
 import com.petsvote.core.adapter.Item
 import com.petsvote.core.ext.log
+import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.SimpleItem
 import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.rating.databinding.FragmentRatingCollapsingBinding
@@ -28,7 +30,9 @@ import com.petsvote.rating.fingerprints.UserPetFingerprint
 import com.petsvote.ui.ext.hide
 import com.petsvote.ui.ext.show
 import dagger.Lazy
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
+import java.lang.Runnable
 import javax.inject.Inject
 
 class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
@@ -41,20 +45,25 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         viewModelFactory.get()
     }
 
+    private var fragmentScope = CoroutineScope(Dispatchers.Main + Job())
+
     var binding: FragmentRatingCollapsingBinding? = null
-    private val ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint()))
+    private var ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint()))
     private val findPetAdapter = FingerprintListAdapter(listOf(FindPetFingerprint(::onFindPet)))
-    private val userPetsAdapter = FingerprintListAdapter(listOf(UserPetFingerprint(::onClickUserPet)))
-    private val concatAdapter = ConcatAdapter(
-        ConcatAdapter.Config.Builder()
-            .setIsolateViewTypes(false)
-            .build(),
+    private val userPetsAdapter =
+        FingerprintListAdapter(listOf(UserPetFingerprint(::onClickUserPet)))
+    private var config = ConcatAdapter.Config.Builder()
+        .setIsolateViewTypes(false)
+        .build()
+    private var concatAdapter = ConcatAdapter(
+        config,
         findPetAdapter,
         userPetsAdapter
     )
 
     private var topLinearHeight = 0
     private var check_ScrollingUp = false
+    private var currentClickUserPetId = 0
 
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -71,6 +80,10 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         }
         lifecycleScope.launchWhenStarted {
             viewModel.getUserPets()
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.getRatingFilter()
         }
     }
 
@@ -119,15 +132,14 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 //if (isAnim) return@OnScrollChangeListener
                 var offset = binding?.listRating?.computeVerticalScrollOffset()
                 offset?.let {
-                    log("measureHeight = $offset")
-
                     if (scrollY < oldScrollY) {
                         if (check_ScrollingUp) {
                             binding?.bottomBar?.startAnimation(
                                 AnimationUtils.loadAnimation(
                                     context,
                                     com.petsvote.ui.R.anim.trans_downwards
-                                ))
+                                )
+                            )
                             binding?.scrollToTop?.visibility = View.VISIBLE
                             check_ScrollingUp = false;
                         }
@@ -154,21 +166,49 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             viewModel.pages.collect {
                 it?.let { page ->
                     ratingAdapter.submitData(page)
+                    var list = ratingAdapter.snapshot().items
+                    if (list.isNotEmpty()) {
+                        var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
+                        if ((ratingAdapter.snapshot().items.first() as RatingPet).index != 1
+                            && myPet != null && list.size <= 50
+                        ) {
+                            log("click is my pet")
+                            var first = (list[0] as RatingPet)
+                            var my =
+                                (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
+                            my?.let {
+                                log(first.toString())
+                                log(it.toString())
+                                var deff = (it as RatingPet).index - first.index
+                                log(deff.toString())
+                                var line = deff / 2
+                                var position = line * (resources.displayMetrics.heightPixels * 0.36)
+                                log(position.toString())
+                                binding?.listRating?.postDelayed(
+                                    Runnable { binding?.listRating?.scrollToPosition(position.toInt()) },
+                                    1000
+                                )
+                                currentClickUserPetId = -1
+                            }
+
+                        }
+                    }
+
                 }
             }
         }
 
-         lifecycleScope.launchWhenResumed {
-             viewModel.userPets.collect {
-                 for (i in 0 until it.size){
-                     if(i == 0){
-                         it[0].isClickPet = true
-                     }
-                     it[i].position = i
-                 }
-                 userPetsAdapter.submitList(it)
-             }
-         }
+        lifecycleScope.launchWhenResumed {
+            viewModel.userPets.collect {
+                for (i in 0 until it.size) {
+                    if (i == 0) {
+                        it[0].isClickPet = true
+                    }
+                    it[i].position = i
+                }
+                userPetsAdapter.submitList(it)
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -179,14 +219,18 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private fun onFindPet(item: SimpleItem) {
         log("click findPet")
     }
+
     private fun onClickUserPet(clickItem: UserPet) {
+        clickItem.pets_id?.let { currentClickUserPetId = it }
         log("click findPet")
         log(userPetsAdapter.currentList.toString())
         var newList = userPetsAdapter.currentList
-        newList.onEach { item: Item? ->  (item as UserPet).isClickPet = false}
-        (newList.find { (it as UserPet).pets_id == clickItem.pets_id} as UserPet).isClickPet = true
+        newList.onEach { item: Item? -> (item as UserPet).isClickPet = false }
+        (newList.find { (it as UserPet).pets_id == clickItem.pets_id } as UserPet).isClickPet = true
         log(newList.toString())
         userPetsAdapter.notifyDataSetChanged()
-    }
 
+        clickItem.id?.let { viewModel.setBreedId(it) }
+        ratingAdapter.refresh()
+    }
 }

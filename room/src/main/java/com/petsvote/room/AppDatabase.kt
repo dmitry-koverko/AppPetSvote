@@ -24,7 +24,7 @@ import com.petsvote.room.entity.user.EntityUserPet
         EntityLocation::class,
         EntityPhoto::class,
         EntityRatingFilter::class
-    ), version = 1, exportSchema = false
+    ), version = 2, exportSchema = false
 )
 @TypeConverters(PhotoConverter::class, UserPetConverter::class, LocationConverter::class)
 public abstract class AppDatabase : RoomDatabase() {

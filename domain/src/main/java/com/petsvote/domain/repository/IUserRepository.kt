@@ -10,7 +10,9 @@ interface IUserRepository {
 
     suspend fun registerUser(params: RegisterUserParams): UserInfo?
     suspend fun getUser(): UserInfo?
+    suspend fun getCountUserPets(): Int
     suspend fun getUserPets(): Flow<List<UserPet>>
+    suspend fun getSimpleUserPets(): List<UserPet>
     suspend fun checkLoginUser(): Boolean
     suspend fun saveUserToLocal(user: UserInfo)
     suspend fun getToken(): String

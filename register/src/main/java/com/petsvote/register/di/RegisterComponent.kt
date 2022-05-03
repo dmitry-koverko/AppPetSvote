@@ -2,6 +2,7 @@ package com.petsvote.register.di
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.rating.ISetDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.user.IRegisterUserUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import com.petsvote.register.RegisterFragment
@@ -43,6 +44,7 @@ interface RegisterDepsProvider {
 interface RegisterDeps{
     val registerUserUseCase: IRegisterUserUseCase
     val saveUserUseCase: ISaveUserToLocalUseCase
+    val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
 }
 
 val Context.registerDepsProvider: RegisterDepsProvider

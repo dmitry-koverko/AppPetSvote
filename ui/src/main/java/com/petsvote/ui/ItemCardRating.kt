@@ -147,6 +147,10 @@ class ItemCardRating @JvmOverloads constructor(
         locationTextView?.text = location
     }
 
+    fun setPosition(position: Int){
+        findViewById<SimpleSFTextView>(R.id.position).text = position.toString()
+    }
+
     fun setMask(isUserPet: Boolean) {
         val icon = when (isUserPet) {
             true -> R.drawable.linear_mask_user

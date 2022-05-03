@@ -2,6 +2,8 @@ package com.petsvote.rating.di
 import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
+import com.petsvote.domain.usecases.rating.IGetRatingFilterUseCase
+import com.petsvote.domain.usecases.rating.ISetBreedIdInRatingFilterUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import com.petsvote.domain.usecases.user.impl.GetUserPetsUseCase
@@ -45,6 +47,8 @@ interface RatingDeps{
     val getRatingUseCase: GetRatingUseCase
     val saveUserUseCase: ISaveUserToLocalUseCase
     val getUserPetsUseCase: IGetUserPetsUseCase
+    val getRatingFilterUseCase: IGetRatingFilterUseCase
+    val setBreedIdInRatingFilterUseCase: ISetBreedIdInRatingFilterUseCase
 }
 
 val Context.ratingDepsProvider: RatingDepsProvider

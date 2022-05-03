@@ -12,6 +12,8 @@ class FingerprintPagingAdapter(
     FingerprintDiffUtil(fingerprints)
 ) {
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<ViewBinding, Item> {
         val inflater = LayoutInflater.from(parent.context)
         return fingerprints.find { it.getLayoutId() == viewType }

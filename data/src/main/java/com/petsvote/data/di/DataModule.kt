@@ -22,22 +22,34 @@ class DataModule {
     @Provides
     fun provideRatingFilterRepository(
         ratingFilterDao: RatingFilterDao
-    ): IRatingFilterRepository { return RatingFilterRepository(ratingFilterDao = ratingFilterDao) }
+    ): IRatingFilterRepository {
+        return RatingFilterRepository(ratingFilterDao = ratingFilterDao)
+    }
 
     @Provides
     fun provideRatingRemoteRepository(
         ratingApi: RatingApi,
-        IUserRepository: IUserRepository
+        IUserRepository: IUserRepository,
+        languageCodeUseCase: GetLocaleLanguageCodeUseCase
     ): RatingRepository {
         return com.petsvote.data.repository.paging.RatingRepository(
             ratingApi = ratingApi,
-            userRepository = IUserRepository
+            userRepository = IUserRepository,
+            languageCodeUseCase = languageCodeUseCase
         )
     }
 
     @Provides
-    fun provideRatingPagingRepository(ratingRepository: RatingRepository): RatingPagingRepository {
-        return com.petsvote.data.repository.paging.RatingPagingRepository(ratingRepository = ratingRepository)
+    fun provideRatingPagingRepository(
+        ratingRepository: RatingRepository,
+        ratingFilterRepository: IRatingFilterRepository,
+        userRepository: IUserRepository
+    ): RatingPagingRepository {
+        return com.petsvote.data.repository.paging.RatingPagingRepository(
+            ratingRepository = ratingRepository,
+            ratingFilterRepository = ratingFilterRepository,
+            userRepository = userRepository
+        )
     }
 
     @Provides
