@@ -41,7 +41,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
     }
 
     fun startDragToLeft(){
-        binding?.pager?.fakeDrag(duration = 400L, numberOfPages = 1)
+        binding?.pager?.fakeDrag(duration = 300L, numberOfPages = 1)
     }
 
     override fun initObservers() {
