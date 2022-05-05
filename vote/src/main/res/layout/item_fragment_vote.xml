@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/cardMotion"
+    android:background="@android:color/transparent"
+    app:layoutDescription="@xml/item_fragment_vote_scene">
+
+    <com.petsvote.ui.RoundedImage
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:backgroundTint="@color/white"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cat_example"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/VoteTextCardTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:alpha="1"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxLines="2"
+        android:text="Ешка, 7 мес."
+        app:layout_constraintBottom_toTopOf="@id/description" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/VoteTextCardDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:alpha="1"
+        android:autoSizePresetSizes="@array/autosize_text_sizes"
+        android:ellipsize="end"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:maxLines="2"
+        android:text="Манчикин, Минск, Беларусь"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.petsvote.ui.RoundedImage
+        android:id="@+id/mask"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:alpha="0"
+        android:scaleType="centerCrop"
+        android:src="@drawable/shape_mask"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <com.petsvote.ui.textview.SimpleSFTextView
+        android:id="@+id/simpleSFTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:gravity="center"
+        android:scaleX="1"
+        android:scaleY="1"
+        android:textColor="@color/white"
+        android:textSize="270sp" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

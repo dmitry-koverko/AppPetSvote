@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    app:layoutDescription="@xml/item_vote_fragment_scene">
+
+    <FrameLayout
+        android:background="@android:color/transparent"
+        android:id="@+id/card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:background="@android:color/transparent"
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutDescription="@xml/item_vote_fragment_xml_constraintlayout_scene">
+
+            <com.petsvote.ui.RoundedImage
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cat_example" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/VoteTextCardTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:alpha="1"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:text="Ешка, 7 мес." />
+
+                <TextView
+                    android:id="@+id/description"
+                    style="@style/VoteTextCardDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="1"
+                    android:autoSizePresetSizes="@array/autosize_text_sizes"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:includeFontPadding="false"
+                    android:maxLines="2"
+                    android:text="Манчи asнск, Беларусь" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:id="@+id/view_black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.3"
+                android:background="@color/bold"
+                android:visibility="visible" />
+
+            <com.petsvote.ui.textview.SimpleSFTextView
+                android:id="@+id/simpleSFTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="1"
+                android:gravity="center"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:text="+3"
+                android:textColor="@color/white"
+                android:textSize="270sp" />
+
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

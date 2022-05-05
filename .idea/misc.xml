@@ -49,6 +49,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/item_list_state.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/linear_mask_default.xml" value="0.233" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/linear_mask_user.xml" value="0.233" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/shape_mask.xml" value="0.2295" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/tabindicators.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font-v26/myfont.xml" value="0.42314814814814816" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/myfont.xml" value="0.42314814814814816" />
@@ -56,6 +57,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_layout.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_tab_latout_two.xml" value="0.25416666666666665" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_tab_layout.xml" value="0.4" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/bottom_stars.xml" value="0.2" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/item_add_pet.xml" value="0.136" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/item_card_rating.xml" value="0.25" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/item_tab.xml" value="0.358695652173913" />
@@ -71,6 +73,9 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_besie_view.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_my_view.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/top_bar_layout.xml" value="0.264" />
+        <entry key="..\:/clean-petsvote/vote/src/main/res/layout/fragment_vote.xml" value="0.136" />
+        <entry key="..\:/clean-petsvote/vote/src/main/res/layout/item_fragment_vote.xml" value="0.15301391035548687" />
+        <entry key="..\:/clean-petsvote/vote/src/main/res/layout/item_vote_fragment.xml" value="0.12" />
       </map>
     </option>
   </component>

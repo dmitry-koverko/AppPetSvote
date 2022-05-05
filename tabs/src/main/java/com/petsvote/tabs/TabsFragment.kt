@@ -1,7 +1,9 @@
 package com.petsvote.tabs
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -10,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.petsvote.rating.RatingFragment
 import com.petsvote.tabs.databinding.FragmentTabsBinding
 import com.petsvote.ui.maintabs.TopTabLayout
+import com.petsvote.vote.VoteFragment
 
 class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeListener,
     TopTabLayout.TopTabLayoutListener {
@@ -37,7 +40,7 @@ class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeList
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> RatingFragment()
-                1 -> BlankFragment()
+                1 -> VoteFragment()
                 2 -> BlankFragment()
                 else -> BlankFragment()
             }
@@ -67,5 +70,20 @@ class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeList
         binding?.viewPager?.setCurrentItem(position, true)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                activity?.finish()
+            }
+
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
+    }
 
 }
