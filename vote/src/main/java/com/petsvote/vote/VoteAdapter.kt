@@ -4,16 +4,17 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.petsvote.domain.entity.pet.RatingPet
+import com.petsvote.domain.entity.pet.VotePet
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
-class VoteAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
+class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 25
+    override fun getItemCount(): Int = listPets.size
 
     override fun createFragment(position: Int): Fragment {
-        val fragment = ItemVoteFragment()
-//        fragment.arguments = Bundle().apply {
-//            putInt(ARG_OBJECT, position + 1)
-//        }
+        val fragment = ItemVoteFragment.newInstance(Json.encodeToString(listPets[position]))
         return fragment
     }
 

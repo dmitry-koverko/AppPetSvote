@@ -288,4 +288,12 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
         ratingAdapter.refresh()
     }
+
+    companion object {
+        @JvmStatic
+        fun newInstance(bundle: Bundle = Bundle()) =
+            RatingFragment().apply {
+                arguments = bundle
+            }
+    }
 }

@@ -21,13 +21,20 @@ class BottomStars @JvmOverloads constructor(
     private var starActiveFour: ImageView
     private var starActiveFive: ImageView
 
-    private var starOne: BesieLayout
-    private var starTwo: BesieLayout
-    private var starThree: BesieLayout
-    private var starFour: BesieLayout
-    private var starFive: BesieLayout
+    private var starUnActiveOne: ImageView
+    private var starUnActiveTwo: ImageView
+    private var starUnActiveThree: ImageView
+    private var starUnActiveFour: ImageView
+    private var starUnActiveFive: ImageView
+
+    private var starOne: View
+    private var starTwo: View
+    private var starThree: View
+    private var starFour: View
+    private var starFive: View
 
     private var listStars = mutableListOf<ImageView>()
+    private var listUnStars = mutableListOf<ImageView>()
     private var isAnim = false
 
     var mBottomStarsListener: BottomStarsListener? = null
@@ -41,17 +48,29 @@ class BottomStars @JvmOverloads constructor(
         starActiveFour = findViewById(R.id.starActiveFour)
         starActiveFive = findViewById(R.id.starActiveFive)
 
-        starOne = findViewById(R.id.star1)
-        starTwo = findViewById(R.id.star2)
-        starThree = findViewById(R.id.star3)
-        starFour = findViewById(R.id.star4)
-        starFive = findViewById(R.id.star5)
+        starUnActiveOne = findViewById(R.id.starUnActiveOne)
+        starUnActiveTwo = findViewById(R.id.starUnActiveTwo)
+        starUnActiveThree = findViewById(R.id.starUnActiveThree)
+        starUnActiveFour = findViewById(R.id.starUnActiveFour)
+        starUnActiveFive = findViewById(R.id.starUnActiveFive)
+
+        starOne = findViewById(R.id.viewVote1)
+        starTwo = findViewById(R.id.viewVote2)
+        starThree = findViewById(R.id.viewVote3)
+        starFour = findViewById(R.id.viewVote4)
+        starFive = findViewById(R.id.viewVote5)
 
         listStars.add(starActiveOne)
         listStars.add(starActiveTwo)
         listStars.add(starActiveThree)
         listStars.add(starActiveFour)
         listStars.add(starActiveFive)
+
+        listUnStars.add(starUnActiveOne)
+        listUnStars.add(starUnActiveTwo)
+        listUnStars.add(starUnActiveThree)
+        listUnStars.add(starUnActiveFour)
+        listUnStars.add(starUnActiveFive)
 
         starOne.setOnClickListener {
             if (isAnim) return@setOnClickListener
@@ -83,14 +102,18 @@ class BottomStars @JvmOverloads constructor(
     fun startVoteAnim(position: Int) {
         isAnim = true
         var isUnselected = false
-        for (i in 0..position)
+        for (i in 0..position) {
             listStars[i].startAnimActive()
+            listUnStars[i].startAnimUnActive()
+        }
 
         object : CountDownTimer(1000, 500) {
             override fun onTick(millisUntilFinished: Long) {
                 if(!isUnselected){
-                    for (i in 0..position)
+                    for (i in 0..position) {
                         listStars[i].startAnimUnActive()
+                        listUnStars[i].startAnimActive()
+                    }
                     isUnselected = true
                 }
             }

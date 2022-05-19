@@ -26,4 +26,18 @@ interface RatingApi {
         @Query("breed_id") breed_id: Int?,
     ): NetworkResponse<Rating, ApiError>
 
+    @GET("get-pets-list")
+    suspend fun getVotePets(
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+        @Query("lang") lang: String?,
+        @Query("type") type: String?,
+        @Query("sex") sex: String?,
+        @Query("city_id") city_id: Int?,
+        @Query("country_id") country_id: Int?,
+        @Query("age_between") age_between: String?,
+        @Query("rating_type") rating_type: String?,
+        @Query("ids") ids: String?,
+    ): NetworkResponse<Rating, ApiError>
+
 }

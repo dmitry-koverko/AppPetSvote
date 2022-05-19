@@ -81,4 +81,19 @@
     <color name="dialog_divider_color">#1FFFFFFF</color>
     <color name="dialog_button_text_color">#FF347F</color>
 
+
+    //VOTE
+    <color name="text_color_btn_primary">#FFFFFF</color>
+    <color name="primary_button_ripple">#1AFFFFFF</color>
+    <color name="primary_button_color">#FF347F</color>
+    <color name="active_text_color">#DEFFFFFF</color>
+    <color name="sub_active_text_color">#99FFFFFF</color>
+
+    //STARS
+    <color name="star_color">#99FFFFFF</color>
+    <color name="star_active_color">#FF347F</color>
+    <color name="digits_star_color">#121212</color>
+    <color name="refresh_background_color">#1FFFFFFF</color>
+
+
 </resources>

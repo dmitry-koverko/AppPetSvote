@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_layers_1"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.petsvote.ui.maintabs.TopTabLayout
+        android:layout_marginTop="16dp"
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="32dp"/>
 
     <androidx.viewpager.widget.ViewPager
+        android:layout_marginTop="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabs"
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

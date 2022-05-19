@@ -12,6 +12,8 @@ import androidx.viewpager.widget.ViewPager
 import com.petsvote.rating.RatingFragment
 import com.petsvote.tabs.databinding.FragmentTabsBinding
 import com.petsvote.ui.maintabs.TopTabLayout
+import com.petsvote.vote.VoteBonusFragment
+import com.petsvote.vote.VoteEmptyFilterFragment
 import com.petsvote.vote.VoteFragment
 
 class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeListener,
@@ -39,9 +41,9 @@ class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeList
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
-                0 -> RatingFragment()
+                0 -> RatingFragment.newInstance()
                 1 -> VoteFragment()
-                2 -> BlankFragment()
+                2 -> VoteBonusFragment()
                 else -> BlankFragment()
             }
         }

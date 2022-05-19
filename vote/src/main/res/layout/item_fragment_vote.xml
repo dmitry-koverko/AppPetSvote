@@ -8,7 +8,7 @@
     android:background="@android:color/transparent"
     app:layoutDescription="@xml/item_fragment_vote_scene">
 
-    <com.petsvote.ui.RoundedImage
+    <com.petsvote.ui.parallax.ParallaxView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,7 +58,7 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
 
-    <com.petsvote.ui.textview.SimpleSFTextView
+    <com.petsvote.ui.textview.SFHeavy
         android:id="@+id/simpleSFTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

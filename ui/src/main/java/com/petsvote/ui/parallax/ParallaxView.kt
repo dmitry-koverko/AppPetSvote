@@ -1,6 +1,10 @@
 package com.petsvote.ui.parallax
 
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +12,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,16 +30,14 @@ class ParallaxView @JvmOverloads constructor(
 
     private val TAG = ParallaxView::class.java.name
     private val pageIndicator: PageIndicator
-    private var orientation: Int = 0
 
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
-    var list = listOf<String>(
-        "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-        "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg")
+    var list = listOf<String>()
         set(value) {
             field = value
-           //viewPagerAdapter.update(value)
+            viewPagerAdapter.update(value)
+            pageIndicator.setCountIndicators(value.size)
         }
 
     init{
@@ -42,28 +45,14 @@ class ParallaxView @JvmOverloads constructor(
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.parallax_view, this, true)
 
-        context.withStyledAttributes(attrs, R.styleable.ParallaxView){
-            orientation = getInt(R.styleable.ParallaxView_pv_orientation, 0)
-        }
-
         viewPagerAdapter = ViewPagerAdapter(context, list)
         pageIndicator =  findViewById<PageIndicator>(R.id.page_indicators)
         pageIndicator.apply {
-            typeOrientation = orientation
             setCountIndicators(viewPagerAdapter.itemCount)
         }
 
-        var lp = pageIndicator.layoutParams as ConstraintLayout.LayoutParams
-        if(orientation == 1) lp.apply {
-            bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
-            bottomMargin = (12 * context.resources.displayMetrics.density).toInt()
-            rightToRight = LayoutParams.PARENT_ID
-            leftToLeft = LayoutParams.PARENT_ID
-            topToTop = -1
-        }
-
         findViewById<ViewPager2>(R.id.view_pager).apply {
-            orientation = if(orientation == 0) ORIENTATION_VERTICAL else ORIENTATION_HORIZONTAL
+            orientation = ORIENTATION_VERTICAL
             adapter = viewPagerAdapter
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageScrolled(
@@ -85,6 +74,24 @@ class ParallaxView @JvmOverloads constructor(
             }
         }
 
+    }
+
+    private var radius = context.resources.displayMetrics.density * 16
+    private var paint =
+        Paint().apply {
+            isAntiAlias = true
+            color = ContextCompat.getColor(context, R.color.ui_gray)
+            style = Paint.Style.FILL
+        }
+    private var path = Path()
+
+    override fun onDraw(canvas: Canvas) {
+        path.reset()
+        path.addRoundRect(
+            RectF(0f, 0f, width.toFloat(), height.toFloat()), radius, radius, Path.Direction.CCW)
+        canvas.clipPath(path)
+        canvas.drawPath(path, paint)
+        super.onDraw(canvas)
     }
 
 }

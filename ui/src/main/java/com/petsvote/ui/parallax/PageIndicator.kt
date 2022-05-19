@@ -24,7 +24,6 @@ class PageIndicator @JvmOverloads constructor(
 
     private val TAG = PageIndicator::class.java.name
 
-    var typeOrientation = 0
     private var dotCount = 0
     private var indicatorSize = 0
     private var marginSize = 0
@@ -34,7 +33,6 @@ class PageIndicator @JvmOverloads constructor(
 
     init{
         context.withStyledAttributes(attrs, R.styleable.PageIndicator){
-            typeOrientation = getInt(R.styleable.PageIndicator_page_orientation, 0)
             dotCount = getInt(R.styleable.PageIndicator_count_indicators, 0)
         }
 
@@ -42,9 +40,7 @@ class PageIndicator @JvmOverloads constructor(
             context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.page_indicator_view, this, true)
 
-        findViewById<LinearLayoutCompat>(R.id.root).orientation =
-            if(typeOrientation == 0) VERTICAL else HORIZONTAL
-
+        findViewById<LinearLayoutCompat>(R.id.root).orientation = VERTICAL
 
         dotIndicator = findViewById(R.id.dot_animation)
 
@@ -60,7 +56,6 @@ class PageIndicator @JvmOverloads constructor(
         for(i in 1..count){
             var dot = DotIndicator(context)
             var lp = ViewGroup.MarginLayoutParams(indicatorSize, indicatorSize)
-            if(typeOrientation == 1) lp.setMargins(marginSize, 0, 0 ,0)
             dot.apply {
                 layoutParams = lp
                 paint.color = ContextCompat.getColor(context, R.color.dot_white)
@@ -72,46 +67,26 @@ class PageIndicator @JvmOverloads constructor(
             indicatorSize,
             (count * indicatorSize) + (count -1) * marginSize
         )
-
-        var lpLinearHorizontal = LinearLayoutCompat.LayoutParams(
-            (count * indicatorSize) + (count -1) * marginSize,
-            indicatorSize
-        )
-        findViewById<LinearLayoutCompat>(R.id.root).layoutParams = if(typeOrientation == 0) lpLinearVertical else lpLinearHorizontal
+        findViewById<LinearLayoutCompat>(R.id.root).layoutParams = lpLinearVertical
     }
 
     fun setOffsetTo(percentOffset: Int){
         var distance = (indicatorSize + marginSize) * currentPoint
         val lp = dotIndicator.layoutParams
-        if(typeOrientation == 0){
-            if(currentPoint == dotCount) return
-            if(percentOffset <= 50){
-                var length = ((indicatorSize + marginSize) * percentOffset / 50) + indicatorSize
-                lp.height = length
-                dotIndicator.y = distance.toFloat()
-            }else if(percentOffset > 50){
-                var lengthOffset = ((indicatorSize + marginSize) * (percentOffset - 50) / 50)
-                var offset = lengthOffset + distance
-                var length = distance + ((indicatorSize * 2) + marginSize) - offset
-                lp.height = length
-                dotIndicator.y = offset.toFloat()
+        if(currentPoint == dotCount) return
+        if(percentOffset <= 50){
+            var length = ((indicatorSize + marginSize) * percentOffset / 50) + indicatorSize
+            //lp.height = length
+            dotIndicator.y = distance.toFloat()
+        }else if(percentOffset > 50){
+            var lengthOffset = ((indicatorSize + marginSize) * (percentOffset - 50) / 50)
+            var offset = lengthOffset + distance
+            var length = distance + ((indicatorSize * 2) + marginSize) - offset
+            //lp.height = length
+            dotIndicator.y = offset.toFloat()
 
-                Log.d(TAG, "lengthOffser = $lengthOffset " +
-                        "offset = $offset length = $length")
-            }
-        }else {
-            if(currentPoint == dotCount) return
-            if(percentOffset <= 50){
-                var width = ((indicatorSize + marginSize) * percentOffset / 50) + indicatorSize
-                lp.width = width
-                dotIndicator.x = distance.toFloat()
-            }else {
-                var lengthOffset = ((indicatorSize + marginSize) * (percentOffset - 50) / 50)
-                var offset = lengthOffset + distance
-                var width = distance + ((indicatorSize * 2) + marginSize) - offset
-                lp.width = width
-                dotIndicator.x = offset.toFloat()
-            }
+            Log.d(TAG, "lengthOffser = $lengthOffset " +
+                    "offset = $offset length = $length")
         }
         dotIndicator.layoutParams = lp
     }

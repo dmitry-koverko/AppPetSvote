@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <FrameLayout
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="104dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.petsvote.ui.RoundedImage
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cat_example" />
+
+
+        <com.petsvote.ui.RoundedImage
+            android:id="@+id/mask"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.3"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shape_mask"/>
+
+
+        <com.petsvote.ui.textview.SFHeavy
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="72sp"
+            android:textColor="@color/text_color_btn_primary"
+            android:gravity="center"
+            android:text="@string/bonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <com.petsvote.ui.textview.SFHeavy
+            android:layout_gravity="center"
+            android:textSize="182sp"
+            android:textColor="@color/text_color_btn_primary"
+            android:text="+50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <com.petsvote.ui.textview.SimpleSFTextView
+            tools:text="Евгений, вы совершили 50 голосований и Марсик получил +50 баллов к своей популярности"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_gravity="bottom"
+            android:textSize="20sp"
+            android:textColor="@color/text_color_btn_primary"
+            android:text="+50"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <com.petsvote.ui.BesieLayout
+        android:layout_gravity="bottom"
+        android:id="@+id/share"
+        app:bl_background="@color/primary_button_color"
+        app:bl_ripple_color="@color/primary_button_ripple"
+        app:bl_ripple="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp">
+
+        <com.petsvote.ui.textview.SimpleSFTextView
+            android:textSize="20sp"
+            android:textColor="@color/text_color_btn_primary"
+            android:gravity="center"
+            android:text="@string/continue_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </com.petsvote.ui.BesieLayout>
+
+</FrameLayout>

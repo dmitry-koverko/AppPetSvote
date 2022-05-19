@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <androidx.viewpager2.widget.ViewPager2
+        android:visibility="gone"
         android:layout_marginBottom="104dp"
         android:isScrollContainer="false"
         android:id="@+id/pager"
@@ -17,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.petsvote.ui.bottomstar.BottomStars
+        android:visibility="gone"
         android:id="@+id/bottomStars"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
@@ -25,12 +27,11 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"/>
 
-    <FrameLayout
-        android:visibility="gone"
-        android:id="@+id/starsContainer"
-        android:layout_marginBottom="24dp"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"/>
+   <ProgressBar
+       android:id="@+id/voteProgress"
+       android:layout_gravity="center"
+       style="@style/CircularProgress"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"/>
 
 </FrameLayout>

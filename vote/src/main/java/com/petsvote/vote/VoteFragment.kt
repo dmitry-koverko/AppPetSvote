@@ -2,16 +2,36 @@ package com.petsvote.vote
 
 import android.animation.Animator
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.log
+import com.petsvote.domain.entity.pet.RatingPet
+import com.petsvote.domain.entity.pet.VotePet
 import com.petsvote.ui.bottomstar.BottomStars
 import com.petsvote.vote.databinding.FragmentVoteBinding
+import com.petsvote.vote.di.VoteComponentViewModel
+import dagger.Lazy
+import kotlinx.coroutines.flow.collect
+import javax.inject.Inject
 
 class VoteFragment : BaseFragment(R.layout.fragment_vote) {
+
+    @Inject
+    internal lateinit var viewModelFactory: Lazy<VoteViewModel.Factory>
+
+    private val ratingComponentViewModel: VoteComponentViewModel by viewModels()
+    private val viewModel: VoteViewModel by viewModels {
+        viewModelFactory.get()
+    }
+
+    private var listVote = mutableListOf(VotePet(-1, -1, "", "", emptyList()))
 
     private var binding: FragmentVoteBinding? = null
     private var adapter: VoteAdapter? = null
@@ -20,10 +40,17 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentVoteBinding.bind(view)
-        adapter = activity?.let { VoteAdapter(it) }
+
+        initAdapter()
+        viewModel.getRating()
+
+    }
+
+    private fun initAdapter() {
+
+        adapter = activity?.let { VoteAdapter(listVote,it) }
         binding?.pager?.adapter = adapter
         binding?.pager?.isUserInputEnabled = false
-        binding?.pager?.setCurrentItem(1, false)
 
         binding?.bottomStars?.mBottomStarsListener = object : BottomStars.BottomStarsListener{
             override fun vote(position: Int) {
@@ -44,8 +71,26 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
         binding?.pager?.fakeDrag(duration = 300L, numberOfPages = 1)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun initObservers() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.pets.collect {
+                if(listVote.size <= 1){
+                    binding?.pager?.postDelayed( Runnable {
+                        initFirst()
+                    }, 200)
+                }
+                listVote.addAll(it)
+                adapter?.notifyDataSetChanged()
+            }
+        }
+    }
 
+    private fun initFirst(){
+        binding?.pager?.setCurrentItem(1, false)
+        binding?.pager?.visibility = View.VISIBLE
+        binding?.bottomStars?.visibility = View.VISIBLE
+        binding?.voteProgress?.visibility = View.GONE
     }
 
     fun ViewPager2.fakeDrag(leftToRight: Boolean = true, duration: Long, numberOfPages: Int) {
@@ -72,5 +117,10 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
         animator.interpolator = AccelerateDecelerateInterpolator()
         animator.duration = duration
         animator.start()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        ratingComponentViewModel.voteComponent.inject(this)
     }
 }

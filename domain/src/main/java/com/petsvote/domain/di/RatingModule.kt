@@ -2,15 +2,25 @@ package com.petsvote.domain.di
 
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingPagingRepository
+import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.filter.impl.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
+import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
 import com.petsvote.domain.usecases.rating.impl.GetRatingUseCaseImpl
+import com.petsvote.domain.usecases.rating.impl.GetVotePetsUseCase
 import dagger.Module
 import dagger.Provides
 
 @Module
 class RatingModule {
+
+    @Provides
+    fun provideGetVotePetsUseCase(
+        ratingRepository: RatingRepository
+    ): IGetVotePetsUseCase {
+        return GetVotePetsUseCase(ratingRepository = ratingRepository)
+    }
 
     @Provides
     fun provideSetDefaultInRatingFilterUseCase(

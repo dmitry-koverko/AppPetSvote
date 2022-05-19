@@ -12,11 +12,13 @@ import com.petsvote.room.RoomDeps
 import com.petsvote.room.RoomDepsProvider
 import com.petsvote.splash.di.SplashDeps
 import com.petsvote.splash.di.SplashDepsProvider
+import com.petsvote.vote.di.VoteDeps
+import com.petsvote.vote.di.VoteDepsProvider
 import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProvider,
-    TermsDepsProvider, RatingDepsProvider {
+    TermsDepsProvider, RatingDepsProvider, VoteDepsProvider {
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
@@ -37,4 +39,5 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
     override var depsRoom: RoomDeps = appComponent
     override var depsTerms: TermsDeps = appComponent
     override var depsRating: RatingDeps = appComponent
+    override var depsVote: VoteDeps = appComponent
 }

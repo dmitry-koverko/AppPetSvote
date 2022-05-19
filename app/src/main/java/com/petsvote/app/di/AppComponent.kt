@@ -11,6 +11,7 @@ import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
 import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
+import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.*
 import com.petsvote.legal.di.TermsDeps
@@ -21,6 +22,7 @@ import com.petsvote.room.RoomDeps
 import com.petsvote.room.RoomModule
 import com.petsvote.splash.di.SplashDeps
 import com.petsvote.ui.di.UIModule
+import com.petsvote.vote.di.VoteDeps
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -32,7 +34,7 @@ import javax.inject.Scope
         RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class,
         RatingModule::class]
 )]
-interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps {
+interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps {
 
     override val registerUserUseCase: IRegisterUserUseCase
     override val checkLoginUserUseCase: ICheckLoginUserUseCase
@@ -48,6 +50,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase
     override val checkLocationUserUseCase: ICheckLocationUserUseCase
     override val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
+    override val votePetsUseCase: IGetVotePetsUseCase
 
     @Component.Builder
     interface Builder {
