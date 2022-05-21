@@ -3,6 +3,7 @@ package com.petsvote.splash
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.petsvote.core.BaseViewModel
+import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
 import com.petsvote.domain.usecases.user.ICheckLoginUserUseCase
 import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
 import com.petsvote.domain.usecases.user.impl.GetCurrentUserUseCase
@@ -15,7 +16,8 @@ import javax.inject.Inject
 
 class SplashViewModel @Inject constructor(
     private val checkLoginUserUseCase: ICheckLoginUserUseCase,
-    private val getCurrentUserUseCase: IGetCurrentUserUseCase
+    private val getCurrentUserUseCase: IGetCurrentUserUseCase,
+    private val breedsUseCase: IGetBreedsUseCase
 ) : BaseViewModel() {
 
     private var isLoginUser = MutableStateFlow<Boolean?>(null)
@@ -26,7 +28,13 @@ class SplashViewModel @Inject constructor(
         val checkLogin = async {
             checkLoginUserUseCase.checkLoginUser()
         }
+
+        val updateBreeds = async {
+            breedsUseCase.updateBreeds()
+        }
+        updateBreeds.await()
         val isLogin = checkLogin.await()
+
 
         if(isLogin){
             val userJob = async {
@@ -40,13 +48,15 @@ class SplashViewModel @Inject constructor(
     @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(
         private val checkLoginUserUseCase: ICheckLoginUserUseCase,
-        private val getCurrentUserUseCase: IGetCurrentUserUseCase)
+        private val getCurrentUserUseCase: IGetCurrentUserUseCase,
+        private val breedsUseCase: IGetBreedsUseCase)
         : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == SplashViewModel::class.java)
             return SplashViewModel(
                 checkLoginUserUseCase = checkLoginUserUseCase,
-                getCurrentUserUseCase = getCurrentUserUseCase) as T
+                getCurrentUserUseCase = getCurrentUserUseCase,
+                breedsUseCase = breedsUseCase) as T
         }
 
     }

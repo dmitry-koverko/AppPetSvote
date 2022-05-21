@@ -2,6 +2,7 @@ package com.petsvote.room
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.room.dao.BreedsDao
 import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
 import dagger.Component
@@ -44,6 +45,11 @@ val Context.roomDepsProvider: RoomDepsProvider
 
 @Module
 class RoomModule {
+
+    @Provides
+    fun provideBreedsDao(application: Application): BreedsDao{
+        return AppDatabase.getDatabase(application).breedsDao()
+    }
 
     @Provides
     fun provideUserDao(application: Application): UserDao{

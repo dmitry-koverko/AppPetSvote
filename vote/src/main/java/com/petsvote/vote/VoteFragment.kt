@@ -31,7 +31,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
         viewModelFactory.get()
     }
 
-    private var listVote = mutableListOf(VotePet(-1, -1, "", "", emptyList()))
+    private var listVote = mutableListOf(VotePet(-1, -1, "", "", "", "", 0, emptyList()))
 
     private var binding: FragmentVoteBinding? = null
     private var adapter: VoteAdapter? = null
@@ -48,16 +48,17 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
 
     private fun initAdapter() {
 
-        adapter = activity?.let { VoteAdapter(listVote,it) }
+        adapter = VoteAdapter(listVote, this)
         binding?.pager?.adapter = adapter
         binding?.pager?.isUserInputEnabled = false
 
         binding?.bottomStars?.mBottomStarsListener = object : BottomStars.BottomStarsListener{
             override fun vote(position: Int) {
                 val myFragment =
-                    activity?.supportFragmentManager?.findFragmentByTag("f" + binding?.pager?.currentItem)
+                    childFragmentManager.findFragmentByTag("f" + binding?.pager?.currentItem)
                 myFragment?.tag?.let { it1 -> log(it1) }
                 if(myFragment is ItemVoteFragment) {
+                    checkCount()
                     myFragment.setRating(position)
                     myFragment.startAnim({ startDragToLeft() })
                 }
@@ -65,6 +66,12 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote) {
 
         }
 
+    }
+
+    private fun checkCount() {
+        if((binding?.pager?.currentItem?.plus(5) ?: 0) > (adapter?.itemCount ?: 5)){
+            viewModel.getRating()
+        }
     }
 
     fun startDragToLeft(){

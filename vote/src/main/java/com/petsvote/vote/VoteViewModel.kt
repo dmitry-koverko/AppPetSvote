@@ -36,7 +36,7 @@ class VoteViewModel @Inject constructor(
 
     fun getRating(){
         viewModelScope.launch {
-            votePetsUseCase.getRating().collect {
+            votePetsUseCase.getRating(pets.value.size).collect {
                 pets.emit(it)
             }
         }

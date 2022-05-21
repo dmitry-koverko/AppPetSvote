@@ -5,13 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import com.petsvote.room.converters.BreedsConverter
 import com.petsvote.room.converters.LocationConverter
 import com.petsvote.room.converters.PhotoConverter
 import com.petsvote.room.converters.UserPetConverter
+import com.petsvote.room.dao.BreedsDao
 import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
+import com.petsvote.room.entity.EntityBreed
 import com.petsvote.room.entity.EntityLocation
 import com.petsvote.room.entity.EntityPhoto
+import com.petsvote.room.entity.breeds.EntityBreedList
 import com.petsvote.room.entity.filter.EntityRatingFilter
 import com.petsvote.room.entity.user.EntityUserInfo
 import com.petsvote.room.entity.user.EntityUserPet
@@ -23,14 +27,22 @@ import com.petsvote.room.entity.user.EntityUserPet
         EntityUserPet::class,
         EntityLocation::class,
         EntityPhoto::class,
-        EntityRatingFilter::class
-    ), version = 2, exportSchema = false
+        EntityRatingFilter::class,
+        EntityBreed::class,
+        EntityBreedList::class
+    ), version = 3, exportSchema = false
 )
-@TypeConverters(PhotoConverter::class, UserPetConverter::class, LocationConverter::class)
+@TypeConverters(
+    PhotoConverter::class,
+    UserPetConverter::class,
+    LocationConverter::class,
+    BreedsConverter::class
+)
 public abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
     abstract fun ratingFilterDao(): RatingFilterDao
+    abstract fun breedsDao(): BreedsDao
 
     companion object {
         @Volatile

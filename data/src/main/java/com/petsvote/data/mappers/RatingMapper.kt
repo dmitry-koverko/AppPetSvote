@@ -15,7 +15,7 @@ fun List<PetRating>.remoteToRatingList(): List<RatingPet>{
 
 fun PetRating.remoteToRating(): RatingPet{
     return RatingPet(
-        this.index,
+        this.index ?: 0,
         this.pet_id,
         this.name,
         this.country_name,

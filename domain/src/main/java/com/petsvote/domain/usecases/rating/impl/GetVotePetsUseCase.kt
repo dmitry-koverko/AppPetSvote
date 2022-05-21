@@ -10,7 +10,7 @@ class GetVotePetsUseCase @Inject constructor(
     private val ratingRepository: RatingRepository
 ): IGetVotePetsUseCase {
 
-    override suspend fun getRating(): Flow<List<VotePet>> {
-       return ratingRepository.getVotePets()
+    override suspend fun getRating(offset: Int): Flow<List<VotePet>> {
+       return ratingRepository.getVotePets(offset)
     }
 }

@@ -1,10 +1,13 @@
 package com.petsvote.domain.di
 
 import android.content.res.Configuration
+import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IConfigurationRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
 import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
+import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
+import com.petsvote.domain.usecases.configuration.impl.GetBreedsUseCase
 import com.petsvote.domain.usecases.configuration.impl.GetLocaleLanguageCodeUseCaseImpl
 import com.petsvote.domain.usecases.configuration.impl.GetPrivacyPolicyUseCaseImpl
 import com.petsvote.domain.usecases.configuration.impl.GetUserAgreementUseCaseImpl
@@ -13,6 +16,11 @@ import dagger.Provides
 
 @Module
 class ConfigurationModule {
+
+    @Provides
+    fun provideGetBreedsUseCase(breedsRepository: IBreedRepository): IGetBreedsUseCase {
+        return GetBreedsUseCase(breedsRepository = breedsRepository)
+    }
 
     @Provides
     fun provideGetLocaleLanguageCodeUseCase(configuration: Configuration): GetLocaleLanguageCodeUseCase {

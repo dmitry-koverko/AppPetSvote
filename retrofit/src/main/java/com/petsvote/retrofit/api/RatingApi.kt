@@ -4,6 +4,7 @@ import com.petsvote.retrofit.SettingsApi
 import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.rating.Rating
+import com.petsvote.retrofit.entity.rating.Vote
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -28,6 +29,7 @@ interface RatingApi {
 
     @GET("get-pets-list")
     suspend fun getVotePets(
+        @Header("Authorization") token: String,
         @Query("limit") limit: Int?,
         @Query("offset") offset: Int?,
         @Query("lang") lang: String?,
@@ -38,6 +40,6 @@ interface RatingApi {
         @Query("age_between") age_between: String?,
         @Query("rating_type") rating_type: String?,
         @Query("ids") ids: String?,
-    ): NetworkResponse<Rating, ApiError>
+    ): NetworkResponse<Vote, ApiError>
 
 }

@@ -9,7 +9,7 @@ import com.petsvote.domain.entity.pet.VotePet
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
+class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: VoteFragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = listPets.size
 

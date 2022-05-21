@@ -1,8 +1,10 @@
 package com.petsvote.data.repository.paging
 
 import android.util.Log
+import com.petsvote.data.mappers.checkResult
 import com.petsvote.data.mappers.checkResultPaging
 import com.petsvote.data.mappers.remoteToRatingList
+import com.petsvote.data.mappers.remoteToVotePetsList
 import com.petsvote.data.repository.RatingFilterRepository
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
@@ -15,6 +17,8 @@ import com.petsvote.domain.usecases.filter.IGetRatingFilterUseCase
 import com.petsvote.domain.usecases.filter.impl.GetRatingFilterUseCase
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.entity.rating.Rating
+import com.petsvote.retrofit.entity.rating.Vote
+import com.petsvote.retrofit.entity.rating.VoteRating
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -53,35 +57,27 @@ class RatingRepository @Inject constructor(
         return if (response != null) (response as Rating).pets.remoteToRatingList() else emptyList()
     }
 
-    override suspend fun getVotePets(): Flow<List<VotePet>> = flow {
-        run{
-            emit(listOf(
-                VotePet(-1, 1, "Eshka, 7m.", "Cat, Minsk, Belarus", listOf(
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg"
-                )),
-                VotePet(-1, 1, "Deshama, 7m.", "Fish, Minsk, Belarus", listOf(
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg"
-                )),
-                VotePet(-1, 1, "Petka, 12", "Dog, Minsk, Belarus", listOf(
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg",
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg"
-                )),
-                VotePet(-1, 1, "Vatsksf, 7m.", "Cat, Minsk, Belarus", listOf(
-                    "https://sobakainfo.ru/wp-content/uploads/2016/11/1-66.jpg"
-                ))
-            ))
+    override suspend fun getVotePets(offset: Int): Flow<List<VotePet>> = flow {
+        run {
+            val result =
+                checkResult(
+                    ratingApi.getVotePets(
+                        userRepository.getToken(),
+                        null,
+                        offset,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    )
+                )
+            if (result != null) emit((result as Vote).pets.remoteToVotePetsList())
+            else emit(emptyList())
         }
     }
-    //{
-//        val response = checkResultPaging<Rating>(
-//            ratingApi.getVotePets(null, null, null, null, null, null, null, null, null, null)
-//        )
-        //return if (response != null) (response as Rating).pets.remoteToRatingList() else emptyList()
 
-   // }
 }
