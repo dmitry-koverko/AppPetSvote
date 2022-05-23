@@ -11,6 +11,6 @@ data class VotePet(
     val bdate: String,
     val sex: String,
     val location: String,
-    val breedId: Int,
+    val breed: String,
     val photos: List<String>
 )

@@ -38,7 +38,8 @@
     <string name="cancel">Отменить</string>
     <string name="next">Далее</string>
     <string name="share_friends">"Пригласить друзей "</string>
-    <string name="empty_list_vote">Нет питомцев с интересующими \nвас параметрами</string>
+    <string name="empty_list_vote_filter">Нет питомцев с интересующими \nвас параметрами</string>
+    <string name="empty_list_vote">Вы проголосовали за всех \nпитомцев с интересующими вас \nпараметрами</string>
     <string name="sub_title_empty_vote">Пригласите друзей, чтобы вам было интереснее и веселее.</string>
 
     <string name="continue_btn">Продолжить</string>

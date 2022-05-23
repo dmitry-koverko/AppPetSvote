@@ -29,17 +29,23 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class VoteViewModel @Inject constructor(
-    private val votePetsUseCase: IGetVotePetsUseCase
+    private val votePetsUseCase: IGetVotePetsUseCase,
+
 ) : BaseViewModel() {
 
-    var pets = MutableStateFlow<List<VotePet>>(emptyList())
+    var pets = MutableStateFlow<List<VotePet>?>(null)
 
     fun getRating(){
         viewModelScope.launch {
-            votePetsUseCase.getRating(pets.value.size).collect {
+            votePetsUseCase.getRating().collect {
+                //pets.emit(emptyList())
                 pets.emit(it)
             }
         }
+    }
+
+    fun resetList(){
+        pets.value = null
     }
 
     @Suppress("UNCHECKED_CAST")

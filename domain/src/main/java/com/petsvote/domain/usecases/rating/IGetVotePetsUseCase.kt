@@ -6,5 +6,5 @@ import com.petsvote.domain.entity.pet.VotePet
 import kotlinx.coroutines.flow.Flow
 
 interface IGetVotePetsUseCase {
-    suspend fun getRating(offset: Int): Flow<List<VotePet>>
+    suspend fun getRating(): Flow<List<VotePet>>
 }

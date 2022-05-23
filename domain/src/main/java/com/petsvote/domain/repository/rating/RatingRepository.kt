@@ -14,5 +14,5 @@ interface RatingRepository {
         rating_type: String
     ): List<RatingPet>
 
-    suspend fun getVotePets(offset: Int): Flow<List<VotePet>>
+    suspend fun getVotePets(): Flow<List<VotePet>>
 }

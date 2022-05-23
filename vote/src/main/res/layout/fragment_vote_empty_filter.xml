@@ -41,6 +41,7 @@
 
 
     <com.petsvote.ui.BesieLayout
+        android:id="@+id/refresh"
         app:layout_constraintTop_toBottomOf="@id/subText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

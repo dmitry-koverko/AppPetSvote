@@ -17,6 +17,9 @@ interface BreedsDao{
     @Query("SELECT * FROM EntityBreed WHERE lang=:lang AND id_breed=:id")
     fun getBreedById(lang: String, id: Int): EntityBreed
 
+    @Query("SELECT * FROM EntityBreed WHERE lang=:lang")
+    fun getBreedsByLang(lang: String): List<EntityBreed>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(breeds: List<EntityBreed>)
 

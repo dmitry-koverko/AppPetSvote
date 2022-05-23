@@ -40,7 +40,8 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
 
     private fun initView(pet: VotePet?) {
 
-        binding?.title?.text = pet?.name
+        binding?.title?.text = "${pet?.name} ${pet?.location}"
+
 //        binding?.description?.text = pet?.description
 //        if (pet?.photos?.isNotEmpty() == true) {
 //            binding?.imageView?.list = pet.photos
