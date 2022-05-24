@@ -63,7 +63,8 @@ class RatingRepository @Inject constructor(
         run {
             val filter =
                 withContext(scoupe.coroutineContext) { ratingFilterRepository.getSimpleRatingFilter() }
-            val breeds = breedsDao.getBreedsByLang(languageCodeUseCase.getLanguage())
+            val breeds =
+                withContext(scoupe.coroutineContext) { breedsDao.getBreedsByLang(languageCodeUseCase.getLanguage()) }
             val result =
                 checkResult(
                     ratingApi.getVotePets(
@@ -80,7 +81,12 @@ class RatingRepository @Inject constructor(
                         null
                     )
                 )
-            if (result != null) emit((result as Vote).pets.remoteToVotePetsList(filter.rating_type, breeds))
+            if (result != null) emit(
+                (result as Vote).pets.remoteToVotePetsList(
+                    filter.rating_type,
+                    breeds
+                )
+            )
             else emit(emptyList())
         }
     }

@@ -17,6 +17,12 @@ fun List<Photo>.remoteToPhotoList(): List<com.petsvote.domain.entity.user.Photo>
     return list
 }
 
+fun List<Photo>.remoteToPhotoListString(): List<String> {
+    var list = mutableListOf<String>()
+    this.onEach { list.add(it.url) }
+    return list
+}
+
 fun com.petsvote.domain.entity.user.Photo.toLocalPhoto(): EntityPhoto {
     return EntityPhoto(
         id = this.id,

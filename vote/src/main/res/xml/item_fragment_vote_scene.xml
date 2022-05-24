@@ -66,6 +66,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="0" />
+        <Constraint
+            android:id="@+id/rndView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -126,5 +138,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:alpha="1" />
+        <Constraint
+            android:id="@+id/rndView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp" />
     </ConstraintSet>
 </MotionScene>

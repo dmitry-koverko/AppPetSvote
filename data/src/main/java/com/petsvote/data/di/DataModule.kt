@@ -44,13 +44,15 @@ class DataModule {
         ratingApi: RatingApi,
         IUserRepository: IUserRepository,
         languageCodeUseCase: GetLocaleLanguageCodeUseCase,
-        ratingFilterRepository: IRatingFilterRepository
+        ratingFilterRepository: IRatingFilterRepository,
+        breedsDao: BreedsDao,
     ): RatingRepository {
         return com.petsvote.data.repository.paging.RatingRepository(
             ratingApi = ratingApi,
             userRepository = IUserRepository,
             languageCodeUseCase = languageCodeUseCase,
-            ratingFilterRepository = ratingFilterRepository
+            ratingFilterRepository = ratingFilterRepository,
+            breedsDao = breedsDao
         )
     }
 

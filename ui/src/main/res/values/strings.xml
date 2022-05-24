@@ -44,5 +44,6 @@
 
     <string name="continue_btn">Продолжить</string>
     <string name="bonus">БОНУС</string>
+    <string name="no_breed">Без породы</string>
 
 </resources>

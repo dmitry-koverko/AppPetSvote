@@ -5,6 +5,7 @@ import android.util.Log
 import com.cesarferreira.tempo.Tempo
 import com.cesarferreira.tempo.minus
 import com.cesarferreira.tempo.toDate
+import com.petsvote.retrofit.entity.Photo
 import kotlinx.serialization.Serializable
 import java.time.LocalDate
 import java.time.Month
@@ -22,6 +23,8 @@ data class VoteRating(
     val name: String,
     val country_name: String,
     val city_name: String,
-    val sex: String
+    val sex: String,
+    val breed_id: Int,
+    val photos: List<Photo>,
 )
 

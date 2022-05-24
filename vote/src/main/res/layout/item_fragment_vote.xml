@@ -8,6 +8,8 @@
     android:background="@android:color/transparent"
     app:layoutDescription="@xml/item_fragment_vote_scene">
 
+
+
     <com.petsvote.ui.parallax.ParallaxView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
@@ -28,7 +30,7 @@
         android:ellipsize="end"
         android:includeFontPadding="false"
         android:maxLines="2"
-        android:text="Ешка, 7 мес."
+        android:text=""
         app:layout_constraintBottom_toTopOf="@id/description" />
 
     <TextView
@@ -43,7 +45,7 @@
         android:gravity="top"
         android:includeFontPadding="false"
         android:maxLines="2"
-        android:text="Манчикин, Минск, Беларусь"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.petsvote.ui.RoundedImage
@@ -67,5 +69,12 @@
         android:scaleY="1"
         android:textColor="@color/white"
         android:textSize="270sp" />
+
+
+    <com.petsvote.ui.RoundedView
+        android:layout_margin="8dp"
+        android:id="@+id/rndView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

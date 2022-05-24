@@ -36,7 +36,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     }
 
     private var listVote = mutableListOf<VotePet>()
-    private var emptypet = VotePet(-1, -1, "", "", "", "", 0, emptyList())
+    private var emptypet = VotePet(-1, -1, "", "", 0, "", "", emptyList())
 
     private var binding: FragmentVoteBinding? = null
     private var adapter: VoteAdapter? = null

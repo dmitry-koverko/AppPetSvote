@@ -22,10 +22,10 @@ fun VoteRating.remoteToVote(ratingType: RatingFilterType?, breeds: List<EntityBr
         this.pet_id,
         this.name,
         this.bdate,
-        this.sex,
+        getSex(this.sex),
         getLocation(this.city_name, this.country_name, ratingType),
-       breeds.find { it.id == this.id }?.title ?: "",
-        emptyList()
+       breeds.find { it.id == this.breed_id }?.title ?: "",
+        this.photos.remoteToPhotoListString()
     )
 }
 
@@ -36,3 +36,9 @@ fun getLocation(city: String, country: String, ratingType: RatingFilterType?): S
         else -> ""
     }
 }
+
+
+fun getSex(sex: String): Int{
+    return if(sex == "FEMALE") 0 else 1
+}
+

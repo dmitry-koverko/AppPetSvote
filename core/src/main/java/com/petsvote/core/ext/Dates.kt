@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 fun Fragment.getMonthOnYear(value: String): String {
+    if(value.isEmpty()) return ""
     val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
     var convertedDate = LocalDate.parse(value, formatter)
     var dateNow = LocalDate.now()
