@@ -5,9 +5,7 @@ import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.rating.Rating
 import com.petsvote.retrofit.entity.rating.Vote
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RatingApi {
 
@@ -41,5 +39,16 @@ interface RatingApi {
         @Query("rating_type") rating_type: String?,
         @Query("ids") ids: String?,
     ): NetworkResponse<Vote, ApiError>
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @FormUrlEncoded
+    @POST("add-vote")
+    suspend fun addVote(
+        @Header("Authorization") token: String,
+        @Field("from_user_id") from_user_id: Int?,
+        @Field("to_pet_id") to_pet_id: Int?,
+        @Field("mark") mark: Int?,
+        @Field("grant_point") grant_point: Int?,
+    )
 
 }

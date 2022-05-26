@@ -19,6 +19,7 @@ fun List<VoteRating>.remoteToVotePetsList(ratingType: RatingFilterType?, breeds:
 fun VoteRating.remoteToVote(ratingType: RatingFilterType?, breeds: List<EntityBreed>): VotePet {
     return VotePet(
         0,
+        this.id,
         this.pet_id,
         this.name,
         this.bdate,

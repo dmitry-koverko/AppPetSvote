@@ -2,7 +2,9 @@ package com.petsvote.vote.di
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
+import com.petsvote.vote.ItemVoteFragment
 import com.petsvote.vote.VoteFragment
 import dagger.Component
 import dagger.Module
@@ -18,6 +20,7 @@ internal annotation class VoteScope
 interface VoteComponent {
 
     fun inject(fragment: VoteFragment)
+    fun injectAddVote(itemVoteFragment: ItemVoteFragment)
 
     @Component.Builder
     interface Builder{
@@ -43,6 +46,7 @@ interface VoteDepsProvider {
 interface VoteDeps{
 
     val votePetsUseCase: IGetVotePetsUseCase
+    val addVoteUseCase: IAddVoteUseCase
 
 }
 

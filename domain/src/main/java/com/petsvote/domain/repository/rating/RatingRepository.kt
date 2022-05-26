@@ -2,6 +2,7 @@ package com.petsvote.domain.repository.rating
 
 import androidx.paging.PagingData
 import com.petsvote.core.adapter.Item
+import com.petsvote.domain.entity.params.AddVoteParams
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
 import kotlinx.coroutines.flow.Flow
@@ -15,4 +16,5 @@ interface RatingRepository {
     ): List<RatingPet>
 
     suspend fun getVotePets(): Flow<List<VotePet>>
+    suspend fun addVote(params: AddVoteParams)
 }

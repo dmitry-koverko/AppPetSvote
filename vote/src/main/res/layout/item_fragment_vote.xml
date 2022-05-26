@@ -20,6 +20,18 @@
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
 
+    <com.petsvote.ui.RoundedImage
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/maskBottom"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="8dp"
+        android:alpha="0"
+        android:scaleType="centerCrop"
+        android:src="@drawable/shape_mask"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
     <TextView
         android:id="@+id/title"
         style="@style/VoteTextCardTitle"

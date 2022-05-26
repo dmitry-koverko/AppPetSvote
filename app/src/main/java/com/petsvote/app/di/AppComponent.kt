@@ -12,6 +12,7 @@ import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
 import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
+import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.*
@@ -53,6 +54,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
     override val votePetsUseCase: IGetVotePetsUseCase
     override val breedsUseCase: IGetBreedsUseCase
+    override val addVoteUseCase: IAddVoteUseCase
 
     @Component.Builder
     interface Builder {

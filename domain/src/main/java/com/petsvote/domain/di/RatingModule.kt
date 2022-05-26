@@ -6,7 +6,9 @@ import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.filter.impl.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
+import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
+import com.petsvote.domain.usecases.rating.impl.AddVoteUseCase
 import com.petsvote.domain.usecases.rating.impl.GetRatingUseCaseImpl
 import com.petsvote.domain.usecases.rating.impl.GetVotePetsUseCase
 import dagger.Module
@@ -14,6 +16,13 @@ import dagger.Provides
 
 @Module
 class RatingModule {
+
+    @Provides
+    fun provideAddVoteUseCase(
+        ratingRepository: RatingRepository
+    ): IAddVoteUseCase {
+        return AddVoteUseCase(ratingRepository = ratingRepository)
+    }
 
     @Provides
     fun provideGetVotePetsUseCase(

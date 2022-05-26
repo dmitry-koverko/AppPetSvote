@@ -11,16 +11,31 @@ import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.petsvote.core.ext.getMonthOnYear
+import com.petsvote.domain.entity.params.AddVoteParams
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
 import com.petsvote.vote.databinding.ItemFragmentVoteBinding
+import com.petsvote.vote.di.VoteComponentViewModel
+import dagger.Lazy
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
 
 private const val ARG_PARAM = "pet"
 
 class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
+
+    @Inject
+    internal lateinit var viewModelFactory: Lazy<AddVoteViewModel.Factory>
+
+    private val ratingComponentViewModel: VoteComponentViewModel by viewModels()
+    private val viewModel: AddVoteViewModel by viewModels {
+        viewModelFactory.get()
+    }
+
+    var pet: VotePet? = null
 
     companion object {
         @JvmStatic
@@ -39,7 +54,7 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
 
         binding = ItemFragmentVoteBinding.bind(view)
 
-        var pet: VotePet? =
+        pet =
             if (arguments?.isEmpty == true) null
             else Json.decodeFromString(arguments?.get(ARG_PARAM) as String)
 
@@ -74,9 +89,17 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
 
     fun setRating(rating: Int) {
         binding?.simpleSFTextView?.text = "+$rating"
+        viewModel.addVote(AddVoteParams(
+            mark = rating,
+            to_pet_id = pet?.pet_id,
+            first_vote = false,
+            pet?.name,
+            pet?.id
+        ))
     }
 
     fun startAnim(endAnimation: () -> Unit) {
+
         var motion = binding?.cardMotion
         motion?.transitionToEnd()
         motion?.addTransitionListener(object : MotionLayout.TransitionListener {
@@ -111,6 +134,11 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
             }
 
         })
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        ratingComponentViewModel.voteComponent.injectAddVote(this)
     }
 
 }

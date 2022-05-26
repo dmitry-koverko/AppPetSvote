@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class VotePet(
     val index: Int,
+    val id: Int,
     val pet_id: Int,
     val name: String,
     val bdate: String,

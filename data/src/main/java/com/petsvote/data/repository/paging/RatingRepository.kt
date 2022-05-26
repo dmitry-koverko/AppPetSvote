@@ -4,6 +4,7 @@ import com.petsvote.data.mappers.checkResult
 import com.petsvote.data.mappers.checkResultPaging
 import com.petsvote.data.mappers.remoteToRatingList
 import com.petsvote.data.mappers.remoteToVotePetsList
+import com.petsvote.domain.entity.params.AddVoteParams
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
 import com.petsvote.domain.repository.IUserRepository
@@ -89,6 +90,17 @@ class RatingRepository @Inject constructor(
             )
             else emit(emptyList())
         }
+    }
+
+    override suspend fun addVote(params: AddVoteParams) {
+        val user = withContext(scoupe.coroutineContext) { userRepository.getCurrentUser() }
+        ratingApi.addVote(
+            token = userRepository.getToken(),
+            from_user_id = user.id,
+            to_pet_id = params.id,
+            mark = params.mark,
+            grant_point = 0
+        )
     }
 
 }

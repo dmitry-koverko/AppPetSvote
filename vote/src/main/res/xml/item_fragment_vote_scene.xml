@@ -78,6 +78,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp" />
+        <Constraint
+            android:id="@+id/maskBottom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            motion:layout_editor_absoluteY="8dp"
+            motion:layout_editor_absoluteX="8dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
