@@ -20,5 +20,7 @@ data class UserPet(
     val city_dynamic: Int? = -1,
     val mark_dynamic: Int? = -1,
     val has_paid_votes: Int? = -1,
+    val bdate: String? = "",
+    val sex: String?,
     val photos: List<Photo>? = listOf()
 )

@@ -39,11 +39,18 @@ data class EntityUserPet(
     val city_dynamic: Int? = null,
     @Ignore
     val mark_dynamic: Int? = null,
+
     @Ignore
     val has_paid_votes: Int? = null,
 
     @NotNull
     @Ignore
     @TypeConverters(PhotoConverter::class)
-    var photos: List<EntityPhoto>? = listOf()
+    var photos: List<EntityPhoto>? = listOf(),
+
+    @Ignore
+    val bdate: String? = null,
+
+    @Ignore
+    val sex: String? = null,
 )

@@ -56,7 +56,9 @@ fun UserPet.remoteToUserPet(): com.petsvote.domain.entity.user.UserPet {
         city_dynamic = this.city_dynamic,
         mark_dynamic = this.mark_dynamic,
         has_paid_votes = this.has_paid_votes,
-        photos = this.photos?.remoteToPhotoList()
+        photos = this.photos?.remoteToPhotoList(),
+        bdate = this.bdate ?: "",
+        sex = this.sex ?: ""
     )
 }
 
@@ -75,6 +77,8 @@ fun com.petsvote.domain.entity.user.UserPet.toLocalUserPet(): EntityUserPet {
         mark_dynamic = this.mark_dynamic,
         has_paid_votes = this.has_paid_votes,
         photos = this.photos?.toLocalPhotoList(),
+        bdate = this.bdate,
+        sex = this.sex
     )
 }
 
@@ -93,6 +97,8 @@ fun UserPet.toLocalUserPet(): EntityUserPet {
         mark_dynamic = this.mark_dynamic,
         has_paid_votes = this.has_paid_votes,
         photos = this.photos?.remoteToLocalPhotoList(),
+        bdate = this.bdate,
+        sex = this.sex
     )
 }
 
@@ -165,7 +171,9 @@ fun EntityUserPet.toUserPet(): com.petsvote.domain.entity.user.UserPet{
         city_dynamic = this.city_dynamic,
         mark_dynamic = this.mark_dynamic,
         has_paid_votes = this.has_paid_votes,
-        photos = this.photos?.toPhotoList()
+        photos = this.photos?.toPhotoList(),
+        bdate = this.bdate ?: "",
+        sex = this.sex ?: ""
     )
 }
 

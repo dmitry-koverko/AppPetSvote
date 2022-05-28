@@ -100,5 +100,8 @@
     <color name="star_active_color">#FF1E70</color>
     <color name="digits_star_color">#FFFFFF</color>
     <color name="refresh_background_color">@android:color/transparent</color>
+    <color name="simple_user_image_bg">#0AF44336</color>
+    <color name="simple_user_image_icon">#57F44336</color>
+    <color name="simple_user_image_sub_icon">#FFFFFF</color>
 
 </resources>

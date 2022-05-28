@@ -32,8 +32,8 @@ fun VoteRating.remoteToVote(ratingType: RatingFilterType?, breeds: List<EntityBr
 
 fun getLocation(city: String, country: String, ratingType: RatingFilterType?): String {
     return when(ratingType){
-        RatingFilterType.GLOBAL -> ",$city, $country"
-        RatingFilterType.COUNTRY -> ",$city"
+        RatingFilterType.GLOBAL -> "$city, $country"
+        RatingFilterType.COUNTRY -> "$city"
         else -> ""
     }
 }

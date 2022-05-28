@@ -95,5 +95,10 @@
     <color name="digits_star_color">#121212</color>
     <color name="refresh_background_color">#1FFFFFFF</color>
 
+    //SIMPLEUser
+    <color name="simple_user_image_bg">#A8FFFFFF</color>
+    <color name="simple_user_image_icon">#1FFFFFFF</color>
+    <color name="simple_user_image_sub_icon">#000000</color>
+
 
 </resources>

@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -35,16 +37,29 @@ android {
 
 dependencies {
 
-    implementation project(path: ':ui')
     implementation project(path: ':core')
+    implementation project(path: ':ui')
+    implementation project(path: ':domain')
     implementation project(path: ':navigation')
+    implementation project(path: ':dialog')
 
-    implementation "androidx.navigation:navigation-fragment:$navigationFragmentVersion"
+    //DAGGER
+    implementation "com.google.dagger:dagger:$daggerCompilerVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
+
+    //Navigation
+    implementation "com.github.valeryponomarenko.componentsmanager:androidx:$navigatorVersion"
+
+    //Recycler
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swiperefreshlayoutVersion"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationJsonVersion"
+
+    implementation "androidx.core:core-ktx:$coreKtxVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation project(path: ':rating')
-    implementation project(path: ':vote')
-    implementation project(path: ':user')
+    implementation "androidx.navigation:navigation-fragment:$navigationFragmentVersion"
 }

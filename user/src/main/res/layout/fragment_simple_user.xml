@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    android:paddingTop="16dp"
+    android:background="@color/bg_layers_2"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginLeft="16dp"
+            android:id="@+id/profile_container"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <com.petsvote.ui.textview.SimpleSFTextView
+                android:id="@+id/profile"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/active_text_color"
+                android:textSize="34sp"
+                android:text="@string/profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <com.petsvote.ui.BesieLayout
+                app:bl_ripple="true"
+                app:bl_ripple_color="@color/ripple_text"
+                android:layout_marginRight="16dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="40dp"
+                android:layout_height="40dp">
+
+                <ImageView
+                    android:id="@+id/user_ava"
+                    android:src="@drawable/ic_user_avatar"
+                    android:scaleType="centerCrop"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </com.petsvote.ui.BesieLayout>
+
+
+            <com.petsvote.ui.BesieLayout
+                app:bl_background="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginRight="46dp"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_width="21dp"
+                android:layout_height="21dp">
+
+                <ImageView
+                    android:src="@drawable/ic_settings_profile"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"/>
+
+            </com.petsvote.ui.BesieLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.petsvote.ui.textview.SFTextView
+            android:layout_marginLeft="16dp"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp"
+            android:textColor="@color/sub_active_text_color"
+            android:textSize="20sp"
+            android:id="@+id/add_pet"
+            android:text="@string/add_my_pet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/user_pets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.core.widget.NestedScrollView>

@@ -25,6 +25,7 @@
             <option value="$PROJECT_DIR$/tabs" />
             <option value="$PROJECT_DIR$/terms" />
             <option value="$PROJECT_DIR$/ui" />
+            <option value="$PROJECT_DIR$/user" />
             <option value="$PROJECT_DIR$/vote" />
           </set>
         </option>

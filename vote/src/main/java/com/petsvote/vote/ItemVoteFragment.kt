@@ -63,7 +63,7 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
 
     private fun initView(pet: VotePet?) {
 
-        var title = "${pet?.name}, ${pet?.bdate?.let { getMonthOnYear(it) }}"
+        var title = "${pet?.name}, ${pet?.bdate?.let { context?.getMonthOnYear(it) }}"
         val googleText = SpannableStringBuilder("$title *").apply {
             setSpan(
                 ImageSpan(

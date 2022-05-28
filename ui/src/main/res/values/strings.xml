@@ -45,5 +45,7 @@
     <string name="continue_btn">Продолжить</string>
     <string name="bonus">БОНУС</string>
     <string name="no_breed">Без породы</string>
+    <string name="profile">Профиль</string>
+    <string name="add_my_pet">Добавить питомца</string>
 
 </resources>

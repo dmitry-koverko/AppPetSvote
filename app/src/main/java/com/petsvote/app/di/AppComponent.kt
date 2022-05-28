@@ -24,6 +24,7 @@ import com.petsvote.room.RoomDeps
 import com.petsvote.room.RoomModule
 import com.petsvote.splash.di.SplashDeps
 import com.petsvote.ui.di.UIModule
+import com.petsvote.user.di.UserDeps
 import com.petsvote.vote.di.VoteDeps
 import dagger.BindsInstance
 import dagger.Component
@@ -36,7 +37,7 @@ import javax.inject.Scope
         RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class,
         RatingModule::class]
 )]
-interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps {
+interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps, UserDeps {
 
     override val registerUserUseCase: IRegisterUserUseCase
     override val checkLoginUserUseCase: ICheckLoginUserUseCase

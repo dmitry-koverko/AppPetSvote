@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame"
+    app:cardCornerRadius="16dp"
+    android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="500dp">
+
+    <com.petsvote.ui.RoundedImage
+        android:scaleType="centerCrop"
+        android:src="@drawable/cat_example"
+        android:id="@+id/pet_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.petsvote.ui.textview.SimpleSFTextView
+        android:layout_gravity="bottom"
+        android:id="@+id/nameUserPet"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="34sp"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:text="Ешка, 7 месfdssssssssssssssssssssssssssss."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>

@@ -18,5 +18,7 @@ data class UserPet(
     val has_paid_votes: Int? = null,
     var photos: List<Photo>? = listOf(),
     var isClickPet: Boolean = false,
-    var position: Int = 0
+    var position: Int = 0,
+    var bdate: String,
+    var sex: String
 ): Item
