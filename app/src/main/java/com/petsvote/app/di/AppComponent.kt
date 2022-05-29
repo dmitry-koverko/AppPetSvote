@@ -2,11 +2,9 @@ package com.petsvote.app.di
 
 import android.app.Application
 import android.content.res.Configuration
+import android.content.res.Resources
 import com.petsvote.data.di.DataModule
-import com.petsvote.domain.di.ConfigurationModule
-import com.petsvote.domain.di.RatingModule
-import com.petsvote.domain.di.ResourcesModule
-import com.petsvote.domain.di.UserUseCaseModule
+import com.petsvote.domain.di.*
 import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
 import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
 import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
@@ -16,6 +14,7 @@ import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.*
+import com.petsvote.filter.di.FilterDeps
 import com.petsvote.legal.di.TermsDeps
 import com.petsvote.rating.di.RatingDeps
 import com.petsvote.register.di.RegisterDeps
@@ -35,9 +34,10 @@ import javax.inject.Scope
 @[AppScope Component(
     modules = [AppModule::class, DataModule::class, UserUseCaseModule::class, RetrofitModule::class,
         RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class,
-        RatingModule::class]
+        RatingModule::class, FilterModule::class]
 )]
-interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps, UserDeps {
+interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps,
+    UserDeps, FilterDeps {
 
     override val registerUserUseCase: IRegisterUserUseCase
     override val checkLoginUserUseCase: ICheckLoginUserUseCase
@@ -56,6 +56,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val votePetsUseCase: IGetVotePetsUseCase
     override val breedsUseCase: IGetBreedsUseCase
     override val addVoteUseCase: IAddVoteUseCase
+    override val kindsUseCase: IGetKindsUseCase
 
     @Component.Builder
     interface Builder {
@@ -74,7 +75,7 @@ class AppModule {
 
     @Provides
     @AppScope
-    fun provideConfiguration(application: Application): Configuration{
+    fun provideConfiguration(application: Application): Configuration {
         return application.resources.configuration
     }
 

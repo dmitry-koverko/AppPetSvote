@@ -26,6 +26,7 @@ import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.SimpleItem
 import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.navigation.MainNavigation
 import com.petsvote.rating.databinding.FragmentRatingCollapsingBinding
 import com.petsvote.rating.di.RatingComponentViewModel
 import com.petsvote.rating.fingerprints.FindPetFingerprint
@@ -39,10 +40,15 @@ import dagger.Lazy
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 import java.lang.Runnable
 import javax.inject.Inject
 
 class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
+
+    private val navigation: MainNavigation by lazy {
+        XInjectionManager.findComponent<MainNavigation>()
+    }
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<RatingViewModel.Factory>
@@ -83,6 +89,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         initRatingRecycler()
         initBottomRecycler()
         initTabs()
+        initFilter()
 
         lifecycleScope.launchWhenStarted {
             viewModel.getRating()
@@ -101,6 +108,12 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
         lifecycleScope.launchWhenResumed {
             viewModel.checkLocation()
+        }
+    }
+
+    private fun initFilter() {
+        binding?.imageFilter?.setOnClickListener {
+            navigation.startFilter()
         }
     }
 

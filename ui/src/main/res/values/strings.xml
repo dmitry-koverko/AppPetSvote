@@ -47,5 +47,17 @@
     <string name="no_breed">Без породы</string>
     <string name="profile">Профиль</string>
     <string name="add_my_pet">Добавить питомца</string>
+    <string name="filter">Фильтр</string>
+    <string name="filter_description">Изменяя параметры фильтра вы изменяете параметры рейтинга и голосования.</string>
+    <string name="kinds_lower">вид</string>
+    <string name="all">Все</string>
+    <string name="all_breeds">Все породы</string>
+    <string name="breed">порода</string>
+    <string name="age">возраст</string>
+    <string name="done">Готово</string>
+    <string name="kind">Вид</string>
+    <string name="all_kinds">Все виды</string>
+    <string name="breed_upper">Порода</string>
+    <string name="no_breeds">Без породы</string>
 
 </resources>

@@ -100,6 +100,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     }
 
     private fun commitEmptyFragment(){
+        if(myFragment.isAdded()) { return; }
         childFragmentManager.commit {
             myFragment.mVoteEmptyFilterFragmentListener = this@VoteFragment
             add(R.id.container, myFragment)

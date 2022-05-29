@@ -68,6 +68,7 @@ dependencies {
     implementation project(path: ':rating')
     implementation project(path: ':vote')
     implementation project(path: ':user')
+    implementation project(path: ':filter')
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     //Navigator

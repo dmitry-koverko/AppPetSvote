@@ -23,7 +23,7 @@
     <color name="text_legal_button">#DE000000</color>
     <color name="text_legal_description">#99000000</color>
 
-    <color name="ui_primary">#FF2D55</color>
+    <color name="ui_primary">#FF1E70</color>
     <color name="white">#FFFFFF</color>
     <color name="dot_white">#80FFFFFF</color>
     <color name="bold">#000000</color>
@@ -103,5 +103,15 @@
     <color name="simple_user_image_bg">#0AF44336</color>
     <color name="simple_user_image_icon">#57F44336</color>
     <color name="simple_user_image_sub_icon">#FFFFFF</color>
+
+    //FILTER
+    <color name="minus_plus_color">#FFFFFF</color>
+    <color name="border_age_container">#14212121</color>
+    <color name="age_container">@color/bg_layers_2</color>
+    <color name="age_disable_bg">#1F121212</color>
+    <color name="age_disable_border">#FFFFFF</color>
+
+    //SEARCH
+    <color name="search_bg">#FFFFFF</color>
 
 </resources>

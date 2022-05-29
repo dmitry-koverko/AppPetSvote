@@ -2,6 +2,8 @@ package com.petsvote.app
 import android.app.Application;
 import com.petsvote.app.di.AppComponent
 import com.petsvote.app.di.DaggerAppComponent
+import com.petsvote.filter.di.FilterDeps
+import com.petsvote.filter.di.FilterDepsProvider
 import com.petsvote.legal.di.TermsDeps
 import com.petsvote.legal.di.TermsDepsProvider
 import com.petsvote.rating.di.RatingDeps
@@ -20,7 +22,7 @@ import me.vponomarenko.injectionmanager.IHasComponent
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProvider,
-    TermsDepsProvider, RatingDepsProvider, VoteDepsProvider, UserDepsProvider {
+    TermsDepsProvider, RatingDepsProvider, VoteDepsProvider, UserDepsProvider, FilterDepsProvider {
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
@@ -43,4 +45,5 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
     override var depsRating: RatingDeps = appComponent
     override var depsVote: VoteDeps = appComponent
     override var depsUser: UserDeps = appComponent
+    override var depsFilter: FilterDeps = appComponent
 }

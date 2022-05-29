@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.petsvote.navigation.MainNavigation
 import com.petsvote.rating.RatingFragment
 import com.petsvote.tabs.databinding.FragmentTabsBinding
 import com.petsvote.ui.maintabs.TopTabLayout
@@ -16,11 +17,13 @@ import com.petsvote.user.di.SimpleUserFragment
 import com.petsvote.vote.VoteBonusFragment
 import com.petsvote.vote.VoteEmptyFilterFragment
 import com.petsvote.vote.VoteFragment
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 
 class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeListener,
     TopTabLayout.TopTabLayoutListener {
 
     private var binding: FragmentTabsBinding? = null
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

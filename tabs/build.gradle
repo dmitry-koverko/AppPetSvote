@@ -39,6 +39,9 @@ dependencies {
     implementation project(path: ':core')
     implementation project(path: ':navigation')
 
+    //Navigation
+    implementation "com.github.valeryponomarenko.componentsmanager:androidx:$navigatorVersion"
+
     implementation "androidx.navigation:navigation-fragment:$navigationFragmentVersion"
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
     implementation "com.google.android.material:material:$materialVersion"

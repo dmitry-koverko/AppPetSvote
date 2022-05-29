@@ -36,6 +36,18 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_splashFragment_to_tabsFragment)
     }
 
+    override fun startFilter() {
+        navController?.navigate(R.id.action_tabsFragment_to_filterFragment)
+    }
+
+    override fun startSelectKinds() {
+        navController?.navigate(R.id.action_filterFragment_to_selectKindsFragment)
+    }
+
+    override fun startSelectBreeds() {
+        navController?.navigate(R.id.action_filterFragment_to_selectBreedsFragment)
+    }
+
     override fun back() {
         navController?.popBackStack()
     }

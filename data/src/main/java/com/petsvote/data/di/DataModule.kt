@@ -1,10 +1,9 @@
 package com.petsvote.data.di
 
-import com.petsvote.data.repository.BreedRepository
-import com.petsvote.data.repository.ConfigurationRepository
-import com.petsvote.data.repository.RatingFilterRepository
-import com.petsvote.data.repository.UserRepository
+import android.content.res.Resources
+import com.petsvote.data.repository.*
 import com.petsvote.domain.repository.IBreedRepository
+import com.petsvote.domain.repository.IResourcesRepository
 import com.petsvote.domain.repository.rating.RatingPagingRepository
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
@@ -22,6 +21,12 @@ import dagger.Provides
 @Module
 class DataModule {
 
+    @Provides
+    fun provideResourcesRepository(
+        resources: Resources
+    ): IResourcesRepository{
+        return ResourcesRepository(resources = resources)
+    }
 
     @Provides
     fun provideBreedsRepository(

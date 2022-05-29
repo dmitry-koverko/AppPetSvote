@@ -9,6 +9,9 @@ interface MainNavigation {
     fun startInfoTerms(bundle: Bundle = Bundle())
     fun backSplashFromRegister()
     fun startTabs()
+    fun startFilter()
+    fun startSelectKinds()
+    fun startSelectBreeds()
 
     fun back()
     fun popUp()

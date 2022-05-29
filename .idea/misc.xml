@@ -11,6 +11,13 @@
         <entry key="..\:/clean-petsvote/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1275" />
         <entry key="..\:/clean-petsvote/core/src/main/res/layout/progress.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/dialog/src/main/res/layout/fragment_dialog_user_location.xml" value="0.176" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/drawable/ic__.xml" value="0.332" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/drawable/ic_vector_21.xml" value="0.27" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/layout/fragment_filter.xml" value="0.33" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/layout/fragment_select_breeds.xml" value="0.3859375" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/layout/fragment_select_kinds.xml" value="0.3859375" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/layout/item_breeds.xml" value="0.3859375" />
+        <entry key="..\:/clean-petsvote/filter/src/main/res/layout/item_kinds.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragment_rating.xml" value="0.25" />
         <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragment_rating_collapsing.xml" value="0.1903114186851211" />
         <entry key="..\:/clean-petsvote/rating/src/main/res/layout/fragmnt_rt.xml" value="0.1" />
@@ -29,9 +36,13 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable-night/ic_home.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable-night/ic_people.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable-night/ic_user_avatar.xml" value="0.332" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/cursor.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/default_item_drawable.xml" value="0.1615" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic__.xml" value="0.332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic___title.xml" value="0.2285" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_add_disable.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_add_pet.xml" value="0.1615" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_add_white.xml" value="0.332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_close.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_close_white.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_corona.xml" value="0.233" />
@@ -50,10 +61,13 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_star_active.xml" value="0.228" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote_selected.xml" value="0.139" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_svg_disable.xml" value="0.27" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_white.xml" value="0.332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_one.xml" value="0.228" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_people.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_profile_selected.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_rating_selected.xml" value="0.139" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_search_m.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_settings_profile.xml" value="0.332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_three.xml" value="0.228" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_two.xml" value="0.228" />
@@ -62,6 +76,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/item_list_state.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/linear_mask_default.xml" value="0.233" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/linear_mask_user.xml" value="0.233" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/shape_et.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/shape_mask.xml" value="0.2295" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/tabindicators.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font-v26/myfont.xml" value="0.42314814814814816" />
@@ -89,6 +104,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_besie_layout.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_besie_view.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/sample_my_view.xml" value="0.358695652173913" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/search_bar.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/top_bar_layout.xml" value="0.264" />
         <entry key="..\:/clean-petsvote/user/src/main/res/layout/fragment_simple_user.xml" value="0.38697916666666665" />
         <entry key="..\:/clean-petsvote/user/src/main/res/layout/item_user_pet.xml" value="0.3859375" />
