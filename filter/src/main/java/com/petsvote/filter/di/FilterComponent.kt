@@ -50,6 +50,8 @@ interface FilterDepsProvider {
 interface FilterDeps{
     val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase
     val kindsUseCase: IGetKindsUseCase
+    val ratingFilterUseCase: IGetRatingFilterUseCase
+    val setKindsUseCase: ISetKindsRatingFilterUseCase
 }
 
 val Context.filterDepsProvider: FilterDepsProvider

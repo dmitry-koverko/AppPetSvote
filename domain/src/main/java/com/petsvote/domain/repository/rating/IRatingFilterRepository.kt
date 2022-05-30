@@ -8,6 +8,7 @@ interface IRatingFilterRepository {
     suspend fun getRatingFilter(): Flow<RatingFilter>
     suspend fun getSimpleRatingFilter(): RatingFilter
     suspend fun setBredIdRatingFilter(breedId: Int?)
+    suspend fun setKindsRatingFilter(kinds: String?)
     suspend fun setDefaultRatingFilter()
     suspend fun setRatingFilterType(typeRating: RatingFilterType)
 }

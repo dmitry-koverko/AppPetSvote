@@ -33,7 +33,7 @@ class KindsFingerprint(
         override fun areItemsTheSame(oldItem: Kind, newItem: Kind) =
             oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: Kind, newItem: Kind) = oldItem == newItem
+        override fun areContentsTheSame(oldItem: Kind, newItem: Kind) = oldItem.isSelect == newItem.isSelect
 
     }
 
@@ -48,6 +48,10 @@ class ItemKindViewHolder(
         super.onBind(item)
         with(binding) {
             binding.title.text = item.title
+            binding.check.isChecked = item.isSelect
+            binding.check.setOnClickListener {
+                onSelectKind(item)
+            }
         }
     }
 

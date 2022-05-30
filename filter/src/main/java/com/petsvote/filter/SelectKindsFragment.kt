@@ -3,7 +3,6 @@ package com.petsvote.filter
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +16,7 @@ import dagger.Lazy
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class SelectKindsFragment: BaseFragment(R.layout.fragment_select_kinds) {
+class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<SelectKindsVewModel.Factory>
@@ -30,6 +29,8 @@ class SelectKindsFragment: BaseFragment(R.layout.fragment_select_kinds) {
     private var kinds = mutableListOf<Item>()
     private val kindsAdapter = FingerprintListAdapter(listOf(KindsFingerprint(::onSelectKind)))
 
+    private var allKindCheck = true
+
     private var binding: FragmentSelectKindsBinding? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -38,7 +39,41 @@ class SelectKindsFragment: BaseFragment(R.layout.fragment_select_kinds) {
         binding = FragmentSelectKindsBinding.bind(view)
 
         initList()
-        viewModel.getKinds()
+        initRbtn()
+        initHome()
+        lifecycleScope.launchWhenStarted { viewModel.getKinds() }
+    }
+
+    private fun initHome() {
+        binding?.back?.setOnClickListener {
+
+        }
+    }
+
+    private fun initRbtn() {
+        binding?.rbtn?.setOnClickListener {
+            if (!allKindCheck) checkAllRbtn()
+            else checkCatsRbtn()
+            allKindCheck = !allKindCheck
+            binding?.rbtn?.isChecked = allKindCheck
+            kindsAdapter.notifyDataSetChanged()
+            viewModel.setKindsFilter(kinds)
+        }
+    }
+
+    private fun checkCatsRbtn() {
+
+        for (kind in kinds) {
+            (kind as Kind).isSelect = false
+        }
+        (kinds.find { (it as Kind).id == 0 } as Kind).isSelect = true
+
+    }
+
+    private fun checkAllRbtn() {
+        for (kind in kinds) {
+            (kind as Kind).isSelect = true
+        }
     }
 
     private fun initList() {
@@ -55,13 +90,24 @@ class SelectKindsFragment: BaseFragment(R.layout.fragment_select_kinds) {
             viewModel.kinds.collect {
                 kinds = it.toMutableList()
                 kindsAdapter.submitList(kinds)
+                if(kinds.filter { !(it as Kind).isSelect }.isNotEmpty()){
+                    allKindCheck = false
+                    binding?.rbtn?.isChecked = false
+                }
             }
         }
 
     }
 
-    private fun onSelectKind(kind: Kind){
-
+    private fun onSelectKind(kind: Kind) {
+        var listSelect = kinds.filter { (it as Kind).isSelect }
+        if (kind.isSelect && listSelect.size == 1) return
+        (kinds.find { (it as Kind).id == kind.id } as Kind).isSelect =
+            !(kind.isSelect && listSelect.isNotEmpty())
+        binding?.rbtn?.isChecked = kinds.filter { (it as Kind).isSelect }.size == kinds.size
+        allKindCheck = binding?.rbtn?.isChecked == true
+        kindsAdapter.notifyItemChanged(kinds.indexOf(kind))
+        viewModel.setKindsFilter(kinds)
     }
 
     override fun onAttach(context: Context) {

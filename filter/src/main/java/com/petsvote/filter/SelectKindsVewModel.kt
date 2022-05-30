@@ -17,7 +17,9 @@ import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.ui.maintabs.BesieTabSelected
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -25,26 +27,34 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SelectKindsVewModel @Inject constructor(
-    private val kindsUseCase: IGetKindsUseCase
+    private val kindsUseCase: IGetKindsUseCase,
+    private val setKindsUseCase: ISetKindsRatingFilterUseCase
 ) : BaseViewModel() {
 
     var kinds = MutableStateFlow<List<Kind>>(emptyList())
+    private var filterKinds = MutableStateFlow<String?>(null)
 
-    fun getKinds(){
+
+    suspend fun getKinds() = withContext(Dispatchers.IO){
+        kinds.emit(kindsUseCase.getKinds())
+    }
+
+    fun setKindsFilter(list: List<Item>){
         viewModelScope.launch {
-            kinds.emit(kindsUseCase.getKinds())
+            setKindsUseCase.setKinds(list)
         }
     }
 
     @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(
-        private val kindsUseCase: IGetKindsUseCase
+        private val kindsUseCase: IGetKindsUseCase,
+        private val setKindsUseCase: ISetKindsRatingFilterUseCase
     )
         : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == SelectKindsVewModel::class.java)
             return SelectKindsVewModel(
-                kindsUseCase = kindsUseCase) as T
+                kindsUseCase = kindsUseCase, setKindsUseCase = setKindsUseCase) as T
         }
 
     }

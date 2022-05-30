@@ -33,6 +33,10 @@ class RatingFilterRepository @Inject constructor(
         ratingFilterDao.updateBreedId(breedId = breedId)
     }
 
+    override suspend fun setKindsRatingFilter(kinds: String?) {
+        ratingFilterDao.updateKinds(kinds)
+    }
+
     override suspend fun setDefaultRatingFilter() {
         ratingFilterDao.insert(EntityRatingFilter(
             type = null,
