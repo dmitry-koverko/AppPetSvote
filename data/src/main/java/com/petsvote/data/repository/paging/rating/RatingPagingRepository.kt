@@ -1,4 +1,4 @@
-package com.petsvote.data.repository.paging
+package com.petsvote.data.repository.paging.rating
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

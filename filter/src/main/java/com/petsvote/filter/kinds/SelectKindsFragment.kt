@@ -1,15 +1,17 @@
-package com.petsvote.filter
+package com.petsvote.filter.kinds
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.core.adapter.Item
 import com.petsvote.domain.entity.filter.Kind
+import com.petsvote.filter.R
 import com.petsvote.filter.databinding.FragmentSelectKindsBinding
 import com.petsvote.filter.di.FilterComponentViewModel
 import dagger.Lazy
@@ -29,7 +31,7 @@ class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
     private var kinds = mutableListOf<Item>()
     private val kindsAdapter = FingerprintListAdapter(listOf(KindsFingerprint(::onSelectKind)))
 
-    private var allKindCheck = true
+    private var allKindCheck = false
 
     private var binding: FragmentSelectKindsBinding? = null
 
@@ -46,7 +48,7 @@ class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
 
     private fun initHome() {
         binding?.back?.setOnClickListener {
-
+            findNavController().popBackStack()
         }
     }
 
@@ -93,6 +95,9 @@ class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
                 if(kinds.filter { !(it as Kind).isSelect }.isNotEmpty()){
                     allKindCheck = false
                     binding?.rbtn?.isChecked = false
+                }else {
+                    allKindCheck = true
+                    binding?.rbtn?.isChecked = true
                 }
             }
         }

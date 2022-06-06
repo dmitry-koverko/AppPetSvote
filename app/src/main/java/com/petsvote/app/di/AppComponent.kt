@@ -54,9 +54,13 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val checkLocationUserUseCase: ICheckLocationUserUseCase
     override val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
     override val votePetsUseCase: IGetVotePetsUseCase
-    override val breedsUseCase: IGetBreedsUseCase
     override val addVoteUseCase: IAddVoteUseCase
     override val kindsUseCase: IGetKindsUseCase
+    override val breedsUseCase: IGetBreedsUseCase
+    override val setBreedUseCase: ISetBreedUseCase
+    override val filterUseCase: IGetFilterUseCase
+    override val setSexFilterUseCase: ISetSexUseCase
+    override val breedsPagingUseCase: IGetBreedsPagingUseCase
 
     @Component.Builder
     interface Builder {

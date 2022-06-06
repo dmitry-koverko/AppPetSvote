@@ -1,4 +1,4 @@
-package com.petsvote.filter
+package com.petsvote.filter.kinds
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import com.petsvote.core.adapter.BaseViewHolder
 import com.petsvote.core.adapter.Item
 import com.petsvote.core.adapter.ItemFingerprint
 import com.petsvote.domain.entity.filter.Kind
-import com.petsvote.domain.entity.pet.SimpleItem
+import com.petsvote.filter.R
 import com.petsvote.filter.databinding.ItemKindsBinding
 
 class KindsFingerprint(

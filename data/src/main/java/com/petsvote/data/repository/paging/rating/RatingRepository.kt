@@ -1,4 +1,4 @@
-package com.petsvote.data.repository.paging
+package com.petsvote.data.repository.paging.rating
 
 import com.petsvote.data.mappers.checkResult
 import com.petsvote.data.mappers.checkResultPaging

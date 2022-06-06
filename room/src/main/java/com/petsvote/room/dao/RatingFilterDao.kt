@@ -27,6 +27,9 @@ interface RatingFilterDao {
     @Query("UPDATE entityratingfilter SET type =:kinds")
     suspend fun updateKinds(kinds: String?)
 
+    @Query("UPDATE entityratingfilter SET sex =:sex")
+    suspend fun updateSex(sex: String?)
+
     @Query("UPDATE entityratingfilter SET rating_type =:type")
     suspend fun updateFilterType(type: EntityRatingFilterType)
 

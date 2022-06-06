@@ -58,4 +58,8 @@ class RatingFilterRepository @Inject constructor(
             }
         )
     }
+
+    override suspend fun setSexRatingFilter(sex: String?) {
+        ratingFilterDao.updateSex(sex)
+    }
 }

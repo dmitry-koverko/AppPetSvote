@@ -1,11 +1,14 @@
 package com.petsvote.data.di
 
+import android.app.Application
 import android.content.res.Resources
 import com.petsvote.data.repository.*
+import com.petsvote.data.repository.paging.breeds.BreedsPagingRepository
 import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IResourcesRepository
 import com.petsvote.domain.repository.rating.RatingPagingRepository
 import com.petsvote.domain.repository.IUserRepository
+import com.petsvote.domain.repository.breeds.IBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
@@ -22,19 +25,35 @@ import dagger.Provides
 class DataModule {
 
     @Provides
+    fun provideBreedsPagingRepository(
+        breedsRepository: IBreedRepository
+    ): IBreedsPagingRepository {
+        return BreedsPagingRepository(
+            breedsRepository = breedsRepository
+        )
+    }
+
+    @Provides
     fun provideResourcesRepository(
-        resources: Resources
-    ): IResourcesRepository{
-        return ResourcesRepository(resources = resources)
+        resources: Resources,
+        context: Application
+    ): IResourcesRepository {
+        return ResourcesRepository(resources = resources, context = context)
     }
 
     @Provides
     fun provideBreedsRepository(
         breedsDao: BreedsDao,
         configurationApi: ConfigurationApi,
-        localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
-    ): IBreedRepository{
-        return BreedRepository(breedsDao, configurationApi, localeLanguageCodeUseCase)
+        localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase,
+        filterRepository: IRatingFilterRepository
+    ): IBreedRepository {
+        return BreedRepository(
+            breedsDao = breedsDao,
+            configurationApi = configurationApi,
+            localeLanguageCodeUseCase = localeLanguageCodeUseCase,
+            filterRepository = filterRepository
+        )
     }
 
     @Provides
@@ -52,7 +71,7 @@ class DataModule {
         ratingFilterRepository: IRatingFilterRepository,
         breedsDao: BreedsDao,
     ): RatingRepository {
-        return com.petsvote.data.repository.paging.RatingRepository(
+        return com.petsvote.data.repository.paging.rating.RatingRepository(
             ratingApi = ratingApi,
             userRepository = IUserRepository,
             languageCodeUseCase = languageCodeUseCase,
@@ -67,7 +86,7 @@ class DataModule {
         ratingFilterRepository: IRatingFilterRepository,
         userRepository: IUserRepository
     ): RatingPagingRepository {
-        return com.petsvote.data.repository.paging.RatingPagingRepository(
+        return com.petsvote.data.repository.paging.rating.RatingPagingRepository(
             ratingRepository = ratingRepository,
             ratingFilterRepository = ratingFilterRepository,
             userRepository = userRepository

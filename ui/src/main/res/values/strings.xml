@@ -57,6 +57,7 @@
     <string name="done">Готово</string>
     <string name="kind">Вид</string>
     <string name="all_kinds">Все виды</string>
+    <string name="n_kinds">Разные виды</string>
     <string name="breed_upper">Порода</string>
     <string name="no_breeds">Без породы</string>
 

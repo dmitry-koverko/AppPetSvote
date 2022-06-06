@@ -74,11 +74,11 @@
     </fragment>
     <fragment
         android:id="@+id/selectKindsFragment"
-        android:name="com.petsvote.filter.SelectKindsFragment"
+        android:name="com.petsvote.filter.kinds.SelectKindsFragment"
         android:label="SelectKindsFragment" />
     <fragment
         android:id="@+id/selectBreedsFragment"
-        android:name="com.petsvote.filter.SelectBreedsFragment"
+        android:name="com.petsvote.filter.breeds.SelectBreedsFragment"
         android:label="SelectBreedsFragment" />
 
 

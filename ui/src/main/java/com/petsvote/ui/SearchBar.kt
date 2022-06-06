@@ -50,14 +50,16 @@ class SearchBar @JvmOverloads constructor(
             }
             override fun afterTextChanged(p0: Editable?) {
                 var t = p0.toString()
-                if(t.isEmpty()) mOnTextSearchBar?.onClear()
-                else mOnTextSearchBar?.onText(t)
+                mOnTextSearchBar?.onText(t)
             }
 
         })
 
         findViewById<BesieLayout>(R.id.clear).setOnClickListener {
-            if(editable)mOnTextSearchBar?.onClear()
+            if(editable) {
+                mOnTextSearchBar?.onClear()
+                textSearch = ""
+            }
             else textSearch = ""
         }
     }

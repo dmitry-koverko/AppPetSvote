@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="cats">Кошки</string>
-    <string name="dogs">Собаки</string>
-    <string name="horses">Лошади</string>
-    <string name="ferrets">Хорьки</string>
-    <string name="reptiles">Рептилии</string>
-    <string name="rodents">Грызуны</string>
-    <string name="amphibians">Амфибии</string>
-    <string name="birds">Птицы</string>
-    <string name="exotics">Экзотика</string>
+    <string name="cat">Кошки</string>
+    <string name="dog">Собаки</string>
+    <string name="horse">Лошади</string>
+    <string name="ferret">Хорьки</string>
+    <string name="reptile">Рептилии</string>
+    <string name="rodent">Грызуны</string>
+    <string name="amphibian">Амфибии</string>
+    <string name="bird">Птицы</string>
+    <string name="exotic">Экзотика</string>
     <string name="invertebrates">Беспозвоночные</string>
     <string name="fish">Аквариумные рыбки</string>
-    <string name="robots">Роботы</string>
+    <string name="robot">Роботы</string>
 </resources>

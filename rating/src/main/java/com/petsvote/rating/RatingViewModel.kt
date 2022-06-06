@@ -40,7 +40,7 @@ class RatingViewModel @Inject constructor(
     var filterType = MutableStateFlow(RatingFilterType.GLOBAL)
     var isLocationUser = MutableStateFlow(false)
 
-    suspend fun getRating() = withContext(Dispatchers.Default){
+    suspend fun getRating() = withContext(Dispatchers.IO){
         setBreedIdInRatingFilterUseCase.setBredIdRatingFilter(null)
         ratingUseCase.getRating().cachedIn(viewModelScope).collect{
             pages.emit(it)

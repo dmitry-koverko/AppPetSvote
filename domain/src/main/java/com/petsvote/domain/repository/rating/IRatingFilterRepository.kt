@@ -11,4 +11,5 @@ interface IRatingFilterRepository {
     suspend fun setKindsRatingFilter(kinds: String?)
     suspend fun setDefaultRatingFilter()
     suspend fun setRatingFilterType(typeRating: RatingFilterType)
+    suspend fun setSexRatingFilter(sex: String?)
 }

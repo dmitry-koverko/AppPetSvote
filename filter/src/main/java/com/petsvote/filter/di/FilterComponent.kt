@@ -2,14 +2,11 @@ package com.petsvote.filter.di
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
 import com.petsvote.domain.usecases.filter.*
-import com.petsvote.domain.usecases.rating.GetRatingUseCase
-import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
-import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
-import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import com.petsvote.filter.FilterFragment
-import com.petsvote.filter.SelectBreedsFragment
-import com.petsvote.filter.SelectKindsFragment
+import com.petsvote.filter.breeds.SelectBreedsFragment
+import com.petsvote.filter.kinds.SelectKindsFragment
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -52,6 +49,11 @@ interface FilterDeps{
     val kindsUseCase: IGetKindsUseCase
     val ratingFilterUseCase: IGetRatingFilterUseCase
     val setKindsUseCase: ISetKindsRatingFilterUseCase
+    val breedsUseCase: IGetBreedsUseCase
+    val setBreedUseCase: ISetBreedUseCase
+    val filterUseCase: IGetFilterUseCase
+    val setSexFilterUseCase: ISetSexUseCase
+    val breedsPagingUseCase: IGetBreedsPagingUseCase
 }
 
 val Context.filterDepsProvider: FilterDepsProvider

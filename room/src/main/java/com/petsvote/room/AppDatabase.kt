@@ -30,7 +30,7 @@ import com.petsvote.room.entity.user.EntityUserPet
         EntityRatingFilter::class,
         EntityBreed::class,
         EntityBreedList::class
-    ), version = 3, exportSchema = false
+    ), version = 4, exportSchema = false
 )
 @TypeConverters(
     PhotoConverter::class,

@@ -1,11 +1,10 @@
-package com.petsvote.data.repository.paging
+package com.petsvote.data.repository.paging.rating
 
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.petsvote.core.adapter.Item
-import com.petsvote.data.repository.paging.RatingPagingRepository.Companion.NETWORK_PAGE_SIZE
-import com.petsvote.domain.entity.filter.RatingFilter
+import com.petsvote.data.repository.paging.rating.RatingPagingRepository.Companion.NETWORK_PAGE_SIZE
 import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.pet.RatingFilterLocationType
 import com.petsvote.domain.entity.pet.RatingPet
@@ -14,12 +13,7 @@ import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.last
-import kotlinx.coroutines.flow.onEach
-import java.io.IOException
 import javax.inject.Inject
-import kotlin.math.log
 
 class RatingPagingSource @Inject constructor(
     private val ratingRepository: RatingRepository,
