@@ -23,6 +23,7 @@ open class BesieLayout @JvmOverloads constructor(
             field = value
             dotColor()
         }
+    var click = true
 
     init {
 
@@ -35,7 +36,7 @@ open class BesieLayout @JvmOverloads constructor(
             findViewById<DotIndicator>(R.id.dot).apply {
                 isRipple = getBoolean(R.styleable.BesieLayout_bl_ripple, false)
                 setOnClickListener{
-                    mOnClickListener?.onClick(this)
+                    if(click) mOnClickListener?.onClick(this)
                 }
                 pRipple.color = getColor(R.styleable.BesieLayout_bl_ripple_color,
                     ContextCompat.getColor(context, R.color.ripple_gray))
@@ -98,7 +99,7 @@ open class BesieLayout @JvmOverloads constructor(
             MotionEvent.ACTION_DOWN -> {}
             MotionEvent.ACTION_MOVE -> {}
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                animRipple()
+                if(click) animRipple()
             }
         }
         return true
@@ -113,6 +114,7 @@ open class BesieLayout @JvmOverloads constructor(
     }
 
     fun animRipple(){
+        if(!click) return
         findViewById<DotIndicator>(R.id.dot).apply {
             isAmim = true
             animRipple()

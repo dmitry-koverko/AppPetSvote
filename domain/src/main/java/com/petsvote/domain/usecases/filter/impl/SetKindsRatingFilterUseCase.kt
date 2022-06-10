@@ -1,6 +1,7 @@
 package com.petsvote.domain.usecases.filter.impl
 
 import com.petsvote.core.adapter.Item
+import com.petsvote.domain.entity.breed.Breed
 import com.petsvote.domain.entity.filter.Kind
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.usecases.filter.ISetKindsRatingFilterUseCase
@@ -18,7 +19,8 @@ class SetKindsRatingFilterUseCase@Inject constructor(
         if(kinds.isNotEmpty() && selectedKinds.size != kinds.size){
             filterValue = listTypes.joinToString()
         }
-
+        var max = selectedKinds.maxOf { (it as Kind).age }
+        ratingFilterRepository.setMaxAge(max)
         ratingFilterRepository.setKindsRatingFilter(filterValue)
     }
 }

@@ -245,7 +245,7 @@
 
                 <com.petsvote.ui.textview.SimpleSFTextView
                     android:id="@+id/sf_max_value"
-                    android:text="200"
+                    android:text="0"
                     android:textColor="@color/active_text_color"
                     android:textSize="24sp"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -269,8 +269,8 @@
         android:layout_height="wrap_content">
 
         <com.petsvote.ui.BesieLayout
-            android:id="@+id/bl_left_1"
             app:bl_ripple="true"
+            android:id="@+id/bl_left_1"
             app:bl_ripple_color="@color/ripple_primary"
             android:layout_marginLeft="22dp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -290,6 +290,7 @@
         </com.petsvote.ui.BesieLayout>
 
         <com.petsvote.ui.BesieLayout
+
             android:id="@+id/bl_left_2"
             app:bl_ripple="true"
             app:bl_ripple_color="@color/ripple_primary"
@@ -342,24 +343,24 @@
         </com.petsvote.ui.BesieLayout>
 
         <com.petsvote.ui.BesieLayout
-            android:id="@+id/bl_right_2"
             app:bl_ripple="true"
-            app:bl_ripple_color="@color/ripple_primary"
+            android:id="@+id/bl_right_2"
+            android:layout_width="47dp"
+            android:layout_height="44dp"
             android:layout_marginRight="22dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_width="48dp"
-            android:layout_height="48dp">
+            app:bl_ripple_color="@color/ripple_primary"
+            app:layout_constraintRight_toRightOf="parent">
 
             <ImageView
                 android:id="@+id/img_right_age_p"
-                android:scaleType="centerInside"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/ic_add_disable"
                 android:layout_width="28dp"
-                android:layout_height="28dp"/>
+                android:layout_height="28dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_add_disable"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </com.petsvote.ui.BesieLayout>
 

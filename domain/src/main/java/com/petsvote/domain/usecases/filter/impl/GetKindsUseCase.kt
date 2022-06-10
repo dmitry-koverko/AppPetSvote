@@ -32,7 +32,7 @@ class GetKindsUseCase @Inject constructor(
             Kind(8, resourcesRepository.getString(R.string.exotic), "exotic", 60, checkSelected(array, "exotic")),
             Kind(9, resourcesRepository.getString(R.string.invertebrates), "invertebrates", 100, checkSelected(array, "invertebrates")),
             Kind(10, resourcesRepository.getString(R.string.fish), "fish", 35, checkSelected(array, "fish")),
-            Kind(11, resourcesRepository.getString(R.string.robot), "robots", 999, checkSelected(array, "robots")),
+            Kind(11, resourcesRepository.getString(R.string.robot), "robots", 999, checkSelected(array, "robots")), //TODO update Age and id
         )
     }
 

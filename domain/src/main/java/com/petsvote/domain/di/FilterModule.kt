@@ -27,6 +27,24 @@ class FilterModule {
     }
 
     @Provides
+    fun provideSetMinFilter(
+        ratingFilterRepository: IRatingFilterRepository
+    ): ISetMinAgeUseCase {
+        return SetMinAgeUseCase(
+            ratingFilterRepository = ratingFilterRepository
+        )
+    }
+
+    @Provides
+    fun provideSetMaxFilter(
+        ratingFilterRepository: IRatingFilterRepository
+    ): ISetMaxAgeUseCase {
+        return SetMaxAgeUseCase(
+            ratingFilterRepository = ratingFilterRepository
+        )
+    }
+
+    @Provides
     fun provideSetSexFilter(
         ratingFilterRepository: IRatingFilterRepository
     ): ISetSexUseCase {

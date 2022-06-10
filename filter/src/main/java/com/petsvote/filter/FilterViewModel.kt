@@ -7,37 +7,40 @@ import com.petsvote.core.BaseViewModel
 import com.petsvote.core.adapter.Item
 import com.petsvote.domain.entity.breed.Breed
 import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
-import com.petsvote.domain.usecases.filter.IGetFilterUseCase
-import com.petsvote.domain.usecases.filter.IGetRatingFilterUseCase
-import com.petsvote.domain.usecases.filter.ISetBreedUseCase
-import com.petsvote.domain.usecases.filter.ISetSexUseCase
+import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.filter.impl.GetFilterUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class FilterViewModel @Inject constructor(
     private val filterUseCase: IGetFilterUseCase,
-    private val setSexFilterUseCase: ISetSexUseCase
+    private val setSexFilterUseCase: ISetSexUseCase,
+    private val setMaxAgeUseCase: ISetMaxAgeUseCase,
+    private val setMinAgeUseCase: ISetMinAgeUseCase
 ) : BaseViewModel() {
 
     var kind = MutableStateFlow<String>("")
     var breed = MutableStateFlow<String>("")
     var ageMin = MutableStateFlow<String>("")
     var ageMax = MutableStateFlow<String>("")
-    var sex = MutableStateFlow<Int>(0)
+    var sex = MutableStateFlow<Int>(-1)
     var isBreedRight = MutableStateFlow<Boolean>(false)
     var topSelect = MutableStateFlow<Int?>(-2)
 
     fun getFilter() {
         viewModelScope.launch {
             filterUseCase.getFilter().collect {
-                sex.emit(it.sex)
+                if(sex.value == -1) sex.emit(it.sex)
                 kind.emit(it.kind)
+                ageMin.emit(it.ageMin)
+                ageMax.emit(it.ageMax)
+                isBreedRight.emit(it.isBreedRight)
             }
         }
     }
@@ -51,13 +54,17 @@ class FilterViewModel @Inject constructor(
     @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(
         private val filterUseCase: IGetFilterUseCase,
-        private val setSexFilterUseCase: ISetSexUseCase
+        private val setSexFilterUseCase: ISetSexUseCase,
+        private val setMaxAgeUseCase: ISetMaxAgeUseCase,
+        private val setMinAgeUseCase: ISetMinAgeUseCase
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == FilterViewModel::class.java)
             return FilterViewModel(
                 filterUseCase = filterUseCase,
-                setSexFilterUseCase = setSexFilterUseCase
+                setSexFilterUseCase = setSexFilterUseCase,
+                setMaxAgeUseCase = setMaxAgeUseCase,
+                setMinAgeUseCase = setMinAgeUseCase
             ) as T
         }
 

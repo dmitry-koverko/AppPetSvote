@@ -11,7 +11,8 @@ fun EntityRatingFilter?.toRatingFilter(): RatingFilter {
         sex = this?.sex,
         city_id = this?.city_id,
         country_id = this?.country_id,
-        age_between = this?.age_between,
+        age_between_min = this?.age_between_min,
+        age_between_max = this?.age_between_max,
         rating_type = when (this?.rating_type) {
             EntityRatingFilterType.GLOBAL -> RatingFilterType.GLOBAL
             EntityRatingFilterType.COUNTRY -> RatingFilterType.COUNTRY

@@ -54,6 +54,8 @@ interface FilterDeps{
     val filterUseCase: IGetFilterUseCase
     val setSexFilterUseCase: ISetSexUseCase
     val breedsPagingUseCase: IGetBreedsPagingUseCase
+    val setMaxAgeUseCase: ISetMaxAgeUseCase
+    val setMinAgeUseCase: ISetMinAgeUseCase
 }
 
 val Context.filterDepsProvider: FilterDepsProvider

@@ -43,7 +43,8 @@ class RatingFilterRepository @Inject constructor(
             sex = null,
             city_id = null,
             country_id = null,
-            age_between = null,
+            age_between_max = 0,
+            age_between_min = 0,
             id = null,
             breed_id = null
         ))
@@ -61,5 +62,13 @@ class RatingFilterRepository @Inject constructor(
 
     override suspend fun setSexRatingFilter(sex: String?) {
         ratingFilterDao.updateSex(sex)
+    }
+
+    override suspend fun setMaxAge(max: Int) {
+        ratingFilterDao.updateMaxAge(max)
+    }
+
+    override suspend fun setMinAge(min: Int) {
+        ratingFilterDao.updateMinAge(min)
     }
 }

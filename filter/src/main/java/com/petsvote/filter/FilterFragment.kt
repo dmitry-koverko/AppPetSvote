@@ -3,6 +3,7 @@ package com.petsvote.filter
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -34,6 +35,12 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
 
     private var binding: FragmentFilterBinding? = null
 
+    private var max: Int = 0
+    private var min: Int = 0
+
+    private var maxCurrent: Int = 0
+    private var minCurrent: Int = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,6 +60,8 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
 
     private fun initTabs() {
         binding?.tabs?.setTabSelectedListener(this)
+        binding?.blRight2?.click = false
+        binding?.blLeft1?.click = false
     }
 
     override fun initObservers() {
@@ -69,6 +78,150 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
             viewModel.kind.collect {
                 binding?.kids?.text = it
             }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.ageMax.collect {
+                binding?.sfMaxValue?.text = it
+                if(it.isNotEmpty()) initMax(it.toInt())
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.ageMin.collect {
+                binding?.sfMinValue?.text = it
+                if(it.isNotEmpty()) initMin(it.toInt())
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.isBreedRight.collect {
+               if(it){
+                   binding?.containerBreeds?.isClickable = true
+                   binding?.rightBreeds?.visibility = View.VISIBLE
+               }else{
+                   binding?.containerBreeds?.isClickable = false
+                   binding?.rightBreeds?.visibility = View.GONE
+               }
+            }
+        }
+
+    }
+
+    private fun checkMaxR(){
+        if(maxCurrent == minCurrent) {
+            binding?.blRight1?.click = false
+            binding?.imgRightAgeM?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_minus_svg_disable
+                )
+            )
+        }else {
+            binding?.blRight1?.click = true
+            binding?.imgRightAgeM?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_minus_active
+                )
+            )
+        }
+    }
+
+    private fun checkMaxL(){
+        if(maxCurrent == max) {
+            binding?.blRight2?.click = false
+            binding?.imgRightAgeP?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_add_disable
+                )
+            )
+        }else {
+            binding?.blRight2?.click = true
+            binding?.imgRightAgeP?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_add_active
+                )
+            )
+        }
+    }
+
+    private fun checkMinR(){
+        if(min == minCurrent) {
+            binding?.blLeft1?.click = false
+            binding?.imgLeftAgeM?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_minus_svg_disable
+                )
+            )
+        }else {
+            binding?.blLeft1?.click = true
+            binding?.imgLeftAgeM?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_minus_active
+                )
+            )
+        }
+    }
+
+    private fun checkMinL(){
+        if(minCurrent == maxCurrent) {
+            binding?.blLeft2?.click = false
+            binding?.imgLeftAgeP?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_add_disable
+                )
+            )
+        }else {
+            binding?.blLeft2?.click = true
+            binding?.imgLeftAgeP?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    com.petsvote.ui.R.drawable.ic_add_active
+                )
+            )
+        }
+    }
+
+    private fun initMax(maxValue: Int){
+        max = maxValue
+        maxCurrent = maxValue
+        binding?.blRight1?.setOnClickListener {
+            maxCurrent -= 1
+            binding?.sfMaxValue?.text = maxCurrent.toString()
+            checkMaxL()
+            checkMaxR()
+
+        }
+        binding?.blRight2?.setOnClickListener {
+            maxCurrent += 1
+            binding?.sfMaxValue?.text = maxCurrent.toString()
+            checkMaxR()
+            checkMaxL()
+        }
+    }
+
+    private fun initMin(minValue: Int){
+        min = minValue
+        minCurrent = minValue
+
+        binding?.blLeft1?.setOnClickListener {
+            minCurrent -= 1
+            binding?.sfMinValue?.text = minCurrent.toString()
+            checkMinL()
+            checkMinR()
+
+        }
+        binding?.blLeft2?.setOnClickListener {
+            minCurrent += 1
+            binding?.sfMinValue?.text = minCurrent.toString()
+            checkMinR()
+            checkMinL()
         }
     }
 

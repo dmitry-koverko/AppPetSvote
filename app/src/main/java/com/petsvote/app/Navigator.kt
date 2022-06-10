@@ -36,6 +36,10 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_splashFragment_to_tabsFragment)
     }
 
+    override fun startFilterFromSplash() {
+        navController?.navigate(R.id.action_splashFragment_to_filterFragment)
+    }
+
     override fun startFilter() {
         navController?.navigate(R.id.action_tabsFragment_to_filterFragment)
     }

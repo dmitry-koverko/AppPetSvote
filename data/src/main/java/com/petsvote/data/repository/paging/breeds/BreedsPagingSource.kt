@@ -34,14 +34,21 @@ class BreedsPagingSource @Inject constructor(
 
             var results = scope.async { breedsRepository.getBreeds(offset, text ?: "", limit) }.await()
 
-            val nextKey = if (results.size < BreedsPagingRepository.NETWORK_PAGE_SIZE) {
+            var nextKey = if (results.size < BreedsPagingRepository.NETWORK_PAGE_SIZE) {
                 null
             } else {
                 offset + BreedsPagingRepository.NETWORK_PAGE_SIZE
             }
 
             var prevKey = if (offset == DEFAULT_OFFSET) null else offset - BreedsPagingRepository.NETWORK_PAGE_SIZE
-
+            if(prevKey == nextKey) {
+                prevKey = null
+                nextKey = BreedsPagingRepository.NETWORK_PAGE_SIZE
+            }
+            if(!text.isNullOrEmpty()) {
+                prevKey = null
+                nextKey = null
+            }
             LoadResult.Page(
                 data = results,
                 prevKey = prevKey,
@@ -55,7 +62,7 @@ class BreedsPagingSource @Inject constructor(
 
     companion object {
         private const val DEFAULT_OFFSET = 0
-        private var limit = 20
+        private var limit = 50
     }
 
 }

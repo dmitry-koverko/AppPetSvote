@@ -61,6 +61,8 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val filterUseCase: IGetFilterUseCase
     override val setSexFilterUseCase: ISetSexUseCase
     override val breedsPagingUseCase: IGetBreedsPagingUseCase
+    override val setMaxAgeUseCase: ISetMaxAgeUseCase
+    override val setMinAgeUseCase: ISetMinAgeUseCase
 
     @Component.Builder
     interface Builder {

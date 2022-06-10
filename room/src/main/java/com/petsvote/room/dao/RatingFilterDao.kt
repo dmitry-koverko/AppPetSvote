@@ -30,6 +30,12 @@ interface RatingFilterDao {
     @Query("UPDATE entityratingfilter SET sex =:sex")
     suspend fun updateSex(sex: String?)
 
+    @Query("UPDATE entityratingfilter SET age_between_max =:maxAge")
+    suspend fun updateMaxAge(maxAge: Int = 0)
+
+    @Query("UPDATE entityratingfilter SET age_between_min =:minAge")
+    suspend fun updateMinAge(minAge: Int = 0)
+
     @Query("UPDATE entityratingfilter SET rating_type =:type")
     suspend fun updateFilterType(type: EntityRatingFilterType)
 

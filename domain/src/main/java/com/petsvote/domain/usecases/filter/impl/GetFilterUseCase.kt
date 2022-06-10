@@ -20,6 +20,10 @@ class GetFilterUseCase @Inject constructor(
     override suspend fun getFilter(): Flow<Filter> = flow {
         var filter = Filter()
         ratingFilterRepository.getRatingFilter().collect {
+
+            filter.ageMax = "${it.age_between_max}"
+            filter.ageMin = "${it.age_between_min}"
+
             filter.sex = when (it.sex) {
                 "MALE" -> 1
                 "FEMALE" -> 2
@@ -27,10 +31,23 @@ class GetFilterUseCase @Inject constructor(
             }
 
             filter.kind =
-                if (it.type == null)
+                if (it.type == null) {
+                    filter.isBreedRight = false
                     resourcesRepository.getStringUiByName("all_kinds")
-                else if(it.type.split(",").size < 2) resourcesRepository.getStringByName(it.type)
-                else resourcesRepository.getStringUiByName("n_kinds")
+                }
+                else if(it.type.split(",").size == 1) {
+                    filter.isBreedRight = true
+                    resourcesRepository.getStringByName(it.type)
+                }
+                else if(it.type.split(",").size == 2){
+                    filter.isBreedRight = false
+                    var arr = it.type.replace(" ", "").split(",")
+                    "${resourcesRepository.getStringByName(arr[0])}, ${resourcesRepository.getStringByName(arr[1])}"
+                }
+                else {
+                    filter.isBreedRight = false
+                    resourcesRepository.getStringUiByName("n_kinds")
+                }
 
             emit(filter)
         }
