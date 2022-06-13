@@ -10,6 +10,11 @@ import dagger.Provides
 class UserUseCaseModule {
 
     @Provides
+    fun provideUserUseCase(userRepository: IUserRepository): IGetUserUseCase {
+        return GetUserUseCase(userRepository)
+    }
+
+    @Provides
     fun provideCheckUserLocationUseCase(userRepository: IUserRepository): ICheckLocationUserUseCase {
         return CheckLocationUserUseCase(userRepository)
     }

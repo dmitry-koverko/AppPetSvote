@@ -7,10 +7,9 @@ import kotlinx.serialization.Serializable
 @Entity
 @Serializable
 data class EntityBreed(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int,
     var lang: String,
     var type: String,
+    @PrimaryKey(autoGenerate = true)
     var id_breed: Int,
     var title: String
 )

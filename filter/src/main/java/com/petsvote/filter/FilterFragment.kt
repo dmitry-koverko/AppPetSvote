@@ -81,6 +81,12 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
         }
 
         lifecycleScope.launchWhenStarted {
+            viewModel.breed.collect {
+                binding?.breeds?.text = it
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
             viewModel.ageMax.collect {
                 binding?.sfMaxValue?.text = it
                 if(it.isNotEmpty()) initMax(it.toInt())

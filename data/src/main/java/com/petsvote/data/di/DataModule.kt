@@ -12,6 +12,7 @@ import com.petsvote.domain.repository.breeds.IBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
+import com.petsvote.domain.repository.IPreferencesRepository
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
@@ -23,6 +24,13 @@ import dagger.Provides
 
 @Module
 class DataModule {
+
+    @Provides
+    fun providePreferencesRepository(
+        context: Application
+    ): IPreferencesRepository {
+        return PreferencesRepository( context = context)
+    }
 
     @Provides
     fun provideBreedsPagingRepository(

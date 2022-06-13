@@ -5,7 +5,10 @@
     android:id="@+id/frame"
     app:cardCornerRadius="16dp"
     android:layout_width="match_parent"
-    android:padding="16dp"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="12dp"
+    android:paddingBottom="12dp"
     android:layout_height="500dp">
 
     <com.petsvote.ui.RoundedImage

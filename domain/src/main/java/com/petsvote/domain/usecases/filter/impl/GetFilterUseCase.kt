@@ -1,6 +1,7 @@
 package com.petsvote.domain.usecases.filter.impl
 
 import com.petsvote.domain.entity.filter.Filter
+import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IResourcesRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.usecases.filter.IGetFilterUseCase
@@ -12,7 +13,8 @@ import javax.inject.Inject
 
 class GetFilterUseCase @Inject constructor(
     private val resourcesRepository: IResourcesRepository,
-    private val ratingFilterRepository: IRatingFilterRepository
+    private val ratingFilterRepository: IRatingFilterRepository,
+    private val breedRepository: IBreedRepository
 ) : IGetFilterUseCase {
 
     var scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
@@ -30,14 +32,21 @@ class GetFilterUseCase @Inject constructor(
                 else -> 0
             }
 
+            filter.breed = resourcesRepository.getStringUiByName("all_breeds")
+
             filter.kind =
                 if (it.type == null) {
                     filter.isBreedRight = false
                     resourcesRepository.getStringUiByName("all_kinds")
                 }
                 else if(it.type.split(",").size == 1) {
+                    breedRepository.getBreedByBreedId(it.breed_id)?.let {
+                        filter.breed = it.breedName
+                    }
+
                     filter.isBreedRight = true
                     resourcesRepository.getStringByName(it.type)
+
                 }
                 else if(it.type.split(",").size == 2){
                     filter.isBreedRight = false

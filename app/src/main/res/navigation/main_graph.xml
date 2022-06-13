@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_splashFragment_to_filterFragment"
             app:destination="@id/filterFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_simpleUserFragment"
+            app:destination="@id/simpleUserFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_register"
@@ -91,6 +94,10 @@
         android:id="@+id/selectBreedsFragment"
         android:name="com.petsvote.filter.breeds.SelectBreedsFragment"
         android:label="SelectBreedsFragment" />
+    <fragment
+        android:id="@+id/simpleUserFragment"
+        android:name="com.petsvote.user.di.SimpleUserFragment"
+        android:label="SimpleUserFragment" />
 
 
 </navigation>

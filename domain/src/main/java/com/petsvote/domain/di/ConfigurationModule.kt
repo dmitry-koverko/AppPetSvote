@@ -1,22 +1,25 @@
 package com.petsvote.domain.di
 
 import android.content.res.Configuration
-import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IConfigurationRepository
-import com.petsvote.domain.repository.rating.IRatingFilterRepository
-import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
-import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
-import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
-import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
-import com.petsvote.domain.usecases.configuration.impl.GetBreedsUseCase
-import com.petsvote.domain.usecases.configuration.impl.GetLocaleLanguageCodeUseCaseImpl
-import com.petsvote.domain.usecases.configuration.impl.GetPrivacyPolicyUseCaseImpl
-import com.petsvote.domain.usecases.configuration.impl.GetUserAgreementUseCaseImpl
+import com.petsvote.domain.repository.IPreferencesRepository
+import com.petsvote.domain.usecases.configuration.*
+import com.petsvote.domain.usecases.configuration.impl.*
 import dagger.Module
 import dagger.Provides
 
 @Module
 class ConfigurationModule {
+
+    @Provides
+    fun provideSetSettingsNotifyUseCase(preferencesRepository: IPreferencesRepository): ISetSettingsNotifyUseCase {
+        return SetSettingsNotifyUseCase(preferencesRepository = preferencesRepository)
+    }
+
+    @Provides
+    fun provideGetSettingsNotifyUseCase(preferencesRepository: IPreferencesRepository): IGetSettingsNotifyUseCase {
+        return GetSettingsNotifyUseCase(preferencesRepository = preferencesRepository)
+    }
 
     @Provides
     fun provideGetLocaleLanguageCodeUseCase(configuration: Configuration): GetLocaleLanguageCodeUseCase {

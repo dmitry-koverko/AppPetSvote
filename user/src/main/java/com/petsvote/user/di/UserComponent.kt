@@ -2,7 +2,11 @@ package com.petsvote.user.di
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.configuration.IGetSettingsNotifyUseCase
+import com.petsvote.domain.usecases.configuration.ISetSettingsNotifyUseCase
+import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
+import com.petsvote.domain.usecases.user.IGetUserUseCase
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -17,6 +21,7 @@ internal annotation class UserScope
 interface UserComponent {
 
     fun inject(simpleUserFragment: SimpleUserFragment)
+    fun injectSettingsProfile(settingProfileFragment: SettingProfileFragment)
 
     @Component.Builder
     interface Builder{
@@ -41,6 +46,9 @@ interface UserDepsProvider {
 
 interface UserDeps{
     val getUserPetsUseCase: IGetUserPetsUseCase
+    val currentUser: IGetUserUseCase
+    val settingsNotifyUseCase: IGetSettingsNotifyUseCase
+    val setSettingsNotifyUseCase: ISetSettingsNotifyUseCase
 }
 
 val Context.userDepsProvider: UserDepsProvider

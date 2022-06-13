@@ -41,6 +41,7 @@ class FilterViewModel @Inject constructor(
                 ageMin.emit(it.ageMin)
                 ageMax.emit(it.ageMax)
                 isBreedRight.emit(it.isBreedRight)
+                breed.emit(it.breed)
             }
         }
     }

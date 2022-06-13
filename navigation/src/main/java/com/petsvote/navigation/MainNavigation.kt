@@ -10,6 +10,7 @@ interface MainNavigation {
     fun backSplashFromRegister()
     fun startTabs()
     fun startFilterFromSplash()
+    fun startSimpleUserFromSplash()
     fun startFilter()
     fun startSelectKinds()
     fun startSelectBreeds()

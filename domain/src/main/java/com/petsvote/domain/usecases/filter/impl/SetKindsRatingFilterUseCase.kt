@@ -20,6 +20,7 @@ class SetKindsRatingFilterUseCase@Inject constructor(
             filterValue = listTypes.joinToString()
         }
         var max = selectedKinds.maxOf { (it as Kind).age }
+        ratingFilterRepository.setBredIdRatingFilter(null)
         ratingFilterRepository.setMaxAge(max)
         ratingFilterRepository.setKindsRatingFilter(filterValue)
     }

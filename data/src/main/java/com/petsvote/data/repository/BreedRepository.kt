@@ -3,6 +3,7 @@ package com.petsvote.data.repository
 import android.content.Context
 import com.petsvote.data.mappers.checkResult
 import com.petsvote.data.mappers.remoteToLocalBreedsList
+import com.petsvote.data.mappers.toLocalBreed
 import com.petsvote.data.mappers.toLocalBreedsList
 import com.petsvote.domain.entity.breed.Breed
 import com.petsvote.domain.repository.IBreedRepository
@@ -58,6 +59,15 @@ class BreedRepository @Inject constructor(
         return flow {
 
         }
+    }
+
+    override suspend fun getBreedByBreedId(id: Int?): Breed? {
+        var breed = scope.async { id?.let {
+            breedsDao.getBreedById(localeLanguageCodeUseCase.getLanguage(),
+                it
+            )
+        } }.await()
+        return breed?.toLocalBreed()
     }
 
 }

@@ -5,9 +5,7 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import com.petsvote.data.di.DataModule
 import com.petsvote.domain.di.*
-import com.petsvote.domain.usecases.configuration.GetPrivacyPolicyUseCase
-import com.petsvote.domain.usecases.configuration.GetUserAgreementUseCase
-import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
+import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
 import com.petsvote.domain.usecases.rating.IAddVoteUseCase
@@ -63,6 +61,9 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val breedsPagingUseCase: IGetBreedsPagingUseCase
     override val setMaxAgeUseCase: ISetMaxAgeUseCase
     override val setMinAgeUseCase: ISetMinAgeUseCase
+    override val currentUser: IGetUserUseCase
+    override val settingsNotifyUseCase: IGetSettingsNotifyUseCase
+    override val setSettingsNotifyUseCase: ISetSettingsNotifyUseCase
 
     @Component.Builder
     interface Builder {

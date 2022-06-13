@@ -48,7 +48,7 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
                 if (it == null) return@collect
                 if (it == false) {
                     try {navigation.startRegister()} catch (e: Exception) {}
-                }else navigation.startFilterFromSplash()//navigation.startTabs()
+                }else navigation.startSimpleUserFromSplash()//navigation.startTabs()
             }
         }
     }

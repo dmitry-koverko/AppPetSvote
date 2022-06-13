@@ -11,6 +11,7 @@ import com.petsvote.core.BaseFragment
 import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.core.adapter.FingerprintPagingAdapter
 import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.ui.loadImage
 import com.petsvote.user.R
 import com.petsvote.user.databinding.FragmentSimpleUserBinding
 import dagger.Lazy
@@ -30,11 +31,18 @@ class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
     private var petsAdapter = FingerprintListAdapter(listOf(UserPetsFingerprint(::clickPet)))
 
     private var binding: FragmentSimpleUserBinding? = null
+    private var settingsDialog = SettingProfileFragment()
 
     override fun initObservers() {
         lifecycleScope.launchWhenResumed {
             viewModel.pets.collect {
                 petsAdapter.submitList(it)
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.ava.collect {
+                binding?.userAva?.loadImage(it)
             }
         }
     }
@@ -48,6 +56,14 @@ class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = petsAdapter
+        }
+
+        binding?.profileContainer?.setOnClickListener {
+            try {
+                if(!settingsDialog.isAdded){
+                    settingsDialog.show(childFragmentManager, "settingsDialog")
+                }
+            }catch (e: Exception){}
         }
 
         viewModel.getPets()

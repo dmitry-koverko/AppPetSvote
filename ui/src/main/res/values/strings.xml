@@ -61,4 +61,13 @@
     <string name="breed_upper">Порода</string>
     <string name="no_breeds">Без породы</string>
 
+    <string name="owner">хозяин</string>
+    <string name="getrate">Получил оценку</string>
+    <string name="get_rate_desc">Как только вашему питомцу поставят оценку вы получите уведомление.</string>
+    <string name="rate_app">Оценить приложение</string>
+    <string name="write_to_support">Написать в техподдержку</string>
+    <string name="invite_friend">Пригласить друзей</string>
+    <string name="terms">Юридическая информация</string>
+    <string name="version_app_text">ВЕРСИЯ 1.0</string>
+
 </resources>

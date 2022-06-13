@@ -7,4 +7,5 @@ interface IBreedRepository {
     suspend fun getBreeds(offset: Int, text: String, limit: Int = 50): List<Breed>
     suspend fun updateBreeds()
     suspend fun getBreedById(id: Int): Flow<List<Breed>>
+    suspend fun getBreedByBreedId(id: Int?): Breed?
 }
