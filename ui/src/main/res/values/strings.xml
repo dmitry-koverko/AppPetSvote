@@ -81,5 +81,7 @@
     <string name="add_photos_desc">При размещении любой рекламы и фотографий не соответствующих тематике приложения ваш профиль будет заблокирован навсегда.</string>
     <string name="ok">Хорошо</string>
     <string name="all_photos">Все фотографии</string>
+    <string name="move_and_scale">Двигайте и масштабируйте</string>
+    <string name="crop">Обрезать</string>
 
 </resources>

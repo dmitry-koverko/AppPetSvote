@@ -10,6 +10,7 @@ import com.petsvote.core.BaseFragment
 import com.petsvote.dialog.SelectPhotoDialog
 import com.petsvote.dialog.UserImageDialog
 import com.petsvote.navigation.MainNavigation
+import com.petsvote.ui.loadImage
 import com.petsvote.user.R
 import com.petsvote.user.databinding.FragmentUserProfileBinding
 import com.petsvote.user.di.UserComponentViewModel
@@ -19,7 +20,8 @@ import kotlinx.coroutines.flow.collect
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
-class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile) {
+class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
+    SelectPhotoDialog.SelectPhotoDialogListener {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<UserProfileViewModel.Factory>
@@ -43,6 +45,7 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentUserProfileBinding.bind(view)
+
         initView()
         requestPermissions()
 
@@ -67,6 +70,9 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile) {
     }
 
     private fun showDialogAva(){
+
+        selectPhotoDialog.setSelectPhotoDialogListener(this)
+
         if(isAddPhotoDialog){
             if(!dialogAddPhoto.isAdded)
                 dialogAddPhoto.show(childFragmentManager, "UserImageDialog")
@@ -86,10 +92,27 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile) {
             }
         }
 
+        lifecycleScope.launchWhenStarted {
+            viewModel.image.collect {
+                if(it.isNotEmpty()) crop()
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.imageCrop.collect {
+                it?.let { bitmap ->
+                    binding?.avatar?.loadImage(bitmap)
+                }
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         userComponentViewModel.userComponent.injectUserProfile(this)
+    }
+
+    override fun crop() {
+        navigation.startUserCrop()
     }
 }

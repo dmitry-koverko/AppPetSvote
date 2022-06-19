@@ -13,6 +13,16 @@ import dagger.Provides
 class ConfigurationModule {
 
     @Provides
+    fun provideSetImageCropUseCase(userRepository: IUserRepository): ISetImageCropUseCase {
+        return SetImageCropUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetImageUseCase(userRepository: IUserRepository): IGetImagesUseCase {
+        return GetImagesUseCase(userRepository = userRepository)
+    }
+
+    @Provides
     fun provideSetImageUseCase(userRepository: IUserRepository): ISetImageUseCase {
         return SetImageUseCase(userRepository = userRepository)
     }

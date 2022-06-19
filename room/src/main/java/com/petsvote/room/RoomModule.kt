@@ -3,13 +3,12 @@ package com.petsvote.room
 import android.app.Application
 import android.content.Context
 import com.petsvote.room.dao.BreedsDao
-import com.petsvote.room.dao.ImagesDao
+import com.petsvote.room.dao.UserProfileDao
 import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
 import dagger.Component
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Component(
     dependencies = [RoomDeps::class],
@@ -48,7 +47,7 @@ val Context.roomDepsProvider: RoomDepsProvider
 class RoomModule {
 
     @Provides
-    fun provideImagesDao(application: Application): ImagesDao{
+    fun provideImagesDao(application: Application): UserProfileDao{
         return AppDatabase.getDatabase(application).imagesDao()
     }
 

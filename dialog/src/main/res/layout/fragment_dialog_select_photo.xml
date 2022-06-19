@@ -41,6 +41,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ProgressBar
+                    android:id="@+id/selectProgress"
+                    style="@style/CircularProgress"
+                    android:layout_marginLeft="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:visibility="gone"
                     android:id="@+id/cardPreview"

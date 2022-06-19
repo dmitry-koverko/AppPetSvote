@@ -17,7 +17,7 @@ import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
 import com.petsvote.room.dao.BreedsDao
-import com.petsvote.room.dao.ImagesDao
+import com.petsvote.room.dao.UserProfileDao
 import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
 import dagger.Module
@@ -106,7 +106,7 @@ class DataModule {
     fun provideUserRemoteRepository(
         userApi: UserApi,
         userDao: UserDao,
-        imagesDao: ImagesDao,
+        imagesDao: UserProfileDao,
         getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
     ): IUserRepository {
         return UserRepository(

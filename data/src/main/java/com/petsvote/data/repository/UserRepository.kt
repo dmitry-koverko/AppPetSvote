@@ -1,7 +1,7 @@
 package com.petsvote.data.repository
 
 import com.petsvote.data.mappers.*
-import com.petsvote.domain.entity.user.DataResponse
+import com.petsvote.domain.entity.configuration.UserProfile
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
 import com.petsvote.domain.entity.user.UserPet
@@ -10,16 +10,16 @@ import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.UserApi
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
-import com.petsvote.room.dao.ImagesDao
+import com.petsvote.room.dao.UserProfileDao
 import com.petsvote.room.dao.UserDao
-import com.petsvote.room.entity.EntityImage
+import com.petsvote.room.entity.EntityUserProfile
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
     private val userApi: UserApi,
     private val userDao: UserDao,
-    private val imagesDao: ImagesDao,
+    private val imagesDao: UserProfileDao,
     private val getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
 ) : IUserRepository {
 
@@ -77,11 +77,20 @@ class UserRepository @Inject constructor(
     }
 
     override suspend fun setImage(bytes: ByteArray) {
-        imagesDao.insert(EntityImage(1, 0, bytes))
+        imagesDao.updateImage(bytes)
     }
 
-    override suspend fun getImage(): ByteArray {
-        return imagesDao.getImage()?.image ?: byteArrayOf()
+    override suspend fun getImage(): Flow<UserProfile> = flow {
+        run {
+            imagesDao.getImageFlow().collect {
+                it?.toUserProfile()?.let { it1 -> emit(it1) }
+            }
+        }
+
+    }
+
+    override suspend fun setImageCrop(bytes: ByteArray) {
+        imagesDao.updateImageCrop(bytes)
     }
 
 

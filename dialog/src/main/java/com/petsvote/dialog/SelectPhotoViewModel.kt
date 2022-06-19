@@ -16,6 +16,7 @@ import com.petsvote.domain.usecases.configuration.impl.SetImageUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
@@ -27,6 +28,7 @@ class SelectPhotoViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     var localPhotos = MutableStateFlow<List<LocalPhoto>>(emptyList())
+    var dismiss = MutableStateFlow(false)
 
     suspend fun getLocalImages(cursor: Cursor?, contentResolver: ContentResolver) {
         var listPhoto = mutableListOf<LocalPhoto>()
@@ -48,10 +50,9 @@ class SelectPhotoViewModel @Inject constructor(
         }
     }
 
-    fun setImage(bytes: ByteArray){
-        viewModelScope.launch (Dispatchers.IO){
-            setImageUseCase.setImage(bytes)
-        }
+    suspend fun setImage(bytes: ByteArray){
+        viewModelScope.async (Dispatchers.IO) { setImageUseCase.setImage(bytes) }.await()
+        //dismiss.emit(true)
     }
 
     @Suppress("UNCHECKED_CAST")

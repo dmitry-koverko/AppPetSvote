@@ -2,13 +2,11 @@ package com.petsvote.user.di
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.domain.usecases.configuration.IGetAddPhotosSettingsUseCase
-import com.petsvote.domain.usecases.configuration.IGetSettingsNotifyUseCase
-import com.petsvote.domain.usecases.configuration.ISetAddPhotosSettingsUseCase
-import com.petsvote.domain.usecases.configuration.ISetSettingsNotifyUseCase
+import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
 import com.petsvote.user.UserProfileFragment
+import com.petsvote.user.crop.CropUserImageFragment
 import com.petsvote.user.settings.SettingProfileFragment
 import com.petsvote.user.simple.SimpleUserFragment
 import dagger.Component
@@ -27,6 +25,7 @@ interface UserComponent {
     fun inject(simpleUserFragment: SimpleUserFragment)
     fun injectSettingsProfile(settingProfileFragment: SettingProfileFragment)
     fun injectUserProfile(userProfileFragment: UserProfileFragment)
+    fun injectCrop(cropUserImageFragment: CropUserImageFragment)
 
     @Component.Builder
     interface Builder{
@@ -56,6 +55,9 @@ interface UserDeps{
     val setSettingsNotifyUseCase: ISetSettingsNotifyUseCase
     val getAddPhotosSettingsUseCase: IGetAddPhotosSettingsUseCase
     val setAddPhotosSettingsUseCase: ISetAddPhotosSettingsUseCase
+    val getImagesUseCase: IGetImagesUseCase
+    val setImageUseCase: ISetImageUseCase
+    val setImageCropUseCase: ISetImageCropUseCase
 }
 
 val Context.userDepsProvider: UserDepsProvider

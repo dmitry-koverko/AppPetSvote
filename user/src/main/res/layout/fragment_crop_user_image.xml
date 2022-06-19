@@ -25,7 +25,7 @@
         android:clickable="false"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="56dp"
-        android:text="Двигайте и масштабируйте"
+        android:text="@string/move_and_scale"
         android:textColor="@color/white"
         android:textSize="19sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -45,7 +45,7 @@
         android:id="@+id/cancel"
         android:textSize="20sp"
         android:textColor="@color/white"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -61,7 +61,7 @@
         android:id="@+id/crop"
         android:textSize="20sp"
         android:textColor="@color/white"
-        android:text="Crop"
+        android:text="@string/crop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

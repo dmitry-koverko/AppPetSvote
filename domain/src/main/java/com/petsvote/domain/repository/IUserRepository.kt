@@ -1,5 +1,6 @@
 package com.petsvote.domain.repository
 
+import com.petsvote.domain.entity.configuration.UserProfile
 import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
@@ -18,6 +19,7 @@ interface IUserRepository {
     suspend fun saveUserToLocal(user: UserInfo)
     suspend fun getToken(): String
     suspend fun setImage(bytes: ByteArray)
-    suspend fun getImage(): ByteArray
+    suspend fun getImage(): Flow<UserProfile>
+    suspend fun setImageCrop(bytes: ByteArray)
 
 }
