@@ -33,7 +33,7 @@ class SelectBreedsViewModel @Inject constructor(
     var pages = MutableStateFlow<PagingData<Item>?>(null)
     var progress = MutableStateFlow<Boolean>(true)
     var isSelect = MutableStateFlow<Boolean>(false)
-    var topSelect = MutableStateFlow<Int?>(-2)
+    var topSelect = MutableStateFlow<Int?>(-3)
 
     suspend fun getBreedsPaging() = withContext(Dispatchers.IO){
         breedsPagingUseCase.getRating().cachedIn(viewModelScope).collect{
@@ -43,13 +43,9 @@ class SelectBreedsViewModel @Inject constructor(
     }
 
     suspend fun getBreeds() = withContext(Dispatchers.IO) {
-        var flowBreeds = breedsUseCase.getBreeds()
-        _breeds.emit(flowBreeds)
-        breeds.emit(flowBreeds)
-        progress.emit(false)
-
         ratingFilterTypeUseCase.getRatingFilter().collect {
             topSelect.emit(it.breed_id)
+            progress.emit(false)
         }
 
     }

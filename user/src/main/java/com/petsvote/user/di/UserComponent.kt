@@ -2,11 +2,15 @@ package com.petsvote.user.di
 
 import android.app.Application
 import android.content.Context
+import com.petsvote.domain.usecases.configuration.IGetAddPhotosSettingsUseCase
 import com.petsvote.domain.usecases.configuration.IGetSettingsNotifyUseCase
+import com.petsvote.domain.usecases.configuration.ISetAddPhotosSettingsUseCase
 import com.petsvote.domain.usecases.configuration.ISetSettingsNotifyUseCase
-import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
+import com.petsvote.user.UserProfileFragment
+import com.petsvote.user.settings.SettingProfileFragment
+import com.petsvote.user.simple.SimpleUserFragment
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -22,6 +26,7 @@ interface UserComponent {
 
     fun inject(simpleUserFragment: SimpleUserFragment)
     fun injectSettingsProfile(settingProfileFragment: SettingProfileFragment)
+    fun injectUserProfile(userProfileFragment: UserProfileFragment)
 
     @Component.Builder
     interface Builder{
@@ -49,6 +54,8 @@ interface UserDeps{
     val currentUser: IGetUserUseCase
     val settingsNotifyUseCase: IGetSettingsNotifyUseCase
     val setSettingsNotifyUseCase: ISetSettingsNotifyUseCase
+    val getAddPhotosSettingsUseCase: IGetAddPhotosSettingsUseCase
+    val setAddPhotosSettingsUseCase: ISetAddPhotosSettingsUseCase
 }
 
 val Context.userDepsProvider: UserDepsProvider

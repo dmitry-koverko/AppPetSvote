@@ -2,6 +2,7 @@ ext {
     navigatorVersion = '2.0.1'
     swiperefreshlayoutVersion = '1.1.0'
     paging_version = '3.1.1'
+    camerax_version = "1.1.0-beta01"
 }
 buildscript {
     ext {

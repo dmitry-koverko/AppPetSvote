@@ -1,18 +1,15 @@
-package com.petsvote.user.di
+package com.petsvote.user.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.entity.user.UserInfo
-import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.domain.usecases.configuration.IGetSettingsNotifyUseCase
 import com.petsvote.domain.usecases.configuration.ISetSettingsNotifyUseCase
-import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

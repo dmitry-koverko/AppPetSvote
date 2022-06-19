@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="month1">мес.</string>
+    <string name="permission_required_text">fsdfsdfsdfsdfsd</string>
 </resources>

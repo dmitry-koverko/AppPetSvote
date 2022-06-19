@@ -3,6 +3,7 @@ package com.petsvote.domain.di
 import android.content.res.Configuration
 import com.petsvote.domain.repository.IConfigurationRepository
 import com.petsvote.domain.repository.IPreferencesRepository
+import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.configuration.impl.*
 import dagger.Module
@@ -10,6 +11,21 @@ import dagger.Provides
 
 @Module
 class ConfigurationModule {
+
+    @Provides
+    fun provideSetImageUseCase(userRepository: IUserRepository): ISetImageUseCase {
+        return SetImageUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetAddPhotoSettingsUseCase(preferencesRepository: IPreferencesRepository): IGetAddPhotosSettingsUseCase {
+        return GetAddPhotosSettingsUseCase(preferencesRepository = preferencesRepository)
+    }
+
+    @Provides
+    fun provideSetAddPhotoSettingsUseCase(preferencesRepository: IPreferencesRepository): ISetAddPhotosSettingsUseCase {
+        return SetAddPhotosSettingsUseCase(preferencesRepository = preferencesRepository)
+    }
 
     @Provides
     fun provideSetSettingsNotifyUseCase(preferencesRepository: IPreferencesRepository): ISetSettingsNotifyUseCase {

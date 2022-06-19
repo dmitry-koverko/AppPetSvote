@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_splashFragment_to_simpleUserFragment"
             app:destination="@id/simpleUserFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_register"
@@ -96,8 +99,20 @@
         android:label="SelectBreedsFragment" />
     <fragment
         android:id="@+id/simpleUserFragment"
-        android:name="com.petsvote.user.di.SimpleUserFragment"
+        android:name="com.petsvote.user.simple.SimpleUserFragment"
         android:label="SimpleUserFragment" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.petsvote.user.UserProfileFragment"
+        android:label="UserProfileFragment" >
+        <action
+            android:id="@+id/action_userProfileFragment_to_cropUserImageFragment"
+            app:destination="@id/cropUserImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cropUserImageFragment"
+        android:name="com.petsvote.user.crop.CropUserImageFragment"
+        android:label="CropUserImageFragment" />
 
 
 </navigation>

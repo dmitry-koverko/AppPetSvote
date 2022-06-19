@@ -69,5 +69,17 @@
     <string name="invite_friend">Пригласить друзей</string>
     <string name="terms">Юридическая информация</string>
     <string name="version_app_text">ВЕРСИЯ 1.0</string>
+    <string name="profile_desc">Заполните все обязательные поля</string>
+    <string name="profile_sub_desc">Данные используются для корректного \nотображения рейтинга.</string>
+    <string name="profile_photo_desc">ваша фотография (не обязательно)</string>
+    <string name="necessarily">обязательно</string>
+    <string name="name">Имя</string>
+    <string name="unnecessarily">не обязательно</string>
+    <string name="family">Фамилия</string>
+    <string name="profile_data_crypto">С целью безопасности мы храним ваши данные в зашифрованном виде.</string>
+    <string name="add_photos_title">Добавление фотографий</string>
+    <string name="add_photos_desc">При размещении любой рекламы и фотографий не соответствующих тематике приложения ваш профиль будет заблокирован навсегда.</string>
+    <string name="ok">Хорошо</string>
+    <string name="all_photos">Все фотографии</string>
 
 </resources>

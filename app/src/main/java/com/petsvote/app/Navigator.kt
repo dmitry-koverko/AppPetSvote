@@ -44,6 +44,10 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_splashFragment_to_simpleUserFragment)
     }
 
+    override fun startProfileFromSplash() {
+        navController?.navigate(R.id.action_splashFragment_to_userProfileFragment)
+    }
+
     override fun startFilter() {
         navController?.navigate(R.id.action_tabsFragment_to_filterFragment)
     }
@@ -54,6 +58,10 @@ class Navigator: MainNavigation {
 
     override fun startSelectBreeds() {
         navController?.navigate(R.id.action_filterFragment_to_selectBreedsFragment)
+    }
+
+    override fun startUserCrop() {
+        navController?.navigate(R.id.action_userProfileFragment_to_cropUserImageFragment)
     }
 
     override fun back() {

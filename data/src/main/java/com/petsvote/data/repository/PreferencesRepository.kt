@@ -15,6 +15,7 @@ class PreferencesRepository @Inject constructor(
     companion object{
         var PREFERENCES = "PREFERENCES_PETSVOTE"
         var SETTINGS_NOTIFY = "SETTINGS_NOTIFY"
+        var SETTINGS_ADD_PHOTOS = "SETTINGS_ADD_PHOTOS"
     }
 
     fun put(key: String, value: Any) = editor.apply {
@@ -47,6 +48,14 @@ class PreferencesRepository @Inject constructor(
 
     override suspend fun setSettingsNotify(b: Boolean) {
         put(SETTINGS_NOTIFY, b)
+    }
+
+    override suspend fun setAddPhotosUseCase() {
+        put(SETTINGS_ADD_PHOTOS, false)
+    }
+
+    override suspend fun getAddPhotosSettings(): Boolean {
+        return get<Boolean>(SETTINGS_ADD_PHOTOS, true)
     }
 
 }

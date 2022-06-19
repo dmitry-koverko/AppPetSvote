@@ -1,6 +1,7 @@
 package com.petsvote.room
 
 import android.content.Context
+import android.media.Image
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -10,9 +11,11 @@ import com.petsvote.room.converters.LocationConverter
 import com.petsvote.room.converters.PhotoConverter
 import com.petsvote.room.converters.UserPetConverter
 import com.petsvote.room.dao.BreedsDao
+import com.petsvote.room.dao.ImagesDao
 import com.petsvote.room.dao.RatingFilterDao
 import com.petsvote.room.dao.UserDao
 import com.petsvote.room.entity.EntityBreed
+import com.petsvote.room.entity.EntityImage
 import com.petsvote.room.entity.EntityLocation
 import com.petsvote.room.entity.EntityPhoto
 import com.petsvote.room.entity.breeds.EntityBreedList
@@ -29,8 +32,9 @@ import com.petsvote.room.entity.user.EntityUserPet
         EntityPhoto::class,
         EntityRatingFilter::class,
         EntityBreed::class,
-        EntityBreedList::class
-    ), version = 6, exportSchema = false
+        EntityBreedList::class,
+        EntityImage::class
+    ), version = 7, exportSchema = false
 )
 @TypeConverters(
     PhotoConverter::class,
@@ -43,6 +47,7 @@ public abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun ratingFilterDao(): RatingFilterDao
     abstract fun breedsDao(): BreedsDao
+    abstract fun imagesDao(): ImagesDao
 
     companion object {
         @Volatile

@@ -2,6 +2,8 @@ package com.petsvote.filter.breeds
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -47,8 +49,20 @@ class SelectBreedsFragment: BaseFragment(R.layout.fragment_select_breeds),
         initList()
         initBack()
         initSearch()
-        lifecycleScope.launchWhenStarted { viewModel.getBreedsPaging() }
+
+        object : CountDownTimer(500, 500) {
+
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                lifecycleScope.launch { viewModel.getBreedsPaging() }
+                lifecycleScope.launch { viewModel.getBreeds() }
+            }
+        }.start()
+
     }
+
 
     private fun initSearch() {
         binding?.searchBar?.setOnTextSearchBar(this)
@@ -61,6 +75,14 @@ class SelectBreedsFragment: BaseFragment(R.layout.fragment_select_breeds),
     }
 
     private fun initList() {
+
+        binding?.breedsAll?.setOnClickListener {
+            viewModel.setBreedFilter(Breed(-2, "", false))
+        }
+
+        binding?.breedsNo?.setOnClickListener {
+            viewModel.setBreedFilter(Breed(-1, "", false))
+        }
 
         binding?.list?.apply {
             itemAnimator = null
@@ -80,8 +102,29 @@ class SelectBreedsFragment: BaseFragment(R.layout.fragment_select_breeds),
         }
 
         lifecycleScope.launchWhenStarted {
+            viewModel.topSelect.collect {
+                when(it){
+                    -2 -> binding?.checkAll?.visibility = View.VISIBLE
+                    -1 -> binding?.checkNo?.visibility = View.VISIBLE
+                    else -> {
+                        binding?.checkAll?.visibility = View.GONE
+                        binding?.checkNo?.visibility = View.GONE
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
             viewModel.pages.collect {
-                it?.let { it1 -> breedsPagingAdapter.submitData(it1) }
+                it?.let { it1 ->
+                    breedsPagingAdapter.submitData(it1)
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.progress.collect {
+                if(!it) binding?.selectBreedsProgress?.visibility = View.GONE
             }
         }
 

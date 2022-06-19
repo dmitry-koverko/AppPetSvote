@@ -17,5 +17,7 @@ interface IUserRepository {
     suspend fun checkLoginUser(): Boolean
     suspend fun saveUserToLocal(user: UserInfo)
     suspend fun getToken(): String
+    suspend fun setImage(bytes: ByteArray)
+    suspend fun getImage(): ByteArray
 
 }

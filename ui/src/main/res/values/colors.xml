@@ -113,5 +113,7 @@
 
     //SEARCH
     <color name="search_bg">#FFFFFF</color>
+    <color name="avarar_bg">#0A121212</color>
+    <color name="dialog_background">#FFFFFF</color>
 
 </resources>

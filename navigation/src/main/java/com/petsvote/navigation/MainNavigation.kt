@@ -11,9 +11,11 @@ interface MainNavigation {
     fun startTabs()
     fun startFilterFromSplash()
     fun startSimpleUserFromSplash()
+    fun startProfileFromSplash()
     fun startFilter()
     fun startSelectKinds()
     fun startSelectBreeds()
+    fun startUserCrop()
 
     fun back()
     fun popUp()

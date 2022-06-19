@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:background="@android:color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.petsvote.ui.CustomImageCropView
+        xmlns:imagecrop="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cropViewImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        imagecrop:gridInnerColor="#66ffffff"
+        imagecrop:gridInnerStroke="1dp"
+        imagecrop:gridOuterColor="#ffffff"
+        imagecrop:gridOuterStroke="1dp"
+        imagecrop:outsideLayerColor="#99000000"
+        imagecrop:setInnerGridMode="on"
+        imagecrop:setOuterGridMode="on" />
+
+
+    <com.petsvote.ui.textview.SFTextView
+        android:clickable="false"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="56dp"
+        android:text="Двигайте и масштабируйте"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.petsvote.ui.textview.SFTextView
+        app:layout_constraintHorizontal_weight="0.5"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        android:id="@+id/cancel"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="Cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.petsvote.ui.textview.SFTextView
+        android:paddingLeft="16dp"
+        android:gravity="right"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:paddingRight="16dp"
+        android:id="@+id/crop"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:text="Crop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

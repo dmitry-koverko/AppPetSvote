@@ -1,4 +1,4 @@
-package com.petsvote.user.di
+package com.petsvote.user
 
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -12,8 +12,6 @@ import com.petsvote.core.adapter.ItemFingerprint
 import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.ui.ext.loadUrl
-import com.petsvote.user.R
-import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.user.databinding.ItemUserPetBigBinding
 
 

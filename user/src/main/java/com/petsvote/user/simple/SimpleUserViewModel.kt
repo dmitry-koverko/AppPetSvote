@@ -1,18 +1,12 @@
-package com.petsvote.user.di
+package com.petsvote.user.simple
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.petsvote.core.BaseViewModel
-import com.petsvote.domain.entity.params.AddVoteParams
-import com.petsvote.domain.entity.pet.VotePet
 import com.petsvote.domain.entity.user.UserPet
-import com.petsvote.domain.usecases.rating.IAddVoteUseCase
-import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
-import com.petsvote.domain.usecases.user.impl.GetCurrentUserUseCase
-import com.petsvote.domain.usecases.user.impl.GetUserUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect

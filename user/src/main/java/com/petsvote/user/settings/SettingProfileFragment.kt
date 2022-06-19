@@ -1,4 +1,4 @@
-package com.petsvote.user.di
+package com.petsvote.user.settings
 
 import android.content.Context
 import android.os.Bundle
@@ -7,11 +7,10 @@ import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.petsvote.core.BaseFragment
-import com.petsvote.domain.entity.user.UserInfo
 import com.petsvote.ui.*
 import com.petsvote.user.R
 import com.petsvote.user.databinding.SettingsUserProfileBinding
+import com.petsvote.user.di.UserComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject

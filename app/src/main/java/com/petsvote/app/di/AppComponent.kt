@@ -1,9 +1,11 @@
 package com.petsvote.app.di
 
 import android.app.Application
+import android.app.Dialog
 import android.content.res.Configuration
 import android.content.res.Resources
 import com.petsvote.data.di.DataModule
+import com.petsvote.dialog.di.DialogDeps
 import com.petsvote.domain.di.*
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.*
@@ -35,7 +37,7 @@ import javax.inject.Scope
         RatingModule::class, FilterModule::class]
 )]
 interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps,
-    UserDeps, FilterDeps {
+    UserDeps, FilterDeps, DialogDeps {
 
     override val registerUserUseCase: IRegisterUserUseCase
     override val checkLoginUserUseCase: ICheckLoginUserUseCase
@@ -64,6 +66,9 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val currentUser: IGetUserUseCase
     override val settingsNotifyUseCase: IGetSettingsNotifyUseCase
     override val setSettingsNotifyUseCase: ISetSettingsNotifyUseCase
+    override val getAddPhotosSettingsUseCase: IGetAddPhotosSettingsUseCase
+    override val setAddPhotosSettingsUseCase: ISetAddPhotosSettingsUseCase
+    override val setImageUseCase: ISetImageUseCase
 
     @Component.Builder
     interface Builder {

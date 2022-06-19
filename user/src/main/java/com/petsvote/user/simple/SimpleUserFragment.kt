@@ -1,19 +1,20 @@
-package com.petsvote.user.di
+package com.petsvote.user.simple
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.adapter.FingerprintListAdapter
-import com.petsvote.core.adapter.FingerprintPagingAdapter
 import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.ui.loadImage
 import com.petsvote.user.R
 import com.petsvote.user.databinding.FragmentSimpleUserBinding
+import com.petsvote.user.settings.SettingProfileFragment
+import com.petsvote.user.di.UserComponentViewModel
+import com.petsvote.user.UserPetsFingerprint
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
 import javax.inject.Inject

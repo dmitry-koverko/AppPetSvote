@@ -2,6 +2,7 @@ package com.petsvote.filter.kinds
 
 import android.content.Context
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ import com.petsvote.filter.databinding.FragmentSelectKindsBinding
 import com.petsvote.filter.di.FilterComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
@@ -43,7 +45,16 @@ class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
         initList()
         initRbtn()
         initHome()
-        lifecycleScope.launchWhenStarted { viewModel.getKinds() }
+        object : CountDownTimer(500, 500) {
+
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                lifecycleScope.launch { viewModel.getKinds() }
+            }
+        }.start()
+
     }
 
     private fun initHome() {

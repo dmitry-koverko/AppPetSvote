@@ -10,13 +10,16 @@ import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.UserApi
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
+import com.petsvote.room.dao.ImagesDao
 import com.petsvote.room.dao.UserDao
+import com.petsvote.room.entity.EntityImage
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
     private val userApi: UserApi,
     private val userDao: UserDao,
+    private val imagesDao: ImagesDao,
     private val getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
 ) : IUserRepository {
 
@@ -71,6 +74,14 @@ class UserRepository @Inject constructor(
 
     override suspend fun getToken(): String {
         return userDao.getToken()
+    }
+
+    override suspend fun setImage(bytes: ByteArray) {
+        imagesDao.insert(EntityImage(1, 0, bytes))
+    }
+
+    override suspend fun getImage(): ByteArray {
+        return imagesDao.getImage()?.image ?: byteArrayOf()
     }
 
 
