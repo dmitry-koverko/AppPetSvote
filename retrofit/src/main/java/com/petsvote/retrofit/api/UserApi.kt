@@ -5,6 +5,7 @@ import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
+import com.petsvote.retrofit.entity.user.location.Countries
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
@@ -43,5 +44,11 @@ interface UserApi {
     suspend fun deleteUser(
         @Field("user_id") user_id: Int?
     )
+
+    @GET("get-country-list")
+    suspend fun getCountries(
+        @Query("lang") lang: String?,
+        @Query("country_name") country_name: String?,
+    ): NetworkResponse<Countries, ApiError>
 
 }

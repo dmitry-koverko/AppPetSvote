@@ -5,11 +5,13 @@ import com.petsvote.domain.entity.configuration.UserProfile
 import com.petsvote.domain.entity.user.RegisterUserParams
 import com.petsvote.domain.entity.user.UserInfo
 import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.domain.entity.user.location.Country
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.UserApi
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
+import com.petsvote.retrofit.entity.user.location.Countries
 import com.petsvote.room.dao.UserProfileDao
 import com.petsvote.room.dao.UserDao
 import com.petsvote.room.entity.EntityUserProfile
@@ -67,7 +69,6 @@ class UserRepository @Inject constructor(
     }
 
 
-
     override suspend fun saveUserToLocal(user: UserInfo) {
         userDao.insert(user.toLocalUser())
     }
@@ -89,8 +90,27 @@ class UserRepository @Inject constructor(
 
     }
 
+    override suspend fun getUserProfile(): UserProfile? {
+        return imagesDao.getUserProfile()?.toUserProfile()
+    }
+
     override suspend fun setImageCrop(bytes: ByteArray) {
         imagesDao.updateImageCrop(bytes)
+    }
+
+    override suspend fun setCountry(title: String, id: Int) {
+        imagesDao.updateLocationCountryId(id)
+        imagesDao.updateLocationCountryTitle(title)
+    }
+
+    override suspend fun setCity(title: String, id: Int) {
+
+    }
+
+    override suspend fun getCountryList(): List<Country> {
+        return checkResult<Countries>(
+            userApi.getCountries(getLocaleLanguageCodeUseCase.getLanguage(), null)
+        )?.countries?.toCountry() ?: listOf()
     }
 
 

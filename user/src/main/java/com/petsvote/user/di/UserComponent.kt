@@ -3,10 +3,14 @@ package com.petsvote.user.di
 import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.configuration.*
+import com.petsvote.domain.usecases.user.IGetCountryListUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
+import com.petsvote.domain.usecases.user.ISetCountryUseCase
 import com.petsvote.user.UserProfileFragment
 import com.petsvote.user.crop.CropUserImageFragment
+import com.petsvote.user.select.SelectCountryFragment
+import com.petsvote.user.select.SelectCountryViewModel
 import com.petsvote.user.settings.SettingProfileFragment
 import com.petsvote.user.simple.SimpleUserFragment
 import dagger.Component
@@ -26,6 +30,7 @@ interface UserComponent {
     fun injectSettingsProfile(settingProfileFragment: SettingProfileFragment)
     fun injectUserProfile(userProfileFragment: UserProfileFragment)
     fun injectCrop(cropUserImageFragment: CropUserImageFragment)
+    fun injectSelectCountry(selectCountryFragment: SelectCountryFragment)
 
     @Component.Builder
     interface Builder{
@@ -58,6 +63,8 @@ interface UserDeps{
     val getImagesUseCase: IGetImagesUseCase
     val setImageUseCase: ISetImageUseCase
     val setImageCropUseCase: ISetImageCropUseCase
+    val getCountryListUseCase: IGetCountryListUseCase
+    val setCountryUseCase: ISetCountryUseCase
 }
 
 val Context.userDepsProvider: UserDepsProvider

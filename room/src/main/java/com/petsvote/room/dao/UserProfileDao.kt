@@ -19,9 +19,18 @@ interface UserProfileDao {
     @Query("select * from EntityUserProfile")
     fun getImageFlow(): Flow<EntityUserProfile?>
 
+    @Query("select * from EntityUserProfile")
+    fun getUserProfile(): EntityUserProfile?
+
     @Query("UPDATE EntityUserProfile SET image =:bytes")
     suspend fun updateImage(bytes: ByteArray?)
 
     @Query("UPDATE EntityUserProfile SET imageCrop =:bytes")
     suspend fun updateImageCrop(bytes: ByteArray?)
+
+    @Query("UPDATE EntityUserProfile SET locationCountryId =:id")
+    suspend fun updateLocationCountryId(id: Int)
+
+    @Query("UPDATE EntityUserProfile SET locationCountryTitle =:title")
+    suspend fun updateLocationCountryTitle(title: String)
 }

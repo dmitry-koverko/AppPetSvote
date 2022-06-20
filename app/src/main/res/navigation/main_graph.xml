@@ -108,11 +108,18 @@
         <action
             android:id="@+id/action_userProfileFragment_to_cropUserImageFragment"
             app:destination="@id/cropUserImageFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_selectCountryFragment"
+            app:destination="@id/selectCountryFragment" />
     </fragment>
     <fragment
         android:id="@+id/cropUserImageFragment"
         android:name="com.petsvote.user.crop.CropUserImageFragment"
         android:label="CropUserImageFragment" />
+    <fragment
+        android:id="@+id/selectCountryFragment"
+        android:name="com.petsvote.user.select.SelectCountryFragment"
+        android:label="SelectCountryFragment" />
 
 
 </navigation>

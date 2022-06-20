@@ -91,6 +91,10 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
             showDialogAva()
         }
 
+        binding?.selectCountry?.setOnClickListener {
+            navigation.startSelectCountry()
+        }
+
     }
 
     private fun showDialogAva() {

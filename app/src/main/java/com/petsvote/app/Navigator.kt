@@ -64,6 +64,10 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_userProfileFragment_to_cropUserImageFragment)
     }
 
+    override fun startSelectCountry() {
+        navController?.navigate(R.id.action_userProfileFragment_to_selectCountryFragment)
+    }
+
     override fun back() {
         navController?.popBackStack()
     }

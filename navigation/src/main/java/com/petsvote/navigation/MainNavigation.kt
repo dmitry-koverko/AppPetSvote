@@ -16,6 +16,7 @@ interface MainNavigation {
     fun startSelectKinds()
     fun startSelectBreeds()
     fun startUserCrop()
+    fun startSelectCountry()
 
     fun back()
     fun popUp()

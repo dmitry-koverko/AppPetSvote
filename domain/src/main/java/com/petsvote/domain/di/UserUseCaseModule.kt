@@ -10,6 +10,16 @@ import dagger.Provides
 class UserUseCaseModule {
 
     @Provides
+    fun provideSetCountryUseCase(userRepository: IUserRepository): ISetCountryUseCase {
+        return SetCountryUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideCountryListUseCase(userRepository: IUserRepository): IGetCountryListUseCase {
+        return GetCountryListUseCase(userRepository)
+    }
+
+    @Provides
     fun provideUserUseCase(userRepository: IUserRepository): IGetUserUseCase {
         return GetUserUseCase(userRepository)
     }

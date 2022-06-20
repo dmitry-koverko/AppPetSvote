@@ -71,6 +71,8 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val setImageUseCase: ISetImageUseCase
     override val getImagesUseCase: IGetImagesUseCase
     override val setImageCropUseCase: ISetImageCropUseCase
+    override val getCountryListUseCase: IGetCountryListUseCase
+    override val setCountryUseCase: ISetCountryUseCase
 
     @Component.Builder
     interface Builder {
