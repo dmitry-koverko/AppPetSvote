@@ -1,9 +1,14 @@
 package com.petsvote.user
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
@@ -12,6 +17,8 @@ import com.petsvote.dialog.UserImageDialog
 import com.petsvote.navigation.MainNavigation
 import com.petsvote.ui.loadImage
 import com.petsvote.user.R
+import com.petsvote.user.crop.CropUserActivity
+import com.petsvote.user.crop.CropUserImageFragment
 import com.petsvote.user.databinding.FragmentUserProfileBinding
 import com.petsvote.user.di.UserComponentViewModel
 import com.petsvote.user.simple.SimpleUserViewModel
@@ -20,7 +27,7 @@ import kotlinx.coroutines.flow.collect
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
-class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
+class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
     SelectPhotoDialog.SelectPhotoDialogListener {
 
     @Inject
@@ -41,6 +48,22 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
     private val dialogAddPhoto = UserImageDialog()
     private val selectPhotoDialog = SelectPhotoDialog()
 
+    val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val intent = result.data
+                if (intent?.getBooleanExtra(
+                        CropUserImageFragment.EXTRA_MESSAGE_VALUE,
+                        false
+                    ) == true
+                ) selectPhotoDialog.dismiss()
+            }
+        }
+
+    companion object {
+        const val EXTRA_MESSAGE = "CROP_MESSAGE"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,7 +77,8 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
 
     private fun initView() {
 
-        dialogAddPhoto.setUserLocationDialogListener(object : UserImageDialog.UserImageDialogListener{
+        dialogAddPhoto.setUserLocationDialogListener(object :
+            UserImageDialog.UserImageDialogListener {
             override fun next() {
                 viewModel.setAddPhotoDialog()
                 isAddPhotoDialog = false
@@ -69,16 +93,16 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
 
     }
 
-    private fun showDialogAva(){
+    private fun showDialogAva() {
 
         selectPhotoDialog.setSelectPhotoDialogListener(this)
 
-        if(isAddPhotoDialog){
-            if(!dialogAddPhoto.isAdded)
+        if (isAddPhotoDialog) {
+            if (!dialogAddPhoto.isAdded)
                 dialogAddPhoto.show(childFragmentManager, "UserImageDialog")
-        }else {
-            if(checkCameraPermissions() || checkReadPermissions()){
-                if(!selectPhotoDialog.isAdded)
+        } else {
+            if (checkCameraPermissions() || checkReadPermissions()) {
+                if (!selectPhotoDialog.isAdded)
                     selectPhotoDialog.show(childFragmentManager, "SelectPhotoDialog")
             }
         }
@@ -92,11 +116,6 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.image.collect {
-                if(it.isNotEmpty()) crop()
-            }
-        }
 
         lifecycleScope.launchWhenStarted {
             viewModel.imageCrop.collect {
@@ -112,7 +131,8 @@ class UserProfileFragment: BaseFragment(R.layout.fragment_user_profile),
         userComponentViewModel.userComponent.injectUserProfile(this)
     }
 
+
     override fun crop() {
-        navigation.startUserCrop()
+        startForResult.launch(Intent(activity, CropUserActivity::class.java))
     }
 }

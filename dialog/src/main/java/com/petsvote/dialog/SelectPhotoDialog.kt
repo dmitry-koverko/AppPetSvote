@@ -18,6 +18,7 @@ import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -79,6 +80,11 @@ class SelectPhotoDialog: BaseDialog(R.layout.fragment_dialog_select_photo),
 
     var mDialogListener: SelectPhotoDialogListener? = null
 
+    companion object {
+        const val EXTRA_MESSAGE = "CROP_MESSAGE"
+        const val EXTRA_MESSAGE_VALUE = "CROP_MESSAGE_VALUE"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -94,9 +100,9 @@ class SelectPhotoDialog: BaseDialog(R.layout.fragment_dialog_select_photo),
         }
 
         lifecycleScope.launchWhenStarted {
-            viewModel.dismiss.collect {
-                if(it) dismiss()
-            }
+//            viewModel.dismiss.collect {
+//                if(it) dismiss()
+//            }
         }
 
         var mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -235,7 +241,7 @@ class SelectPhotoDialog: BaseDialog(R.layout.fragment_dialog_select_photo),
         if (resultCode === Activity.RESULT_OK && requestCode == REQUEST_ID) {
             val contentResolver =
                 requireContext().contentResolver
-            var bt= uriToBitmap(Uri.fromFile( File(currentPhotoPath)), 1f, contentResolver)
+            var bt= uriToBitmap(Uri.fromFile( File(currentPhotoPath)), 1.2f, contentResolver)
             bt?.let { bitmapToBytes(it) }
 
         }
@@ -286,6 +292,7 @@ class SelectPhotoDialog: BaseDialog(R.layout.fragment_dialog_select_photo),
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         val imageInByte: ByteArray = stream.toByteArray()
         lifecycleScope.launch (Dispatchers.IO){ viewModel.setImage(imageInByte) }
+        mDialogListener?.crop()
     }
 
     /*

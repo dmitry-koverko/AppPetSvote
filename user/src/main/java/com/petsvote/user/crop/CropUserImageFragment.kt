@@ -1,9 +1,13 @@
 package com.petsvote.user.crop
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -28,6 +32,11 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
 
     private var binding: FragmentCropUserImageBinding? = null
 
+    companion object {
+        const val EXTRA_MESSAGE = "CROP_MESSAGE"
+        const val EXTRA_MESSAGE_VALUE = "CROP_MESSAGE_VALUE"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,15 +46,18 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
         binding?.crop?.setOnClickListener {
             val cropped: Bitmap? = binding?.cropViewImage?.getCroppedImage()
             cropped?.let { bitmap ->
-                viewModel.setImage()
                 bitmapToArray(bitmap)
-                findNavController().popBackStack()
+                var intent = Intent()
+                intent.putExtra(EXTRA_MESSAGE_VALUE, true)
+                activity?.setResult(Activity.RESULT_OK, intent)
+                activity?.finish()
             }
 
         }
         binding?.cancel?.setOnClickListener {
-            viewModel.setImage()
-            findNavController().popBackStack()
+            //viewModel.setImage()
+            activity?.finish()
+            //findNavController().popBackStack()
         }
 
         binding?.crop?.animation = true

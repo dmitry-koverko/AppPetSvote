@@ -15,12 +15,9 @@ import com.petsvote.domain.usecases.configuration.ISetImageUseCase
 import com.petsvote.domain.usecases.configuration.impl.SetImageUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SelectPhotoViewModel @Inject constructor(
@@ -51,8 +48,8 @@ class SelectPhotoViewModel @Inject constructor(
     }
 
     suspend fun setImage(bytes: ByteArray){
-        viewModelScope.async (Dispatchers.IO) { setImageUseCase.setImage(bytes) }.await()
-        //dismiss.emit(true)
+        var set = viewModelScope.async (Dispatchers.IO + Job()) { setImageUseCase.setImage(bytes) }
+        set.await()
     }
 
     @Suppress("UNCHECKED_CAST")

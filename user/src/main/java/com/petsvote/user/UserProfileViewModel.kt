@@ -32,17 +32,12 @@ class UserProfileViewModel @Inject constructor(
 
     fun getConfiguration() {
 
-//        viewModelScope.launch (Dispatchers.IO){
-//            setImageCropUseCase.setImageCrop(byteArrayOf())
-//        }
-
         viewModelScope.launch(Dispatchers.IO) {
             isAddPhoto.emit(getAddPhotosSettingsUseCase.getAddPhotosSettings())
         }
 
         viewModelScope.launch (Dispatchers.IO) {
             getImagesUseCase.getImage().collect {
-                it.image?.let { it1 -> image.emit(it1) }
                 if(it.imageCrop?.isNotEmpty() == true){
                     val imageStream = ByteArrayInputStream(it.imageCrop)
                     val theImage = BitmapFactory.decodeStream(imageStream)
