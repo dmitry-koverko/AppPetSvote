@@ -3,19 +3,29 @@ package com.petsvote.data.repository
 import com.petsvote.data.mappers.*
 import com.petsvote.domain.entity.configuration.UserProfile
 import com.petsvote.domain.entity.user.RegisterUserParams
+import com.petsvote.domain.entity.user.SaveUserParams
 import com.petsvote.domain.entity.user.UserInfo
 import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.domain.entity.user.location.City
 import com.petsvote.domain.entity.user.location.Country
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.UserApi
+import com.petsvote.retrofit.entity.user.Location
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
+import com.petsvote.retrofit.entity.user.location.Cities
 import com.petsvote.retrofit.entity.user.location.Countries
-import com.petsvote.room.dao.UserProfileDao
 import com.petsvote.room.dao.UserDao
+import com.petsvote.room.dao.UserProfileDao
 import com.petsvote.room.entity.EntityUserProfile
 import kotlinx.coroutines.flow.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -99,18 +109,75 @@ class UserRepository @Inject constructor(
     }
 
     override suspend fun setCountry(title: String, id: Int) {
-        imagesDao.updateLocationCountryId(id)
-        imagesDao.updateLocationCountryTitle(title)
+        imagesDao.updateLocationCountryId(id, title)
+
     }
 
-    override suspend fun setCity(title: String, id: Int) {
-
+    override suspend fun setCity(title: String, id: Int, region: String) {
+        imagesDao.updateLocationCityId(id, title, region)
     }
 
     override suspend fun getCountryList(): List<Country> {
         return checkResult<Countries>(
             userApi.getCountries(getLocaleLanguageCodeUseCase.getLanguage(), null)
         )?.countries?.toCountry() ?: listOf()
+    }
+
+    override suspend fun getCitiesList(): List<City> {
+        var user = imagesDao.getUserProfile()
+        var countryId = user?.locationCountryId
+        return checkResult<Cities>(
+            userApi.getCities(
+                getLocaleLanguageCodeUseCase.getLanguage(),
+                null,
+                countryId,
+                null,
+                null
+            )
+        )?.cities?.toCity() ?: listOf()
+    }
+
+    override suspend fun setEmptyUserProfile() {
+        imagesDao.update(
+            EntityUserProfile(
+                id = 1, null, byteArrayOf(), byteArrayOf(), null, null, null, null, null
+            ))
+    }
+
+    override suspend fun saveUser(params: SaveUserParams) {
+
+        var userProfile = imagesDao.getUserProfile()
+        var user = userDao.getUser().toUserInfo()
+        var mp: MultipartBody.Part? = null
+        var locationStr: String? = null
+
+        if(userProfile?.locationCountryId != null){
+            var location = Location(
+                city_id = userProfile.locationCityId ?: 1,
+                country_id = userProfile.locationCountryId ?: 1,
+                country = userProfile.locationCountryTitle?: "",
+                city = userProfile.locationCityTitle ?: ""
+            )
+            locationStr = Json.encodeToString(location)
+        }else if(user.location != null)
+            locationStr = Json.encodeToString(user.location)
+
+        userProfile?.let {
+            if(userProfile.imageCrop?.isNotEmpty() == true){
+                val reqFile: RequestBody = RequestBody.create(
+                    "image/*".toMediaTypeOrNull(),
+                    userProfile.imageCrop!!
+                )
+
+                mp = MultipartBody.Part.createFormData(
+                    "photo_data",
+                    null,  // filename, this is optional
+                    reqFile
+                )
+            }
+        }
+
+        checkResult<User>(userApi.saveUserData(userDao.getToken(), mp, params.first_name, params.last_name, null))
     }
 
 

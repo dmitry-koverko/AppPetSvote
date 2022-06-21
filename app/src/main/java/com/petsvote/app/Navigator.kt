@@ -68,6 +68,10 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_userProfileFragment_to_selectCountryFragment)
     }
 
+    override fun startSelectCity() {
+        navController?.navigate(R.id.action_userProfileFragment_to_selectCityFragment)
+    }
+
     override fun back() {
         navController?.popBackStack()
     }

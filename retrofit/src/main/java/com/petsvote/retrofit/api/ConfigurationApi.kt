@@ -4,6 +4,7 @@ import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.breeds.Breeds
 import com.petsvote.retrofit.entity.configuration.Document
+import com.petsvote.retrofit.entity.user.location.Cities
 import retrofit2.http.GET
 import retrofit2.http.Query
 

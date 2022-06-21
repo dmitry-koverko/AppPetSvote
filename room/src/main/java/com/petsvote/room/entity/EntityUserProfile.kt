@@ -21,7 +21,8 @@ data class EntityUserProfile(
     val locationCountryTitle: String? = "",
     val locationCountryId: Int? = -1,
     val locationCityTitle: String? = "",
-    val locationCityId: Int? = -1
+    val locationCityId: Int? = -1,
+    val locationRegion: String? = ""
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -43,6 +44,7 @@ data class EntityUserProfile(
         if (locationCountryId != other.locationCountryId) return false
         if (locationCityTitle != other.locationCityTitle) return false
         if (locationCityId != other.locationCityId) return false
+        if (locationRegion != other.locationRegion) return false
 
         return true
     }
@@ -56,7 +58,9 @@ data class EntityUserProfile(
         result = 31 * result + (locationCountryId ?: 0)
         result = 31 * result + (locationCityTitle?.hashCode() ?: 0)
         result = 31 * result + (locationCityId ?: 0)
+        result = 31 * result + (locationRegion?.hashCode() ?: 0)
         return result
     }
+
 
 }

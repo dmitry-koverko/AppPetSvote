@@ -1,10 +1,8 @@
 package com.petsvote.domain.repository
 
 import com.petsvote.domain.entity.configuration.UserProfile
-import com.petsvote.domain.entity.user.DataResponse
-import com.petsvote.domain.entity.user.RegisterUserParams
-import com.petsvote.domain.entity.user.UserInfo
-import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.domain.entity.user.*
+import com.petsvote.domain.entity.user.location.City
 import com.petsvote.domain.entity.user.location.Country
 import kotlinx.coroutines.flow.Flow
 
@@ -24,7 +22,10 @@ interface IUserRepository {
     suspend fun getUserProfile(): UserProfile?
     suspend fun setImageCrop(bytes: ByteArray)
     suspend fun setCountry(title: String, id: Int)
-    suspend fun setCity(title: String, id: Int)
+    suspend fun setCity(title: String, id: Int, region: String)
     suspend fun getCountryList(): List<Country>
+    suspend fun getCitiesList(): List<City>
+    suspend fun setEmptyUserProfile()
+    suspend fun saveUser(params: SaveUserParams)
 
 }

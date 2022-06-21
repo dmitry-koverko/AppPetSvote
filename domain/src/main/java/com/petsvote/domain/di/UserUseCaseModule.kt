@@ -10,6 +10,26 @@ import dagger.Provides
 class UserUseCaseModule {
 
     @Provides
+    fun provideSaveUserProfileUseCase(userRepository: IUserRepository): ISaveUserUseCase {
+        return SaveUserUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideSetEmptyUserProfileUseCase(userRepository: IUserRepository): ISetEmptyUserProfileUseCase {
+        return SetEmptyUserProfileUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideSetCityUseCase(userRepository: IUserRepository): ISetCityUseCase {
+        return SetCityUseCase(userRepository)
+    }
+
+    @Provides
+    fun provideCityListUseCase(userRepository: IUserRepository): IGetCitiesListUseCase {
+        return GetCitiesListUseCase(userRepository)
+    }
+
+    @Provides
     fun provideSetCountryUseCase(userRepository: IUserRepository): ISetCountryUseCase {
         return SetCountryUseCase(userRepository)
     }

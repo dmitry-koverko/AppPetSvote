@@ -55,8 +55,8 @@ public class CustomImageCropView extends androidx.appcompat.widget.AppCompatImag
     protected Runnable mLayoutRunnable = null;
     protected boolean mUserScaled = false;
 
-    private float mMaxZoom = ZOOM_INVALID;
-    private float mMinZoom = ZOOM_INVALID;
+    private float mMaxZoom = 3;
+    private float mMinZoom = -3;
 
     // true when min and max zoom are explicitly defined
     private boolean mMaxZoomDefined;

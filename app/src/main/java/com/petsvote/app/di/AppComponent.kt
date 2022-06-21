@@ -14,6 +14,7 @@ import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.*
+import com.petsvote.domain.usecases.user.impl.ISaveUserUseCase
 import com.petsvote.filter.di.FilterDeps
 import com.petsvote.legal.di.TermsDeps
 import com.petsvote.rating.di.RatingDeps
@@ -73,6 +74,10 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val setImageCropUseCase: ISetImageCropUseCase
     override val getCountryListUseCase: IGetCountryListUseCase
     override val setCountryUseCase: ISetCountryUseCase
+    override val getCitiesListUseCase: IGetCitiesListUseCase
+    override val setCityUseCase: ISetCityUseCase
+    override val setEmptyUserProfileUseCase: ISetEmptyUserProfileUseCase
+    override val saveUserProfileUseCase: ISaveUserUseCase
 
     @Component.Builder
     interface Builder {

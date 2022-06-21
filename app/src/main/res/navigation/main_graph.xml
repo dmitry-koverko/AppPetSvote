@@ -111,6 +111,9 @@
         <action
             android:id="@+id/action_userProfileFragment_to_selectCountryFragment"
             app:destination="@id/selectCountryFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment_to_selectCityFragment"
+            app:destination="@id/selectCityFragment" />
     </fragment>
     <fragment
         android:id="@+id/cropUserImageFragment"
@@ -120,6 +123,10 @@
         android:id="@+id/selectCountryFragment"
         android:name="com.petsvote.user.select.SelectCountryFragment"
         android:label="SelectCountryFragment" />
+    <fragment
+        android:id="@+id/selectCityFragment"
+        android:name="com.petsvote.user.select.SelectCityFragment"
+        android:label="SelectCityFragment" />
 
 
 </navigation>

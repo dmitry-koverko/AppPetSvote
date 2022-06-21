@@ -6,6 +6,7 @@ import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
 import com.petsvote.domain.usecases.user.ICheckLoginUserUseCase
 import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
 import com.petsvote.domain.usecases.user.IRegisterUserUseCase
+import com.petsvote.domain.usecases.user.ISetEmptyUserProfileUseCase
 import com.petsvote.splash.SplashFragment
 import dagger.Component
 import dagger.Module
@@ -48,6 +49,7 @@ interface SplashDeps{
     val checkLoginUserUseCase: ICheckLoginUserUseCase
     val getCurrentUserUseCase: IGetCurrentUserUseCase
     val breedsUseCase: IGetBreedsUseCase
+    val setEmptyUserProfileUseCase: ISetEmptyUserProfileUseCase
 }
 
 val Context.splashDepsProvider: SplashDepsProvider

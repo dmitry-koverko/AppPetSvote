@@ -5,6 +5,7 @@ import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
+import com.petsvote.retrofit.entity.user.location.Cities
 import com.petsvote.retrofit.entity.user.location.Countries
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -24,11 +25,13 @@ interface UserApi {
     @Multipart
     @POST("save-user-data")
     suspend fun saveUserData(
+        @Header("Authorization") token: String,
         @Part photo_data: MultipartBody.Part?,
         @Query("first_name") first_name: String?,
         @Query("last_name") last_name: String?,
         @Query("location") location: String?,
-    ):  NetworkResponse<UserData, ApiError>
+        @Part("d")d: String = ""
+    ):  NetworkResponse<User, ApiError>
 
 
     @Headers("Content-Type: application/x-www-form-urlencoded")
@@ -50,5 +53,14 @@ interface UserApi {
         @Query("lang") lang: String?,
         @Query("country_name") country_name: String?,
     ): NetworkResponse<Countries, ApiError>
+
+    @GET("get-city-list")
+    suspend fun getCities(
+        @Query("lang") lang: String?,
+        @Query("city_name") city_name: String?,
+        @Query("country_id") country_id: Int?,
+        @Query("limit") limit: Int?,
+        @Query("offset") offset: Int?,
+    ): NetworkResponse<Cities, ApiError>
 
 }

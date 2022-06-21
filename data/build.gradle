@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlinx-serialization'
 }
 
 android {
@@ -43,11 +44,13 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinxCoroutinesAndroidVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinxSerializationJsonVersion"
 
     //DATE
     implementation 'com.github.cesarferreira:tempo:0.7.0'
 
     implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

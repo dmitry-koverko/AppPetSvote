@@ -72,6 +72,7 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
             viewModel.image.collect {
                 it?.let {
                     binding?.cropViewImage?.setImageBitmap(it)
+                    binding?.cropViewImage?.zoomTo(1.2f)
                 }
             }
         }

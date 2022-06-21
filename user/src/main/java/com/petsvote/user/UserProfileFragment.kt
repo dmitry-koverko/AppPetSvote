@@ -5,16 +5,23 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
 import com.petsvote.dialog.SelectPhotoDialog
 import com.petsvote.dialog.UserImageDialog
+import com.petsvote.domain.entity.user.SaveUserParams
 import com.petsvote.navigation.MainNavigation
+import com.petsvote.ui.ext.disabled
+import com.petsvote.ui.ext.enabled
 import com.petsvote.ui.loadImage
 import com.petsvote.user.R
 import com.petsvote.user.crop.CropUserActivity
@@ -47,6 +54,8 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
     private var isAddPhotoDialog = true;
     private val dialogAddPhoto = UserImageDialog()
     private val selectPhotoDialog = SelectPhotoDialog()
+
+    var validateEditProfile = ValidateEditProfile()
 
     val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -95,6 +104,28 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
             navigation.startSelectCountry()
         }
 
+        binding?.selectCity?.setOnClickListener {
+            navigation.startSelectCity()
+        }
+
+        binding?.username?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {
+                validateEditProfile.name = p0.toString()
+                checkBtn()
+            }
+
+        })
+
+        binding?.save?.setOnClickListener {
+            viewModel.saveUserInfo(SaveUserParams(
+                binding?.username?.text?.toString() ?: "",
+                binding?.lastname?.text?.toString() ?: ""
+            ))
+        }
+
     }
 
     private fun showDialogAva() {
@@ -112,6 +143,19 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
         }
     }
 
+    private fun checkBtn() {
+        if (
+            validateEditProfile.name.isNullOrEmpty() ||
+            validateEditProfile.city == null ||
+            validateEditProfile.country == null){
+            binding?.save?.disabled()
+            binding?.saveText?.setTextColor(ContextCompat.getColor(requireContext(), com.petsvote.ui.R.color.besie_tab_text_unselected_color))
+        }else{
+            binding?.save?.enabled()
+            binding?.saveText?.setTextColor(ContextCompat.getColor(requireContext(), com.petsvote.ui.R.color.besie_tab_text_selected_color))
+        }
+    }
+
     override fun initObservers() {
 
         lifecycleScope.launchWhenStarted {
@@ -120,7 +164,6 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
             }
         }
 
-
         lifecycleScope.launchWhenStarted {
             viewModel.imageCrop.collect {
                 it?.let { bitmap ->
@@ -128,15 +171,77 @@ class UserProfileFragment : BaseFragment(R.layout.fragment_user_profile),
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.imageUrl.collect { image ->
+                image?.let { binding?.avatar?.loadImage(it) }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.country.collect { country ->
+                if (country != null) {
+                    binding?.country?.text = country
+                    binding?.rightCity?.visibility = View.VISIBLE
+                    binding?.selectCity?.isClickable = true
+                } else {
+                    binding?.rightCity?.visibility = View.GONE
+                    binding?.selectCity?.isClickable = false
+                }
+                validateEditProfile.country = country
+                checkBtn()
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.city.collect { country ->
+                if (country != null) {
+                    binding?.city?.text = country
+                }
+                validateEditProfile.city = country
+                checkBtn()
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.firstName.collect {
+                if (!it.isNullOrEmpty()) binding?.username?.setText(it)
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.lastname.collect {
+                if (!it.isNullOrEmpty()) binding?.lastname?.setText(it)
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         userComponentViewModel.userComponent.injectUserProfile(this)
+
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                activity?.finish()
+            }
+
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
     }
 
 
     override fun crop() {
         startForResult.launch(Intent(activity, CropUserActivity::class.java))
     }
+
+    data class ValidateEditProfile(
+        var name: String = "",
+        var country: String? = null,
+        var city: String? = null
+    )
 }

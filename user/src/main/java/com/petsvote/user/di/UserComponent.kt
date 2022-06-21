@@ -3,12 +3,11 @@ package com.petsvote.user.di
 import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.configuration.*
-import com.petsvote.domain.usecases.user.IGetCountryListUseCase
-import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
-import com.petsvote.domain.usecases.user.IGetUserUseCase
-import com.petsvote.domain.usecases.user.ISetCountryUseCase
+import com.petsvote.domain.usecases.user.*
+import com.petsvote.domain.usecases.user.impl.ISaveUserUseCase
 import com.petsvote.user.UserProfileFragment
 import com.petsvote.user.crop.CropUserImageFragment
+import com.petsvote.user.select.SelectCityFragment
 import com.petsvote.user.select.SelectCountryFragment
 import com.petsvote.user.select.SelectCountryViewModel
 import com.petsvote.user.settings.SettingProfileFragment
@@ -31,6 +30,7 @@ interface UserComponent {
     fun injectUserProfile(userProfileFragment: UserProfileFragment)
     fun injectCrop(cropUserImageFragment: CropUserImageFragment)
     fun injectSelectCountry(selectCountryFragment: SelectCountryFragment)
+    fun injectSelectCity(selectCityFragment: SelectCityFragment)
 
     @Component.Builder
     interface Builder{
@@ -65,6 +65,9 @@ interface UserDeps{
     val setImageCropUseCase: ISetImageCropUseCase
     val getCountryListUseCase: IGetCountryListUseCase
     val setCountryUseCase: ISetCountryUseCase
+    val getCitiesListUseCase: IGetCitiesListUseCase
+    val setCityUseCase: ISetCityUseCase
+    val saveUserProfileUseCase: ISaveUserUseCase
 }
 
 val Context.userDepsProvider: UserDepsProvider

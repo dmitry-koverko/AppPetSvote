@@ -6,12 +6,12 @@ import com.petsvote.room.entity.EntityUserProfile
 
 fun EntityUserProfile.toUserProfile(): UserProfile {
     return UserProfile(
-        type = checkNotNull(this.type),
+        type = this.type,
         image = this.image,
         imageCrop = this.imageCrop,
-        locationCountryTitle = checkNotNull(this.locationCountryTitle),
-        locationCountryId = checkNotNull(this.locationCountryId),
-        locationCityTitle = checkNotNull(this.locationCityTitle),
-        locationCityId = checkNotNull(this.locationCityId)
+        locationCountryTitle = this.locationCountryTitle,
+        locationCountryId = this.locationCountryId,
+        locationCityTitle = this.locationCityTitle,
+        locationCityId = this.locationCityId
     )
 }
