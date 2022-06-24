@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/filter" />
             <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/pet" />
             <option value="$PROJECT_DIR$/rating" />
             <option value="$PROJECT_DIR$/register" />
             <option value="$PROJECT_DIR$/retrofit" />

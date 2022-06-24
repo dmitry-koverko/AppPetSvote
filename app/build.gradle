@@ -70,6 +70,7 @@ dependencies {
     implementation project(path: ':user')
     implementation project(path: ':filter')
     implementation project(path: ':dialog')
+    implementation project(path: ':pet')
     kapt "com.google.dagger:dagger-compiler:$daggerCompilerVersion"
 
     //Navigator

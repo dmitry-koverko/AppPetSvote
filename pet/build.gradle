@@ -58,5 +58,4 @@ dependencies {
     implementation "com.google.android.material:material:$materialVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayoutVersion"
     implementation "androidx.navigation:navigation-fragment:$navigationFragmentVersion"
-
 }

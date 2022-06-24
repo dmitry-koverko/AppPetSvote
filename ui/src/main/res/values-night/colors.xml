@@ -111,6 +111,7 @@
 
     <color name="avarar_bg">#1FFFFFFF</color>
     <color name="dialog_background">#4E4E4E</color>
+    <color name="hint_text_color">#99FFFFFF</color>
 
 
 </resources>

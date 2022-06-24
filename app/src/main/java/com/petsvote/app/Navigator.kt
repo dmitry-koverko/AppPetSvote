@@ -48,6 +48,10 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_splashFragment_to_userProfileFragment)
     }
 
+    override fun startAddPetFromSplash() {
+        navController?.navigate(R.id.action_splashFragment_to_addPetFragment)
+    }
+
     override fun startFilter() {
         navController?.navigate(R.id.action_tabsFragment_to_filterFragment)
     }

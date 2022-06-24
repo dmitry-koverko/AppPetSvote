@@ -83,5 +83,13 @@
     <string name="all_photos">Все фотографии</string>
     <string name="move_and_scale">Двигайте и масштабируйте</string>
     <string name="crop">Обрезать</string>
+    <string name="not_necessary">не обязательно</string>
+    <string name="instagram_pet">Instagram питомца</string>
+    <string name="disable">Отключить</string>
+    <string name="my_pet">Мой питомец</string>
+    <string name="add_photo_pet">Добавьте лучшие фотографии вашего питомца</string>
+    <string name="add_photo_nesarry">Одна фотография обязательно.</string>
+    <string name="birthday">Дата рожения</string>
+    <string name="sex">пол</string>
 
 </resources>
