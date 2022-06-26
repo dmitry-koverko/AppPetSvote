@@ -45,7 +45,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class SelectPhotoDialog: BaseDialog(R.layout.fragment_dialog_select_photo),
+// typeDialog 0 - userPhoto
+// typeDialog 1 - petPhoto
+
+class SelectPhotoDialog(val typeDialog: Int = 0): BaseDialog(R.layout.fragment_dialog_select_photo),
     AllPhotosAdapter.OnSelectedItem {
 
     private val TAG = SelectPhotoDialog::class.java.name
@@ -291,7 +294,8 @@ class SelectPhotoDialog: BaseDialog(R.layout.fragment_dialog_select_photo),
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
         val imageInByte: ByteArray = stream.toByteArray()
-        lifecycleScope.launch (Dispatchers.IO){ viewModel.setImage(imageInByte) }
+        if(typeDialog == 0) lifecycleScope.launch (Dispatchers.IO){ viewModel.setImage(imageInByte) }
+        else lifecycleScope.launch (Dispatchers.IO){ viewModel.setImagePet(imageInByte) }
         mDialogListener?.crop()
     }
 

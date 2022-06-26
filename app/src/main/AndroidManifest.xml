@@ -46,6 +46,10 @@
             android:name="com.petsvote.user.crop.CropUserActivity"
             android:exported="false" />
 
+        <activity
+            android:name="com.petswote.pet.crop.CropPetActivity"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.android.fileprovider"

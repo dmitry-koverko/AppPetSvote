@@ -37,6 +37,7 @@ class AnimatedRoundedImage(context: Context, attrs: AttributeSet? = null) :
     }
 
     override fun onDraw(canvas: Canvas) {
+        paint.color = ContextCompat.getColor(context, R.color.add_photo_bg)
         super.onDraw(canvas)
         if(isAnim) drawRipple(canvas)
     }

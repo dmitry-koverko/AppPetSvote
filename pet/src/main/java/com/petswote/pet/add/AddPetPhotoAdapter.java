@@ -1,29 +1,25 @@
-package com.petswote.pet;
+package com.petswote.pet.add;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.MotionEventCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.petsvote.domain.entity.pet.PetPhoto;
 import com.petsvote.ui.AnimatedRoundedImage;
 import com.petsvote.ui.BesieLayout;
+import com.petswote.pet.R;
 import com.petswote.pet.helpers.ItemTouchHelperAdapter;
 import com.petswote.pet.helpers.ItemTouchHelperViewHolder;
 import com.petswote.pet.helpers.OnStartDragListener;
-import com.petswote.pet.helpers.PetPhoto;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -38,15 +34,25 @@ public class AddPetPhotoAdapter extends RecyclerView.Adapter<AddPetPhotoAdapter.
         mDragStartListener = dragStartListener;
     }
 
+    public List<PetPhoto> getItems(){
+        return mItems;
+    }
+
     public void addData(List<PetPhoto> list){
         mItems.addAll(list);
         notifyDataSetChanged();
     }
 
-    public void addItem(Bitmap photo){
+    public void addItem(PetPhoto photo){
+        if(photo.getId() != null){
+            for (PetPhoto p: mItems){
+                if(p.getId() != null && p.getId() == photo.getId()) return;
+            }
+        }
         for(PetPhoto i: mItems){
             if(i.getBitmap() == null) {
-                i.setBitmap(photo);
+                i.setBitmap(photo.getBitmap());
+                i.setId(photo.getId());
                 notifyDataSetChanged();
                 return;
             }
@@ -56,7 +62,7 @@ public class AddPetPhotoAdapter extends RecyclerView.Adapter<AddPetPhotoAdapter.
     public void removeItem(int position){
         mItems.remove(position);
         notifyItemRemoved(position);
-        mItems.add(mItems.size(), new PetPhoto(null));
+        mItems.add(mItems.size(), new PetPhoto());
         notifyItemInserted(mItems.size() -1);
         notifyDataSetChanged();
     }
@@ -111,7 +117,8 @@ public class AddPetPhotoAdapter extends RecyclerView.Adapter<AddPetPhotoAdapter.
         holder.close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDragStartListener.onClose(holder.getBindingAdapterPosition());
+                mDragStartListener.onClose(mItems.get(holder.getBindingAdapterPosition()));
+                removeItem(holder.getBindingAdapterPosition());
             }
         });
     }

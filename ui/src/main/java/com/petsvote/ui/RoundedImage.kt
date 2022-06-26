@@ -13,7 +13,7 @@ open class RoundedImage @JvmOverloads constructor(
 ) : androidx.appcompat.widget.AppCompatImageView(context, attrs) {
 
     private var radius = context.resources.displayMetrics.density * 16
-    private var paint =
+    var paint =
         Paint().apply {
             isAntiAlias = true
             color = ContextCompat.getColor(context, R.color.ui_gray)

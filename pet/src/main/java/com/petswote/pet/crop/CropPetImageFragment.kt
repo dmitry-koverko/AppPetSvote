@@ -1,4 +1,4 @@
-package com.petsvote.user.crop
+package com.petswote.pet.crop
 
 import android.app.Activity
 import android.content.Context
@@ -6,31 +6,27 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.petsvote.core.BaseFragment
-import com.petsvote.user.R
-import com.petsvote.user.databinding.FragmentCropUserImageBinding
-import com.petsvote.user.di.UserComponentViewModel
+import com.petswote.pet.R
+import com.petswote.pet.databinding.FragmentCropPetImageBinding
+import com.petswote.pet.di.PetComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
-class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
+class CropPetImageFragment: BaseFragment(R.layout.fragment_crop_pet_image) {
 
     @Inject
-    internal lateinit var viewModelFactory: Lazy<CropUserImageViewModel.Factory>
+    internal lateinit var viewModelFactory: Lazy<CropPetImageViewModel.Factory>
 
-    private val userComponentViewModel: UserComponentViewModel by viewModels()
-    private val viewModel: CropUserImageViewModel by viewModels {
+    private val petComponentViewModel: PetComponentViewModel by viewModels()
+    private val viewModel: CropPetImageViewModel by viewModels {
         viewModelFactory.get()
     }
 
-    private var binding: FragmentCropUserImageBinding? = null
+    private var binding: FragmentCropPetImageBinding? = null
 
     companion object {
         const val EXTRA_MESSAGE = "CROP_MESSAGE"
@@ -40,8 +36,7 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding = FragmentCropUserImageBinding.bind(view)
-        binding?.cropViewImage?.setCropperType(1)
+        binding = FragmentCropPetImageBinding.bind(view)
 
         binding?.crop?.setOnClickListener {
             val cropped: Bitmap? = binding?.cropViewImage?.getCroppedImage()
@@ -55,9 +50,7 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
 
         }
         binding?.cancel?.setOnClickListener {
-            //viewModel.setImage()
             activity?.finish()
-            //findNavController().popBackStack()
         }
 
         binding?.crop?.animation = true
@@ -65,6 +58,7 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
 
 
         lifecycleScope.launchWhenStarted { viewModel.getImage() }
+
     }
 
     fun setImage(byteArray: ByteArray){
@@ -84,8 +78,6 @@ class CropUserImageFragment : BaseFragment(R.layout.fragment_crop_user_image) {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        userComponentViewModel.userComponent.injectCrop(this)
+        petComponentViewModel.petComponent.injectCrop(this)
     }
-
-
 }

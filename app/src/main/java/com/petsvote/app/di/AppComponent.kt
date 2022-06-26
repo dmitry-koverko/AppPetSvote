@@ -9,6 +9,7 @@ import com.petsvote.dialog.di.DialogDeps
 import com.petsvote.domain.di.*
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.*
+import com.petsvote.domain.usecases.pet.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
 import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
@@ -26,6 +27,7 @@ import com.petsvote.splash.di.SplashDeps
 import com.petsvote.ui.di.UIModule
 import com.petsvote.user.di.UserDeps
 import com.petsvote.vote.di.VoteDeps
+import com.petswote.pet.di.PetDeps
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -35,10 +37,10 @@ import javax.inject.Scope
 @[AppScope Component(
     modules = [AppModule::class, DataModule::class, UserUseCaseModule::class, RetrofitModule::class,
         RoomModule::class, ConfigurationModule::class, UIModule::class, ResourcesModule::class,
-        RatingModule::class, FilterModule::class]
+        RatingModule::class, FilterModule::class, PetModule::class]
 )]
 interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDeps, VoteDeps,
-    UserDeps, FilterDeps, DialogDeps {
+    UserDeps, FilterDeps, DialogDeps, PetDeps {
 
     override val registerUserUseCase: IRegisterUserUseCase
     override val checkLoginUserUseCase: ICheckLoginUserUseCase
@@ -78,6 +80,12 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val setCityUseCase: ISetCityUseCase
     override val setEmptyUserProfileUseCase: ISetEmptyUserProfileUseCase
     override val saveUserProfileUseCase: ISaveUserUseCase
+    override val setEmptyPetProfileUseCase: ISetEmptyPetProfileUseCase
+    override val setImagePetProfileUseCase: ISetImagePetProfileUseCase
+    override val addImageCropUseCase: IAddImageCropUseCase
+    override val getImagePetProfileUseCase: IGetImagePetProfileUseCase
+    override val getImagesCropUseCase: IGetImagesCropUseCase
+    override val getRemoveImageUseCase: IRemovePetImageUseCase
 
     @Component.Builder
     interface Builder {

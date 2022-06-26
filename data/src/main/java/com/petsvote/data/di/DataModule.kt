@@ -4,27 +4,30 @@ import android.app.Application
 import android.content.res.Resources
 import com.petsvote.data.repository.*
 import com.petsvote.data.repository.paging.breeds.BreedsPagingRepository
-import com.petsvote.domain.repository.IBreedRepository
-import com.petsvote.domain.repository.IResourcesRepository
+import com.petsvote.domain.repository.*
 import com.petsvote.domain.repository.rating.RatingPagingRepository
-import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.repository.breeds.IBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
-import com.petsvote.domain.repository.IPreferencesRepository
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
-import com.petsvote.room.dao.BreedsDao
-import com.petsvote.room.dao.UserProfileDao
-import com.petsvote.room.dao.RatingFilterDao
-import com.petsvote.room.dao.UserDao
+import com.petsvote.room.dao.*
 import dagger.Module
 import dagger.Provides
 
 @Module
 class DataModule {
+
+    @Provides
+    fun providePetRepository(
+        userDao: UserDao,
+        petProfileDao: PetProfileDao,
+        localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
+    ): IPetRepository {
+        return PetRepository( userDao = userDao, profilePetDao = petProfileDao, getLocaleLanguageCodeUseCase = localeLanguageCodeUseCase)
+    }
 
     @Provides
     fun providePreferencesRepository(

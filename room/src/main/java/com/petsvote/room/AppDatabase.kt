@@ -5,18 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.petsvote.room.converters.BreedsConverter
-import com.petsvote.room.converters.LocationConverter
-import com.petsvote.room.converters.PhotoConverter
-import com.petsvote.room.converters.UserPetConverter
-import com.petsvote.room.dao.BreedsDao
-import com.petsvote.room.dao.UserProfileDao
-import com.petsvote.room.dao.RatingFilterDao
-import com.petsvote.room.dao.UserDao
-import com.petsvote.room.entity.EntityBreed
-import com.petsvote.room.entity.EntityUserProfile
-import com.petsvote.room.entity.EntityLocation
-import com.petsvote.room.entity.EntityPhoto
+import com.petsvote.room.converters.*
+import com.petsvote.room.dao.*
+import com.petsvote.room.entity.*
 import com.petsvote.room.entity.breeds.EntityBreedList
 import com.petsvote.room.entity.filter.EntityRatingFilter
 import com.petsvote.room.entity.user.EntityUserInfo
@@ -32,14 +23,17 @@ import com.petsvote.room.entity.user.EntityUserPet
         EntityRatingFilter::class,
         EntityBreed::class,
         EntityBreedList::class,
-        EntityUserProfile::class
-    ), version = 10, exportSchema = false
+        EntityUserProfile::class,
+        EntityPetProfile::class,
+        EnityPetImage::class
+    ), version = 13, exportSchema = false
 )
 @TypeConverters(
     PhotoConverter::class,
     UserPetConverter::class,
     LocationConverter::class,
-    BreedsConverter::class
+    BreedsConverter::class,
+    PetImageConverter::class
 )
 public abstract class AppDatabase : RoomDatabase() {
 
@@ -47,6 +41,7 @@ public abstract class AppDatabase : RoomDatabase() {
     abstract fun ratingFilterDao(): RatingFilterDao
     abstract fun breedsDao(): BreedsDao
     abstract fun imagesDao(): UserProfileDao
+    abstract fun petProfileDao(): PetProfileDao
 
     companion object {
         @Volatile

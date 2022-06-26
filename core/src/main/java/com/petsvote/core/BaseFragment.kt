@@ -2,6 +2,7 @@ package com.petsvote.core
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import java.io.ByteArrayOutputStream
 
 abstract class BaseFragment(id: Int): Fragment(id) {
 
@@ -56,5 +58,14 @@ abstract class BaseFragment(id: Int): Fragment(id) {
         return ((activity?.let { ActivityCompat.checkSelfPermission(it, READ_PERMISSION) }) == PackageManager.PERMISSION_GRANTED
                 && (ActivityCompat.checkSelfPermission(requireActivity(), READ_PERMISSION)) == PackageManager.PERMISSION_GRANTED)
     }
+
+
+    fun bitmapToArray(bitmap: Bitmap, onImage: (ByteArray) -> Unit) {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        val imageInByte: ByteArray = stream.toByteArray()
+        onImage(imageInByte)
+    }
+
 
 }

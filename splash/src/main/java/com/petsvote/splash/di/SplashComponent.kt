@@ -3,6 +3,7 @@ package com.petsvote.splash.di
 import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
+import com.petsvote.domain.usecases.pet.ISetEmptyPetProfileUseCase
 import com.petsvote.domain.usecases.user.ICheckLoginUserUseCase
 import com.petsvote.domain.usecases.user.IGetCurrentUserUseCase
 import com.petsvote.domain.usecases.user.IRegisterUserUseCase
@@ -50,6 +51,7 @@ interface SplashDeps{
     val getCurrentUserUseCase: IGetCurrentUserUseCase
     val breedsUseCase: IGetBreedsUseCase
     val setEmptyUserProfileUseCase: ISetEmptyUserProfileUseCase
+    val setEmptyPetProfileUseCase: ISetEmptyPetProfileUseCase
 }
 
 val Context.splashDepsProvider: SplashDepsProvider

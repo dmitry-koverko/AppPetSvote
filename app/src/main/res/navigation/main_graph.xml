@@ -132,7 +132,7 @@
         android:label="SelectCityFragment" />
     <fragment
         android:id="@+id/addPetFragment"
-        android:name="com.petswote.pet.AddPetFragment"
+        android:name="com.petswote.pet.add.AddPetFragment"
         android:label="AddPetFragment" />
 
 

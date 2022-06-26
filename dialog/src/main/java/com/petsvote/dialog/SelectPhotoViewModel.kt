@@ -13,6 +13,7 @@ import com.petsvote.dialog.enity.LocalPhoto
 import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.domain.usecases.configuration.ISetImageUseCase
 import com.petsvote.domain.usecases.configuration.impl.SetImageUseCase
+import com.petsvote.domain.usecases.pet.ISetImagePetProfileUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
 import kotlinx.coroutines.*
@@ -21,7 +22,8 @@ import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class SelectPhotoViewModel @Inject constructor(
-    private val setImageUseCase: ISetImageUseCase
+    private val setImageUseCase: ISetImageUseCase,
+    private val setImagePetUseCase: ISetImagePetProfileUseCase
 ) : BaseViewModel() {
 
     var localPhotos = MutableStateFlow<List<LocalPhoto>>(emptyList())
@@ -52,14 +54,21 @@ class SelectPhotoViewModel @Inject constructor(
         set.await()
     }
 
+    suspend fun setImagePet(bytes: ByteArray){
+        var set = viewModelScope.async (Dispatchers.IO + Job()) { setImagePetUseCase.setImagePet(bytes) }
+        set.await()
+    }
+
     @Suppress("UNCHECKED_CAST")
     class Factory @Inject constructor(
-        private val setImageUseCase: ISetImageUseCase
+        private val setImageUseCase: ISetImageUseCase,
+        private val setImagePetUseCase: ISetImagePetProfileUseCase
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == SelectPhotoViewModel::class.java)
             return SelectPhotoViewModel(
-                setImageUseCase = setImageUseCase
+                setImageUseCase = setImageUseCase,
+                setImagePetUseCase = setImagePetUseCase
             ) as T
         }
 

@@ -2,10 +2,7 @@ package com.petsvote.room
 
 import android.app.Application
 import android.content.Context
-import com.petsvote.room.dao.BreedsDao
-import com.petsvote.room.dao.UserProfileDao
-import com.petsvote.room.dao.RatingFilterDao
-import com.petsvote.room.dao.UserDao
+import com.petsvote.room.dao.*
 import dagger.Component
 import dagger.Module
 import dagger.Provides
@@ -45,6 +42,11 @@ val Context.roomDepsProvider: RoomDepsProvider
 
 @Module
 class RoomModule {
+
+    @Provides
+    fun providePetProfileDao(application: Application): PetProfileDao{
+        return AppDatabase.getDatabase(application).petProfileDao()
+    }
 
     @Provides
     fun provideImagesDao(application: Application): UserProfileDao{

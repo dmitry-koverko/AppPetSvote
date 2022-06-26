@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.petsvote.dialog.SelectPhotoDialog
 import com.petsvote.domain.usecases.configuration.ISetImageUseCase
+import com.petsvote.domain.usecases.pet.ISetImagePetProfileUseCase
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -43,6 +44,7 @@ interface DialogDepsProvider {
 
 interface DialogDeps{
     val setImageUseCase: ISetImageUseCase
+    val setImagePetProfileUseCase: ISetImagePetProfileUseCase
 }
 
 val Context.dialogDepsProvider: DialogDepsProvider
