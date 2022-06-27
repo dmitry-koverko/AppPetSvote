@@ -6,12 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.petsvote.core.BaseViewModel
-import com.petsvote.domain.usecases.configuration.IGetImagesUseCase
-import com.petsvote.domain.usecases.configuration.ISetImageCropUseCase
-import com.petsvote.domain.usecases.configuration.ISetImageUseCase
-import com.petsvote.domain.usecases.pet.IAddImageCropUseCase
-import com.petsvote.domain.usecases.pet.IGetImagePetProfileUseCase
-import com.petsvote.domain.usecases.pet.impl.GetImagePetProfileUseCase
+import com.petsvote.domain.usecases.pet.create.IAddImageCropUseCase
+import com.petsvote.domain.usecases.pet.create.IGetImagePetProfileUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect

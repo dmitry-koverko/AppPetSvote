@@ -27,5 +27,6 @@ interface IUserRepository {
     suspend fun getCitiesList(): List<City>
     suspend fun setEmptyUserProfile()
     suspend fun saveUser(params: SaveUserParams)
+    suspend fun getUsernameInsta(id: Long): String
 
 }

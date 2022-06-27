@@ -11,6 +11,7 @@ import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.room.dao.BreedsDao
+import com.petsvote.room.dao.PetProfileDao
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,6 +22,7 @@ import javax.inject.Inject
 
 class BreedRepository @Inject constructor(
     private val breedsDao: BreedsDao,
+    private val petProfileDao: PetProfileDao,
     private val configurationApi: ConfigurationApi,
     private val localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase,
     private val filterRepository: IRatingFilterRepository
@@ -35,6 +37,17 @@ class BreedRepository @Inject constructor(
             breedsDao.getBreedsByKinds(localeLanguageCodeUseCase.getLanguage(), filter.type, offset, text, limit)
                 .toLocalBreedsList()
         filter.breed_id?.let { id ->
+            results.find { it.breedId == id }?.isSelect = true
+        }
+        return results
+    }
+
+    override suspend fun getPetBreeds(offset: Int, text: String, limit: Int, type: String): List<Breed> {
+        var results =
+            breedsDao.getBreedsByKinds(localeLanguageCodeUseCase.getLanguage(), type, offset, text, limit)
+                .toLocalBreedsList()
+        var petProfile = petProfileDao.getSimplePetProfile()
+        petProfile?.breedId?.let {id ->
             results.find { it.breedId == id }?.isSelect = true
         }
         return results

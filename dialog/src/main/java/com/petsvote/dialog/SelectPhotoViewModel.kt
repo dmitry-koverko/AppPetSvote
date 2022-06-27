@@ -10,15 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.petsvote.core.BaseViewModel
 import com.petsvote.dialog.enity.LocalPhoto
-import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.domain.usecases.configuration.ISetImageUseCase
-import com.petsvote.domain.usecases.configuration.impl.SetImageUseCase
-import com.petsvote.domain.usecases.pet.ISetImagePetProfileUseCase
-import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
-import com.petsvote.domain.usecases.user.IGetUserUseCase
+import com.petsvote.domain.usecases.pet.create.ISetImagePetProfileUseCase
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
 class SelectPhotoViewModel @Inject constructor(

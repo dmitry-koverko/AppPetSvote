@@ -7,5 +7,5 @@ data class Kind(
     val title: String,
     val name: String,
     val age: Int,
-    var isSelect: Boolean
+    var isSelect: Boolean = false
 ): Item

@@ -1,5 +1,6 @@
 package com.petsvote.domain.repository
 
+import com.petsvote.domain.entity.filter.Kind
 import com.petsvote.domain.entity.pet.PetPhoto
 import kotlinx.coroutines.flow.Flow
 
@@ -11,5 +12,13 @@ interface IPetRepository {
     suspend fun getImage(): Flow<ByteArray>
     suspend fun getImagesCrop(): Flow<List<PetPhoto>>
     suspend fun removeImagePet(id: Int)
+    suspend fun setPetName(name: String)
+    suspend fun getSelectKindId(): Int?
+    suspend fun setSelectKind(id: Int, title: String)
+    suspend fun setSelectBreed(id: Int, title: String)
+    suspend fun getSelectBreed(): String
+    suspend fun setSelectBirthday(date: String)
+    suspend fun setSelectInsta(insta: String)
+    suspend fun setSelectSex(sex: Int)
 
 }

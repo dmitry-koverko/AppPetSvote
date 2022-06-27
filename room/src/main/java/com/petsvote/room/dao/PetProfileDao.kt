@@ -18,8 +18,8 @@ interface PetProfileDao {
     @Query("select * from EntityPetProfile")
     fun getPetProfile(): Flow<EntityPetProfile?>
 
-    @Query("select * from EntityUserProfile")
-    fun getUserProfile(): EntityUserProfile?
+    @Query("select * from EntityPetProfile")
+    suspend fun getSimplePetProfile(): EntityPetProfile?
 
     @Query("UPDATE EntityPetProfile SET image =:bytes")
     suspend fun updateImage(bytes: ByteArray?)
@@ -46,7 +46,7 @@ interface PetProfileDao {
     suspend fun updateBreed(id: Int, title: String)
 
     @Query("UPDATE EntityPetProfile SET birthday =:birthday")
-    suspend fun updateBirthday(birthday: Long)
+    suspend fun updateBirthday(birthday: String)
 
     @Query("UPDATE EntityPetProfile SET sex =:sex")
     suspend fun updateSex(sex: Int)

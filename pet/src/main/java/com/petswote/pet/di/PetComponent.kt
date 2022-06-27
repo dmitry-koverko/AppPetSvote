@@ -3,14 +3,13 @@ package com.petswote.pet.di
 import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.configuration.*
-import com.petsvote.domain.usecases.pet.IAddImageCropUseCase
-import com.petsvote.domain.usecases.pet.IGetImagePetProfileUseCase
-import com.petsvote.domain.usecases.pet.IGetImagesCropUseCase
-import com.petsvote.domain.usecases.pet.IRemovePetImageUseCase
+import com.petsvote.domain.usecases.filter.IGetKindsUseCase
+import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.user.*
-import com.petsvote.domain.usecases.user.impl.ISaveUserUseCase
 import com.petswote.pet.add.AddPetFragment
+import com.petswote.pet.breeds.PetSelectBreedsFragment
 import com.petswote.pet.crop.CropPetImageFragment
+import com.petswote.pet.kinds.PetSelectKindsFragment
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -26,6 +25,8 @@ interface PetComponent {
 
     fun inject(addPetFragment: AddPetFragment)
     fun injectCrop(cropPetImageFragment: CropPetImageFragment)
+    fun injectSelectKinds(petSelectKindsFragment: PetSelectKindsFragment)
+    fun injectSelectBreeds(petSelectBreedsFragment: PetSelectBreedsFragment)
 
     @Component.Builder
     interface Builder{
@@ -58,6 +59,18 @@ interface PetDeps{
     val getImagePetProfileUseCase: IGetImagePetProfileUseCase
     val getImagesCropUseCase: IGetImagesCropUseCase
     val getRemoveImageUseCase: IRemovePetImageUseCase
+    val getAddPhotosSettingsUseCase: IGetAddPhotosSettingsUseCase
+    val setAddPhotosSettingsUseCase: ISetAddPhotosSettingsUseCase
+    val setNamePetUseCase: ISetPetNameUseCase
+    val kindsUseCase: IGetKindsUseCase
+    val setKindPetUseCase: ISetKindPetUseCase
+    val getKindPetUseCase: IGetKindPetUseCase
+    val petGetBreedsPagingUseCase: IPetGetBreedsPagingUseCase
+    val setPetBreedUseCase: ISetPetBreedUseCase
+    val getBreedPetUseCase: IGetBreedPetUseCase
+    val setBirthdayPetUseCase: ISetBirthdayPetUseCase
+    val setSexPetUseCase: ISetSexPetUseCase
+    val getInstagramUserNameUseCase: IGetInstagramUserNameUseCase
 }
 
 val Context.petDepsProvider: PetDepsProvider

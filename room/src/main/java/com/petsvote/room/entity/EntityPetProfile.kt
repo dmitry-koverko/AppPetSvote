@@ -26,7 +26,7 @@ data class EntityPetProfile(
     val kindTitle: String? = "",
     val breedId: Int? = -1,
     val breedTitle: String? = "",
-    var birthday: Long,
+    var birthday: String,
     var sex: Int,
     var inst: String? = ""
 ) {

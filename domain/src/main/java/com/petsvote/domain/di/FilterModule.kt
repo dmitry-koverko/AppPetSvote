@@ -2,6 +2,7 @@ package com.petsvote.domain.di
 
 import android.content.res.Resources
 import com.petsvote.domain.repository.IBreedRepository
+import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.repository.IResourcesRepository
 import com.petsvote.domain.repository.breeds.IBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
@@ -69,11 +70,13 @@ class FilterModule {
     @Provides
     fun provideKinds(
         resourcesRepository: IResourcesRepository,
-        ratingFilterRepository: IRatingFilterRepository
+        ratingFilterRepository: IRatingFilterRepository,
+        petRepository: IPetRepository
     ): IGetKindsUseCase {
         return GetKindsUseCase(
             resourcesRepository = resourcesRepository,
-            ratingFilterRepository = ratingFilterRepository
+            ratingFilterRepository = ratingFilterRepository,
+            petRepository = petRepository
         )
     }
 

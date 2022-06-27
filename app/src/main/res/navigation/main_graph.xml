@@ -133,7 +133,22 @@
     <fragment
         android:id="@+id/addPetFragment"
         android:name="com.petswote.pet.add.AddPetFragment"
-        android:label="AddPetFragment" />
+        android:label="AddPetFragment" >
+        <action
+            android:id="@+id/action_addPetFragment_to_petSelectKindsFragment"
+            app:destination="@id/petSelectKindsFragment" />
+        <action
+            android:id="@+id/action_addPetFragment_to_petSelectBreedsFragment"
+            app:destination="@id/petSelectBreedsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/petSelectKindsFragment"
+        android:name="com.petswote.pet.kinds.PetSelectKindsFragment"
+        android:label="PetSelectKindsFragment" />
+    <fragment
+        android:id="@+id/petSelectBreedsFragment"
+        android:name="com.petswote.pet.breeds.PetSelectBreedsFragment"
+        android:label="PetSelectBreedsFragment" />
 
 
 </navigation>

@@ -1,7 +1,7 @@
-package com.petsvote.domain.usecases.pet.impl
+package com.petsvote.domain.usecases.pet.create.impl
 
 import com.petsvote.domain.repository.IPetRepository
-import com.petsvote.domain.usecases.pet.IAddImageCropUseCase
+import com.petsvote.domain.usecases.pet.create.IAddImageCropUseCase
 import javax.inject.Inject
 
 class AddImageCropUseCase @Inject constructor(

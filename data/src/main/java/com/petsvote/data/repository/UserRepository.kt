@@ -10,7 +10,9 @@ import com.petsvote.domain.entity.user.location.City
 import com.petsvote.domain.entity.user.location.Country
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
+import com.petsvote.retrofit.api.ApiInstagram
 import com.petsvote.retrofit.api.UserApi
+import com.petsvote.retrofit.entity.InstagramResponse
 import com.petsvote.retrofit.entity.user.Location
 import com.petsvote.retrofit.entity.user.Register
 import com.petsvote.retrofit.entity.user.User
@@ -29,6 +31,7 @@ import okhttp3.RequestBody
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
+    private val instagramApi: ApiInstagram,
     private val userApi: UserApi,
     private val userDao: UserDao,
     private val imagesDao: UserProfileDao,
@@ -178,6 +181,11 @@ class UserRepository @Inject constructor(
         }
 
         checkResult<User>(userApi.saveUserData(userDao.getToken(), mp, params.first_name, params.last_name, null))
+    }
+
+    override suspend fun getUsernameInsta(id: Long): String {
+        var ua = "Mozilla/5.0 (Linux; Android 8.0.0; SM-A520F Build/R16NW; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/66.0.3359.158 Mobile Safari/537.36 Instagram 46.0.0.15.96 Android (26/8.0.0; 480dpi; 1080x1920; samsung; SM-A520F; a5y17lte; samsungexynos7880; pt_BR; 109556226)"
+        return checkResult<InstagramResponse>(instagramApi.getUsername(ua, id))?.user?.username ?: ""
     }
 
 

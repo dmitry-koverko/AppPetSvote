@@ -4,12 +4,17 @@ import android.app.Application
 import android.content.res.Resources
 import com.petsvote.data.repository.*
 import com.petsvote.data.repository.paging.breeds.BreedsPagingRepository
+import com.petsvote.data.repository.paging.breeds.PetBreedsPagingRepository
 import com.petsvote.domain.repository.*
 import com.petsvote.domain.repository.rating.RatingPagingRepository
 import com.petsvote.domain.repository.breeds.IBreedsPagingRepository
+import com.petsvote.domain.repository.breeds.IPetBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
+import com.petsvote.domain.usecases.pet.create.IPetGetBreedsPagingUseCase
+import com.petsvote.domain.usecases.pet.create.impl.PetGetBreedsPagingUseCase
+import com.petsvote.retrofit.api.ApiInstagram
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
@@ -46,6 +51,15 @@ class DataModule {
     }
 
     @Provides
+    fun providePetGetBreedsPagingUseCase(
+        breedsRepository: IBreedRepository
+    ): IPetBreedsPagingRepository {
+        return PetBreedsPagingRepository(
+            breedsRepository = breedsRepository
+        )
+    }
+
+    @Provides
     fun provideResourcesRepository(
         resources: Resources,
         context: Application
@@ -56,11 +70,13 @@ class DataModule {
     @Provides
     fun provideBreedsRepository(
         breedsDao: BreedsDao,
+        petProfileDao: PetProfileDao,
         configurationApi: ConfigurationApi,
         localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase,
         filterRepository: IRatingFilterRepository
     ): IBreedRepository {
         return BreedRepository(
+            petProfileDao = petProfileDao,
             breedsDao = breedsDao,
             configurationApi = configurationApi,
             localeLanguageCodeUseCase = localeLanguageCodeUseCase,
@@ -107,12 +123,14 @@ class DataModule {
 
     @Provides
     fun provideUserRemoteRepository(
+        instagramApi: ApiInstagram,
         userApi: UserApi,
         userDao: UserDao,
         imagesDao: UserProfileDao,
         getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
     ): IUserRepository {
         return UserRepository(
+            instagramApi = instagramApi,
             userApi = userApi,
             userDao = userDao,
             imagesDao = imagesDao,

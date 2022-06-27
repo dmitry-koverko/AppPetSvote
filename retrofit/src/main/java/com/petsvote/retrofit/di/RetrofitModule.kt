@@ -3,6 +3,7 @@ package com.petsvote.retrofit.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.petsvote.retrofit.SettingsApi
 import com.petsvote.retrofit.adapter.NetworkResponseAdapterFactory
+import com.petsvote.retrofit.api.ApiInstagram
 import com.petsvote.retrofit.api.ConfigurationApi
 import com.petsvote.retrofit.api.RatingApi
 import com.petsvote.retrofit.api.UserApi
@@ -14,8 +15,9 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
-import javax.inject.Scope
+import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLSession
 
 private val contentType = "application/json".toMediaType()
 private val json = Json {
@@ -26,6 +28,14 @@ private val converterFactory = json.asConverterFactory(contentType)
 
 @Module
 class RetrofitModule {
+
+    @Provides
+    fun provideInstagramRetrofitApi(): ApiInstagram {
+        return buildRetrofit(
+            getInstagramOkHttpClient(getInstagramHttpLoggingInterceptor()),
+            SettingsApi.BASE_URL_INSTAGRAM
+        ).create(ApiInstagram::class.java)
+    }
 
     @Provides
     fun provideRatingRetrofitApi(): RatingApi {
@@ -71,6 +81,14 @@ class RetrofitModule {
             connectTimeout(SettingsApi.CONNECT_TIMEOUT, TimeUnit.SECONDS)
             writeTimeout(SettingsApi.WRITE_TIMEOUT, TimeUnit.SECONDS)
         }
+
+        client.addInterceptor(httpLoggingInterceptor).hostnameVerifier(object :HostnameVerifier {
+            override fun verify(p0: String?, p1: SSLSession?): Boolean {
+                val hv = HttpsURLConnection.getDefaultHostnameVerifier()
+                return hv.verify("i.instagram.com", p1)
+            }
+
+        })
         client.addInterceptor(httpLoggingInterceptor).hostnameVerifier { p0, p1 ->
             val hv = HttpsURLConnection.getDefaultHostnameVerifier()
             hv.verify(SettingsApi.BASE_URL, p1)
@@ -93,14 +111,32 @@ class RetrofitModule {
             connectTimeout(SettingsApi.CONNECT_TIMEOUT, TimeUnit.SECONDS)
             writeTimeout(SettingsApi.WRITE_TIMEOUT, TimeUnit.SECONDS)
         }
+
+        client.addInterceptor(httpLoggingInterceptor).hostnameVerifier(object :HostnameVerifier {
+            override fun verify(p0: String?, p1: SSLSession?): Boolean {
+                val hv = HttpsURLConnection.getDefaultHostnameVerifier()
+                return hv.verify("i.instagram.com", p1)
+            }
+
+        })
         client.addInterceptor(httpLoggingInterceptor).hostnameVerifier { p0, p1 ->
             val hv = HttpsURLConnection.getDefaultHostnameVerifier()
-            hv.verify(SettingsApi.BASE_URL_INSTAGRAM, p1)
+            hv.verify("i.instagram.com", p1)
         }
+
+
+        client.addInterceptor(httpLoggingInterceptor)
         return client.build()
     }
 
     fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        val httpLoggingInterceptor = HttpLoggingInterceptor()
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
+        httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return httpLoggingInterceptor
+    }
+
+    fun getInstagramHttpLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS)
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)

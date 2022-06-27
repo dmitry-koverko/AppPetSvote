@@ -76,6 +76,14 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_userProfileFragment_to_selectCityFragment)
     }
 
+    override fun startSelectKindsFromAddPet() {
+        navController?.navigate(R.id.action_addPetFragment_to_petSelectKindsFragment)
+    }
+
+    override fun startSelectBreedsFromAddPet() {
+        navController?.navigate(R.id.action_addPetFragment_to_petSelectBreedsFragment)
+    }
+
     override fun back() {
         navController?.popBackStack()
     }

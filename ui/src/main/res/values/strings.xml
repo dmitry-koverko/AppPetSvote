@@ -91,5 +91,6 @@
     <string name="add_photo_nesarry">Одна фотография обязательно.</string>
     <string name="birthday">Дата рожения</string>
     <string name="sex">пол</string>
+    <string name="dialog_select_kind">Выбирите сначала вид вашего питомца.</string>
 
 </resources>

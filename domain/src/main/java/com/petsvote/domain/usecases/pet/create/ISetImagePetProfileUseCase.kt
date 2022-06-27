@@ -1,4 +1,4 @@
-package com.petsvote.domain.usecases.pet
+package com.petsvote.domain.usecases.pet.create
 
 interface ISetImagePetProfileUseCase {
 

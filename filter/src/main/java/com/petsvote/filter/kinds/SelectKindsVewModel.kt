@@ -24,7 +24,7 @@ class SelectKindsVewModel @Inject constructor(
 
 
     suspend fun getKinds() = withContext(Dispatchers.IO) {
-        kinds.emit(kindsUseCase.getKinds())
+        kinds.emit(kindsUseCase.getKinds(0))
     }
 
     fun setKindsFilter(list: List<Item>) {

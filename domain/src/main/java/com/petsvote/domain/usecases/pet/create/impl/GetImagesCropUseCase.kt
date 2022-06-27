@@ -1,8 +1,8 @@
-package com.petsvote.domain.usecases.pet.impl
+package com.petsvote.domain.usecases.pet.create.impl
 
 import com.petsvote.domain.entity.pet.PetPhoto
 import com.petsvote.domain.repository.IPetRepository
-import com.petsvote.domain.usecases.pet.IGetImagesCropUseCase
+import com.petsvote.domain.usecases.pet.create.IGetImagesCropUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

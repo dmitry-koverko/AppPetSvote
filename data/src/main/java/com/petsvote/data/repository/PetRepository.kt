@@ -1,6 +1,7 @@
 package com.petsvote.data.repository
 
 import com.petsvote.data.mappers.toPetPhotoList
+import com.petsvote.domain.entity.filter.Kind
 import com.petsvote.domain.entity.pet.PetPhoto
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
@@ -21,8 +22,9 @@ class PetRepository @Inject constructor(
 
     override suspend fun insertEmptyPetProfile() {
         profilePetDao.clearImagesCrop()
-        profilePetDao.insert(
-            EntityPetProfile(1, byteArrayOf(), emptyList(), "", -1, "", -1, "",  0, 0, "")
+        profilePetDao.insert(EntityPetProfile(imagesCrop = emptyList(), birthday = "", sex = 0))
+        profilePetDao.update(
+            EntityPetProfile(1, byteArrayOf(), emptyList(), "", -1, "", -1, "",  "", 0, "")
         )
     }
 
@@ -50,6 +52,38 @@ class PetRepository @Inject constructor(
 
     override suspend fun removeImagePet(id: Int) {
         profilePetDao.removeImagePet(id)
+    }
+
+    override suspend fun setPetName(name: String) {
+        profilePetDao.updateName(name)
+    }
+
+    override suspend fun getSelectKindId(): Int? {
+        return profilePetDao.getSimplePetProfile()?.kindId
+    }
+
+    override suspend fun setSelectKind(id: Int, title: String) {
+        profilePetDao.updateKind(id, title)
+    }
+
+    override suspend fun setSelectBreed(id: Int, title: String) {
+        profilePetDao.updateBreed(id, title)
+    }
+
+    override suspend fun getSelectBreed(): String {
+        return profilePetDao.getSimplePetProfile()?.breedTitle ?: ""
+    }
+
+    override suspend fun setSelectBirthday(date: String) {
+        profilePetDao.updateBirthday(date)
+    }
+
+    override suspend fun setSelectInsta(insta: String) {
+        profilePetDao.updateInst(insta)
+    }
+
+    override suspend fun setSelectSex(sex: Int) {
+       profilePetDao.updateSex(sex)
     }
 
 

@@ -1,15 +1,14 @@
 package com.petsvote.app.di
 
 import android.app.Application
-import android.app.Dialog
 import android.content.res.Configuration
-import android.content.res.Resources
 import com.petsvote.data.di.DataModule
 import com.petsvote.dialog.di.DialogDeps
 import com.petsvote.domain.di.*
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.pet.*
+import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
 import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
@@ -86,6 +85,15 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val getImagePetProfileUseCase: IGetImagePetProfileUseCase
     override val getImagesCropUseCase: IGetImagesCropUseCase
     override val getRemoveImageUseCase: IRemovePetImageUseCase
+    override val setNamePetUseCase: ISetPetNameUseCase
+    override val setKindPetUseCase: ISetKindPetUseCase
+    override val getKindPetUseCase: IGetKindPetUseCase
+    override val petGetBreedsPagingUseCase: IPetGetBreedsPagingUseCase
+    override val setPetBreedUseCase: ISetPetBreedUseCase
+    override val getBreedPetUseCase: IGetBreedPetUseCase
+    override val setBirthdayPetUseCase: ISetBirthdayPetUseCase
+    override val setSexPetUseCase: ISetSexPetUseCase
+    override val getInstagramUserNameUseCase: IGetInstagramUserNameUseCase
 
     @Component.Builder
     interface Builder {
