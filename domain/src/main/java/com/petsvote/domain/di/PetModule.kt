@@ -8,11 +8,18 @@ import com.petsvote.domain.usecases.pet.*
 import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.pet.create.impl.*
 import com.petsvote.domain.usecases.pet.impl.*
+import com.petsvote.domain.usecases.user.IRegisterUserUseCase
 import dagger.Module
 import dagger.Provides
 
 @Module
 class PetModule {
+
+    @Provides
+    fun provideFindPetUseCase(petRepository: IPetRepository): IFindPetUseCase {
+        return FindPetUseCase(petRepository = petRepository)
+    }
+
 
     @Provides
     fun provideGetInstagramUserNameUseCase(userRepository: IUserRepository): IGetInstagramUserNameUseCase {

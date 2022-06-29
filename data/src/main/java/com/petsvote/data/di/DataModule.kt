@@ -14,10 +14,7 @@ import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.domain.usecases.pet.create.IPetGetBreedsPagingUseCase
 import com.petsvote.domain.usecases.pet.create.impl.PetGetBreedsPagingUseCase
-import com.petsvote.retrofit.api.ApiInstagram
-import com.petsvote.retrofit.api.ConfigurationApi
-import com.petsvote.retrofit.api.RatingApi
-import com.petsvote.retrofit.api.UserApi
+import com.petsvote.retrofit.api.*
 import com.petsvote.room.dao.*
 import dagger.Module
 import dagger.Provides
@@ -27,11 +24,12 @@ class DataModule {
 
     @Provides
     fun providePetRepository(
+        petApi: PetApi,
         userDao: UserDao,
         petProfileDao: PetProfileDao,
         localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
     ): IPetRepository {
-        return PetRepository( userDao = userDao, profilePetDao = petProfileDao, getLocaleLanguageCodeUseCase = localeLanguageCodeUseCase)
+        return PetRepository(petApi = petApi, userDao = userDao, profilePetDao = petProfileDao, getLocaleLanguageCodeUseCase = localeLanguageCodeUseCase)
     }
 
     @Provides

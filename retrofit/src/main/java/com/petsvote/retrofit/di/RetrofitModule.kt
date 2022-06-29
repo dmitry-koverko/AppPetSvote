@@ -3,10 +3,7 @@ package com.petsvote.retrofit.di
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.petsvote.retrofit.SettingsApi
 import com.petsvote.retrofit.adapter.NetworkResponseAdapterFactory
-import com.petsvote.retrofit.api.ApiInstagram
-import com.petsvote.retrofit.api.ConfigurationApi
-import com.petsvote.retrofit.api.RatingApi
-import com.petsvote.retrofit.api.UserApi
+import com.petsvote.retrofit.api.*
 import dagger.Module
 import dagger.Provides
 import kotlinx.serialization.json.Json
@@ -35,6 +32,14 @@ class RetrofitModule {
             getInstagramOkHttpClient(getInstagramHttpLoggingInterceptor()),
             SettingsApi.BASE_URL_INSTAGRAM
         ).create(ApiInstagram::class.java)
+    }
+
+    @Provides
+    fun providePetRetrofitApi(): PetApi {
+        return buildRetrofit(
+            getOkHttpClient(getHttpLoggingInterceptor()),
+            SettingsApi.BASE_URL
+        ).create(PetApi::class.java)
     }
 
     @Provides

@@ -94,6 +94,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val setBirthdayPetUseCase: ISetBirthdayPetUseCase
     override val setSexPetUseCase: ISetSexPetUseCase
     override val getInstagramUserNameUseCase: IGetInstagramUserNameUseCase
+    override val findPetUseCase: IFindPetUseCase
 
     @Component.Builder
     interface Builder {

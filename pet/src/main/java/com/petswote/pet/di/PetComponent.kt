@@ -4,11 +4,13 @@ import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.IGetKindsUseCase
+import com.petsvote.domain.usecases.pet.IFindPetUseCase
 import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.user.*
 import com.petswote.pet.add.AddPetFragment
 import com.petswote.pet.breeds.PetSelectBreedsFragment
 import com.petswote.pet.crop.CropPetImageFragment
+import com.petswote.pet.find.FindPetFragment
 import com.petswote.pet.kinds.PetSelectKindsFragment
 import dagger.Component
 import dagger.Module
@@ -27,6 +29,9 @@ interface PetComponent {
     fun injectCrop(cropPetImageFragment: CropPetImageFragment)
     fun injectSelectKinds(petSelectKindsFragment: PetSelectKindsFragment)
     fun injectSelectBreeds(petSelectBreedsFragment: PetSelectBreedsFragment)
+    fun injectFindPet(findPetFragment: FindPetFragment) {
+
+    }
 
     @Component.Builder
     interface Builder{
@@ -71,6 +76,7 @@ interface PetDeps{
     val setBirthdayPetUseCase: ISetBirthdayPetUseCase
     val setSexPetUseCase: ISetSexPetUseCase
     val getInstagramUserNameUseCase: IGetInstagramUserNameUseCase
+    val findPetUseCase: IFindPetUseCase
 }
 
 val Context.petDepsProvider: PetDepsProvider

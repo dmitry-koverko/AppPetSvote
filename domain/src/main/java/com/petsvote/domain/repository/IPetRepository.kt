@@ -1,6 +1,7 @@
 package com.petsvote.domain.repository
 
 import com.petsvote.domain.entity.filter.Kind
+import com.petsvote.domain.entity.pet.FindPet
 import com.petsvote.domain.entity.pet.PetPhoto
 import kotlinx.coroutines.flow.Flow
 
@@ -20,5 +21,6 @@ interface IPetRepository {
     suspend fun setSelectBirthday(date: String)
     suspend fun setSelectInsta(insta: String)
     suspend fun setSelectSex(sex: Int)
+    suspend fun findPet(petId: Int): FindPet?
 
 }

@@ -13,6 +13,7 @@ interface MainNavigation {
     fun startSimpleUserFromSplash()
     fun startProfileFromSplash()
     fun startAddPetFromSplash()
+    fun startFindPetFromSplash()
     fun startFilter()
     fun startSelectKinds()
     fun startSelectBreeds()

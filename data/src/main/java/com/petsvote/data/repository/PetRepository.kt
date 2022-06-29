@@ -1,10 +1,15 @@
 package com.petsvote.data.repository
 
+import com.petsvote.data.mappers.checkResult
+import com.petsvote.data.mappers.toLocalFind
 import com.petsvote.data.mappers.toPetPhotoList
 import com.petsvote.domain.entity.filter.Kind
 import com.petsvote.domain.entity.pet.PetPhoto
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
+import com.petsvote.retrofit.api.PetApi
+import com.petsvote.retrofit.entity.pet.FindPet
+import com.petsvote.retrofit.entity.user.User
 import com.petsvote.room.dao.PetProfileDao
 import com.petsvote.room.dao.UserDao
 import com.petsvote.room.entity.EntityPetProfile
@@ -15,16 +20,17 @@ import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class PetRepository @Inject constructor(
+    private val petApi: PetApi,
     private val userDao: UserDao,
     private val profilePetDao: PetProfileDao,
     private val getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
-): IPetRepository {
+) : IPetRepository {
 
     override suspend fun insertEmptyPetProfile() {
         profilePetDao.clearImagesCrop()
         profilePetDao.insert(EntityPetProfile(imagesCrop = emptyList(), birthday = "", sex = 0))
         profilePetDao.update(
-            EntityPetProfile(1, byteArrayOf(), emptyList(), "", -1, "", -1, "",  "", 0, "")
+            EntityPetProfile(1, byteArrayOf(), emptyList(), "", -1, "", -1, "", "", 0, "")
         )
     }
 
@@ -43,7 +49,7 @@ class PetRepository @Inject constructor(
         }
     }
 
-    override suspend fun getImagesCrop(): Flow<List<PetPhoto>> = flow{
+    override suspend fun getImagesCrop(): Flow<List<PetPhoto>> = flow {
         profilePetDao.getImagesCrop().collect {
             emit(it.toPetPhotoList())
         }
@@ -83,7 +89,17 @@ class PetRepository @Inject constructor(
     }
 
     override suspend fun setSelectSex(sex: Int) {
-       profilePetDao.updateSex(sex)
+        profilePetDao.updateSex(sex)
+    }
+
+    override suspend fun findPet(petId: Int): com.petsvote.domain.entity.pet.FindPet? {
+        return checkResult<FindPet>(
+            petApi.findPet(
+                userDao.getToken(),
+                lang = getLocaleLanguageCodeUseCase.getLanguage(),
+                petId
+            )
+        )?.toLocalFind()
     }
 
 

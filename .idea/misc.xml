@@ -27,6 +27,7 @@
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/activity_crop_pet.xml" value="0.38697916666666665" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_add_pet.xml" value="0.38697916666666665" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_crop_pet_image.xml" value="0.3859375" />
+        <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_find_pet.xml" value="0.38697916666666665" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_select_breeds.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_select_kind.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/gp_insta.xml" value="0.3859375" />
@@ -77,6 +78,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_star_active.xml" value="0.228" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote_selected.xml" value="0.139" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_keyboard_clear.xml" value="0.253" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_svg_disable.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_white.xml" value="0.332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_more.xml" value="0.269" />
@@ -104,6 +106,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/semibold.xml" value="0.2574074074074074" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/sfdefault.xml" value="0.40974358974358976" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/font/sfheavy.xml" value="0.25462962962962965" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_keyboard.xml" value="0.25" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_layout.xml" value="0.358695652173913" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_tab_latout_two.xml" value="0.25416666666666665" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/layout/besie_tab_layout.xml" value="0.4" />

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_splashFragment_to_addPetFragment"
             app:destination="@id/addPetFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_findPetFragment"
+            app:destination="@id/findPetFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_register"
@@ -149,6 +152,10 @@
         android:id="@+id/petSelectBreedsFragment"
         android:name="com.petswote.pet.breeds.PetSelectBreedsFragment"
         android:label="PetSelectBreedsFragment" />
+    <fragment
+        android:id="@+id/findPetFragment"
+        android:name="com.petswote.pet.find.FindPetFragment"
+        android:label="FindPetFragment" />
 
 
 </navigation>
