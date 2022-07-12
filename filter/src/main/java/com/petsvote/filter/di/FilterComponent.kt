@@ -56,6 +56,7 @@ interface FilterDeps{
     val breedsPagingUseCase: IGetBreedsPagingUseCase
     val setMaxAgeUseCase: ISetMaxAgeUseCase
     val setMinAgeUseCase: ISetMinAgeUseCase
+    val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
 }
 
 val Context.filterDepsProvider: FilterDepsProvider

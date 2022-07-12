@@ -11,8 +11,11 @@ import com.petsvote.legal.R
 import com.petsvote.legal.databinding.FragmentTermsBinding
 import com.petsvote.legal.di.TermsComponentViewModel
 import com.petsvote.navigation.MainNavigation
+import com.petsvote.ui.RippleConstraintLayout
 import dagger.Lazy
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
@@ -61,10 +64,8 @@ open class TermsFragment: BaseFragment(R.layout.fragment_terms) {
            viewModel._dataPrivacyPolicy.collect {
                if(it.isNotEmpty()) {
                    binding?.containerPolicy?.setOnClickListener { view ->
-                       view.isPressed = true
                        navigation.startInfoTerms(bundleOf(TERMS_KEY to it, TERMS_ID to 1))
                    }
-
                }
            }
         }
@@ -73,7 +74,6 @@ open class TermsFragment: BaseFragment(R.layout.fragment_terms) {
             viewModel._dataUserAgreement.collect {
                 if(it.isNotEmpty()) {
                     binding?.containerTerms?.setOnClickListener { view ->
-                        view.isPressed = true
                         navigation.startInfoTerms(bundleOf(TERMS_KEY to it, TERMS_ID to 2))
                     }
                 }

@@ -10,10 +10,13 @@ import com.petsvote.core.adapter.ItemFingerprint
 import com.petsvote.domain.entity.pet.RatingFilterLocationType
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.RatingPetItemType
+import com.petsvote.domain.entity.pet.SimpleItem
 import com.petsvote.rating.databinding.ItemRatingBinding
 import com.petsvote.rating.databinding.ItemTopBinding
 
-class TopRatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
+class TopRatingFingerprint(
+    private val onClick: (RatingPet) -> Unit
+) : ItemFingerprint<ItemRatingBinding, RatingPet> {
 
     override fun isRelativeItem(item: Item) = item is RatingPet
 
@@ -24,7 +27,7 @@ class TopRatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
         parent: ViewGroup
     ): BaseViewHolder<ItemRatingBinding, RatingPet> {
         val binding = ItemRatingBinding.inflate(layoutInflater, parent, false)
-        return TopRatingViewHolder(binding)
+        return TopRatingViewHolder(binding, onClick)
     }
 
     override fun getDiffUtil() = diffUtil
@@ -41,7 +44,8 @@ class TopRatingFingerprint : ItemFingerprint<ItemRatingBinding, RatingPet> {
 }
 
 class TopRatingViewHolder(
-    binding: ItemRatingBinding
+    binding: ItemRatingBinding,
+    private val onClick: (RatingPet) -> Unit
 ) : BaseViewHolder<ItemRatingBinding, RatingPet>(binding) {
 
 
@@ -85,6 +89,8 @@ class TopRatingViewHolder(
                 RatingPetItemType.TOPADDPET -> binding.root.setTopAppPetLP()
                 RatingPetItemType.NULLABLE -> binding.root.setNullableLP()
             }
+
+            binding.root.setOnClickListener { onClick(item) }
 //            if (item.itemType == RatingPetItemType.DEFAULT || item.itemType == RatingPetItemType.TOP) {
 //                binding.root.setMask(item.isUserPet)
 //                if (item.photos.isNotEmpty())

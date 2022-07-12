@@ -37,17 +37,17 @@ class RatingFilterRepository @Inject constructor(
         ratingFilterDao.updateKinds(kinds)
     }
 
+
     override suspend fun setDefaultRatingFilter() {
-        ratingFilterDao.insert(EntityRatingFilter(
+        ratingFilterDao.reset(
             type = null,
             sex = null,
-            city_id = null,
-            country_id = null,
-            age_between_max = 0,
+            citiId = null,
+            countryId = null,
+            age_between_max = 30,
             age_between_min = 0,
             id = null,
-            breed_id = null
-        ))
+            breed_id = null)
     }
 
     override suspend fun setRatingFilterType(typeRating: RatingFilterType) {
@@ -70,5 +70,20 @@ class RatingFilterRepository @Inject constructor(
 
     override suspend fun setMinAge(min: Int) {
         ratingFilterDao.updateMinAge(min)
+    }
+
+    override suspend fun insertDefault() {
+        ratingFilterDao.insert(
+            EntityRatingFilter(
+                type = null,
+                sex = null,
+                city_id = null,
+                country_id = null,
+                age_between_max = 30,
+                age_between_min = 0,
+                id = null,
+                breed_id = null
+          )
+        )
     }
 }

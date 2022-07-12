@@ -4,12 +4,14 @@ import android.graphics.drawable.Drawable
 import android.media.Image
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestListener
 
 fun ImageView.loadUrl(url: String){
     Glide
         .with(this)
         .load(url)
+        .diskCacheStrategy(DiskCacheStrategy.DATA)
         .centerCrop()
         .into(this);
 }

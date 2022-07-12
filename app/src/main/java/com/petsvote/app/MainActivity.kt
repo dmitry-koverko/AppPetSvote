@@ -3,15 +3,13 @@ package com.petsvote.app
 import android.animation.Animator
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 
@@ -24,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val navigator: Navigator by lazy {
         XInjectionManager.findComponent<Navigator>()
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

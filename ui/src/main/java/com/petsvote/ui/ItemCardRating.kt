@@ -66,77 +66,77 @@ class ItemCardRating @JvmOverloads constructor(
     }
 
     fun setTopLP() {
-        removeAllViews()
-        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
-        maskImage = findViewById<ImageView>(R.id.mask)
-        carImage = findViewById<ImageView>(R.id.image)
-        nameTextView = findViewById<TextView>(R.id.name)
-        locationTextView = findViewById<TextView>(R.id.location)
-        corona = findViewById<ImageView>(R.id.corona)
-        positionTextView = findViewById<TextView>(R.id.position)
-
-        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
-        lpTop.rightMargin = dpToPx(8f, context)
-        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
-
-
-        var lpName = nameTextView?.layoutParams as MarginLayoutParams
-        lpName.leftMargin = com.petsvote.ui.dpToPx(16f, context)
-        nameTextView?.layoutParams = lpName
-
-        var lpLocation = locationTextView?.layoutParams as MarginLayoutParams
-        lpLocation.leftMargin = com.petsvote.ui.dpToPx(16f, context)
-        locationTextView?.layoutParams = lpLocation
-
-        var lpPosition = positionTextView?.layoutParams as MarginLayoutParams
-        lpPosition.leftMargin = com.petsvote.ui.dpToPx(16f, context)
-        positionTextView?.layoutParams = lpPosition
+//        removeAllViews()
+//        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
+//        maskImage = findViewById<ImageView>(R.id.mask)
+//        carImage = findViewById<ImageView>(R.id.image)
+//        nameTextView = findViewById<TextView>(R.id.name)
+//        locationTextView = findViewById<TextView>(R.id.location)
+//        corona = findViewById<ImageView>(R.id.corona)
+//        positionTextView = findViewById<TextView>(R.id.position)
+//
+//        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+//        lpTop.rightMargin = dpToPx(8f, context)
+//        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
+//
+//
+//        var lpName = nameTextView?.layoutParams as MarginLayoutParams
+//        lpName.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+//        nameTextView?.layoutParams = lpName
+//
+//        var lpLocation = locationTextView?.layoutParams as MarginLayoutParams
+//        lpLocation.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+//        locationTextView?.layoutParams = lpLocation
+//
+//        var lpPosition = positionTextView?.layoutParams as MarginLayoutParams
+//        lpPosition.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+//        positionTextView?.layoutParams = lpPosition
 
     }
 
     fun setNullableLP() {
-        removeAllViews()
-        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
-
-        findViewById<FrameLayout>(R.id.root).layoutParams =
-            LayoutParams(0, 0)
+//        removeAllViews()
+//        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
+//
+//        findViewById<FrameLayout>(R.id.root).layoutParams =
+//            LayoutParams(0, 0)
 
     }
 
     fun setDefaultLP() {
-        removeAllViews()
-        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
-        maskImage = findViewById<ImageView>(R.id.mask)
-        carImage = findViewById<ImageView>(R.id.image)
-        nameTextView = findViewById<TextView>(R.id.name)
-        locationTextView = findViewById<TextView>(R.id.location)
-        corona = findViewById<ImageView>(R.id.corona)
-        findViewById<FrameLayout>(R.id.root).layoutParams =
-            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
+//        removeAllViews()
+//        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
+//        maskImage = findViewById<ImageView>(R.id.mask)
+//        carImage = findViewById<ImageView>(R.id.image)
+//        nameTextView = findViewById<TextView>(R.id.name)
+//        locationTextView = findViewById<TextView>(R.id.location)
+//        corona = findViewById<ImageView>(R.id.corona)
+//        findViewById<FrameLayout>(R.id.root).layoutParams =
+//            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
 
     }
 
     fun setAppPetLP() {
-        this.removeAllViews()
-        inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
-
-        findViewById<FrameLayout>(R.id.root).layoutParams =
-            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
-
-        initSFTextViewParams()
+//        this.removeAllViews()
+//        inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
+//
+//        findViewById<FrameLayout>(R.id.root).layoutParams =
+//            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
+//
+//        initSFTextViewParams()
 
     }
 
     fun setTopAppPetLP() {
-        this.removeAllViews()
-
-        inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
-
-        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
-        lpTop.rightMargin = dpToPx(8f, context)
-
-        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
-        initSFTextViewParams()
+//        this.removeAllViews()
+//
+//        inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
+//
+//        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+//        lpTop.rightMargin = dpToPx(8f, context)
+//
+//        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
+//        initSFTextViewParams()
     }
 
     private fun initSFTextViewParams() {
@@ -165,11 +165,11 @@ class ItemCardRating @JvmOverloads constructor(
     }
 
     fun setMask(isUserPet: Boolean) {
-        val icon = when (isUserPet) {
-            true -> R.drawable.linear_mask_user
-            false -> R.drawable.linear_mask_default
-        }
-        maskImage?.loadFromResources(icon)
+//        val icon = when (isUserPet) {
+//            true -> R.drawable.linear_mask_user
+//            false -> R.drawable.linear_mask_default
+//        }
+//        maskImage?.loadFromResources(icon)
     }
 
     fun setCorona(isShow: Boolean = false){

@@ -31,8 +31,10 @@ class FindPetFragment: BaseFragment(R.layout.fragment_find_pet) {
         binding = FragmentFindPetBinding.bind(view)
 
         binding?.findContainer?.setOnClickListener {
-            viewModel.findPet(20959902)
+            viewModel.findPet(72160874)
         }
+
+        binding?.home?.setOnClickListener { activity?.finish() }
     }
 
     override fun initObservers() {

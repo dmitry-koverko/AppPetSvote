@@ -1,5 +1,6 @@
 package com.petsvote.navigation
 
+import android.app.Activity
 import android.os.Bundle
 
 interface MainNavigation {
@@ -22,6 +23,9 @@ interface MainNavigation {
     fun startSelectCity()
     fun startSelectKindsFromAddPet()
     fun startSelectBreedsFromAddPet()
+    fun startFilterActivityForResult(activity: Activity)
+    fun startActivityFindPet(activity: Activity)
+    fun startActivityPetInfo(activity: Activity)
 
 
     fun back()

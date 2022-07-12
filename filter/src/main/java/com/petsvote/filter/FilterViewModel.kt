@@ -22,7 +22,8 @@ class FilterViewModel @Inject constructor(
     private val filterUseCase: IGetFilterUseCase,
     private val setSexFilterUseCase: ISetSexUseCase,
     private val setMaxAgeUseCase: ISetMaxAgeUseCase,
-    private val setMinAgeUseCase: ISetMinAgeUseCase
+    private val setMinAgeUseCase: ISetMinAgeUseCase,
+    private val setDefaultRatingFilter: ISetDefaultRatingFilterUseCase
 ) : BaseViewModel() {
 
     var kind = MutableStateFlow<String>("")
@@ -46,10 +47,22 @@ class FilterViewModel @Inject constructor(
         }
     }
 
+    fun setMax(max: Int){
+        viewModelScope.launch (Dispatchers.IO){ setMaxAgeUseCase.setMax(max)}
+    }
+
+    fun setMin(min: Int){
+        viewModelScope.launch (Dispatchers.IO){ setMinAgeUseCase.setMin(min)}
+    }
+
     fun setSex(tabSex: Int){
         viewModelScope.launch {
             setSexFilterUseCase.setSex(tabSex)
         }
+    }
+
+    fun resetFilter(){
+        viewModelScope.launch (Dispatchers.IO){ setDefaultRatingFilter.setDefaultRatingFilter() }
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -57,7 +70,8 @@ class FilterViewModel @Inject constructor(
         private val filterUseCase: IGetFilterUseCase,
         private val setSexFilterUseCase: ISetSexUseCase,
         private val setMaxAgeUseCase: ISetMaxAgeUseCase,
-        private val setMinAgeUseCase: ISetMinAgeUseCase
+        private val setMinAgeUseCase: ISetMinAgeUseCase,
+        private val setDefaultRatingFilter: ISetDefaultRatingFilterUseCase
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == FilterViewModel::class.java)
@@ -65,7 +79,8 @@ class FilterViewModel @Inject constructor(
                 filterUseCase = filterUseCase,
                 setSexFilterUseCase = setSexFilterUseCase,
                 setMaxAgeUseCase = setMaxAgeUseCase,
-                setMinAgeUseCase = setMinAgeUseCase
+                setMinAgeUseCase = setMinAgeUseCase,
+                setDefaultRatingFilter = setDefaultRatingFilter
             ) as T
         }
 

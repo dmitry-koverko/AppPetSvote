@@ -86,6 +86,7 @@ class DotIndicator @JvmOverloads constructor(
         }
     var changeLayout = true
     private val BESIEDOT = 128
+    var typeAnimation = 0;//0 - from center // 1- from click
 
     init {
         context.withStyledAttributes(attrs, R.styleable.DotIndicator){
@@ -118,7 +119,8 @@ class DotIndicator @JvmOverloads constructor(
     }
 
     private fun drawRipple(){
-        canvas!!.drawCircle(xTouch, yTouth, rippleRadius, pRipple!!);
+        if(typeAnimation == 1) canvas!!.drawCircle(xTouch, yTouth, rippleRadius, pRipple);
+        else canvas!!.drawCircle(widthView /2f, heightView /2f, rippleRadius, pRipple);
         if(rippleRadius >= widthView){
             isAmim = false
             invalidate()

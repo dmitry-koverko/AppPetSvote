@@ -43,6 +43,7 @@ open class BesieLayout @JvmOverloads constructor(
                 paint.color = getColor(R.styleable.BesieLayout_bl_background,
                     ContextCompat.getColor(context, android.R.color.transparent))
                 changeLayout = getBoolean(R.styleable.BesieLayout_bl_change_layout, true)
+                typeAnimation = getInteger(R.styleable.BesieLayout_bl_ripple_type, 0)
 
             }
             dotColor = getColor(R.styleable.BesieLayout_bl_background,

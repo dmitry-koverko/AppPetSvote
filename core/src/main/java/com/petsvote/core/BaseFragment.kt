@@ -5,11 +5,14 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 
 abstract class BaseFragment(id: Int): Fragment(id) {
@@ -25,7 +28,15 @@ abstract class BaseFragment(id: Int): Fragment(id) {
     abstract fun initObservers()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObservers()
+        object : CountDownTimer(200, 200) {
+
+            override fun onTick(millisUntilFinished: Long) {
+            }
+
+            override fun onFinish() {
+                initObservers()
+            }
+        }.start()
     }
 
     fun requestPermissions() {

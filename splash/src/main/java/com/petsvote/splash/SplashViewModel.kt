@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
+import com.petsvote.domain.usecases.filter.ISetInsertDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.pet.ISetEmptyPetProfileUseCase
 import com.petsvote.domain.usecases.pet.impl.SetEmptyPetProfileUseCase
 import com.petsvote.domain.usecases.user.ICheckLoginUserUseCase
@@ -23,7 +24,8 @@ class SplashViewModel @Inject constructor(
     private val getCurrentUserUseCase: IGetCurrentUserUseCase,
     private val breedsUseCase: IGetBreedsUseCase,
     private val setEmptyUserProfileUseCase: ISetEmptyUserProfileUseCase,
-    private val setEmptyPetProfileUseCase: ISetEmptyPetProfileUseCase
+    private val setEmptyPetProfileUseCase: ISetEmptyPetProfileUseCase,
+    private val setInsertDefaultRatingFilterUseCase: ISetInsertDefaultRatingFilterUseCase
 ) : BaseViewModel() {
 
     private var isLoginUser = MutableStateFlow<Boolean?>(null)
@@ -36,6 +38,10 @@ class SplashViewModel @Inject constructor(
 
         launch {
             setEmptyPetProfileUseCase.setEmptyPetProfile()
+        }
+
+        launch {
+            setInsertDefaultRatingFilterUseCase.insert()
         }
 
         val checkLogin = async {
@@ -64,7 +70,8 @@ class SplashViewModel @Inject constructor(
         private val getCurrentUserUseCase: IGetCurrentUserUseCase,
         private val breedsUseCase: IGetBreedsUseCase,
         private val setEmptyUserProfileUseCase: ISetEmptyUserProfileUseCase,
-        private val setEmptyPetProfileUseCase: ISetEmptyPetProfileUseCase
+        private val setEmptyPetProfileUseCase: ISetEmptyPetProfileUseCase,
+        private val setInsertDefaultRatingFilterUseCase: ISetInsertDefaultRatingFilterUseCase
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == SplashViewModel::class.java)
@@ -73,7 +80,8 @@ class SplashViewModel @Inject constructor(
                 getCurrentUserUseCase = getCurrentUserUseCase,
                 breedsUseCase = breedsUseCase,
                 setEmptyUserProfileUseCase = setEmptyUserProfileUseCase,
-                setEmptyPetProfileUseCase = setEmptyPetProfileUseCase
+                setEmptyPetProfileUseCase = setEmptyPetProfileUseCase,
+                setInsertDefaultRatingFilterUseCase = setInsertDefaultRatingFilterUseCase
             ) as T
         }
 

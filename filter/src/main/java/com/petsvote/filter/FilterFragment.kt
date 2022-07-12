@@ -3,6 +3,7 @@ package com.petsvote.filter
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,6 +53,17 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
 
         binding?.containerBreeds?.setOnClickListener {
             navigation.startSelectBreeds()
+        }
+
+        binding?.close?.setOnClickListener {
+            viewModel.resetFilter()
+            activity?.finish()
+        }
+
+        binding?.applyRipple?.setOnClickListener {
+            binding?.sfMaxValue?.text?.toString()?.toInt()?.let { it1 -> viewModel.setMax(it1) }
+            binding?.sfMinValue?.text?.toString()?.toInt()?.let { it1 -> viewModel.setMin(it1) }
+            activity?.finish()
         }
 
         initTabs()
@@ -234,6 +246,20 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
     override fun onAttach(context: Context) {
         super.onAttach(context)
         filterComponentViewModel.filterComponent.inject(this)
+
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                viewModel.resetFilter()
+                activity?.finish()
+            }
+
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
     }
 
     override fun selected(tab: BesieTabSelected) {
@@ -245,5 +271,6 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
         }
         viewModel.setSex(index)
     }
+
 
 }

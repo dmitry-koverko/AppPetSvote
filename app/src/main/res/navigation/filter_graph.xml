@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/filterFragment"
+    android:id="@+id/filter_graph">
+
+    <fragment
+        tools:layout="@layout/fragment_filter"
+        android:id="@+id/filterFragment"
+        android:name="com.petsvote.filter.FilterFragment"
+        android:label="FilterFragment" >
+        <action
+            app:enterAnim="@anim/to_term_info"
+            app:exitAnim="@anim/from_term"
+            app:popEnterAnim="@anim/to_term"
+            app:popExitAnim="@anim/from_term_info"
+            android:id="@+id/action_filterFragment_to_selectKindsFragment"
+            app:destination="@id/selectKindsFragment" />
+        <action
+            app:enterAnim="@anim/to_term_info"
+            app:exitAnim="@anim/from_term"
+            app:popEnterAnim="@anim/to_term"
+            app:popExitAnim="@anim/from_term_info"
+            android:id="@+id/action_filterFragment_to_selectBreedsFragment"
+            app:destination="@id/selectBreedsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectKindsFragment"
+        android:name="com.petsvote.filter.kinds.SelectKindsFragment"
+        android:label="SelectKindsFragment" />
+    <fragment
+        android:id="@+id/selectBreedsFragment"
+        android:name="com.petsvote.filter.breeds.SelectBreedsFragment"
+        android:label="SelectBreedsFragment" />
+
+</navigation>

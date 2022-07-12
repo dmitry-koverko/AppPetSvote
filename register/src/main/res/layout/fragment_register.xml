@@ -51,6 +51,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.petsvote.ui.BesieLayout
+        app:bl_ripple_type="1"
         app:bl_background="@color/bg_sign_in_with_google"
         app:bl_ripple="true"
         app:bl_ripple_color="@color/ripple_sign_in_with_google"
@@ -94,6 +95,7 @@
         android:layout_height="wrap_content">
 
         <com.petsvote.ui.BesieLayout
+            app:bl_ripple_type="1"
             android:id="@+id/legal_bl"
             app:bl_ripple="true"
             app:bl_ripple_color="@color/legal_ripple_color"

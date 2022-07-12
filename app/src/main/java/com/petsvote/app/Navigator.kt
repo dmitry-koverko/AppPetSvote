@@ -1,5 +1,7 @@
 package com.petsvote.app
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.NavController
 import com.petsvote.navigation.MainNavigation
@@ -7,6 +9,7 @@ import com.petsvote.navigation.MainNavigation
 class Navigator: MainNavigation {
 
     private var navController: NavController? = null
+
 
     fun bind(navController: NavController) {
         this.navController = navController
@@ -37,7 +40,7 @@ class Navigator: MainNavigation {
     }
 
     override fun startFilterFromSplash() {
-        navController?.navigate(R.id.action_splashFragment_to_filterFragment)
+        //navController?.navigate(R.id.action_splashFragment_to_filterFragment)
     }
 
     override fun startSimpleUserFromSplash() {
@@ -57,7 +60,7 @@ class Navigator: MainNavigation {
     }
 
     override fun startFilter() {
-        navController?.navigate(R.id.action_tabsFragment_to_filterFragment)
+
     }
 
     override fun startSelectKinds() {
@@ -88,6 +91,19 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_addPetFragment_to_petSelectBreedsFragment)
     }
 
+    override fun startFilterActivityForResult(activity: Activity) {
+        activity.startActivity(Intent(activity, FilterActivity::class.java))
+    }
+
+    override fun startActivityFindPet(activity: Activity) {
+        activity.startActivity(Intent(activity, FindPetActivity::class.java))
+    }
+
+    override fun startActivityPetInfo(activity: Activity) {
+        activity.startActivity(Intent(activity, PetInfoActivity::class.java))
+    }
+
+
     override fun back() {
         navController?.popBackStack()
     }
@@ -95,4 +111,6 @@ class Navigator: MainNavigation {
     override fun popUp() {
         navController?.navigateUp()
     }
+
+
 }

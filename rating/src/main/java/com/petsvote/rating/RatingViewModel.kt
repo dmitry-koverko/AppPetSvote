@@ -7,20 +7,18 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.petsvote.core.BaseViewModel
 import com.petsvote.core.adapter.Item
-import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.user.UserPet
-import com.petsvote.domain.usecases.filter.IGetRatingFilterTypeUseCase
+import com.petsvote.domain.usecases.filter.*
+import com.petsvote.domain.usecases.filter.impl.GetRatingFilterTextUseCase
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
-import com.petsvote.domain.usecases.filter.IGetRatingFilterUseCase
-import com.petsvote.domain.usecases.filter.ISetBreedIdInRatingFilterUseCase
-import com.petsvote.domain.usecases.filter.ISetRatingFilterTypeUseCase
-import com.petsvote.domain.usecases.filter.impl.SetRatingFilterTypeUseCase
 import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.ui.maintabs.BesieTabSelected
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -32,13 +30,15 @@ class RatingViewModel @Inject constructor(
     private val setBreedIdInRatingFilterUseCase: ISetBreedIdInRatingFilterUseCase,
     private val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase,
     private val checkLocationUserUseCase: ICheckLocationUserUseCase,
-    private val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
+    private val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase,
+    private val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase
 ) : BaseViewModel() {
 
     var pages = MutableStateFlow<PagingData<Item>?>(null)
     var userPets = MutableStateFlow<List<UserPet>>(emptyList())
     var filterType = MutableStateFlow(RatingFilterType.GLOBAL)
     var isLocationUser = MutableStateFlow(false)
+    var filterText = MutableStateFlow<String?>(null)
 
     suspend fun getRating() = withContext(Dispatchers.IO){
         setBreedIdInRatingFilterUseCase.setBredIdRatingFilter(null)
@@ -55,8 +55,8 @@ class RatingViewModel @Inject constructor(
     }
 
     suspend fun getRatingFilter()= withContext(Dispatchers.IO){
-        getRatingFilterUseCase.getRatingFilter().onEach {
-            log(it.toString())
+        getRatingFilterTextUseCase.getFilter().collect {
+            filterText.emit(it)
         }
     }
 
@@ -94,7 +94,8 @@ class RatingViewModel @Inject constructor(
         private val setBreedIdInRatingFilterUseCase: ISetBreedIdInRatingFilterUseCase,
         private val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase,
         private val checkLocationUserUseCase: ICheckLocationUserUseCase,
-        private val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
+        private val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase,
+        private val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase
     )
         : ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -106,7 +107,8 @@ class RatingViewModel @Inject constructor(
                 setBreedIdInRatingFilterUseCase = setBreedIdInRatingFilterUseCase,
                 ratingFilterTypeUseCase = ratingFilterTypeUseCase,
                 checkLocationUserUseCase = checkLocationUserUseCase,
-                setRatingFilterTypeUseCase = setRatingFilterTypeUseCase) as T
+                setRatingFilterTypeUseCase = setRatingFilterTypeUseCase,
+            getRatingFilterTextUseCase = getRatingFilterTextUseCase) as T
         }
 
     }

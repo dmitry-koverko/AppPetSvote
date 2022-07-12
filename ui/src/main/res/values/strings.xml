@@ -60,6 +60,7 @@
     <string name="n_kinds">Разные виды</string>
     <string name="breed_upper">Порода</string>
     <string name="no_breeds">Без породы</string>
+    <string name="dm">дм</string>
 
     <string name="owner">хозяин</string>
     <string name="getrate">Получил оценку</string>

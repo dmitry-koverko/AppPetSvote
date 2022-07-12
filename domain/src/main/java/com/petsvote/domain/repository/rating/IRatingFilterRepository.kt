@@ -14,4 +14,5 @@ interface IRatingFilterRepository {
     suspend fun setSexRatingFilter(sex: String?)
     suspend fun setMaxAge(max: Int)
     suspend fun setMinAge(min: Int)
+    suspend fun insertDefault()
 }

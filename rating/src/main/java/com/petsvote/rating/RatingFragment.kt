@@ -61,7 +61,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private var fragmentScope = CoroutineScope(Dispatchers.Main + Job())
 
     var binding: FragmentRatingCollapsingBinding? = null
-    private var ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint()))
+    private var ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint(::onClickPet)))
     private val findPetAdapter = FingerprintListAdapter(listOf(FindPetFingerprint(::onFindPet)))
     private val userPetsAdapter =
         FingerprintListAdapter(listOf(UserPetFingerprint(::onClickUserPet)))
@@ -113,7 +113,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
     private fun initFilter() {
         binding?.imageFilter?.setOnClickListener {
-            navigation.startFilter()
+            activity?.let { it1 -> navigation.startFilterActivityForResult(it1) }
         }
     }
 
@@ -230,6 +230,14 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
+            viewModel.filterText.collect {
+                it?.let { textFilter ->
+                   binding?.filterText?.text = textFilter
+                }
+            }
+        }
+//
+        lifecycleScope.launchWhenStarted {
             viewModel.pages.collect {
                 it?.let { page ->
                     ratingAdapter.submitData(page)
@@ -238,7 +246,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
-
+//
         lifecycleScope.launchWhenResumed {
             viewModel.userPets.collect {
                 for (i in 0 until it.size) {
@@ -250,7 +258,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 userPetsAdapter.submitList(it)
             }
         }
-
+//
         lifecycleScope.launchWhenStarted {
             viewModel.filterType.collect {
                 when(it){
@@ -259,12 +267,12 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.isLocationUser.collect {
-                binding?.tabs?.isUserLocation = it
-            }
-        }
+//
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.isLocationUser.collect {
+//                binding?.tabs?.isUserLocation = it
+//            }
+//        }
     }
 
     override fun onAttach(context: Context) {
@@ -273,7 +281,11 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun onFindPet(item: SimpleItem) {
-        TODO("click findPet")
+        activity?.let { navigation.startActivityFindPet(it) }
+    }
+
+    private fun onClickPet(item: RatingPet) {
+        activity?.let { navigation.startActivityPetInfo(it) }
     }
 
     private fun onClickUserPet(clickItem: UserPet) {

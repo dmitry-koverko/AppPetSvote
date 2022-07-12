@@ -4,6 +4,7 @@ import android.content.res.Resources
 import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.repository.IResourcesRepository
+import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.repository.breeds.IBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.usecases.configuration.IGetBreedsUseCase
@@ -17,6 +18,31 @@ import dagger.Provides
 
 @Module
 class FilterModule {
+
+
+    @Provides
+    fun provideSetInsertDefaultRatingFilterUseCase(
+        ratingFilterRepository: IRatingFilterRepository
+    ): ISetInsertDefaultRatingFilterUseCase {
+        return SetInsertDefaultRatingFilterUseCase(
+            ratingFilterRepository = ratingFilterRepository
+        )
+    }
+
+    @Provides
+    fun provideGetRatingFilterTextUseCase(
+        ratingFilterRepository: IRatingFilterRepository,
+        resourcesRepository: IResourcesRepository,
+        userRepository: IUserRepository,
+        breedRepository: IBreedRepository
+    ): IGetRatingFilterTextUseCase {
+        return GetRatingFilterTextUseCase(
+            ratingFilterRepository = ratingFilterRepository,
+            resourcesRepository = resourcesRepository,
+            userRepository = userRepository,
+            breedRepository = breedRepository
+        )
+    }
 
     @Provides
     fun provideGetPagingBreedsUseCase(
