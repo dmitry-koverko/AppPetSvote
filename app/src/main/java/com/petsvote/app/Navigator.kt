@@ -99,10 +99,11 @@ class Navigator: MainNavigation {
         activity.startActivity(Intent(activity, FindPetActivity::class.java))
     }
 
-    override fun startActivityPetInfo(activity: Activity) {
-        activity.startActivity(Intent(activity, PetInfoActivity::class.java))
+    override fun startActivityPetInfo(activity: Activity, bundle: Bundle?) {
+        var intent = Intent(activity, PetInfoActivity::class.java)
+        bundle?.let { intent.putExtras(it) }
+        activity.startActivity(intent)
     }
-
 
     override fun back() {
         navController?.popBackStack()

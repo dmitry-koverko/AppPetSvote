@@ -2,6 +2,7 @@ package com.petsvote.data.mappers
 
 import com.petsvote.retrofit.entity.pet.FindPet
 import com.petsvote.retrofit.entity.pet.Pet
+import com.petsvote.retrofit.entity.pet.PetDetails
 
 fun FindPet.toLocalFind(): com.petsvote.domain.entity.pet.FindPet {
     return com.petsvote.domain.entity.pet.FindPet(
@@ -32,5 +33,23 @@ fun Pet.toLocalPet(): com.petsvote.domain.entity.pet.Pet {
         city_id = this.city_id,
         card_type = this.card_type,
         photos = this.photos.remoteToPhotoList()
+    )
+}
+
+fun PetDetails.toLocalPetDetails(): com.petsvote.domain.entity.pet.PetDetails{
+    return com.petsvote.domain.entity.pet.PetDetails(
+        first_name,
+        last_name,
+        avatar,
+        official,
+        global_range,
+        country_range,
+        city_range,
+        global_score,
+        global_dynamic,
+        country_dynamic,
+        city_dynamic,
+        mark_dynamic,
+        has_paid_votes
     )
 }

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.entity.pet.FindPet
 import com.petsvote.domain.entity.pet.PetPhoto
+import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.usecases.configuration.IGetAddPhotosSettingsUseCase
 import com.petsvote.domain.usecases.configuration.ISetAddPhotosSettingsUseCase
 import com.petsvote.domain.usecases.pet.IFindPetUseCase
@@ -28,12 +29,24 @@ class FindPetViewModel @Inject constructor(
 
     fun findPet(id: Int) {
         launchIO{
+            state.emit(0)
             findPetUseCase.findPet(id).collect {
-
+                when(it){
+                    is DataResponse.Loading -> progress.emit(true)
+                    is DataResponse.Error -> {
+                        progress.emit(false)
+                        state.emit(2)
+                    }
+                    is DataResponse.Success<FindPet> ->{
+                        findPet.emit(it.data)
+                        state.emit(1)
+                        progress.emit(false)
+                    }
+                    else -> state.emit(0)
+                }
             }
         }
     }
-
 
 
     @Suppress("UNCHECKED_CAST")

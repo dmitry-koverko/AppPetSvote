@@ -16,6 +16,12 @@ import dagger.Provides
 class PetModule {
 
     @Provides
+    fun provideGetPetDetailsUseCase(petRepository: IPetRepository): IGetPetDetailsUseCase {
+        return GetPetDetailsUseCase(petRepository = petRepository)
+    }
+
+
+    @Provides
     fun provideFindPetUseCase(petRepository: IPetRepository): IFindPetUseCase {
         return FindPetUseCase(petRepository = petRepository)
     }

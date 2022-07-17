@@ -97,6 +97,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val findPetUseCase: IFindPetUseCase
     override val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase
     override val setInsertDefaultRatingFilterUseCase: ISetInsertDefaultRatingFilterUseCase
+    override val petDetailsUseCase: IGetPetDetailsUseCase
 
     @Component.Builder
     interface Builder {

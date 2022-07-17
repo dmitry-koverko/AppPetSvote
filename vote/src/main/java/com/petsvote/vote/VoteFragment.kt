@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
+import com.petsvote.navigation.MainNavigation
 import com.petsvote.ui.bottomstar.BottomStars
 import com.petsvote.ui.ext.hideAlpha
 import com.petsvote.ui.ext.showAlpha
@@ -22,10 +24,19 @@ import com.petsvote.vote.databinding.FragmentVoteBinding
 import com.petsvote.vote.di.VoteComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
 class VoteFragment : BaseFragment(R.layout.fragment_vote),
-    VoteEmptyFilterFragment.VoteEmptyFilterFragmentListener {
+    VoteEmptyFilterFragment.VoteEmptyFilterFragmentListener,
+    ItemVoteFragment.ItemVoteFragmentClick {
+
+
+    private val navigation: MainNavigation by lazy {
+        XInjectionManager.findComponent<MainNavigation>()
+    }
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<VoteViewModel.Factory>
@@ -36,7 +47,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     }
 
     private var listVote = mutableListOf<VotePet>()
-    private var emptypet = VotePet(-1, -1, -1,"", "", 0, "", "", emptyList())
+    private var emptypet = VotePet(-1, -1, -1,"", "", 0, "", "", -1,"", emptyList())
 
     private var binding: FragmentVoteBinding? = null
     private var adapter: VoteAdapter? = null
@@ -64,7 +75,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
         viewModel.resetList()
         listVote.clear()
         if(adapter != null) adapter = null
-        adapter = VoteAdapter(listVote, this)
+        adapter = VoteAdapter(listVote, this, this::clickPet)
         binding?.pager?.adapter = adapter
         binding?.pager?.isUserInputEnabled = false
 
@@ -184,6 +195,14 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
         listVote.clear()
         binding?.container?.hideAlpha()
 
+    }
+
+    override fun clickPet(pet: VotePet) {
+        var bundle = Bundle()
+        bundle.putInt("pet", pet.pet_id)
+        bundle.putInt("petBreedId", pet.breed_id)
+        bundle.putString("petKind", pet.type)
+        activity?.let { navigation.startActivityPetInfo(it, bundle) }
     }
 
 }

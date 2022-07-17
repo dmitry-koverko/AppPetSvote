@@ -25,7 +25,7 @@ interface MainNavigation {
     fun startSelectBreedsFromAddPet()
     fun startFilterActivityForResult(activity: Activity)
     fun startActivityFindPet(activity: Activity)
-    fun startActivityPetInfo(activity: Activity)
+    fun startActivityPetInfo(activity: Activity, bundle: Bundle? = null)
 
 
     fun back()

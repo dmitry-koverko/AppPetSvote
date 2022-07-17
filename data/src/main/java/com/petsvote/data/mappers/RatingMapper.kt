@@ -22,6 +22,8 @@ fun PetRating.remoteToRating(): RatingPet{
         this.city_name,
         RatingFilterLocationType.CITY,
         this.photos.remoteToPhotoList(),false,
-        if(this.index != 1) RatingPetItemType.DEFAULT else RatingPetItemType.TOP
+        if(this.index != 1) RatingPetItemType.DEFAULT else RatingPetItemType.TOP,
+        breed_id,
+        type
     )
 }

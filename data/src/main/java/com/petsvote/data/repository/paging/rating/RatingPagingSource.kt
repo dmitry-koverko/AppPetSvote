@@ -111,7 +111,9 @@ class RatingPagingSource @Inject constructor(
             RatingFilterLocationType.COUNTRY,
             emptyList(),
             false,
-            if (!isTop) RatingPetItemType.ADDPET else RatingPetItemType.TOPADDPET
+            if (!isTop) RatingPetItemType.ADDPET else RatingPetItemType.TOPADDPET,
+            -1,
+            ""
         )
     }
 

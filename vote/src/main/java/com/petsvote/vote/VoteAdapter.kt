@@ -9,13 +9,19 @@ import com.petsvote.domain.entity.pet.VotePet
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: VoteFragment) : FragmentStateAdapter(fragment) {
+class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: VoteFragment,  private val onClick: (VotePet) -> Unit) : FragmentStateAdapter(fragment),
+    ItemVoteFragment.ItemVoteFragmentClick {
 
     override fun getItemCount(): Int = listPets.size
 
     override fun createFragment(position: Int): Fragment {
         val fragment = ItemVoteFragment.newInstance(Json.encodeToString(listPets[position]))
+        fragment.itemVoteFragmentClick = this
         return fragment
+    }
+
+    override fun clickPet(pet: VotePet) {
+        onClick(pet)
     }
 
 }

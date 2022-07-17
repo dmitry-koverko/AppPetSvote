@@ -93,5 +93,7 @@
     <string name="birthday">Дата рожения</string>
     <string name="sex">пол</string>
     <string name="dialog_select_kind">Выбирите сначала вид вашего питомца.</string>
+    <string name="text_copy_to_buffer">ID Скопирован</string>
+    <string name="position">место</string>
 
 </resources>

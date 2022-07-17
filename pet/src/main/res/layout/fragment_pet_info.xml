@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.petsvote.ui.parallax.ParallaxView
+            <com.petsvote.ui.parallax.HorizontalParallaxView
                 android:id="@+id/parallax"
                 android:visibility="visible"
                 android:layout_width="match_parent"
@@ -63,7 +63,7 @@
 
             </FrameLayout>
 
-            <TextView
+            <com.petsvote.ui.textview.SimpleSFTextView
                 android:text="популярность"
                 android:textSize="15sp"
                 android:textColor="@color/sub_text_color"
@@ -118,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"/>
 
-            <TextView
+            <com.petsvote.ui.textview.SimpleSFTextView
                 android:id="@+id/city"
                 tools:text="Минск"
                 android:textSize="15sp"
@@ -139,7 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
+            <com.petsvote.ui.textview.SimpleSFTextView
                 android:id="@+id/country"
                 tools:text="Беларусь"
                 android:textSize="15sp"
@@ -160,7 +160,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
+            <com.petsvote.ui.textview.SimpleSFTextView
                 android:text="мир"
                 android:textSize="15sp"
                 android:textColor="@color/sub_text_color"
@@ -297,7 +297,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <com.petsvote.ui.textview.SimpleSFTextView
+                <com.petsvote.ui.textview.SFTextView
                     android:id="@+id/copy"
                     android:gravity="right"
                     android:text="Скопировать"

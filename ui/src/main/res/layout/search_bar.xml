@@ -13,6 +13,7 @@
         android:paddingLeft="36dp"
         android:background="@drawable/shape_et"
         android:fontFamily="@font/myfont"
+        android:includeFontPadding="false"
         android:layout_width="match_parent"
         android:layout_height="36dp"/>
 

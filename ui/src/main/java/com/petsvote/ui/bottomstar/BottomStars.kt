@@ -33,9 +33,10 @@ class BottomStars @JvmOverloads constructor(
     private var starFour: View
     private var starFive: View
 
-    private var listStars = mutableListOf<ImageView>()
-    private var listUnStars = mutableListOf<ImageView>()
-    private var isAnim = false
+    var listStars = mutableListOf<ImageView>()
+    var listUnStars = mutableListOf<ImageView>()
+    var isAnim = false
+    var isAnimUn = true
 
     var mBottomStarsListener: BottomStarsListener? = null
 
@@ -103,29 +104,31 @@ class BottomStars @JvmOverloads constructor(
         isAnim = true
         var isUnselected = false
         for (i in 0..position) {
-            listStars[i].startAnimActive()
-            listUnStars[i].startAnimUnActive()
+            startAnimActive(listStars[i])
+            startAnimUnActive(listUnStars[i])
         }
 
-        object : CountDownTimer(1000, 500) {
-            override fun onTick(millisUntilFinished: Long) {
-                if(!isUnselected){
-                    for (i in 0..position) {
-                        listStars[i].startAnimUnActive()
-                        listUnStars[i].startAnimActive()
+        if(isAnimUn) {
+            object : CountDownTimer(1000, 500) {
+                override fun onTick(millisUntilFinished: Long) {
+                    if (!isUnselected) {
+                        for (i in 0..position) {
+                            startAnimUnActive(listStars[i])
+                            startAnimActive(listUnStars[i])
+                        }
+                        isUnselected = true
                     }
-                    isUnselected = true
                 }
-            }
 
-            override fun onFinish() {
-                isAnim = false
-            }
-        }.start()
+                override fun onFinish() {
+                    isAnim = false
+                }
+            }.start()
+        }
 
     }
 
-    private fun ImageView.startAnimActive() {
+    fun startAnimActive(image : ImageView) {
         val propertyLP: PropertyValuesHolder =
             PropertyValuesHolder.ofFloat("alpha", 0f, 1f)
         val animatorLP = ValueAnimator()
@@ -133,12 +136,12 @@ class BottomStars @JvmOverloads constructor(
         animatorLP.setDuration(500)
         animatorLP.addUpdateListener(ValueAnimator.AnimatorUpdateListener { animation ->
             var alpha = animation.getAnimatedValue("alpha") as Float
-            this.alpha = alpha
+            image.alpha = alpha
         })
         animatorLP.start()
     }
 
-    private fun ImageView.startAnimUnActive() {
+    fun startAnimUnActive(image : ImageView) {
         val propertyLP: PropertyValuesHolder =
             PropertyValuesHolder.ofFloat("alpha", 1f, 0f)
         val animatorLP = ValueAnimator()
@@ -146,7 +149,7 @@ class BottomStars @JvmOverloads constructor(
         animatorLP.setDuration(500)
         animatorLP.addUpdateListener(ValueAnimator.AnimatorUpdateListener { animation ->
             var alpha = animation.getAnimatedValue("alpha") as Float
-            this.alpha = alpha
+            image.alpha = alpha
         })
         animatorLP.start()
     }

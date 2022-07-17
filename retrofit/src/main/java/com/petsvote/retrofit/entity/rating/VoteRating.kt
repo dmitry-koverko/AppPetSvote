@@ -25,6 +25,7 @@ data class VoteRating(
     val city_name: String,
     val sex: String,
     val breed_id: Int,
+    val type: String,
     val photos: List<Photo>,
 )
 

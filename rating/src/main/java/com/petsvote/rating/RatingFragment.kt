@@ -8,6 +8,7 @@ import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagingData
@@ -285,7 +286,11 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun onClickPet(item: RatingPet) {
-        activity?.let { navigation.startActivityPetInfo(it) }
+        var bundle = Bundle()
+        bundle.putInt("pet", item.pet_id)
+        bundle.putInt("petBreed", item.breed_id)
+        bundle.putString("petKind", item.type)
+        activity?.let { navigation.startActivityPetInfo(it, bundle) }
     }
 
     private fun onClickUserPet(clickItem: UserPet) {

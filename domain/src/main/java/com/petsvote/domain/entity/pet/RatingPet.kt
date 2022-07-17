@@ -12,7 +12,9 @@ data class RatingPet(
     var locationType: RatingFilterLocationType = RatingFilterLocationType.WORLD,
     val photos: List<Photo>,
     var isUserPet: Boolean,
-    val itemType: RatingPetItemType = RatingPetItemType.DEFAULT
+    val itemType: RatingPetItemType = RatingPetItemType.DEFAULT,
+    var breed_id: Int,
+    var type: String,
 ): Item
 
 enum class RatingFilterLocationType{

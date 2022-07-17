@@ -10,13 +10,18 @@ import android.view.View
 import android.widget.EditText
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class SearchBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
 
+    private var count = 0
+    var editType: SearchBarType = SearchBarType.TEXT
+
     private var mOnTextSearchBar: OnTextSearchBar? = null
-    private lateinit var edit: EditText
+    var edit: EditText
     var editable = true
         set(value) {
             field = value
@@ -50,7 +55,27 @@ class SearchBar @JvmOverloads constructor(
             }
             override fun afterTextChanged(p0: Editable?) {
                 var t = p0.toString()
-                mOnTextSearchBar?.onText(t)
+                if(editType == SearchBarType.PET_ID){
+                    var inputlength = t.length
+
+                    if (count <= inputlength && inputlength == 4){
+
+                        edit.setText(edit.text.toString() + " ")
+
+                        var pos = edit.text.length
+                        edit.setSelection(pos);
+
+                    } else if (count >= inputlength && (inputlength == 4)) {
+                        edit.setText(edit.getText().toString()
+                            .substring(0, edit.getText()
+                                .toString().length - 1));
+
+                        var pos = edit.text.length
+                        edit.setSelection(pos);
+                    }
+                    count = edit.text.toString().length
+                }
+                mOnTextSearchBar?.onText(edit.text.toString())
             }
 
         })
@@ -71,5 +96,10 @@ class SearchBar @JvmOverloads constructor(
     interface OnTextSearchBar{
         fun onText(text: String)
         fun onClear()
+    }
+
+    enum class SearchBarType{
+        TEXT,
+        PET_ID
     }
 }

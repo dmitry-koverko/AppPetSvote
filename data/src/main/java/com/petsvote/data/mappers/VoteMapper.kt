@@ -26,6 +26,8 @@ fun VoteRating.remoteToVote(ratingType: RatingFilterType?, breeds: List<EntityBr
         getSex(this.sex),
         getLocation(this.city_name, this.country_name, ratingType),
        breeds.find { it.id_breed == this.breed_id }?.title ?: "",
+        breed_id = this.breed_id,
+        this.type,
         this.photos.remoteToPhotoListString()
     )
 }

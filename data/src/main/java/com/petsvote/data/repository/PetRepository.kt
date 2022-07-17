@@ -2,6 +2,7 @@ package com.petsvote.data.repository
 
 import com.petsvote.data.mappers.checkResult
 import com.petsvote.data.mappers.toLocalFind
+import com.petsvote.data.mappers.toLocalPetDetails
 import com.petsvote.data.mappers.toPetPhotoList
 import com.petsvote.domain.entity.filter.Kind
 import com.petsvote.domain.entity.pet.PetPhoto
@@ -9,6 +10,7 @@ import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.retrofit.api.PetApi
 import com.petsvote.retrofit.entity.pet.FindPet
+import com.petsvote.retrofit.entity.pet.PetDetails
 import com.petsvote.retrofit.entity.user.User
 import com.petsvote.room.dao.PetProfileDao
 import com.petsvote.room.dao.UserDao
@@ -102,5 +104,28 @@ class PetRepository @Inject constructor(
         )?.toLocalFind()
     }
 
+    override suspend fun petDetails(petId: Int): com.petsvote.domain.entity.pet.PetDetails? {
+        return checkResult<PetDetails>(
+            petApi.getPetDetails(
+                userDao.getToken(),
+                userDao.getUser().location?.city_id,
+                userDao.getUser().location?.country_id,
+                1489254,//petId,
+                userDao.getUser().id,
+                "0:30",
+                "dog",
+                "global"
+            )
+        )?.toLocalPetDetails()
+
+    }
+    //http://d.pvapi.site/get-pet-details?
+// age_between=0%3A30
+// &city_id=282
+// &country_id=3
+// &id=1489254
+// &rating_type=global
+// &type=dog
+// &user_id=1588579
 
 }

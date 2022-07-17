@@ -48,6 +48,7 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
     }
 
     private var binding: ItemFragmentVoteBinding? = null
+    var itemVoteFragmentClick: ItemVoteFragmentClick? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -84,6 +85,13 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
             binding?.imageView?.list = pet.photos
         }
 
+//        binding?.imageView?.setOnClickListener {
+//            pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
+//        }
+
+        binding?.simpleSFTextView?.setOnClickListener {
+            pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
+        }
     }
 
 
@@ -139,6 +147,10 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         ratingComponentViewModel.voteComponent.injectAddVote(this)
+    }
+
+    interface ItemVoteFragmentClick{
+        fun clickPet(pet: VotePet)
     }
 
 }

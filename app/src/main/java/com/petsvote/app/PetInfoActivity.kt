@@ -6,15 +6,17 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.petswote.pet.find.FindPetFragment
 import com.petswote.pet.info.PetInfoFragment
+import kotlinx.serialization.json.Json
 
 class PetInfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pet_info)
 
+        var fragment = PetInfoFragment.newInstance(intent.extras?.getInt("pet"))
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace<PetInfoFragment>(R.id.container)
+            add(R.id.container, fragment)
         }
     }
 }
