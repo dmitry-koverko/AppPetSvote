@@ -57,7 +57,10 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/people" />
 
-    <com.petsvote.ui.RippleConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/ripple_layout"
         android:id="@+id/container_terms"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -95,9 +98,12 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </com.petsvote.ui.RippleConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.petsvote.ui.RippleConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/ripple_layout"
         android:id="@+id/container_policy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -133,7 +139,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </com.petsvote.ui.RippleConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

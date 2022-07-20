@@ -95,5 +95,9 @@
     <string name="dialog_select_kind">Выбирите сначала вид вашего питомца.</string>
     <string name="text_copy_to_buffer">ID Скопирован</string>
     <string name="position">место</string>
+    <string name="popularity">популярность</string>
+    <string name="balls">баллов</string>
+    <string name="pet_id">ID питомца</string>
+    <string name="copy">Скопировать</string>
 
 </resources>

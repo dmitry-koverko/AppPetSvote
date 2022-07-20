@@ -125,7 +125,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
 
     @SuppressLint("NotifyDataSetChanged")
     override fun initObservers() {
-        lifecycleScope.launchWhenResumed {
+        lifecycleScope.launchWhenStarted {
             viewModel.pets.collect {
                 if(it != null){
                     if(listVote.size == 0 && it.isNotEmpty()){

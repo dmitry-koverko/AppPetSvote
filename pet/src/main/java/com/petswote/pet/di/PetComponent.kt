@@ -5,6 +5,7 @@ import android.content.Context
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.IGetKindsUseCase
 import com.petsvote.domain.usecases.pet.IFindPetUseCase
+import com.petsvote.domain.usecases.pet.IGetBreedByIdUseCase
 import com.petsvote.domain.usecases.pet.IGetPetDetailsUseCase
 import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.user.*
@@ -79,6 +80,7 @@ interface PetDeps{
     val getInstagramUserNameUseCase: IGetInstagramUserNameUseCase
     val findPetUseCase: IFindPetUseCase
     val petDetailsUseCase: IGetPetDetailsUseCase
+    val getBreedByIdUseCase: IGetBreedByIdUseCase
 }
 
 val Context.petDepsProvider: PetDepsProvider

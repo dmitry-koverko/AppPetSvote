@@ -1,5 +1,6 @@
 package com.petswote.pet.info
 
+import android.app.Activity.RESULT_OK
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -8,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ImageSpan
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
@@ -59,9 +61,14 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
         var petId= arguments?.getInt("pet")
         petId?.let { viewModel.getPetInfo(it) }
 
-        //binding?.copy?.animation = true
+        binding?.copy?.animation = true
         binding?.copy?.setOnClickListener {
             copyTextToClipboard()
+        }
+
+        binding?.close?.setOnClickListener {
+            activity?.setResult(RESULT_OK)
+            activity?.finish()
         }
     }
 
@@ -93,8 +100,8 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
                     binding?.country?.text = petData.pet.country_name
                     petData.pet.pet_id.let { binding?.petId?.spacingFormat(it) }
                     if (petData.pet.inst.isNotEmpty()) {
-                        binding?.petInstagram?.visibility = View.VISIBLE
-                        binding?.petInstagram?.setOnClickListener {
+                        binding?.instagramContainer?.visibility = View.VISIBLE
+                        binding?.instagramContainer?.setOnClickListener {
                             openUrl("https://www.instagram.com/${petData.pet.inst}")
                         }
                     }
@@ -109,7 +116,6 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
         lifecycleScope.launchWhenStarted {
             viewModel.uiPetDetails.collect { details ->
                 if (details?.first_name?.isNotEmpty() == true) {
-                    binding?.petLocate?.text = "${details.breedName}, ${binding?.petLocate?.text}"
                     binding?.ratingBalls?.spacingFormat(details.global_score)
                     binding?.cityRating?.spacingFormat(
                         details.city_range,
@@ -133,11 +139,29 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
                 }
             }
         }
+        lifecycleScope.launchWhenStarted {
+            viewModel.uiBreedString.collect {
+                binding?.petLocate?.text = it
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         petComponentViewModel.petComponent.injectPetInfo(this)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+            true
+        ) {
+            override fun handleOnBackPressed() {
+                activity?.setResult(RESULT_OK)
+                activity?.finish()
+            }
+
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            callback
+        )
     }
 
     private fun copyTextToClipboard() {

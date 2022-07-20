@@ -1,5 +1,6 @@
 package com.petsvote.domain.di
 
+import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.repository.breeds.IPetBreedsPagingRepository
@@ -14,6 +15,12 @@ import dagger.Provides
 
 @Module
 class PetModule {
+
+    @Provides
+    fun provideIGetBreedByIdUseCase(breedRepository: IBreedRepository, userRepository: IUserRepository): IGetBreedByIdUseCase {
+        return GetBreedByIdUseCase(breedRepository, userRepository)
+    }
+
 
     @Provides
     fun provideGetPetDetailsUseCase(petRepository: IPetRepository): IGetPetDetailsUseCase {

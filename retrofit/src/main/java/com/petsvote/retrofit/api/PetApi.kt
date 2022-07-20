@@ -27,7 +27,7 @@ interface PetApi {
         @Query("user_id") user_id: Int?,
         @Query("age_between") age_between: String?,
         @Query("rating_type") rating_type: String?,
-        @Query("type") type: String?,
+        //@Query("type") type: String?,
     ): NetworkResponse<PetDetails, ApiError>
 
 

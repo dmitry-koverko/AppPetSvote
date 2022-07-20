@@ -87,6 +87,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_star_active.xml" value="0.228" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote_selected.xml" value="0.139" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_instagram_pet.xml" value="0.227" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_keyboard_clear.xml" value="0.253" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_svg_disable.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_white.xml" value="0.332" />
@@ -105,6 +106,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/item_list_state.xml" value="0.2985" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/linear_mask_default.xml" value="0.233" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/linear_mask_user.xml" value="0.233" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ripple_layout.xml" value="0.227" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/shape_et.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/shape_mask.xml" value="0.2295" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/tabindicators.xml" value="0.139" />

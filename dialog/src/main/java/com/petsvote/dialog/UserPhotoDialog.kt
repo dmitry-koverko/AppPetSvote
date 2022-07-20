@@ -11,8 +11,17 @@ class UserPhotoDialog(private var userImage: String): BaseDialog(com.petsvote.di
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        var width = resources.displayMetrics.widthPixels - resources.displayMetrics.density * 32
+
         var binding = DialogUserPhotoBinding.bind(view)
+
+        var lp = binding.userImage.layoutParams
+        lp.width = width.toInt()
+        lp.height = width.toInt()
+        binding.userImage.layoutParams = lp
         binding.userImage.loadImage(userImage)
+
+        binding.root.setOnClickListener { dismiss() }
     }
 
 }

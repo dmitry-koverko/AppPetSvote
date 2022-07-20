@@ -18,7 +18,7 @@ fun TextView.spacingFormat(value: Int, subValue: String = "") {
 
 fun Fragment.showSnackBar(view: View, text: String) {
     Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
-        .show();
+        .show()
 }
 
 fun Fragment.sharePet(petId: Int) {

@@ -105,27 +105,23 @@ class PetRepository @Inject constructor(
     }
 
     override suspend fun petDetails(petId: Int): com.petsvote.domain.entity.pet.PetDetails? {
+
         return checkResult<PetDetails>(
             petApi.getPetDetails(
                 userDao.getToken(),
-                userDao.getUser().location?.city_id,
-                userDao.getUser().location?.country_id,
-                1489254,//petId,
+                0,//userDao.getUser().location?.city_id,
+                0,//userDao.getUser().location?.country_id,
+                petId,//petId,
                 userDao.getUser().id,
-                "0:30",
-                "dog",
-                "global"
+                "0:200",
+                "country",
+                //"global"
             )
         )?.toLocalPetDetails()
 
+
     }
-    //http://d.pvapi.site/get-pet-details?
-// age_between=0%3A30
-// &city_id=282
-// &country_id=3
-// &id=1489254
-// &rating_type=global
-// &type=dog
-// &user_id=1588579
+   // http://d.pvapi.site/get-pet-details?city_id=2001077&country_id=5&id=1489195&rating_type=country&user_id=3336288
+    // http://d.pvapi.site/get-pet-details?city_id=0&country_id=0&id=1481559&user_id=3336319&rating_type=country&type=global
 
 }

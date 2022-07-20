@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -66,8 +67,9 @@ fun ImageView.loadImage(url: String) {
         .with(context)
         .load(url)
         .placeholder(circularProgressDrawable)
-        //.transition(DrawableTransitionOptions.withCrossFade())
-        //.skipMemoryCache(true)
+        .diskCacheStrategy(DiskCacheStrategy.ALL)
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .skipMemoryCache(false)
         .into(this);
 }
 

@@ -3,6 +3,7 @@ package com.petsvote.app
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.navigation.NavController
 import com.petsvote.navigation.MainNavigation
 
@@ -102,7 +103,7 @@ class Navigator: MainNavigation {
     override fun startActivityPetInfo(activity: Activity, bundle: Bundle?) {
         var intent = Intent(activity, PetInfoActivity::class.java)
         bundle?.let { intent.putExtras(it) }
-        activity.startActivity(intent)
+        startActivityForResult(activity, intent, 123, bundle)
     }
 
     override fun back() {
