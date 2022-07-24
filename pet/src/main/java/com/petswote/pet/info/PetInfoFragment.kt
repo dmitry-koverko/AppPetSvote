@@ -15,12 +15,16 @@ import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.dialog.UserPhotoDialog
+import com.petsvote.domain.entity.pet.FindPet
+import com.petsvote.domain.entity.pet.Pet
 import com.petsvote.domain.entity.pet.PetDetails
+import com.petsvote.navigation.MainNavigation
 import com.petsvote.ui.ext.sharePet
 import com.petsvote.ui.ext.showSnackBar
 import com.petsvote.ui.ext.spacingFormat
 import com.petsvote.ui.loadImage
 import com.petsvote.ui.openUrl
+import com.petsvote.ui.parallax.HorizontalParallaxView
 import com.petswote.pet.R
 import com.petswote.pet.databinding.FragmentFindPetBinding
 import com.petswote.pet.databinding.FragmentPetInfoBinding
@@ -29,10 +33,13 @@ import com.petswote.pet.find.FindPetViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
-class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
+class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
+    HorizontalParallaxView.HorizontalParallaxViewListener {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<PetInfoViewModel.Factory>
@@ -43,6 +50,12 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
     }
 
     var binding: FragmentPetInfoBinding? = null
+    private val navigation: MainNavigation by lazy {
+        XInjectionManager.findComponent<MainNavigation>()
+    }
+
+    private var currentPet: Pet? = null
+    private var currentPosition: Int = 0
 
     companion object{
         fun newInstance(id: Int?): PetInfoFragment{
@@ -70,12 +83,16 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
             activity?.setResult(RESULT_OK)
             activity?.finish()
         }
+
+        binding?.parallax?.mHorizontalParallaxViewListener = this
+
     }
 
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.uiPet.collect { petData ->
                 if (petData?.pet != null && petData.pet.id != -1) {
+                    currentPet = petData.pet
                     var lString = mutableListOf<String>()
                     petData.pet.photos.let { list ->
                         for (i in list) {
@@ -171,5 +188,17 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info) {
         val clipData = ClipData.newPlainText("text", textToCopy)
         clipboardManager.setPrimaryClip(clipData)
         binding?.petId?.let { showSnackBar(it, getString(com.petsvote.ui.R.string.text_copy_to_buffer)) }
+    }
+
+    override fun changePage(position: Int) {
+        currentPosition = position
+    }
+
+    override fun onClick() {
+        var bundle = Bundle()
+        bundle.putString("pet", Json.encodeToString(currentPet))
+        bundle.putInt("position", currentPosition)
+        bundle.putString("location", binding?.petLocate?.text.toString())
+        activity?.let { it1 -> navigation.startActivityPetPhotos(it1, bundle) }
     }
 }

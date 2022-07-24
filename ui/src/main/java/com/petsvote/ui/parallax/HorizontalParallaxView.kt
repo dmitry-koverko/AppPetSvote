@@ -15,7 +15,7 @@ import com.petsvote.ui.R
 
 class HorizontalParallaxView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : ConstraintLayout(context, attrs) {
+) : ConstraintLayout(context, attrs), ViewPagerAdapter.OnClickPhoto {
 
     private val TAG = HorizontalParallaxView::class.java.name
     private val pageIndicator: HorizontalPageIndicator
@@ -28,6 +28,8 @@ class HorizontalParallaxView @JvmOverloads constructor(
             viewPagerAdapter.update(value)
             pageIndicator.setCountIndicators(value.size)
         }
+    var mHorizontalParallaxViewListener: HorizontalParallaxViewListener? = null
+
 
     init{
         val inflater: LayoutInflater =
@@ -57,12 +59,15 @@ class HorizontalParallaxView @JvmOverloads constructor(
                         if(positionOffset != 0.0f )
                             setOffsetTo((positionOffset * 100).toInt())
                     }
+                    mHorizontalParallaxViewListener?.changePage(position)
                 }
             })
             setPageTransformer { page, position ->
 
             }
         }
+        viewPagerAdapter.mOnClickPhotoListener = this
+
 
     }
 
@@ -82,6 +87,15 @@ class HorizontalParallaxView @JvmOverloads constructor(
         canvas.clipPath(path)
         canvas.drawPath(path, paint)
         super.onDraw(canvas)
+    }
+
+    interface HorizontalParallaxViewListener{
+        fun changePage(position: Int)
+        fun onClick()
+    }
+
+    override fun onClick() {
+        mHorizontalParallaxViewListener?.onClick()
     }
 
 }

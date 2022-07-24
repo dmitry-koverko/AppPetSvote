@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/filter_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/shareImage"
+        android:scaleType="centerCrop"
+        android:src="@drawable/cat_example"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_group_1401"
+        android:layout_gravity="top|right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.petsvote.ui.textview.SimpleSFTextView
+            android:id="@+id/shareName"
+            android:layout_marginBottom="2dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="34sp"
+            android:textColor="@color/white"
+            tools:text="Ешка, 7 мес."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:targetApi="o" />
+
+        <com.petsvote.ui.textview.SimpleSFTextView
+            android:id="@+id/shareLocate"
+            android:layout_marginBottom="15dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:autoSizePresetSizes="@array/autosize_text_sizes"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            tools:text="Yorkshire Terkshire Terricit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:targetApi="o" />
+
+        <com.petsvote.ui.textview.SimpleSFTextView
+            android:id="@+id/shareId"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            tools:text="ID 3456 0097"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>

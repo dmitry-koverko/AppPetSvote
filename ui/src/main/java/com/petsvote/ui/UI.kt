@@ -4,14 +4,13 @@ import android.app.Activity
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Matrix
+import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.os.ParcelFileDescriptor
+import android.provider.MediaStore
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -27,8 +26,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import jp.wasabeef.glide.transformations.BlurTransformation
+import java.io.ByteArrayOutputStream
 import java.io.FileDescriptor
 import java.io.IOException
 import java.time.LocalDate
@@ -209,6 +211,80 @@ fun uriToBitmap(
         e.printStackTrace()
     }
     return null
+}
+
+
+@MainThread
+fun Context.urlToBitmapGlide(uri: String, view: ScaleImageView) {
+    Glide.with(this).asBitmap().load(uri).into(object : CustomTarget<Bitmap>() {
+        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+            view.setImageBitmap(resource)
+        }
+
+        override fun onLoadCleared(placeholder: Drawable?) {
+        }
+
+    })
+}
+
+private fun processingBitmap_Blur(src: Bitmap): Bitmap? {
+    val width = src.width
+    val height = src.height
+    var blurMaskFilter: BlurMaskFilter
+    val paintBlur = Paint()
+    val dest = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
+    val canvas = Canvas(dest)
+
+    val alpha = src.extractAlpha()
+    paintBlur.color = Color.BLACK
+    canvas.drawBitmap(alpha, 0f, 0f, paintBlur)
+
+    blurMaskFilter = BlurMaskFilter(15f, BlurMaskFilter.Blur.OUTER)
+    paintBlur.maskFilter = blurMaskFilter
+    canvas.drawBitmap(alpha, 0f, 0f, paintBlur)
+
+
+    blurMaskFilter = BlurMaskFilter(15f, BlurMaskFilter.Blur.NORMAL)
+    paintBlur.maskFilter = blurMaskFilter
+    canvas.drawBitmap(src, 0f, 0f, paintBlur)
+    return dest
+}
+
+fun ImageView.loadImageBlure(bitmap: Bitmap) {
+    Glide
+        .with(context)
+        .load(bitmap)
+        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
+        .into(this);
+}
+
+fun Fragment.showShareIntent(bitmap: Bitmap) {
+    val intent = Intent(Intent.ACTION_SEND).setType("image/*")
+    val bytes = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+    val path = MediaStore.Images.Media.insertImage(
+        requireContext().contentResolver,
+        bitmap,
+        "tempimage${System.currentTimeMillis().toString()}",
+        null
+    )
+    val uri = Uri.parse(path)
+    intent.putExtra(Intent.EXTRA_STREAM, uri)
+    startActivity(intent)
+}
+
+fun Fragment.createBluredBitmapFromView(view: View): Bitmap? {
+    var viewBM = createBitmapFromView(view)
+    return viewBM?.let { processingBitmap_Blur(it) }
+}
+
+fun Fragment.createBitmapFromView(view: View): Bitmap? {
+    val returnedBitmap = Bitmap.createBitmap(800, 1100, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(returnedBitmap)
+    val bgDrawable = view.background
+    if (bgDrawable != null) bgDrawable.draw(canvas) else canvas.drawColor(Color.WHITE)
+    view.draw(canvas)
+    return returnedBitmap
 }
 
 fun uriToBitmapCamera(selectedFileUri: Uri): Bitmap? {

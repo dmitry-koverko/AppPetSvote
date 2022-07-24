@@ -58,6 +58,11 @@
             android:name=".FilterActivity"
             android:exported="false" />
 
+        <activity
+            android:name="com.petswote.pet.photos.PetPhotosActivity"
+            android:exported="false" />
+
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.android.fileprovider"

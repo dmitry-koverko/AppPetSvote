@@ -3,6 +3,7 @@ package com.petsvote.domain.entity.pet
 import com.petsvote.domain.entity.user.Photo
 import kotlinx.serialization.Serializable
 
+@Serializable
 data class Pet(
     val temp_type: String,
     val id : Int,

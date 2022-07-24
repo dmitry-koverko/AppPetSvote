@@ -26,6 +26,7 @@ interface MainNavigation {
     fun startFilterActivityForResult(activity: Activity)
     fun startActivityFindPet(activity: Activity)
     fun startActivityPetInfo(activity: Activity, bundle: Bundle? = null)
+    fun startActivityPetPhotos(activity: Activity, bundle: Bundle? = null)
 
 
     fun back()

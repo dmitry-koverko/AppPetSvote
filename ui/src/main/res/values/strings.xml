@@ -99,5 +99,11 @@
     <string name="balls">баллов</string>
     <string name="pet_id">ID питомца</string>
     <string name="copy">Скопировать</string>
+    <string name="complaint">Пожаловаться</string>
+    <string name="textThanks">Спасибо</string>
+    <string name="text_complaint_success">Ваша жалоба принята</string>
+    <string name="from">из</string>
+
+    <string name="share_id">ID</string>
 
 </resources>

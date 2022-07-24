@@ -14,6 +14,8 @@ import com.petsvote.ui.loadImage
 class ViewPagerAdapter(private val context: Context, private var arrayList: List<String>) :
     RecyclerView.Adapter<ViewPagerAdapter.MyViewHolder>() {
 
+    var mOnClickPhotoListener: OnClickPhoto? = null
+
     fun update(listNew: List<String>){
         arrayList = listNew
         notifyDataSetChanged()
@@ -26,6 +28,9 @@ class ViewPagerAdapter(private val context: Context, private var arrayList: List
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.image.loadImage(arrayList[position])
+        holder.image.setOnClickListener {
+            mOnClickPhotoListener?.onClick()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -38,6 +43,10 @@ class ViewPagerAdapter(private val context: Context, private var arrayList: List
         init {
             image = itemView.findViewById(R.id.image)
         }
+    }
+
+    interface OnClickPhoto{
+        fun onClick()
     }
 
 }

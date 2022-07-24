@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.navigation.NavController
 import com.petsvote.navigation.MainNavigation
+import com.petswote.pet.photos.PetPhotosActivity
 
 class Navigator: MainNavigation {
 
@@ -102,6 +103,12 @@ class Navigator: MainNavigation {
 
     override fun startActivityPetInfo(activity: Activity, bundle: Bundle?) {
         var intent = Intent(activity, PetInfoActivity::class.java)
+        bundle?.let { intent.putExtras(it) }
+        startActivityForResult(activity, intent, 123, bundle)
+    }
+
+    override fun startActivityPetPhotos(activity: Activity, bundle: Bundle?) {
+        var intent = Intent(activity, PetPhotosActivity::class.java)
         bundle?.let { intent.putExtras(it) }
         startActivityForResult(activity, intent, 123, bundle)
     }
