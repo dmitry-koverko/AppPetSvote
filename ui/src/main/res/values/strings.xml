@@ -105,5 +105,8 @@
     <string name="from">из</string>
 
     <string name="share_id">ID</string>
+    <string name="edit_pet">Редактировать</string>
+    <string name="promote">Продвигать</string>
+    <string name="pet_edit">Редактирование</string>
 
 </resources>

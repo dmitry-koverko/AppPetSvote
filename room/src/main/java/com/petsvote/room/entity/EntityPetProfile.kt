@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull
 @Serializable
 data class EntityPetProfile(
     @PrimaryKey
-    var id: Int? = null,
+    var id: Int? = 1,
 
     @ColumnInfo(name = "image",typeAffinity = ColumnInfo.BLOB)
     val image: ByteArray? = byteArrayOf(),

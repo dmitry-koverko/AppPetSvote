@@ -64,6 +64,9 @@ class UserPetsFingerprint(
                     );
                 }
                 binding.nameUserPet.text = text
+                binding?.frame?.setOnClickListener {
+                    onClick(item)
+                }
             }
         }
 

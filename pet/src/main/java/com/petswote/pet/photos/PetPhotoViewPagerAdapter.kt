@@ -58,6 +58,7 @@ class PetPhotoViewPagerAdapter(private var photos: List<String>, private var con
             currentImage = binding.image
 
         }
+
     }
 
     interface PetPhotoViewPagerAdapterListener{

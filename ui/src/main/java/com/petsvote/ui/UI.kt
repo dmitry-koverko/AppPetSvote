@@ -214,7 +214,6 @@ fun uriToBitmap(
 }
 
 
-@MainThread
 fun Context.urlToBitmapGlide(uri: String, view: ScaleImageView) {
     Glide.with(this).asBitmap().load(uri).into(object : CustomTarget<Bitmap>() {
         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {

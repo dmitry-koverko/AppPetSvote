@@ -19,7 +19,7 @@ class GetKindsUseCase @Inject constructor(
 
     //  0 filter
     //  1 addPet
-    override suspend fun getKinds(type: Int): List<Kind> = withContext(Dispatchers.IO){
+    override suspend fun getKinds(type: Int, name: String?): List<Kind> = withContext(Dispatchers.IO){
         val filter = ratingFilterRepository.getSimpleRatingFilter()
         var list = listOf<Kind>(
             Kind(0, resourcesRepository.getString(R.string.cat), "cat", 30),
@@ -43,8 +43,10 @@ class GetKindsUseCase @Inject constructor(
             }
         }
         else {
-            var id = petRepository.getSelectKindId() ?: -1
-            list.find { it.id == id }?.isSelect = true
+            if(name == null){
+                var id = petRepository.getSelectKindId() ?: -1
+                list.find { it.id == id }?.isSelect = true
+            }else return@withContext list.filter { it.name == name }
         }
 
         return@withContext list

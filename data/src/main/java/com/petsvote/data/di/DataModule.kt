@@ -12,6 +12,8 @@ import com.petsvote.domain.repository.breeds.IPetBreedsPagingRepository
 import com.petsvote.domain.repository.rating.IRatingFilterRepository
 import com.petsvote.domain.repository.rating.RatingRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
+import com.petsvote.domain.usecases.filter.IGetKindsUseCase
+import com.petsvote.domain.usecases.filter.impl.GetKindsUseCase
 import com.petsvote.domain.usecases.pet.create.IPetGetBreedsPagingUseCase
 import com.petsvote.domain.usecases.pet.create.impl.PetGetBreedsPagingUseCase
 import com.petsvote.retrofit.api.*
@@ -27,9 +29,10 @@ class DataModule {
         petApi: PetApi,
         userDao: UserDao,
         petProfileDao: PetProfileDao,
-        localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
+        localeLanguageCodeUseCase: GetLocaleLanguageCodeUseCase,
+        context: Application,
     ): IPetRepository {
-        return PetRepository(petApi = petApi, userDao = userDao, profilePetDao = petProfileDao, getLocaleLanguageCodeUseCase = localeLanguageCodeUseCase)
+        return PetRepository(petApi = petApi, userDao = userDao, profilePetDao = petProfileDao, getLocaleLanguageCodeUseCase = localeLanguageCodeUseCase, context = context)
     }
 
     @Provides

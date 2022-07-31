@@ -93,6 +93,14 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_addPetFragment_to_petSelectBreedsFragment)
     }
 
+    override fun startSelectKindsFromEditPet() {
+        navController?.navigate(R.id.action_editPetFragment_to_petSelectKindsFragment2)
+    }
+
+    override fun startSelectBreedsFromEditPet() {
+        navController?.navigate(R.id.action_editPetFragment_to_petSelectBreedsFragment2)
+    }
+
     override fun startFilterActivityForResult(activity: Activity) {
         activity.startActivity(Intent(activity, FilterActivity::class.java))
     }
@@ -112,6 +120,24 @@ class Navigator: MainNavigation {
         bundle?.let { intent.putExtras(it) }
         startActivityForResult(activity, intent, 123, bundle)
     }
+
+    override fun startActivityEditPet(activity: Activity, bundle: Bundle?) {
+        var intent = Intent(activity, EditPetActivity::class.java)
+        bundle?.let { intent.putExtras(it) }
+        startActivityForResult(activity, intent, 123, bundle)
+    }
+
+    override fun startEditFragment(bundle: Bundle?) {
+        navController?.navigate(R.id.addPetFragment2, bundle)
+    }
+
+    override fun startActivityAddPet(activity: Activity, bundle: Bundle?) {
+        var intent = Intent(activity, AddPetActivity::class.java)
+        bundle?.let { intent.putExtras(it) }
+        startActivityForResult(activity, intent, 123, bundle)
+    }
+
+
 
     override fun back() {
         navController?.popBackStack()

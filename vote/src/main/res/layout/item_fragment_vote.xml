@@ -9,7 +9,6 @@
     app:layoutDescription="@xml/item_fragment_vote_scene">
 
 
-
     <com.petsvote.ui.parallax.ParallaxView
         android:id="@+id/imageView"
         android:layout_width="match_parent"

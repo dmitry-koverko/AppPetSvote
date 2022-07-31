@@ -3,10 +3,10 @@ package com.petsvote.retrofit.api
 import com.petsvote.retrofit.adapter.NetworkResponse
 import com.petsvote.retrofit.entity.ApiError
 import com.petsvote.retrofit.entity.pet.FindPet
+import com.petsvote.retrofit.entity.pet.Pet
 import com.petsvote.retrofit.entity.pet.PetDetails
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Query
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface PetApi {
 
@@ -30,5 +30,30 @@ interface PetApi {
         //@Query("type") type: String?,
     ): NetworkResponse<PetDetails, ApiError>
 
+    @Multipart
+    @POST("add-pet")
+    suspend fun addPet(
+        @Header("Authorization") token: String,
+        @Part photos:List<MultipartBody.Part>,
+        @Query("bdate") bdate: String?,
+        @Query("user_id") user_id: Int?,
+        @Query("name") name: String?,
+        @Query("breed_id") breed_id: String?,
+        @Query("sex") sex: String?,
+        @Query("type") type: String?,
+    ): NetworkResponse<Pet, ApiError>
+
+    @Multipart
+    @POST("edit-pet")
+    suspend fun editPet(
+        @Header("Authorization") token: String,
+        @Part photos:List<MultipartBody.Part>,
+        @Query("bdate") bdate: String?,
+        @Query("user_id") user_id: Int?,
+        @Query("name") name: String?,
+        @Query("breed_id") breed_id: String?,
+        @Query("sex") sex: String?,
+        @Query("type") type: String?,
+    ): NetworkResponse<Pet, ApiError>
 
 }

@@ -25,6 +25,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".AddPetActivity"
+            android:exported="false" />
+        <activity
             android:name=".PetInfoActivity"
             android:exported="false" />
         <activity
@@ -57,11 +60,13 @@
         <activity
             android:name=".FilterActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".EditPetActivity"
+            android:exported="false" />
         <activity
             android:name="com.petswote.pet.photos.PetPhotosActivity"
-            android:exported="false" />
-
+            android:exported="false"
+            android:theme="@style/Theme.PhotosTheme" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

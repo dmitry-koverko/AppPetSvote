@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/clean-petsvote/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1275" />
         <entry key="..\:/clean-petsvote/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1275" />
+        <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_add_pet.xml" value="0.290234375" />
+        <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_edit_pet.xml" value="0.14" />
         <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_find_pet.xml" value="0.38697916666666665" />
         <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/clean-petsvote/app/src/main/res/layout/activity_pet_info.xml" value="0.38697916666666665" />
@@ -32,11 +34,12 @@
         <entry key="..\:/clean-petsvote/filter/src/main/res/layout/item_kinds.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/drawable/ic_icon_sex_female_black.xml" value="0.2275" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/activity_crop_pet.xml" value="0.38697916666666665" />
+        <entry key="..\:/clean-petsvote/pet/src/main/res/layout/activity_edit_pet.xml" value="0.2675438596491228" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/activity_pet_photos.xml" value="0.3439814814814815" />
-        <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_add_pet.xml" value="0.38697916666666665" />
+        <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_add_pet.xml" value="0.22" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_crop_pet_image.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_find_pet.xml" value="0.38697916666666665" />
-        <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_info.xml" value="0.3859375" />
+        <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_info.xml" value="0.25" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_photos.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_select_breeds.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/pet/src/main/res/layout/fragment_pet_select_kind.xml" value="0.3859375" />
@@ -97,6 +100,7 @@
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_icon_vote_selected.xml" value="0.139" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_instagram_pet.xml" value="0.227" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_keyboard_clear.xml" value="0.253" />
+        <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_lock.xml" value="0.254" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_svg_disable.xml" value="0.27" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_minus_white.xml" value="0.332" />
         <entry key="..\:/clean-petsvote/ui/src/main/res/drawable/ic_more.xml" value="0.269" />
@@ -160,7 +164,7 @@
         <entry key="..\:/clean-petsvote/user/src/main/res/layout/item_city.xml" value="0.38697916666666665" />
         <entry key="..\:/clean-petsvote/user/src/main/res/layout/item_country.xml" value="0.3859375" />
         <entry key="..\:/clean-petsvote/user/src/main/res/layout/item_user_pet.xml" value="0.3859375" />
-        <entry key="..\:/clean-petsvote/user/src/main/res/layout/item_user_pet_big.xml" value="0.38697916666666665" />
+        <entry key="..\:/clean-petsvote/user/src/main/res/layout/item_user_pet_big.xml" value="0.25" />
         <entry key="..\:/clean-petsvote/user/src/main/res/layout/settings_user_profile.xml" value="0.22760416666666666" />
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/fragment_blank.xml" value="0.2509057971014493" />
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/fragment_vote.xml" value="0.1" />

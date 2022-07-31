@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.petsvote.domain.entity.pet.PetPhoto;
 import com.petsvote.ui.AnimatedRoundedImage;
 import com.petsvote.ui.BesieLayout;
+import com.petsvote.ui.ext.GlideKt;
 import com.petswote.pet.R;
 import com.petswote.pet.helpers.ItemTouchHelperAdapter;
 import com.petswote.pet.helpers.ItemTouchHelperViewHolder;
@@ -50,8 +51,9 @@ public class AddPetPhotoAdapter extends RecyclerView.Adapter<AddPetPhotoAdapter.
             }
         }
         for(PetPhoto i: mItems){
-            if(i.getBitmap() == null) {
-                i.setBitmap(photo.getBitmap());
+            if(i.getBitmap() == null && i.getImage() == null) {
+                if(photo.getBitmap() != null ) i.setBitmap(photo.getBitmap());
+                else if (photo.getImage() != null ) i.setImage(photo.getImage());
                 i.setId(photo.getId());
                 notifyDataSetChanged();
                 return;
@@ -93,7 +95,12 @@ public class AddPetPhotoAdapter extends RecyclerView.Adapter<AddPetPhotoAdapter.
             holder.handleView.setImageBitmap(mItems.get(holder.getAbsoluteAdapterPosition()).getBitmap());
             holder.add_photo.setVisibility(View.GONE);
             holder.close.setVisibility(View.VISIBLE);
-        }else {
+        }else if(item.getImage() != null){
+            GlideKt.loadUrl(holder.handleView,item.getImage());
+            holder.add_photo.setVisibility(View.GONE);
+            holder.close.setVisibility(View.VISIBLE);
+        }
+        else {
             holder.add_photo.setVisibility(View.VISIBLE);
             holder.close.setVisibility(View.GONE);
             holder.handleView.setImageBitmap(null);

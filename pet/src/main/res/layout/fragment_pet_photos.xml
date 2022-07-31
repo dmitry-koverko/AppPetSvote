@@ -10,6 +10,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.viewpager2.widget.ViewPager2
+        android:outlineAmbientShadowColor="@color/ripple_text"
+        android:outlineSpotShadowColor="@color/ripple_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

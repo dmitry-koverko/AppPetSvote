@@ -1,15 +1,16 @@
 package com.petsvote.data.repository
 
-import com.petsvote.data.mappers.checkResult
-import com.petsvote.data.mappers.toLocalFind
-import com.petsvote.data.mappers.toLocalPetDetails
-import com.petsvote.data.mappers.toPetPhotoList
-import com.petsvote.domain.entity.filter.Kind
+import android.content.Context
+import android.graphics.Bitmap
+import com.petsvote.data.mappers.*
 import com.petsvote.domain.entity.pet.PetPhoto
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
+import com.petsvote.domain.usecases.filter.IGetKindsUseCase
+import com.petsvote.domain.usecases.filter.impl.GetKindsUseCase
 import com.petsvote.retrofit.api.PetApi
 import com.petsvote.retrofit.entity.pet.FindPet
+import com.petsvote.retrofit.entity.pet.Pet
 import com.petsvote.retrofit.entity.pet.PetDetails
 import com.petsvote.retrofit.entity.user.User
 import com.petsvote.room.dao.PetProfileDao
@@ -19,13 +20,18 @@ import com.petsvote.room.entity.EnityPetImage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.*
 import javax.inject.Inject
 
 class PetRepository @Inject constructor(
     private val petApi: PetApi,
     private val userDao: UserDao,
     private val profilePetDao: PetProfileDao,
-    private val getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase
+    private val getLocaleLanguageCodeUseCase: GetLocaleLanguageCodeUseCase,
+    private val context: Context,
 ) : IPetRepository {
 
     override suspend fun insertEmptyPetProfile() {
@@ -121,7 +127,64 @@ class PetRepository @Inject constructor(
 
 
     }
-   // http://d.pvapi.site/get-pet-details?city_id=2001077&country_id=5&id=1489195&rating_type=country&user_id=3336288
-    // http://d.pvapi.site/get-pet-details?city_id=0&country_id=0&id=1481559&user_id=3336319&rating_type=country&type=global
+
+    override suspend fun addPet(list: List<Bitmap?>, kind: String): com.petsvote.domain.entity.pet.Pet? {
+        var listPhotos = mutableListOf<MultipartBody.Part>()
+
+        for (i in 0..list.size - 1) {
+            if (list[i] != null) {
+                listPhotos.add(buildImageBodyPart("photo_data[${i + 1}]", list[i]!!))
+            }
+        }
+
+        var profilePet = profilePetDao.getSimplePetProfile()
+
+        return checkResult<Pet>(
+            petApi.addPet(
+                userDao.getToken(),
+                listPhotos,
+                profilePet?.birthday,
+                userDao.getUser().id,
+                profilePet?.name,
+                profilePet?.breedId.toString(),
+                if(profilePet?.sex == 0) "FEMALE" else "MALE",
+                kind
+            )
+        )?.toLocalPet()
+    }
+
+
+    private fun buildImageBodyPart(fileName: String, bitmap: Bitmap): MultipartBody.Part {
+        val leftImageFile = convertBitmapToFile(fileName, bitmap)
+        val reqFile = RequestBody.create("image/*".toMediaTypeOrNull(), leftImageFile)
+        return MultipartBody.Part.createFormData(fileName, leftImageFile.name, reqFile)
+    }
+
+    private fun convertBitmapToFile(fileName: String, bitmap: Bitmap): File {
+        //create a file to write bitmap data
+        val file = File(context.cacheDir, fileName)
+        file.createNewFile()
+
+        //Convert bitmap to byte array
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 90 /*ignored for PNG*/, bos)
+        val bitMapData = bos.toByteArray()
+
+        //write the bytes in file
+        var fos: FileOutputStream? = null
+        try {
+            fos = FileOutputStream(file)
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+        try {
+            fos?.write(bitMapData)
+            fos?.flush()
+            fos?.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+        return file
+    }
 
 }

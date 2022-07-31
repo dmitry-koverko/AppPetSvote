@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.adapter.FingerprintListAdapter
 import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.navigation.MainNavigation
 import com.petsvote.ui.loadImage
 import com.petsvote.user.R
 import com.petsvote.user.databinding.FragmentSimpleUserBinding
@@ -17,6 +18,7 @@ import com.petsvote.user.di.UserComponentViewModel
 import com.petsvote.user.UserPetsFingerprint
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
+import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
 class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
@@ -27,6 +29,10 @@ class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
     private val userComponentViewModel: UserComponentViewModel by viewModels()
     private val viewModel: SimpleUserViewModel by viewModels {
         viewModelFactory.get()
+    }
+
+    private val navigation: MainNavigation by lazy {
+        XInjectionManager.findComponent<MainNavigation>()
     }
 
     private var petsAdapter = FingerprintListAdapter(listOf(UserPetsFingerprint(::clickPet)))
@@ -53,6 +59,11 @@ class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
 
         binding = FragmentSimpleUserBinding.bind(view)
         binding?.addPet?.animation = true
+        binding?.addPet?.setOnClickListener { activity?.let { it1 ->
+            navigation.startActivityAddPet(
+                it1
+            )
+        } }
         binding?.userPets?.apply {
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -71,7 +82,10 @@ class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
     }
 
     private fun clickPet(pet: UserPet){
-
+        var bundle = Bundle()
+        pet.pets_id?.let { bundle.putInt("pet", it) }
+        bundle.putBoolean("myPet", true)
+        activity?.let { navigation.startActivityPetInfo(it, bundle) }
     }
 
     override fun onAttach(context: Context) {

@@ -13,4 +13,13 @@
         <item name="android:statusBarColor">@color/status_bar_color</item>
 
     </style>
+
+    <style name="Theme.PhotosTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorPrimaryVariant">@color/status_bar_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">#4DFFFFFF</item>
+    </style>
+
 </resources>

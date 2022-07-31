@@ -36,6 +36,7 @@
         </com.petsvote.ui.BesieLayout>
 
         <com.petsvote.ui.textview.SimpleSFTextView
+            android:id="@+id/title"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:textColor="@color/active_text_color"
@@ -253,6 +254,7 @@
             android:layout_height="wrap_content"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/containerTabs"
             android:layout_marginTop="8dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -261,6 +263,23 @@
             <com.petsvote.ui.maintabs.BesieTabLayout
                 app:btl_type="2"
                 android:id="@+id/tabs"
+                android:layout_marginTop="8dp"
+                app:btl_count_tabs="2"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/containerTabs2"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <com.petsvote.ui.maintabs.BesieTabLayout
+                app:btl_type="2"
+                android:id="@+id/tabs2"
                 android:layout_marginTop="8dp"
                 app:btl_count_tabs="3"
                 android:layout_width="match_parent"

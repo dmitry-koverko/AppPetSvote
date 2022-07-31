@@ -8,6 +8,7 @@ class SetKindPetUseCase @Inject constructor(
     private val petRepository: IPetRepository
 ): ISetKindPetUseCase {
     override suspend fun setKind(id: Int, title: String) {
+        petRepository.setSelectBreed(-1, "" )
         petRepository.setSelectKind(id  ,title)
     }
 }

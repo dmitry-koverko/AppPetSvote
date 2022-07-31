@@ -58,9 +58,10 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
     private var currentPosition: Int = 0
 
     companion object{
-        fun newInstance(id: Int?): PetInfoFragment{
+        fun newInstance(id: Int?, myPet: Boolean = false): PetInfoFragment{
             val args = Bundle()
             id?.let { args.putInt("pet", it) }
+            myPet.let { args.putBoolean("myPet", it) }
             val fragment = PetInfoFragment()
             fragment.arguments = args
             return fragment
@@ -85,6 +86,17 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
         }
 
         binding?.parallax?.mHorizontalParallaxViewListener = this
+
+        if(arguments?.getBoolean("myPet") == true) {
+            binding?.editContainer?.visibility = View.VISIBLE
+            binding?.btnPromote?.visibility = View.VISIBLE
+        }else binding?.userContainer?.visibility = View.VISIBLE
+
+        binding?.editBl?.setOnClickListener {
+            var bundle = Bundle()
+            currentPet?.let { it1 -> bundle.putString("pet", Json.encodeToString(it1)) }
+            activity?.let { it1 -> navigation.startActivityEditPet(it1, bundle) }
+        }
 
     }
 

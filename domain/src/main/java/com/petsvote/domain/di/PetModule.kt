@@ -4,8 +4,11 @@ import com.petsvote.domain.repository.IBreedRepository
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.repository.breeds.IPetBreedsPagingRepository
+import com.petsvote.domain.usecases.filter.IGetKindsUseCase
 import com.petsvote.domain.usecases.filter.impl.GetKindsUseCase
 import com.petsvote.domain.usecases.pet.*
+import com.petsvote.domain.usecases.pet.add.IAddPetUseCase
+import com.petsvote.domain.usecases.pet.add.impl.AddPetUseCase
 import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.pet.create.impl.*
 import com.petsvote.domain.usecases.pet.impl.*
@@ -15,6 +18,11 @@ import dagger.Provides
 
 @Module
 class PetModule {
+
+    @Provides
+    fun provideIAddPetUseCase(petRepository: IPetRepository, userRepository: IUserRepository, getKindsUseCase: IGetKindsUseCase): IAddPetUseCase {
+        return AddPetUseCase(petRepository = petRepository, userRepository = userRepository, getKindsUseCase = getKindsUseCase)
+    }
 
     @Provides
     fun provideIGetBreedByIdUseCase(breedRepository: IBreedRepository, userRepository: IUserRepository): IGetBreedByIdUseCase {

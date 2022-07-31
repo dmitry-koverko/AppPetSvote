@@ -85,11 +85,16 @@ class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
             binding?.imageView?.list = pet.photos
         }
 
-//        binding?.imageView?.setOnClickListener {
-//            pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
-//        }
+        binding?.imageView?.setOnLongClickListener {
+            pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
+            true
+        }
 
-        binding?.simpleSFTextView?.setOnClickListener {
+        binding?.title?.setOnClickListener {
+            pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
+        }
+
+        binding?.description?.setOnClickListener {
             pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
         }
     }

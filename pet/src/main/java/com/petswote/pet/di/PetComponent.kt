@@ -4,9 +4,11 @@ import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.configuration.*
 import com.petsvote.domain.usecases.filter.IGetKindsUseCase
+import com.petsvote.domain.usecases.filter.ISetBreedUseCase
 import com.petsvote.domain.usecases.pet.IFindPetUseCase
 import com.petsvote.domain.usecases.pet.IGetBreedByIdUseCase
 import com.petsvote.domain.usecases.pet.IGetPetDetailsUseCase
+import com.petsvote.domain.usecases.pet.add.IAddPetUseCase
 import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.user.*
 import com.petswote.pet.add.AddPetFragment
@@ -81,6 +83,9 @@ interface PetDeps{
     val findPetUseCase: IFindPetUseCase
     val petDetailsUseCase: IGetPetDetailsUseCase
     val getBreedByIdUseCase: IGetBreedByIdUseCase
+    val addPetUseCase: IAddPetUseCase
+    val setBreedsUseCase: ISetBreedUseCase
+
 }
 
 val Context.petDepsProvider: PetDepsProvider

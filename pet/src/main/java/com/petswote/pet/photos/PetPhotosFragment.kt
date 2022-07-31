@@ -9,6 +9,7 @@ import android.text.style.ImageSpan
 import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.dialog.ComplaintSuccessDialog
@@ -74,7 +75,6 @@ class PetPhotosFragment: BaseFragment(R.layout.fragment_pet_photos),
         binding.viewPager.setCurrentItem(position, false)
         adapter?.mPetPhotoViewPagerAdapterListener = this
 
-
         binding.more.setOnClickListener {
             var dialogMore = PetPhotoMoreDialogFragment()
             dialogMore.mPetPhotoMoreDialogFragmentListener = this
@@ -86,7 +86,7 @@ class PetPhotosFragment: BaseFragment(R.layout.fragment_pet_photos),
                 listPhotoString[binding.viewPager.currentItem],
                 currentPet,
                 location ?: "",
-                adapter?.currentImage?.viewBitmap)
+                adapter?.currentImage?.croppedImage)
         }
 
         binding.close.setOnClickListener {

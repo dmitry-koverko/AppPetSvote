@@ -114,6 +114,8 @@
     <color name="hint_text_color">#99FFFFFF</color>
     <color name="add_photo_bg">#1FFFFFFF</color>
     <color name="keyboard_bg">#1FFFFFFF</color>
+    <color name="bg_edit_color">#99FFFFFF</color>
+    <color name="text_edit_button">@color/digits_star_color</color>
 
 
 </resources>

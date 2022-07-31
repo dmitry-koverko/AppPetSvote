@@ -1,7 +1,9 @@
 package com.petsvote.domain.repository
 
+import android.graphics.Bitmap
 import com.petsvote.domain.entity.filter.Kind
 import com.petsvote.domain.entity.pet.FindPet
+import com.petsvote.domain.entity.pet.Pet
 import com.petsvote.domain.entity.pet.PetDetails
 import com.petsvote.domain.entity.pet.PetPhoto
 import kotlinx.coroutines.flow.Flow
@@ -24,5 +26,6 @@ interface IPetRepository {
     suspend fun setSelectSex(sex: Int)
     suspend fun findPet(petId: Int): FindPet?
     suspend fun petDetails(petId: Int): PetDetails?
+    suspend fun addPet(list: List<Bitmap?>, kind: String): Pet?
 
 }

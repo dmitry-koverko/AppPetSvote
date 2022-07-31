@@ -1,6 +1,7 @@
 package com.petswote.pet.add
 
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -44,34 +45,34 @@ import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListener,
+open class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListener,
     SelectPhotoDialog.SelectPhotoDialogListener, BesieTabLayoutSelectedListener,
     LoginInstaDialog.LoginInstaDialogListener {
 
     private var mItemTouchHelper: ItemTouchHelper? = null
     private var listPhotos = mutableListOf<PetPhoto>()
-    private val adapter = AddPetPhotoAdapter(activity, this)
+    val adapter = AddPetPhotoAdapter(activity, this)
 
     private var binding: FragmentAddPetBinding? = null
 
     private var isAddPhotoDialog = true;
     private val dialogAddPhoto = UserImageDialog()
     private val selectPhotoDialog = SelectPhotoDialog(1)
-    private var informationDialog = InformationKindDialog()
+    var informationDialog = InformationKindDialog()
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<AddPetViewModel.Factory>
 
     private val petComponentViewModel: PetComponentViewModel by viewModels()
-    private val viewModel: AddPetViewModel by viewModels {
+    val viewModel: AddPetViewModel by viewModels {
         viewModelFactory.get()
     }
 
-    private val navigation: MainNavigation by lazy {
+    val navigation: MainNavigation by lazy {
         XInjectionManager.findComponent<MainNavigation>()
     }
 
-    private var isBreedClick = false
+    var isBreedClick = false
 
     val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -93,7 +94,7 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
     val sdf = SimpleDateFormat(myFormat, Locale.getDefault())
     val sdfServer = SimpleDateFormat(serverFormat, Locale.getDefault())
 
-    private var validateCreatePet = ValidateCreatePet()
+    var validateCreatePet = ValidateCreatePet()
 
     companion object {
         const val EXTRA_MESSAGE = "CROP_MESSAGE"
@@ -163,6 +164,7 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
         }
 
         binding?.tabs?.setTabSelectedListener(this)
+        binding?.tabs2?.setTabSelectedListener(this)
 
         binding?.insta?.root?.setOnClickListener {
             if (validateCreatePet.inst.isEmpty()) {
@@ -175,6 +177,15 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
         binding?.insta?.gpInstaDisconnect?.setOnClickListener {
             validateCreatePet.inst = ""
             stateInstagramDisabled()
+        }
+
+        binding?.close?.setOnClickListener {
+            activity?.setResult(RESULT_OK)
+            activity?.finish()
+        }
+
+        binding?.save?.setOnClickListener {
+            viewModel.addPet()
         }
     }
 
@@ -251,11 +262,15 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
                 it.let { id ->
                     when (id) {
                         4, 6, 9 -> {
-                            binding?.tabs?.coutTabs = 3;
+                           binding?.containerTabs2?.visibility = View.VISIBLE
+                           binding?.containerTabs?.visibility = View.GONE
                         }
-                        else -> binding?.tabs?.coutTabs = 2
+                        else -> {
+                            binding?.containerTabs2?.visibility = View.GONE
+                            binding?.containerTabs?.visibility = View.VISIBLE
+                        }
                     }
-                    binding?.tabs?.initTabs()
+
                 }
             }
         }
@@ -301,6 +316,13 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
 
         lifecycleScope.launchWhenStarted {
             viewModel.isLoading.collect {
+                if(it){
+                    binding?.save?.enabled()
+                    binding?.saveText?.setTextColor(ContextCompat.getColor(requireContext(), com.petsvote.ui.R.color.besie_tab_text_selected_color))
+                }else {
+                    binding?.save?.disabled()
+                    binding?.saveText?.setTextColor(ContextCompat.getColor(requireContext(), com.petsvote.ui.R.color.besie_tab_text_unselected_color))
+                }
                 stateInstagramLoading(it)
             }
         }
@@ -308,6 +330,15 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
         lifecycleScope.launchWhenStarted {
             viewModel.instagramUserName.collect {
                 if (it.isNotEmpty()) stateInstagramEnabled(it)
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.addPet.collect {pet ->
+                pet?.let {
+                    activity?.setResult(RESULT_OK)
+                    activity?.finish()
+                }
             }
         }
 
@@ -337,6 +368,7 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
             true
         ) {
             override fun handleOnBackPressed() {
+                activity?.setResult(RESULT_OK)
                 activity?.finish()
             }
 
@@ -370,7 +402,7 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
         if (userId != null) viewModel.getUserName(userId)
     }
 
-    private fun stateInstagramEnabled(usernameInstagram: String) {
+    fun stateInstagramEnabled(usernameInstagram: String) {
         validateCreatePet.inst = usernameInstagram
         binding?.insta?.gpInstaUsernameContainer?.show()
         binding?.insta?.gpInstaUsername?.text = usernameInstagram
@@ -379,6 +411,7 @@ class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragListen
     }
 
     private fun stateInstagramLoading(it: Boolean) {
+
         binding?.insta?.gpInstaProgress?.visibility = if (it) View.VISIBLE else View.GONE
         if (it) binding?.insta?.connectInstagram?.visibility = View.GONE
     }

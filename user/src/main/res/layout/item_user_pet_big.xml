@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frame"
     app:cardCornerRadius="16dp"
     android:layout_width="match_parent"
@@ -27,8 +27,9 @@
         android:textColor="@color/white"
         android:maxLines="1"
         android:ellipsize="end"
-        android:text="Ешка, 7 месfdssssssssssssssssssssssssssss."
+        tools:text="Ешка, 7 месfdssssssssssssssssssssssssssss."
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
 
 </FrameLayout>

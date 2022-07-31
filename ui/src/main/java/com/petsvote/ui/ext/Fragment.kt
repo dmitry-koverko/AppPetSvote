@@ -18,8 +18,8 @@ fun TextView.spacingFormat(value: Int, subValue: String = "", preValue: String =
 
 fun TextView.spacing4Format(id: Int) {
     val valueSting = id.toString()
-    val value1 = valueSting.substring(0, 3)
-    val value2 = valueSting.substring(4, valueSting.length-1)
+    val value1 = valueSting.substring(0, 4)
+    val value2 = valueSting.substring(4, valueSting.length)
     this.text = "ID $value1 $value2"
 }
 

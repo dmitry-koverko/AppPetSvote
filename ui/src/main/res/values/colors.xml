@@ -119,4 +119,8 @@
     <color name="add_photo_bg">#0A121212</color>
     <color name="keyboard_bg">#FFFFFF</color>
 
+
+    <color name="bg_edit_color">#61000000</color>
+    <color name="text_edit_button">#FFFFFF</color>
+
 </resources>

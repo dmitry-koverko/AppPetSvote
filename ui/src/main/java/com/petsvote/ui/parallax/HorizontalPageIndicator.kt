@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -40,11 +41,14 @@ class HorizontalPageIndicator @JvmOverloads constructor(
         indicatorSize = (12 * context.resources.displayMetrics.density).toInt()
         marginSize = (7 * context.resources.displayMetrics.density).toInt()
 
-        if(dotCount != 0) setCountIndicators(dotCount)
+        if(dotCount >1) setCountIndicators(dotCount)
+        else dotIndicator.visibility = View.GONE
     }
 
     fun setCountIndicators(count: Int){
         dotCount = count
+        if(dotCount < 2) return
+        dotIndicator.visibility = View.VISIBLE
         findViewById<LinearLayoutCompat>(R.id.root).removeAllViews()
         for(i in 1..count){
             var dot = DotIndicator(context)

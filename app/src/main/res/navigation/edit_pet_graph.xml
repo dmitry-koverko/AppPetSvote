@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/edit_pet_graph"
+    app:startDestination="@id/editPetFragment">
+
+
+    <fragment
+        android:id="@+id/editPetFragment"
+        android:name="com.petswote.pet.edit.EditPetFragment"
+        android:label="EditPetFragment" >
+        <action
+            android:id="@+id/action_editPetFragment_to_petSelectKindsFragment2"
+            app:destination="@id/petSelectKindsFragment2" />
+        <action
+            android:id="@+id/action_editPetFragment_to_petSelectBreedsFragment2"
+            app:destination="@id/petSelectBreedsFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/petSelectBreedsFragment2"
+        android:name="com.petswote.pet.breeds.PetSelectBreedsFragment"
+        android:label="PetSelectBreedsFragment" />
+    <fragment
+        android:id="@+id/petSelectKindsFragment2"
+        android:name="com.petswote.pet.kinds.PetSelectKindsFragment"
+        android:label="PetSelectKindsFragment" />
+
+
+</navigation>
