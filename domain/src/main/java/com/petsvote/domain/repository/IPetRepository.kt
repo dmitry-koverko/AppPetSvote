@@ -27,5 +27,6 @@ interface IPetRepository {
     suspend fun findPet(petId: Int): FindPet?
     suspend fun petDetails(petId: Int): PetDetails?
     suspend fun addPet(list: List<Bitmap?>, kind: String): Pet?
+    suspend fun editPet(list: List<Bitmap?>, kind: String, petId: Int): Pet?
 
 }

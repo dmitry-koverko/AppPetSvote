@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Pet(
-    val  temp_type: String,
+    val temp_type: String,
     val id : Int,
     val create_date: String,
     val pet_id: Int,

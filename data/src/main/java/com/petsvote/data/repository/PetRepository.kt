@@ -153,6 +153,31 @@ class PetRepository @Inject constructor(
         )?.toLocalPet()
     }
 
+    override suspend fun editPet(list: List<Bitmap?>, kind: String, petId: Int): com.petsvote.domain.entity.pet.Pet? {
+        var listPhotos = mutableListOf<MultipartBody.Part?>()
+        listPhotos.add(null)
+//        for (i in 0..list.size - 1) {
+//            if (list[i] != null) {
+//                listPhotos.add(buildImageBodyPart("photo_data[${i + 1}]", list[i]!!))
+//            }
+//        }
+
+        var profilePet = profilePetDao.getSimplePetProfile()
+
+        return checkResult<Pet>(
+            petApi.editPetWithoutPhotos(
+                userDao.getToken(),
+                profilePet?.birthday,
+                userDao.getUser().id,
+                profilePet?.name,
+                profilePet?.breedId.toString(),
+                if(profilePet?.sex == 0) "FEMALE" else "MALE",
+                kind,
+                petId
+            )
+        )?.toLocalPet()
+    }
+
 
     private fun buildImageBodyPart(fileName: String, bitmap: Bitmap): MultipartBody.Part {
         val leftImageFile = convertBitmapToFile(fileName, bitmap)

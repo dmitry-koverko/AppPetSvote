@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import com.petsvote.navigation.MainNavigation
 import com.petswote.pet.photos.PetPhotosActivity
@@ -93,12 +94,14 @@ class Navigator: MainNavigation {
         navController?.navigate(R.id.action_addPetFragment_to_petSelectBreedsFragment)
     }
 
-    override fun startSelectKindsFromEditPet() {
-        navController?.navigate(R.id.action_editPetFragment_to_petSelectKindsFragment2)
+    override fun startSelectKindsFromEditPet(activity: Activity) {
+        var intent = Intent(activity, SelectPetKindActivity::class.java)
+        startActivityForResult(activity, intent, 123, bundleOf())
     }
 
-    override fun startSelectBreedsFromEditPet() {
-        navController?.navigate(R.id.action_editPetFragment_to_petSelectBreedsFragment2)
+    override fun startSelectBreedsFromEditPet(activity: Activity) {
+        var intent = Intent(activity, SelectpetBreedctivity::class.java)
+        startActivityForResult(activity, intent, 123, bundleOf())
     }
 
     override fun startFilterActivityForResult(activity: Activity) {

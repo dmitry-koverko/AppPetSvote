@@ -9,6 +9,7 @@ import com.petsvote.domain.entity.pet.Pet
 import com.petsvote.domain.entity.pet.PetDetails
 import com.petsvote.domain.entity.user.DataResponse
 import com.petsvote.domain.usecases.configuration.impl.GetBreedsUseCase
+import com.petsvote.domain.usecases.filter.IGetKindsUseCase
 import com.petsvote.domain.usecases.pet.IFindPetUseCase
 import com.petsvote.domain.usecases.pet.IGetBreedByIdUseCase
 import com.petsvote.domain.usecases.pet.IGetPetDetailsUseCase
@@ -23,18 +24,21 @@ import javax.inject.Inject
 class PetInfoViewModel @Inject constructor(
     private val petDetailsUseCase: IGetPetDetailsUseCase,
     private val findPetUseCase: IFindPetUseCase,
-    private val getBreedByIdUseCase: IGetBreedByIdUseCase
+    private val getBreedByIdUseCase: IGetBreedByIdUseCase,
+    private val kindsUseCase: IGetKindsUseCase,
 ): BaseViewModel() {
 
     var uiPet = MutableStateFlow<FindPet?>(null)
     var uiPetDetails = MutableStateFlow<PetDetails?>(null)
     var uiBreedString = MutableStateFlow<String>("")
+    var uiKindString = MutableStateFlow<String>("")
 
     fun getPetInfo(petId: Int) {
         launchIO {
             findPetUseCase.findPet(petId).collect {
                 when (it) {
                     is DataResponse.Success<FindPet> -> {
+                        uiKindString.emit(kindsUseCase.getKinds(-1, it.data.pet.type).get(0).title)
                         uiPet.emit(it.data)
                         uiBreedString.emit(getBreedByIdUseCase.getBreedInfo(it.data.pet.breed_id))
                         var petDetails = petDetailsUseCase.getPetDetails(it.data.pet.id)
@@ -50,14 +54,16 @@ class PetInfoViewModel @Inject constructor(
     class Factory @Inject constructor(
         private val petDetailsUseCase: IGetPetDetailsUseCase,
         private val findPetUseCase: IFindPetUseCase,
-        private val getBreedByIdUseCase: IGetBreedByIdUseCase
+        private val getBreedByIdUseCase: IGetBreedByIdUseCase,
+        private val kindsUseCase: IGetKindsUseCase,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == PetInfoViewModel::class.java)
             return PetInfoViewModel(
                 petDetailsUseCase = petDetailsUseCase,
                 findPetUseCase = findPetUseCase,
-                getBreedByIdUseCase = getBreedByIdUseCase
+                getBreedByIdUseCase = getBreedByIdUseCase,
+                kindsUseCase = kindsUseCase
             ) as T
         }
 

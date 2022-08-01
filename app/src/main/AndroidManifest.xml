@@ -25,6 +25,14 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:theme="@style/Theme.RightTheme"
+            android:name=".SelectpetBreedctivity"
+            android:exported="false" />
+        <activity
+            android:theme="@style/Theme.RightTheme"
+            android:name=".SelectPetKindActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddPetActivity"
             android:exported="false" />
         <activity

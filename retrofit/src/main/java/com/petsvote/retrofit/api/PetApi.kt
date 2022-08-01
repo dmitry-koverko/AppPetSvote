@@ -47,13 +47,26 @@ interface PetApi {
     @POST("edit-pet")
     suspend fun editPet(
         @Header("Authorization") token: String,
-        @Part photos:List<MultipartBody.Part>,
+        @Part photos:List<MultipartBody.Part>?,
         @Query("bdate") bdate: String?,
         @Query("user_id") user_id: Int?,
         @Query("name") name: String?,
         @Query("breed_id") breed_id: String?,
         @Query("sex") sex: String?,
         @Query("type") type: String?,
+    ): NetworkResponse<Pet, ApiError>
+
+
+    @POST("edit-pet")
+    suspend fun editPetWithoutPhotos(
+        @Header("Authorization") token: String,
+        @Query("bdate") bdate: String?,
+        @Query("user_id") user_id: Int?,
+        @Query("name") name: String?,
+        @Query("breed_id") breed_id: String?,
+        @Query("sex") sex: String?,
+        @Query("type") type: String?,
+        @Query("id") id: Int?,
     ): NetworkResponse<Pet, ApiError>
 
 }

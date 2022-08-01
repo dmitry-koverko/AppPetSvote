@@ -56,6 +56,8 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
 
     private var currentPet: Pet? = null
     private var currentPosition: Int = 0
+    private var locate = ""
+    private var kindString = ""
 
     companion object{
         fun newInstance(id: Int?, myPet: Boolean = false): PetInfoFragment{
@@ -73,7 +75,9 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
 
         binding = FragmentPetInfoBinding.bind(view)
         var petId= arguments?.getInt("pet")
-        petId?.let { viewModel.getPetInfo(it) }
+        petId?.let {
+            viewModel.getPetInfo(it)
+        }
 
         binding?.copy?.animation = true
         binding?.copy?.setOnClickListener {
@@ -95,6 +99,7 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
         binding?.editBl?.setOnClickListener {
             var bundle = Bundle()
             currentPet?.let { it1 -> bundle.putString("pet", Json.encodeToString(it1)) }
+            bundle.putString("petKind", kindString)
             activity?.let { it1 -> navigation.startActivityEditPet(it1, bundle) }
         }
 
@@ -138,6 +143,8 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
                     binding?.petShare?.setOnClickListener {
                         sharePet(petData.pet.pet_id)
                     }
+
+                    locate = "${petData.pet.country_name}, ${petData.pet.city_name}"
                 }
             }
         }
@@ -166,11 +173,23 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
                         }
                     }
                 }
+
+                lifecycleScope.launchWhenStarted {
+                    viewModel.uiBreedString.collect {
+                        binding?.petLocate?.text = "$it, $locate"
+                    }
+                }
             }
         }
         lifecycleScope.launchWhenStarted {
             viewModel.uiBreedString.collect {
                 binding?.petLocate?.text = it
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.uiKindString.collect {
+                kindString = it
             }
         }
     }

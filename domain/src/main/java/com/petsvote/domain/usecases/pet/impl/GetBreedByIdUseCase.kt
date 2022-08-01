@@ -12,8 +12,8 @@ class GetBreedByIdUseCase @Inject constructor(
     override suspend fun getBreedInfo(breedId: Int): String {
         val breedName = breedRepository.getBreedByBreedId(breedId)?.breedName
         val locale = userRepository.getCurrentUser().location
-        val localeString =
-            if (locale?.city_id != null && locale.city_id != -1) ",${locale.country}, ${locale.city}" else ""
-        return "$breedName $localeString"
+//        val localeString =
+//            if (locale?.city_id != null && locale.city_id != -1) ",${locale.country}, ${locale.city}" else ""
+        return "$breedName"// $localeString"
     }
 }

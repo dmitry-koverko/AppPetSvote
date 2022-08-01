@@ -6,5 +6,5 @@ import com.petsvote.domain.entity.user.DataResponse
 import kotlinx.coroutines.flow.Flow
 
 interface IEditPetUseCase {
-    suspend fun editPet(list: List<Bitmap?>): Flow<DataResponse<Pet>>
+    suspend fun editPet(list: List<Bitmap?>, kindId: Int): Flow<DataResponse<Pet>>
 }

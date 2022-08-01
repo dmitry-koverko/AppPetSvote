@@ -110,7 +110,7 @@ open class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragL
         initTW()
         requestPermissions()
 
-        lifecycleScope.launchWhenStarted { viewModel.getConfiguration() }
+        lifecycleScope.launchWhenResumed { viewModel.getConfiguration() }
     }
 
     private fun initTW() {
@@ -189,9 +189,9 @@ open class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragL
         }
     }
 
-    private fun checkBTN() {
+    fun checkBTN() {
         if(
-            adapter.items.filter { it.bitmap != null }.isNotEmpty()
+            adapter.items.filter { it.bitmap != null || it.image != null}.isNotEmpty()
             && validateCreatePet.name.isNotEmpty()
             && validateCreatePet.breed.isNotEmpty()
             && validateCreatePet.kind.isNotEmpty()
@@ -283,7 +283,7 @@ open class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragL
             }
         }
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenResumed {
             viewModel.kindTitle.collect {
                 if(it.isNotEmpty()) {
                     isBreedClick = true
@@ -410,7 +410,7 @@ open class AddPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDragL
         binding?.insta?.gpInstaProgress?.hide()
     }
 
-    private fun stateInstagramLoading(it: Boolean) {
+    fun stateInstagramLoading(it: Boolean) {
 
         binding?.insta?.gpInstaProgress?.visibility = if (it) View.VISIBLE else View.GONE
         if (it) binding?.insta?.connectInstagram?.visibility = View.GONE

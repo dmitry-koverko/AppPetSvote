@@ -1,5 +1,6 @@
 package com.petswote.pet.breeds
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -64,7 +65,12 @@ class PetSelectBreedsFragment: BaseFragment(R.layout.fragment_pet_select_breeds)
 
     private fun initBack() {
         binding?.back?.setOnClickListener {
-            findNavController().popBackStack()
+            try{
+                findNavController().popBackStack()
+            }catch (e: Exception){
+                activity?.setResult(RESULT_OK)
+                activity?.finish()
+            }
         }
     }
 
@@ -100,7 +106,12 @@ class PetSelectBreedsFragment: BaseFragment(R.layout.fragment_pet_select_breeds)
         lifecycleScope.launch {
             viewModel.setBreedFilter(breed)
         }
-        findNavController().popBackStack()
+        try{
+            findNavController().popBackStack()
+        }catch (e: Exception){
+            activity?.setResult(RESULT_OK)
+            activity?.finish()
+        }
     }
 
     override fun onAttach(context: Context) {

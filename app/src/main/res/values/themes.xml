@@ -21,5 +21,22 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorPrimary">#4DFFFFFF</item>
     </style>
+
+    <style name="MyCustomActivityAnimation"
+        parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">
+            @anim/to_term_info</item>
+        <item name="android:activityOpenExitAnimation">
+            @anim/from_term_info</item>
+        <item name="android:activityCloseEnterAnimation">
+            @anim/to_term</item>
+        <item name="android:activityCloseExitAnimation">
+            @anim/from_term</item>
+    </style>
+
+    <style name="Theme.RightTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowAnimationStyle">
+            @style/MyCustomActivityAnimation</item>
+    </style>
 </resources>
 

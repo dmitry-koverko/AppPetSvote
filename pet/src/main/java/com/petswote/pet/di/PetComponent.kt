@@ -9,11 +9,13 @@ import com.petsvote.domain.usecases.pet.IFindPetUseCase
 import com.petsvote.domain.usecases.pet.IGetBreedByIdUseCase
 import com.petsvote.domain.usecases.pet.IGetPetDetailsUseCase
 import com.petsvote.domain.usecases.pet.add.IAddPetUseCase
+import com.petsvote.domain.usecases.pet.add.IEditPetUseCase
 import com.petsvote.domain.usecases.pet.create.*
 import com.petsvote.domain.usecases.user.*
 import com.petswote.pet.add.AddPetFragment
 import com.petswote.pet.breeds.PetSelectBreedsFragment
 import com.petswote.pet.crop.CropPetImageFragment
+import com.petswote.pet.edit.EditPetFragment
 import com.petswote.pet.find.FindPetFragment
 import com.petswote.pet.info.PetInfoFragment
 import com.petswote.pet.kinds.PetSelectKindsFragment
@@ -36,6 +38,7 @@ interface PetComponent {
     fun injectSelectBreeds(petSelectBreedsFragment: PetSelectBreedsFragment)
     fun injectFindPet(findPetFragment: FindPetFragment)
     fun injectPetInfo(petInfoFragment: PetInfoFragment)
+    fun injectEdit(editPetFragment: EditPetFragment)
 
     @Component.Builder
     interface Builder{
@@ -85,6 +88,7 @@ interface PetDeps{
     val getBreedByIdUseCase: IGetBreedByIdUseCase
     val addPetUseCase: IAddPetUseCase
     val setBreedsUseCase: ISetBreedUseCase
+    val editPetUseCase: IEditPetUseCase
 
 }
 

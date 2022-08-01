@@ -1,5 +1,6 @@
 package com.petswote.pet.kinds
 
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -48,7 +49,12 @@ class PetSelectKindsFragment: BaseFragment(R.layout.fragment_pet_select_kind) {
 
     private fun initHome() {
         binding?.back?.setOnClickListener {
-            findNavController().popBackStack()
+            try{
+                findNavController().popBackStack()
+            }catch (e: Exception){
+                activity?.setResult(RESULT_OK)
+                activity?.finish()
+            }
         }
     }
 
@@ -70,7 +76,12 @@ class PetSelectKindsFragment: BaseFragment(R.layout.fragment_pet_select_kind) {
 
     private fun onSelectKind(kind: Kind) {
         viewModel.setKindsFilter(kind)
-        findNavController().popBackStack()
+        try{
+            findNavController().popBackStack()
+        }catch (e: Exception){
+            activity?.setResult(RESULT_OK)
+            activity?.finish()
+        }
     }
 
     override fun onAttach(context: Context) {

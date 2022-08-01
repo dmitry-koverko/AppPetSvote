@@ -1,4 +1,4 @@
-package com.petswote.pet.add
+package com.petswote.pet.edit
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
@@ -30,7 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AddPetViewModel @Inject constructor(
+class EditPetViewModel @Inject constructor(
     private val getUserUseCase: IGetUserUseCase,
     private val getImagesCropUseCase: IGetImagesCropUseCase,
     private val removePetImageUseCase: IRemovePetImageUseCase,
@@ -197,8 +197,8 @@ class AddPetViewModel @Inject constructor(
         private val getBreedByIdUseCase: IGetBreedByIdUseCase,
     ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            require(modelClass == AddPetViewModel::class.java)
-            return AddPetViewModel(
+            require(modelClass == EditPetViewModel::class.java)
+            return EditPetViewModel(
                 getUserUseCase = getUserUseCase,
                 getImagesCropUseCase = getImagesCropUseCase,
                 removePetImageUseCase = removePetImageUseCase,
