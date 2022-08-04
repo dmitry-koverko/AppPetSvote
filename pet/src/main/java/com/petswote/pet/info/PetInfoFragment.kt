@@ -15,9 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.dialog.UserPhotoDialog
-import com.petsvote.domain.entity.pet.FindPet
 import com.petsvote.domain.entity.pet.Pet
-import com.petsvote.domain.entity.pet.PetDetails
 import com.petsvote.navigation.MainNavigation
 import com.petsvote.ui.ext.sharePet
 import com.petsvote.ui.ext.showSnackBar
@@ -26,13 +24,10 @@ import com.petsvote.ui.loadImage
 import com.petsvote.ui.openUrl
 import com.petsvote.ui.parallax.HorizontalParallaxView
 import com.petswote.pet.R
-import com.petswote.pet.databinding.FragmentFindPetBinding
 import com.petswote.pet.databinding.FragmentPetInfoBinding
 import com.petswote.pet.di.PetComponentViewModel
-import com.petswote.pet.find.FindPetViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.vponomarenko.injectionmanager.x.XInjectionManager
@@ -60,10 +55,11 @@ class PetInfoFragment: BaseFragment(R.layout.fragment_pet_info),
     private var kindString = ""
 
     companion object{
-        fun newInstance(id: Int?, myPet: Boolean = false): PetInfoFragment{
+        fun newInstance(id: Int?, myPet: Boolean = false, userId: Int): PetInfoFragment{
             val args = Bundle()
             id?.let { args.putInt("pet", it) }
             myPet.let { args.putBoolean("myPet", it) }
+            userId.let { args.putInt("userId", it) }
             val fragment = PetInfoFragment()
             fragment.arguments = args
             return fragment

@@ -28,6 +28,8 @@ fun VoteRating.remoteToVote(ratingType: RatingFilterType?, breeds: List<EntityBr
        breeds.find { it.id_breed == this.breed_id }?.title ?: "",
         breed_id = this.breed_id,
         this.type,
+        this.user_id,
+        this.card_type ?: 0,
         this.photos.remoteToPhotoListString()
     )
 }

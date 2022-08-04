@@ -4,6 +4,10 @@ import android.app.Application
 import android.content.Context
 import com.petsvote.domain.usecases.rating.IAddVoteUseCase
 import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
+import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
+import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
+import com.petsvote.domain.usecases.user.IGetUserUseCase
+import com.petsvote.vote.BonusVoteFragment
 import com.petsvote.vote.ItemVoteFragment
 import com.petsvote.vote.VoteFragment
 import dagger.Component
@@ -21,6 +25,9 @@ interface VoteComponent {
 
     fun inject(fragment: VoteFragment)
     fun injectAddVote(itemVoteFragment: ItemVoteFragment)
+    fun injectBonusVote(bonusVoteFragment: BonusVoteFragment) {
+
+    }
 
     @Component.Builder
     interface Builder{
@@ -47,6 +54,9 @@ interface VoteDeps{
 
     val votePetsUseCase: IGetVotePetsUseCase
     val addVoteUseCase: IAddVoteUseCase
+    val userPetsUserCase: IGetUserPetsUseCase
+    val getUserUseCase: IGetUserUseCase
+    val getStringResourcesUseCaseImpl: GetStringResourcesUseCase
 
 }
 

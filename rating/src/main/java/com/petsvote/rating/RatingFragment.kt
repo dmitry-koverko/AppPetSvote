@@ -290,6 +290,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         bundle.putInt("pet", item.pet_id)
         bundle.putInt("petBreed", item.breed_id)
         bundle.putString("petKind", item.type)
+        bundle.putInt("userId", item.user_id)
         activity?.let { navigation.startActivityPetInfo(it, bundle) }
     }
 

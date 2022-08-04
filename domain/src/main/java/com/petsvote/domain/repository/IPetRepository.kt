@@ -6,6 +6,7 @@ import com.petsvote.domain.entity.pet.FindPet
 import com.petsvote.domain.entity.pet.Pet
 import com.petsvote.domain.entity.pet.PetDetails
 import com.petsvote.domain.entity.pet.PetPhoto
+import com.petsvote.domain.entity.user.Photo
 import kotlinx.coroutines.flow.Flow
 
 interface IPetRepository {
@@ -25,8 +26,8 @@ interface IPetRepository {
     suspend fun setSelectInsta(insta: String)
     suspend fun setSelectSex(sex: Int)
     suspend fun findPet(petId: Int): FindPet?
-    suspend fun petDetails(petId: Int): PetDetails?
+    suspend fun petDetails(petId: Int, userId: Int): PetDetails?
     suspend fun addPet(list: List<Bitmap?>, kind: String): Pet?
-    suspend fun editPet(list: List<Bitmap?>, kind: String, petId: Int): Pet?
+    suspend fun editPet(list: List<Photo>, kind: String, petId: Int): Pet?
 
 }

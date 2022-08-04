@@ -10,17 +10,17 @@ class ResourcesRepository @Inject constructor(
     private val context: Context
 ): IResourcesRepository {
 
-    override fun getString(resourcesId: Int): String {
-        return resources.getString(resourcesId)
+    override fun getString(resourcesId: Int, vararg input: String): String {
+        return resources.getString(resourcesId, input)
     }
 
-    override fun getStringByName(string: String): String {
+    override fun getStringByName(string: String, vararg input: String): String {
         var  id =  resources.getIdentifier(string, "string", context.packageName)
-        return if(id != 0) resources.getString(id) else ""
+        return if(id != 0) resources.getString(id, input) else ""
     }
 
-    override fun getStringUiByName(string: String): String {
+    override fun getStringUiByName(string: String,vararg input: String): String {
         var  id =  resources.getIdentifier(string, "string", context.packageName)
-        return if(id != 0) resources.getString(id) else ""
+        return if(id != 0) resources.getString(id, input) else ""
     }
 }

@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.os.bundleOf
@@ -16,10 +17,12 @@ import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
+import com.petsvote.domain.flow.findPetToVote
 import com.petsvote.navigation.MainNavigation
 import com.petsvote.ui.bottomstar.BottomStars
 import com.petsvote.ui.ext.hideAlpha
 import com.petsvote.ui.ext.showAlpha
+import com.petsvote.ui.shareApp
 import com.petsvote.vote.databinding.FragmentVoteBinding
 import com.petsvote.vote.di.VoteComponentViewModel
 import dagger.Lazy
@@ -27,7 +30,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.vponomarenko.injectionmanager.x.XInjectionManager
+import java.util.*
 import javax.inject.Inject
+import kotlin.concurrent.schedule
 
 class VoteFragment : BaseFragment(R.layout.fragment_vote),
     VoteEmptyFilterFragment.VoteEmptyFilterFragmentListener,
@@ -47,7 +52,7 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     }
 
     private var listVote = mutableListOf<VotePet>()
-    private var emptypet = VotePet(-1, -1, -1,"", "", 0, "", "", -1,"", emptyList())
+    private var emptypet = VotePet(-1, -1, -1,"", "", 0, "", "", -1,"", 0, 0,emptyList())
 
     private var binding: FragmentVoteBinding? = null
     private var adapter: VoteAdapter? = null
@@ -59,23 +64,20 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
 
         binding = FragmentVoteBinding.bind(view)
 
+        initAdapter()
+        viewModel.getRating()
 
         commitEmptyFragment()
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        initAdapter()
-        viewModel.getRating()
-    }
 
     private fun initAdapter() {
         binding?.voteProgress?.visibility = View.VISIBLE
         viewModel.resetList()
         listVote.clear()
         if(adapter != null) adapter = null
-        adapter = VoteAdapter(listVote, this, this::clickPet)
+        adapter = VoteAdapter(listVote, this, this::clickPet, this::onChange)
         binding?.pager?.adapter = adapter
         binding?.pager?.isUserInputEnabled = false
 
@@ -83,7 +85,6 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
             override fun vote(position: Int) {
                 val myFragment =
                     childFragmentManager.findFragmentByTag("f" + binding?.pager?.currentItem)
-                myFragment?.tag?.let { it1 -> log(it1) }
                 if(myFragment is ItemVoteFragment) {
                     checkCount()
                     myFragment.setRating(position)
@@ -92,12 +93,22 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
             }
 
         }
+
+        binding?.next?.setOnClickListener {
+            startDragToLeft()
+        }
     }
 
     private fun checkCount() {
-        if((binding?.pager?.currentItem?.plus(5) ?: 0) > (adapter?.itemCount ?: 5)){
+        log("currentItem = ${binding?.pager?.currentItem}")
+        log("itemCount = ${adapter?.itemCount}")
+        if((adapter?.itemCount ?: 2) < (binding?.pager?.currentItem?.plus(3) ?: 1)){
             viewModel.getRating()
+            log("get data without size")
         }
+//        if(binding?.pager?.currentItem?.plus(1)?.equals(adapter?.itemCount) == true){
+//
+//        }
         if(binding?.pager?.currentItem?.plus(1) == adapter?.itemCount){
             showDialog(1)
         }
@@ -106,8 +117,13 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
 
     // 1- emptyVote, 2 - emptyByFilter
     private fun showDialog(type: Int){
-        myFragment.setTitle(type)
-        binding?.container?.showAlpha()
+        log("show dialog type = $type")
+        Timer().schedule(1000){
+            activity?.runOnUiThread{
+                myFragment.setTitle(type)
+                binding?.container?.showAlpha()
+            }
+        }
     }
 
     private fun commitEmptyFragment(){
@@ -127,19 +143,39 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.pets.collect {
+                log(" ---------------- get DATA ---------------")
                 if(it != null){
+                    log("listVote.size = ${listVote.size}")
+                    log("listVote.size = $it")
                     if(listVote.size == 0 && it.isNotEmpty()){
+                        log("init adapter ")
                         listVote.add(emptypet)
                         binding?.pager?.postDelayed( Runnable {
                             initFirst()
                         }, 200)
+                        if(it[0].cardType == 1) binding?.next?.visibility = View.VISIBLE
+                        else binding?.next?.visibility = View.GONE
                     }
                     if(it.isNotEmpty()){
+                        log("init not empty")
+                        binding?.container?.hideAlpha()
                         listVote.addAll(it)
                         adapter?.notifyDataSetChanged()
                     }
 
-                    if(it.isEmpty() && listVote.size == 0) showDialog(2)
+                    if(it.isEmpty() && listVote.size == 0) {
+                        log("showDialog")
+                        showDialog(2)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            findPetToVote.collect { votePet ->
+                votePet?.let {
+                    listVote.add(0, votePet)
+                    adapter?.notifyDataSetChanged()
                 }
             }
         }
@@ -184,10 +220,11 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     }
 
     override fun clickShare() {
-
+        shareApp()
     }
 
     override fun refresh() {
+        log("refresh data")
         viewModel.getRating()
         binding?.pager?.visibility = View.GONE
         binding?.bottomStars?.visibility = View.GONE
@@ -202,7 +239,19 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
         bundle.putInt("pet", pet.pet_id)
         bundle.putInt("petBreedId", pet.breed_id)
         bundle.putString("petKind", pet.type)
+        bundle.putInt("userId", pet.user_id)
         activity?.let { navigation.startActivityPetInfo(it, bundle) }
+    }
+
+
+    private fun onChange(type: Int) {
+        if (type == 1) {
+            binding?.bottomStars?.visibility = View.VISIBLE
+            binding?.next?.visibility = View.GONE
+        } else {
+            binding?.next?.visibility = View.VISIBLE
+            binding?.bottomStars?.visibility = View.GONE
+        }
     }
 
 }

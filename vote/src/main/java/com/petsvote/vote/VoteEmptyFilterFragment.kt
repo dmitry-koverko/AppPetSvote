@@ -43,6 +43,7 @@ class VoteEmptyFilterFragment: Fragment(R.layout.fragment_vote_empty_filter) {
         binding?.title?.text = title
     }
 
+
     interface VoteEmptyFilterFragmentListener{
         fun clickShare()
         fun refresh()

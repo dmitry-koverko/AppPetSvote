@@ -31,6 +31,7 @@ fun View.showAlpha(callback: (() -> Unit)? = null){
 }
 
 
+
 fun collapse(
     view: View?,
     duration: Long = DEFAULT_ANIM_DURATION,
@@ -154,7 +155,7 @@ fun alphaHide(
 ) {
 
     val propertyXLeft: PropertyValuesHolder =
-        PropertyValuesHolder.ofFloat(PROPERTY_ALPHA, 0f, 1f)
+        PropertyValuesHolder.ofFloat(PROPERTY_ALPHA, 1f, 0f)
 
     var animator = ValueAnimator()
     animator.setValues(propertyXLeft)

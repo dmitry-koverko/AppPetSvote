@@ -109,4 +109,13 @@
     <string name="promote">Продвигать</string>
     <string name="pet_edit">Редактирование</string>
 
+    <string name="bonus_50_votes">за каждые</string>
+    <string name="bonus_description">Евгений, вы совершили 50 голосований и Марсик получил +50 баллов к своей <популярности></популярности></string>
+    <string name="bonus_one_pet_male">ddUNAME, вы совершили 50 голосований и ddNAME получил +50 баллов к своей популярности</string>
+    <string name="bonus_one_pet_female">ddUNAME, вы совершили 50 голосований и ddNAME получила +50 баллов к своей популярности</string>
+    <string name="bonus_two_pets">ddUNAME, вы совершили 50 голосований и ddNAME получили по +50 баллов к своей популярности</string>
+    <string name="bonus_all_pets">ddUNAME, вы совершили 50 голосований и все ваши питомцы получили по +50 баллов к своей популярности</string>
+    <string name="vote_pet">Голосовать</string>
+
+
 </resources>

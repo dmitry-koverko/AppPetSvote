@@ -85,6 +85,7 @@ class SimpleUserFragment: BaseFragment(R.layout.fragment_simple_user) {
         var bundle = Bundle()
         pet.pets_id?.let { bundle.putInt("pet", it) }
         bundle.putBoolean("myPet", true)
+        bundle.putInt("userId", 0)
         activity?.let { navigation.startActivityPetInfo(it, bundle) }
     }
 

@@ -15,6 +15,7 @@ data class RatingPet(
     val itemType: RatingPetItemType = RatingPetItemType.DEFAULT,
     var breed_id: Int,
     var type: String,
+    var user_id: Int
 ): Item
 
 enum class RatingFilterLocationType{

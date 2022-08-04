@@ -3,6 +3,7 @@ package com.petsvote.domain.usecases.pet.add.impl
 import android.graphics.Bitmap
 import com.petsvote.domain.entity.pet.Pet
 import com.petsvote.domain.entity.user.DataResponse
+import com.petsvote.domain.entity.user.Photo
 import com.petsvote.domain.repository.IPetRepository
 import com.petsvote.domain.repository.IUserRepository
 import com.petsvote.domain.usecases.filter.IGetKindsUseCase
@@ -16,7 +17,7 @@ class EditPetUseCase@Inject constructor(
     private val userRepository: IUserRepository,
     private val getKindsUseCase: IGetKindsUseCase
 ): IEditPetUseCase {
-    override suspend fun editPet(list: List<Bitmap?>, kindId: Int): Flow<DataResponse<Pet>> = flow {
+    override suspend fun editPet(list: List<Photo>, kindId: Int): Flow<DataResponse<Pet>> = flow {
         emit(DataResponse.Loading)
         val kind: String = getKindsUseCase.getKinds(kindId).firstOrNull()?.name ?: "cat"
         val data = petRepository.editPet(list, kind, 1489274)

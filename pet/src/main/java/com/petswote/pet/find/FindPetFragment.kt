@@ -1,6 +1,7 @@
 package com.petswote.pet.find
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.os.Bundle
 import android.text.InputType
@@ -14,6 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
 import com.petsvote.core.ext.getMonthOnYear
+import com.petsvote.domain.entity.pet.VotePet
+import com.petsvote.domain.flow.findPetToVote
 import com.petsvote.ui.BesieKeyboard
 import com.petsvote.ui.SearchBar
 import com.petsvote.ui.bottomstar.BottomStars
@@ -25,6 +28,7 @@ import com.petswote.pet.databinding.FragmentFindPetBinding
 import com.petswote.pet.di.PetComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class FindPetFragment: BaseFragment(R.layout.fragment_find_pet) {
@@ -159,6 +163,29 @@ class FindPetFragment: BaseFragment(R.layout.fragment_find_pet) {
                         binding?.voteStatusTrue?.visibility = View.GONE
                         binding?.voteContainer?.visibility = View.VISIBLE
                         binding?.voteBar?.visibility = View.GONE
+                    }
+
+                    binding?.voteContainer?.setOnClickListener {
+                        lifecycleScope.launch {
+                            findPetToVote.emit(VotePet(
+                                findPet.pet.id,
+                                findPet.pet.id,
+                                findPet.pet.pet_id,
+                                findPet.pet.name,
+                                findPet.pet.bdate,
+                                if (findPet.pet.sex == "FEMALE") 0 else 1,
+                                "${findPet.pet.city_name}, ${findPet.pet.country_name}",
+                                "",
+                                findPet.pet.breed_id,
+                                findPet.pet.type,
+                                findPet.pet.user_id,
+                                0,
+                                findPet.pet.photos.map { it.url }
+
+                            ))
+                            activity?.setResult(RESULT_OK)
+                            activity?.finish()
+                        }
                     }
                 }
             }

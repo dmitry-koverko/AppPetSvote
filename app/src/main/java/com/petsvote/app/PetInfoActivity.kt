@@ -13,7 +13,7 @@ class PetInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pet_info)
 
-        var fragment = PetInfoFragment.newInstance(intent.extras?.getInt("pet"), intent.extras?.getBoolean("myPet") ?: false)
+        var fragment = PetInfoFragment.newInstance(intent.extras?.getInt("pet"), intent.extras?.getBoolean("myPet") ?: false, 0)
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add(R.id.container, fragment)

@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetPetDetailsUseCase @Inject constructor(
     private val petRepository: IPetRepository
 ): IGetPetDetailsUseCase {
-    override suspend fun getPetDetails(petId: Int): PetDetails? {
-        return petRepository.petDetails(petId)
+    override suspend fun getPetDetails(petId: Int, userId: Int): PetDetails? {
+        return petRepository.petDetails(petId, userId)
     }
 }

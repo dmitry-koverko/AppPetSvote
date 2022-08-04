@@ -4,6 +4,6 @@ import com.petsvote.domain.entity.pet.PetDetails
 
 interface IGetPetDetailsUseCase {
 
-    suspend fun getPetDetails(petId: Int): PetDetails?
+    suspend fun getPetDetails(petId: Int, userId: Int): PetDetails?
 
 }

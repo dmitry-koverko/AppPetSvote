@@ -6,6 +6,7 @@ import com.petsvote.retrofit.entity.pet.FindPet
 import com.petsvote.retrofit.entity.pet.Pet
 import com.petsvote.retrofit.entity.pet.PetDetails
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface PetApi {
@@ -54,6 +55,7 @@ interface PetApi {
         @Query("breed_id") breed_id: String?,
         @Query("sex") sex: String?,
         @Query("type") type: String?,
+        @Body requestBody: RequestBody
     ): NetworkResponse<Pet, ApiError>
 
 

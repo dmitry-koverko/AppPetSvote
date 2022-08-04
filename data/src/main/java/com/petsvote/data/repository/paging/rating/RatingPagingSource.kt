@@ -113,7 +113,8 @@ class RatingPagingSource @Inject constructor(
             false,
             if (!isTop) RatingPetItemType.ADDPET else RatingPetItemType.TOPADDPET,
             -1,
-            ""
+            "",
+            0
         )
     }
 

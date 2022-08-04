@@ -9,6 +9,7 @@ import com.petsvote.domain.usecases.configuration.GetLocaleLanguageCodeUseCase
 import com.petsvote.domain.usecases.filter.IGetKindsUseCase
 import com.petsvote.domain.usecases.filter.impl.GetKindsUseCase
 import com.petsvote.retrofit.api.PetApi
+import com.petsvote.retrofit.entity.Photo
 import com.petsvote.retrofit.entity.pet.FindPet
 import com.petsvote.retrofit.entity.pet.Pet
 import com.petsvote.retrofit.entity.pet.PetDetails
@@ -20,6 +21,9 @@ import com.petsvote.room.entity.EnityPetImage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonObjectBuilder
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -110,7 +114,7 @@ class PetRepository @Inject constructor(
         )?.toLocalFind()
     }
 
-    override suspend fun petDetails(petId: Int): com.petsvote.domain.entity.pet.PetDetails? {
+    override suspend fun petDetails(petId: Int, userId: Int): com.petsvote.domain.entity.pet.PetDetails? {
 
         return checkResult<PetDetails>(
             petApi.getPetDetails(
@@ -118,7 +122,7 @@ class PetRepository @Inject constructor(
                 0,//userDao.getUser().location?.city_id,
                 0,//userDao.getUser().location?.country_id,
                 petId,//petId,
-                userDao.getUser().id,
+                userId,
                 "0:200",
                 "country",
                 //"global"
@@ -153,7 +157,7 @@ class PetRepository @Inject constructor(
         )?.toLocalPet()
     }
 
-    override suspend fun editPet(list: List<Bitmap?>, kind: String, petId: Int): com.petsvote.domain.entity.pet.Pet? {
+    override suspend fun editPet(list: List<com.petsvote.domain.entity.user.Photo>, kind: String, petId: Int): com.petsvote.domain.entity.pet.Pet? {
         var listPhotos = mutableListOf<MultipartBody.Part?>()
         listPhotos.add(null)
 //        for (i in 0..list.size - 1) {
@@ -164,6 +168,9 @@ class PetRepository @Inject constructor(
 
         var profilePet = profilePetDao.getSimplePetProfile()
 
+        var map = mapOf(
+            "num" to ""
+        )
         return checkResult<Pet>(
             petApi.editPetWithoutPhotos(
                 userDao.getToken(),
@@ -173,7 +180,7 @@ class PetRepository @Inject constructor(
                 profilePet?.breedId.toString(),
                 if(profilePet?.sex == 0) "FEMALE" else "MALE",
                 kind,
-                petId
+                petId,
             )
         )?.toLocalPet()
     }

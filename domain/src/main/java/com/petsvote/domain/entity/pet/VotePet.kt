@@ -15,5 +15,7 @@ data class VotePet(
     var breed: String,
     var breed_id: Int,
     var type: String,
+    var user_id: Int,
+    var cardType: Int = 0,
     val photos: List<String>
 )

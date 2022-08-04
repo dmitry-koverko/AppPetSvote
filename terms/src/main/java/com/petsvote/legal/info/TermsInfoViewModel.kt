@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.legal.main.TermsFragment
-import com.petsvote.legal.main.TermsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

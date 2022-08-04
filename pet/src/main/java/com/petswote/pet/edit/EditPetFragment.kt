@@ -134,12 +134,19 @@ open class EditPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDrag
                 "reptile", "amphibian", "invertebrates" -> {
                     binding?.containerTabs2?.visibility = View.VISIBLE
                     binding?.containerTabs?.visibility = View.GONE
+
+                    if(pet.sex == "MALE") binding?.tabs2?.initCountryTabs()
+                    else if(pet.sex == "FEMALE") {}
+                    else binding?.tabs2?.initWorldTab()
                 }
                 else -> {
                     binding?.containerTabs2?.visibility = View.GONE
                     binding?.containerTabs?.visibility = View.VISIBLE
+
+                    if(pet.sex == "MALE") binding?.tabs?.initCountryTabs()
                 }
             }
+
 
             for (i in 0 until pet.photos.size)
                 adapter.addItem(PetPhoto(id = i, image = pet.photos[i].url))
@@ -240,7 +247,7 @@ open class EditPetFragment: BaseFragment(R.layout.fragment_add_pet), OnStartDrag
 
 
         binding?.save?.setOnClickListener {
-            viewModel.editPet()
+            viewModel.editPet(emptyList())
         }
     }
 

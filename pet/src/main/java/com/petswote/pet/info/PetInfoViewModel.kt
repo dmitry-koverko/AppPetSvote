@@ -41,7 +41,7 @@ class PetInfoViewModel @Inject constructor(
                         uiKindString.emit(kindsUseCase.getKinds(-1, it.data.pet.type).get(0).title)
                         uiPet.emit(it.data)
                         uiBreedString.emit(getBreedByIdUseCase.getBreedInfo(it.data.pet.breed_id))
-                        var petDetails = petDetailsUseCase.getPetDetails(it.data.pet.id)
+                        var petDetails = petDetailsUseCase.getPetDetails(it.data.pet.id, it.data.pet.user_id)
                         uiPetDetails.emit(petDetails)
                     }
                 }

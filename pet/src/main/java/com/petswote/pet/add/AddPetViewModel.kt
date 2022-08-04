@@ -12,6 +12,7 @@ import com.petsvote.domain.entity.pet.FindPet
 import com.petsvote.domain.entity.pet.Pet
 import com.petsvote.domain.entity.pet.PetPhoto
 import com.petsvote.domain.entity.user.DataResponse
+import com.petsvote.domain.entity.user.Photo
 import com.petsvote.domain.usecases.configuration.IGetAddPhotosSettingsUseCase
 import com.petsvote.domain.usecases.configuration.ISetAddPhotosSettingsUseCase
 import com.petsvote.domain.usecases.filter.IGetKindsUseCase
@@ -161,7 +162,7 @@ class AddPetViewModel @Inject constructor(
 
     fun editPet(){
         launchIO {
-            var list: List<Bitmap?> = listPhotosPet.value.map { it.bitmap }
+            var list: List<Photo> = listPhotosPet.value.map { Photo(1, 1, "") }//it.bitmap
             editPetUseCase.editPet(list, kindId.value ?: -1).collect {
                 when(it){
                     is DataResponse.Loading -> isLoading.emit(true)

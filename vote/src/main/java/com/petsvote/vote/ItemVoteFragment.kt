@@ -12,6 +12,7 @@ import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.petsvote.core.BaseItemVoteFragment
 import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.domain.entity.params.AddVoteParams
 import com.petsvote.domain.entity.pet.RatingPet
@@ -25,7 +26,7 @@ import javax.inject.Inject
 
 private const val ARG_PARAM = "pet"
 
-class ItemVoteFragment : Fragment(R.layout.item_fragment_vote) {
+class ItemVoteFragment : BaseItemVoteFragment(R.layout.item_fragment_vote) {
 
     @Inject
     internal lateinit var viewModelFactory: Lazy<AddVoteViewModel.Factory>

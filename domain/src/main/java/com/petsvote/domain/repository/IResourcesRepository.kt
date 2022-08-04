@@ -2,8 +2,8 @@ package com.petsvote.domain.repository
 
 interface IResourcesRepository {
 
-    fun getString(resourcesId: Int): String
-    fun getStringByName(string: String): String
-    fun getStringUiByName(string: String): String
+    fun getString(resourcesId: Int, vararg input: String): String
+    fun getStringByName(string: String, vararg input: String): String
+    fun getStringUiByName(string: String, vararg input: String): String
 
 }

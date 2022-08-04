@@ -219,9 +219,9 @@
                 android:layout_width="0dp"
                 android:layout_height="56dp">
 
-                <com.petsvote.ui.textview.SFTextView
+                <com.petsvote.ui.textview.SimpleSFTextView
                     android:id="@+id/vote"
-                    android:text="Голосовать"
+                    android:text="@string/vote_pet"
                     android:textColor="@color/white"
                     android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="parent"
