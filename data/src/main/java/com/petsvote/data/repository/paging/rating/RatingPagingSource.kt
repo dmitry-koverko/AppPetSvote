@@ -40,16 +40,16 @@ class RatingPagingSource @Inject constructor(
         val isWorldTop = ratingFilter.rating_type == RatingFilterType.GLOBAL
 
         var offset = params.key ?: DEFAULT_OFFSET
-        if (ratingFilter.breed_id != null) offset = 0
+        if (ratingFilter.breed_id_find != null) offset = 0
         return try {
 
             var repos: MutableList<RatingPet> = ratingRepository.getRating(
                 limit = if (offset < NETWORK_PAGE_SIZE && offset!= 0) offset else NETWORK_PAGE_SIZE,
                 offset = if (offset < NETWORK_PAGE_SIZE) 0 else offset,
-                breedId = ratingFilter.breed_id,
+                breedId = ratingFilter.breed_id_find,
                 rating_type = ratingFilter.rating_type?.nameParams ?: RatingFilterType.GLOBAL.nameParams
             ).toMutableList()
-            ratingFilterRepository.setBredIdRatingFilter(null)
+
 
             val nextKey = if (repos.size < NETWORK_PAGE_SIZE) {
                 null
@@ -90,6 +90,8 @@ class RatingPagingSource @Inject constructor(
             var prev = if (repos.first().index < NETWORK_PAGE_SIZE && repos.first().index == 1) null
             else if (repos.first().index < NETWORK_PAGE_SIZE && repos.first().index != 1) repos.first().index
             else repos.first().index - 1 - NETWORK_PAGE_SIZE
+
+            //ratingFilterRepository.setUserBredIdRatingFilter(null)
 
             LoadResult.Page(
                 data = repos,

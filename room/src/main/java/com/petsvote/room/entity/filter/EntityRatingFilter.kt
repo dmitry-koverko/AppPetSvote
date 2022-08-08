@@ -17,6 +17,7 @@ data class EntityRatingFilter(
     val rating_type: EntityRatingFilterType = EntityRatingFilterType.GLOBAL,
     val id: Int?,
     val breed_id: Int?,
+    val breed_id_find: Int?
 )
 
 enum class EntityRatingFilterType(val nameParams: String){

@@ -103,6 +103,7 @@ interface AppComponent : SplashDeps, RegisterDeps, RoomDeps, TermsDeps, RatingDe
     override val getBreedByIdUseCase: IGetBreedByIdUseCase
     override val addPetUseCase: IAddPetUseCase
     override val editPetUseCase: IEditPetUseCase
+    override val setUserBreedIdInRatingFilterUseCase: ISetBreedsUserPetUseCase
 
     @Component.Builder
     interface Builder {

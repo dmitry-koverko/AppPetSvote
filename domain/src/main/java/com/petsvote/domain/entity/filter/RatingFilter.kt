@@ -10,6 +10,7 @@ data class RatingFilter(
     val rating_type: RatingFilterType? = RatingFilterType.GLOBAL,
     val id: Int?,
     val breed_id: Int?,
+    val breed_id_find: Int?
 )
 
 enum class RatingFilterType(val nameParams: String){

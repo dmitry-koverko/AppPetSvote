@@ -27,6 +27,7 @@ import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.SimpleItem
 import com.petsvote.domain.entity.user.UserPet
+import com.petsvote.domain.flow.ratingUpdate
 import com.petsvote.navigation.MainNavigation
 import com.petsvote.rating.databinding.FragmentRatingCollapsingBinding
 import com.petsvote.rating.di.RatingComponentViewModel
@@ -93,6 +94,10 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         initFilter()
 
         lifecycleScope.launchWhenStarted {
+            viewModel.resetBreedId()
+        }
+
+        lifecycleScope.launchWhenStarted {
             viewModel.getRating()
         }
         lifecycleScope.launchWhenStarted {
@@ -150,6 +155,9 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         findPetAdapter.submitList(listOf(SimpleItem()))
 
         binding?.scrollToTop?.setOnClickListener {
+            viewModel.resetBreedId()
+            fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
+            ratingAdapter.refresh()
             binding?.listRating?.postDelayed(
                 Runnable { binding?.listRating?.scrollToPosition(0) },
                 10
@@ -237,7 +245,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
-//
+
         lifecycleScope.launchWhenStarted {
             viewModel.pages.collect {
                 it?.let { page ->
@@ -247,7 +255,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
-//
+
         lifecycleScope.launchWhenResumed {
             viewModel.userPets.collect {
                 for (i in 0 until it.size) {
@@ -259,7 +267,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 userPetsAdapter.submitList(it)
             }
         }
-//
+
         lifecycleScope.launchWhenStarted {
             viewModel.filterType.collect {
                 when(it){
@@ -268,12 +276,22 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
-//
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.isLocationUser.collect {
-//                binding?.tabs?.isUserLocation = it
-//            }
-//        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.isLocationUser.collect {
+                binding?.tabs?.isUserLocation = it
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            ratingUpdate.collect {
+                it?.let {
+                    viewModel.resetBreedId()
+                    ratingUpdate.emit(null)
+                    swipeRefresh()
+                }
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -295,6 +313,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun onClickUserPet(clickItem: UserPet) {
+        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
         binding?.listRating?.postDelayed(
             Runnable { binding?.listRating?.scrollToPosition(0) },
             10
@@ -316,6 +335,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun swipeRefresh(){
+        viewModel.resetBreedId()
         fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
         ratingAdapter.refresh()
     }

@@ -21,5 +21,6 @@ fun EntityRatingFilter?.toRatingFilter(): RatingFilter {
         },
         id = this?.id,
         breed_id = this?.breed_id,
+        breed_id_find = this?.breed_id_find
     )
 }

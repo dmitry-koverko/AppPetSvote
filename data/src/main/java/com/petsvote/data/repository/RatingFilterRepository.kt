@@ -33,6 +33,10 @@ class RatingFilterRepository @Inject constructor(
         ratingFilterDao.updateBreedId(breedId = breedId)
     }
 
+    override suspend fun setUserBredIdRatingFilter(breedId: Int?) {
+        ratingFilterDao.updateUserBreedId(breedId = breedId)
+    }
+
     override suspend fun setKindsRatingFilter(kinds: String?) {
         ratingFilterDao.updateKinds(kinds)
     }
@@ -47,7 +51,9 @@ class RatingFilterRepository @Inject constructor(
             age_between_max = 30,
             age_between_min = 0,
             id = null,
-            breed_id = null)
+            breed_id = null,
+            bred_id_find = null
+        )
     }
 
     override suspend fun setRatingFilterType(typeRating: RatingFilterType) {
@@ -82,7 +88,8 @@ class RatingFilterRepository @Inject constructor(
                 age_between_max = 30,
                 age_between_min = 0,
                 id = null,
-                breed_id = null
+                breed_id = null,
+                breed_id_find = null
           )
         )
     }

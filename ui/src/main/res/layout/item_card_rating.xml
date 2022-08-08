@@ -7,77 +7,147 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.petsvote.ui.RoundedImage
-        android:background="@drawable/default_item_drawable"
-        android:id="@+id/image"
-        android:scaleType="centerCrop"
+    <FrameLayout
+        android:id="@+id/containerDefault"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <ImageView
-        android:layout_gravity="bottom"
-        android:id="@+id/mask"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="112dp"/>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:paddingBottom="16dp"
-        android:layout_gravity="bottom"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+        <com.petsvote.ui.RoundedImage
+            android:background="@drawable/default_item_drawable"
+            android:id="@+id/image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <ImageView
-            android:visibility="gone"
-            android:src="@drawable/ic_corona"
-            android:id="@+id/corona"
-            android:layout_marginBottom="6dp"
-            app:layout_constraintBottom_toTopOf="@id/name"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginLeft="11dp"
+            android:layout_gravity="bottom"
+            android:id="@+id/mask"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:paddingBottom="16dp"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:visibility="gone"
+                android:src="@drawable/ic_corona"
+                android:id="@+id/corona"
+                android:layout_marginBottom="6dp"
+                app:layout_constraintBottom_toTopOf="@id/name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.petsvote.ui.textview.SimpleSFTextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:id="@+id/position"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.petsvote.ui.textview.SimpleSFTextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:id="@+id/name"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <com.petsvote.ui.textview.SimpleSFTextView
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:id="@+id/location"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/containerAddPet"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/default_item_drawable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_gravity="center"
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
 
-        <com.petsvote.ui.textview.SimpleSFTextView
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textColor="@color/card_text_color"
-            android:textSize="15sp"
-            android:id="@+id/position"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <com.petsvote.ui.textview.SFTextView
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/add_pet_icon_color"
+                android:id="@+id/textNoPet"
+                android:textSize="15sp"
+                android:text="@string/no_user_pet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        <com.petsvote.ui.textview.SimpleSFTextView
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textColor="@color/card_text_color"
-            android:textSize="15sp"
-            android:id="@+id/name"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/location"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="4dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/containerMiddle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
-        <com.petsvote.ui.textview.SimpleSFTextView
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:textColor="@color/card_text_color"
-            android:textSize="15sp"
-            android:id="@+id/location"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                <com.petsvote.ui.textview.SimpleSFTextView
+                    android:textColor="@color/add_pet_icon_color"
+                    android:layout_marginLeft="8dp"
+                    app:layout_constraintLeft_toRightOf="@id/addImg"
+                    android:id="@+id/textAdd"
+                    android:textSize="19sp"
+                    android:text="@string/add_pet"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
+                <ImageView
+                    android:id="@+id/addImg"
+                    android:layout_marginRight="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/ic_add_pet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.petsvote.ui.textview.SFTextView
+            android:id="@+id/sfClick"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
 
 </FrameLayout>

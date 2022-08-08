@@ -21,11 +21,14 @@ interface RatingFilterDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(ratingFilter: EntityRatingFilter)
 
-    @Query("UPDATE entityratingfilter SET type =:type, sex=:sex, city_id=:citiId, country_id=:countryId, age_between_min =:age_between_min, age_between_max=:age_between_max, id=:id, breed_id=:breed_id")
-    suspend fun reset(type: String?, sex: String?, citiId: Int?, countryId: Int?, age_between_max: Int, age_between_min: Int, id: Int?, breed_id: Int?)
+    @Query("UPDATE entityratingfilter SET type =:type, sex=:sex, city_id=:citiId, country_id=:countryId, age_between_min =:age_between_min, age_between_max=:age_between_max, id=:id, breed_id=:breed_id, breed_id_find=:bred_id_find")
+    suspend fun reset(type: String?, sex: String?, citiId: Int?, countryId: Int?, age_between_max: Int, age_between_min: Int, id: Int?, breed_id: Int?, bred_id_find: Int?)
 
     @Query("UPDATE entityratingfilter SET breed_id =:breedId")
     suspend fun updateBreedId(breedId: Int?)
+
+    @Query("UPDATE entityratingfilter SET breed_id_find =:breedId")
+    suspend fun updateUserBreedId(breedId: Int?)
 
     @Query("UPDATE entityratingfilter SET type =:kinds")
     suspend fun updateKinds(kinds: String?)

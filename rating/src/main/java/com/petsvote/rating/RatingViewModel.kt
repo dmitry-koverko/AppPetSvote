@@ -11,6 +11,7 @@ import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.domain.usecases.filter.*
 import com.petsvote.domain.usecases.filter.impl.GetRatingFilterTextUseCase
+import com.petsvote.domain.usecases.filter.impl.SetDefaultRatingFilterUseCase
 import com.petsvote.domain.usecases.rating.GetRatingUseCase
 import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
@@ -31,7 +32,9 @@ class RatingViewModel @Inject constructor(
     private val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase,
     private val checkLocationUserUseCase: ICheckLocationUserUseCase,
     private val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase,
-    private val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase
+    private val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase,
+    private val setBreedsUserPetUseCase: ISetBreedsUserPetUseCase,
+    private val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
 ) : BaseViewModel() {
 
     var pages = MutableStateFlow<PagingData<Item>?>(null)
@@ -40,42 +43,47 @@ class RatingViewModel @Inject constructor(
     var isLocationUser = MutableStateFlow(false)
     var filterText = MutableStateFlow<String?>(null)
 
-    suspend fun getRating() = withContext(Dispatchers.IO){
-        setBreedIdInRatingFilterUseCase.setBredIdRatingFilter(null)
-        ratingUseCase.getRating().cachedIn(viewModelScope).collect{
+    suspend fun getRating() = withContext(Dispatchers.IO) {
+        //setBreedIdInRatingFilterUseCase.setBredIdRatingFilter(null)
+        ratingUseCase.getRating().cachedIn(viewModelScope).collect {
             pages.emit(it)
         }
 
     }
 
-    suspend fun getUserPets(){
+    suspend fun getUserPets() {
         userPetsUseCase.getUserPets().collect {
             userPets.emit(it)
         }
     }
 
-    suspend fun getRatingFilter()= withContext(Dispatchers.IO){
+    suspend fun getRatingFilter() = withContext(Dispatchers.IO) {
         getRatingFilterTextUseCase.getFilter().collect {
             filterText.emit(it)
         }
     }
 
-    suspend fun getRatingFilterType()= withContext(Dispatchers.IO){
+    suspend fun getRatingFilterType() = withContext(Dispatchers.IO) {
         filterType.emit(ratingFilterTypeUseCase.getRatingFilterType())
     }
 
-    suspend fun checkLocation()= withContext(Dispatchers.IO){
+    suspend fun checkLocation() = withContext(Dispatchers.IO) {
         isLocationUser.emit(checkLocationUserUseCase.checkLocationUser())
     }
 
-    fun setBreedId(breedId: Int){
+    fun setBreedId(breedId: Int) {
         viewModelScope.launch {
-            setBreedIdInRatingFilterUseCase.setBredIdRatingFilter(breedId = breedId)
+            setDefaultRatingFilterUseCase.setDefaultRatingFilter()
+            setBreedsUserPetUseCase.setUserBredIdRatingFilter(breedId = breedId)
         }
     }
 
-    fun setFilterType(tab: BesieTabSelected){
-        var type = when(tab){
+    fun resetBreedId(){
+        launchIO { setBreedsUserPetUseCase.setUserBredIdRatingFilter(null) }
+    }
+
+    fun setFilterType(tab: BesieTabSelected) {
+        var type = when (tab) {
             BesieTabSelected.WORLD -> RatingFilterType.GLOBAL
             BesieTabSelected.COUNTRY -> RatingFilterType.COUNTRY
             BesieTabSelected.CITY -> RatingFilterType.CITY
@@ -95,9 +103,10 @@ class RatingViewModel @Inject constructor(
         private val ratingFilterTypeUseCase: IGetRatingFilterTypeUseCase,
         private val checkLocationUserUseCase: ICheckLocationUserUseCase,
         private val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase,
-        private val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase
-    )
-        : ViewModelProvider.Factory{
+        private val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase,
+        private val setBreedsUserPetUseCase: ISetBreedsUserPetUseCase,
+        private val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             require(modelClass == RatingViewModel::class.java)
             return RatingViewModel(
@@ -108,7 +117,10 @@ class RatingViewModel @Inject constructor(
                 ratingFilterTypeUseCase = ratingFilterTypeUseCase,
                 checkLocationUserUseCase = checkLocationUserUseCase,
                 setRatingFilterTypeUseCase = setRatingFilterTypeUseCase,
-            getRatingFilterTextUseCase = getRatingFilterTextUseCase) as T
+                getRatingFilterTextUseCase = getRatingFilterTextUseCase,
+                setBreedsUserPetUseCase = setBreedsUserPetUseCase,
+                setDefaultRatingFilterUseCase = setDefaultRatingFilterUseCase
+            ) as T
         }
 
     }

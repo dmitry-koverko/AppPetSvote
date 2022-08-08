@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
+import com.petsvote.domain.flow.ratingUpdate
 import com.petsvote.filter.databinding.FragmentFilterBinding
 import com.petsvote.filter.di.FilterComponentViewModel
 import com.petsvote.filter.kinds.SelectKindsVewModel
@@ -17,6 +18,7 @@ import com.petsvote.ui.maintabs.BesieTabLayoutSelectedListener
 import com.petsvote.ui.maintabs.BesieTabSelected
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import me.vponomarenko.injectionmanager.x.XInjectionManager
 import javax.inject.Inject
 
@@ -63,6 +65,7 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
         binding?.applyRipple?.setOnClickListener {
             binding?.sfMaxValue?.text?.toString()?.toInt()?.let { it1 -> viewModel.setMax(it1) }
             binding?.sfMinValue?.text?.toString()?.toInt()?.let { it1 -> viewModel.setMin(it1) }
+            lifecycleScope.launch { ratingUpdate.emit(true) }
             activity?.finish()
         }
 

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PetRating(
     val index : Int?,
-    val global_score : Int?,
+    val global_score : Int? = null,
     val temp_type: String,
     val id : Int,
     val create_date: String,

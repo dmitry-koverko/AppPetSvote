@@ -50,4 +50,5 @@ dependencies {
     implementation project(path: ':rating')
     implementation project(path: ':vote')
     implementation project(path: ':user')
+    implementation project(path: ':domain')
 }

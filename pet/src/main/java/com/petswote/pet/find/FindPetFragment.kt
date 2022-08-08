@@ -111,6 +111,8 @@ class FindPetFragment: BaseFragment(R.layout.fragment_find_pet) {
             }
 
         })
+
+        lifecycleScope.launchWhenStarted { findPetToVote.emit(null) }
     }
 
     private fun hideKeyboard() {

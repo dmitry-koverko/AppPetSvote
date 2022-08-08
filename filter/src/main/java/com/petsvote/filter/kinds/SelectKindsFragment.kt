@@ -117,11 +117,22 @@ class SelectKindsFragment : BaseFragment(R.layout.fragment_select_kinds) {
 
     private fun onSelectKind(kind: Kind) {
         var listSelect = kinds.filter { (it as Kind).isSelect }
-        if (kind.isSelect && listSelect.size == 1) return
-        (kinds.find { (it as Kind).id == kind.id } as Kind).isSelect =
-            !(kind.isSelect && listSelect.isNotEmpty())
-        binding?.rbtn?.isChecked = kinds.filter { (it as Kind).isSelect }.size == kinds.size
-        allKindCheck = binding?.rbtn?.isChecked == true
+        if(listSelect.size == kinds.size && allKindCheck){
+            allKindCheck = binding?.rbtn?.isChecked == false
+            binding?.rbtn?.isChecked = false
+            kinds.onEach {
+                (it as Kind).isSelect = false
+                kindsAdapter.notifyItemChanged(kinds.indexOf(it))}
+            (kinds.find { (it as Kind).id == kind.id } as Kind).isSelect = true
+
+        }
+        else{
+            if (kind.isSelect && listSelect.size == 1) return
+            (kinds.find { (it as Kind).id == kind.id } as Kind).isSelect =
+                !(kind.isSelect && listSelect.isNotEmpty())
+            binding?.rbtn?.isChecked = kinds.filter { (it as Kind).isSelect }.size == kinds.size
+            allKindCheck = binding?.rbtn?.isChecked == true
+        }
         kindsAdapter.notifyItemChanged(kinds.indexOf(kind))
         viewModel.setKindsFilter(kinds)
     }

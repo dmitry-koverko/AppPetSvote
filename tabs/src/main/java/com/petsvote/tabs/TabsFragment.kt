@@ -7,12 +7,15 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
+import com.petsvote.domain.flow.findPetToVote
 import com.petsvote.rating.RatingFragment
 import com.petsvote.tabs.databinding.FragmentTabsBinding
 import com.petsvote.ui.maintabs.TopTabLayout
 import com.petsvote.user.simple.SimpleUserFragment
 import com.petsvote.vote.VoteFragment
+import kotlinx.coroutines.flow.collect
 
 class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeListener,
     TopTabLayout.TopTabLayoutListener {
@@ -32,7 +35,16 @@ class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeList
         binding?.viewPager?.addOnPageChangeListener(this)
         binding?.viewPager?.setCurrentItem(1, true)
         binding?.tabs?.mTopTabLayoutListener = this
-    }
+
+        lifecycleScope.launchWhenResumed {
+            findPetToVote.collect { votePet ->
+                votePet?.let {
+                    binding?.viewPager?.invalidate()
+                    binding?.viewPager?.currentItem = 1
+                }
+            }
+        }
+    }//48376037
 
     class ViewPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
 
@@ -41,8 +53,8 @@ class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeList
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> RatingFragment.newInstance()
-                1 -> VoteFragment()
-                2 -> SimpleUserFragment()
+                //1 -> VoteFragment()
+                //2 -> SimpleUserFragment()
                 else -> BlankFragment()
             }
         }

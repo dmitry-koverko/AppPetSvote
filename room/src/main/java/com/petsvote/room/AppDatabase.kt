@@ -26,7 +26,7 @@ import com.petsvote.room.entity.user.EntityUserPet
         EntityUserProfile::class,
         EntityPetProfile::class,
         EnityPetImage::class
-    ), version = 14, exportSchema = false
+    ), version = 15, exportSchema = false
 )
 @TypeConverters(
     PhotoConverter::class,

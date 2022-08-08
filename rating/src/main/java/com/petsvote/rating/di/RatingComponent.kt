@@ -52,6 +52,8 @@ interface RatingDeps{
     val checkLocationUserUseCase: ICheckLocationUserUseCase
     val setRatingFilterTypeUseCase: ISetRatingFilterTypeUseCase
     val getRatingFilterTextUseCase: IGetRatingFilterTextUseCase
+    val setUserBreedIdInRatingFilterUseCase: ISetBreedsUserPetUseCase
+    val setDefaultRatingFilterUseCase: ISetDefaultRatingFilterUseCase
 }
 
 val Context.ratingDepsProvider: RatingDepsProvider

@@ -171,11 +171,16 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
             }
         }
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenResumed {
             findPetToVote.collect { votePet ->
                 votePet?.let {
+                    listVote.clear()
                     listVote.add(0, votePet)
                     adapter?.notifyDataSetChanged()
+                    binding?.pager?.postDelayed( Runnable {
+                        initFirst()
+                    }, 200)
+                    findPetToVote.emit(null)
                 }
             }
         }

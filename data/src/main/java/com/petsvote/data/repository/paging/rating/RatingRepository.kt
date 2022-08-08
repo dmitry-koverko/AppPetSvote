@@ -40,17 +40,20 @@ class RatingRepository @Inject constructor(
         rating_type: String
     ): List<RatingPet> {
 
+        val filter =
+            withContext(scoupe.coroutineContext) { ratingFilterRepository.getSimpleRatingFilter() }
+
         val response = checkResultPaging<Rating>(
             ratingApi.getRating(
                 userRepository.getToken(),
                 limit = limit,
                 offset = offset,
                 lang = languageCodeUseCase.getLanguage(),
-                null,
-                null,
+                filter.type,
+                filter.sex,
                 city_id = null,//userRepository.getCurrentUser().location?.city_id,
                 country_id = null,//userRepository.getCurrentUser().location?.country_id,
-                null,
+                "${filter.age_between_min}:${filter.age_between_max}",
                 rating_type = rating_type,//ratingFilterRepository.getSimpleRatingFilter().rating_type?.nameParams,
                 id = breedId,
                 breed_id = null

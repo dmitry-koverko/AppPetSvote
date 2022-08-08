@@ -53,6 +53,13 @@ class RatingModule {
     }
 
     @Provides
+    fun provideSetBreedsUserPetUseCase(
+        ratingFilterRepository: IRatingFilterRepository
+    ): ISetBreedsUserPetUseCase {
+        return SetBreedsUserPetUseCase(ratingFilterRepository = ratingFilterRepository)
+    }
+
+    @Provides
     fun provideGetRatingFilterTypeUseCase(
         ratingFilterRepository: IRatingFilterRepository
     ): IGetRatingFilterTypeUseCase {

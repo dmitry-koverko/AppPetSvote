@@ -40,6 +40,8 @@ class ItemCardRating @JvmOverloads constructor(
     private var locationTextView: TextView?
     private var positionTextView: TextView?
     private var corona: ImageView?
+    private var defaultFrame: FrameLayout?
+    private var addPetFrame: FrameLayout?
 
     init {
         inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
@@ -49,94 +51,106 @@ class ItemCardRating @JvmOverloads constructor(
         locationTextView = findViewById<TextView>(R.id.location)
         positionTextView = findViewById<TextView>(R.id.position)
         corona = findViewById<ImageView>(R.id.corona)
+        defaultFrame = findViewById<FrameLayout>(R.id.containerDefault)
+        addPetFrame = findViewById<FrameLayout>(R.id.containerAddPet)
     }
-//
-//    fun setType(type: RatingPetItemType) {
-//        when (type) {
-//            RatingPetItemType.DEFAULT -> setDefaultLP()
-//            RatingPetItemType.TOP -> setTopLP()
-//            RatingPetItemType.NULLABLE -> setNullableLP()
-//            RatingPetItemType.ADDPET -> setAppPetLP()
-//            RatingPetItemType.TOPADDPET -> setTopAppPetLP()
-//        }
-//    }
+
+    fun setType(type: RatingPetItemType) {
+        when (type) {
+            RatingPetItemType.DEFAULT -> setDefaultLP()
+            RatingPetItemType.TOP -> setTopLP()
+            RatingPetItemType.NULLABLE -> setNullableLP()
+            RatingPetItemType.ADDPET -> setAppPetLP()
+            RatingPetItemType.TOPADDPET -> setTopAppPetLP()
+        }
+    }
+
+    fun hideAll(){
+        defaultFrame?.visibility = View.GONE
+        addPetFrame?.visibility = View.GONE
+    }
 
     fun setText(text: String) {
         findViewById<SimpleSFTextView>(R.id.name).text = text
     }
 
     fun setTopLP() {
-//        removeAllViews()
-//        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
-//        maskImage = findViewById<ImageView>(R.id.mask)
-//        carImage = findViewById<ImageView>(R.id.image)
-//        nameTextView = findViewById<TextView>(R.id.name)
-//        locationTextView = findViewById<TextView>(R.id.location)
-//        corona = findViewById<ImageView>(R.id.corona)
-//        positionTextView = findViewById<TextView>(R.id.position)
-//
-//        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
-//        lpTop.rightMargin = dpToPx(8f, context)
-//        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
-//
-//
-//        var lpName = nameTextView?.layoutParams as MarginLayoutParams
-//        lpName.leftMargin = com.petsvote.ui.dpToPx(16f, context)
-//        nameTextView?.layoutParams = lpName
-//
-//        var lpLocation = locationTextView?.layoutParams as MarginLayoutParams
-//        lpLocation.leftMargin = com.petsvote.ui.dpToPx(16f, context)
-//        locationTextView?.layoutParams = lpLocation
-//
-//        var lpPosition = positionTextView?.layoutParams as MarginLayoutParams
-//        lpPosition.leftMargin = com.petsvote.ui.dpToPx(16f, context)
-//        positionTextView?.layoutParams = lpPosition
+
+        hideAll()
+        defaultFrame?.visibility = View.VISIBLE
+
+        defaultFrame?.visibility = View.VISIBLE
+        maskImage = findViewById<ImageView>(R.id.mask)
+        carImage = findViewById<ImageView>(R.id.image)
+        nameTextView = findViewById<TextView>(R.id.name)
+        locationTextView = findViewById<TextView>(R.id.location)
+        corona = findViewById<ImageView>(R.id.corona)
+        positionTextView = findViewById<TextView>(R.id.position)
+
+        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+        lpTop.rightMargin = dpToPx(8f, context)
+        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
+
+
+        var lpName = nameTextView?.layoutParams as MarginLayoutParams
+        lpName.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+        nameTextView?.layoutParams = lpName
+
+        var lpLocation = locationTextView?.layoutParams as MarginLayoutParams
+        lpLocation.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+        locationTextView?.layoutParams = lpLocation
+
+        var lpPosition = positionTextView?.layoutParams as MarginLayoutParams
+        lpPosition.leftMargin = com.petsvote.ui.dpToPx(16f, context)
+        positionTextView?.layoutParams = lpPosition
 
     }
 
     fun setNullableLP() {
-//        removeAllViews()
-//        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
-//
-//        findViewById<FrameLayout>(R.id.root).layoutParams =
-//            LayoutParams(0, 0)
+        hideAll()
+
+
+        findViewById<FrameLayout>(R.id.root).layoutParams =
+            LayoutParams(0, 0)
 
     }
 
     fun setDefaultLP() {
-//        removeAllViews()
-//        inflater.inflate(R.layout.item_card_rating, this@ItemCardRating, true)
-//        maskImage = findViewById<ImageView>(R.id.mask)
-//        carImage = findViewById<ImageView>(R.id.image)
-//        nameTextView = findViewById<TextView>(R.id.name)
-//        locationTextView = findViewById<TextView>(R.id.location)
-//        corona = findViewById<ImageView>(R.id.corona)
-//        findViewById<FrameLayout>(R.id.root).layoutParams =
-//            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
+
+        hideAll()
+        defaultFrame?.visibility = View.VISIBLE
+
+        maskImage = findViewById<ImageView>(R.id.mask)
+        carImage = findViewById<ImageView>(R.id.image)
+        nameTextView = findViewById<TextView>(R.id.name)
+        locationTextView = findViewById<TextView>(R.id.location)
+        corona = findViewById<ImageView>(R.id.corona)
+        findViewById<FrameLayout>(R.id.root).layoutParams =
+            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
 
     }
 
     fun setAppPetLP() {
-//        this.removeAllViews()
-//        inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
-//
-//        findViewById<FrameLayout>(R.id.root).layoutParams =
-//            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
-//
-//        initSFTextViewParams()
+
+        hideAll()
+        addPetFrame?.visibility = View.VISIBLE
+
+        findViewById<FrameLayout>(R.id.root).layoutParams =
+            LayoutParams(itemWidth.toInt(), itemHeight.toInt())
+
+        initSFTextViewParams()
 
     }
 
     fun setTopAppPetLP() {
-//        this.removeAllViews()
-//
-//        inflater.inflate(R.layout.item_add_pet, this@ItemCardRating, true)
-//
-//        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
-//        lpTop.rightMargin = dpToPx(8f, context)
-//
-//        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
-//        initSFTextViewParams()
+        hideAll()
+        addPetFrame?.visibility = View.VISIBLE
+
+        var lpTop = MarginLayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, itemTopHeight.toInt())
+        lpTop.rightMargin = dpToPx(8f, context)
+
+        findViewById<FrameLayout>(R.id.root).layoutParams = lpTop
+        initSFTextViewParams()
     }
 
     private fun initSFTextViewParams() {
