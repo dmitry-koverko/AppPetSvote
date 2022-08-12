@@ -93,11 +93,17 @@ class RatingPagingSource @Inject constructor(
 
             //ratingFilterRepository.setUserBredIdRatingFilter(null)
 
-            LoadResult.Page(
-                data = repos,
-                prevKey = prev,
-                nextKey = nextKey,
-            )
+            Log.d("RATINGPAGINGSOURCES", "params = ${params.key} | prev = $prev | next = $nextKey | first = ${repos.first().index} | last = ${repos.last().index}")
+
+            if(params.key == prev && nextKey == null) {
+                LoadResult.Page(emptyList(), null, null)
+            }else {
+                LoadResult.Page(
+                    data = repos,
+                    prevKey = prev,
+                    nextKey = nextKey,
+                )
+            }
         } catch (exception: Exception) {
             return LoadResult.Error(exception)
         }

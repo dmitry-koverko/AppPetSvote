@@ -53,8 +53,8 @@ class TabsFragment: Fragment(R.layout.fragment_tabs), ViewPager.OnPageChangeList
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> RatingFragment.newInstance()
-                //1 -> VoteFragment()
-                //2 -> SimpleUserFragment()
+                1 -> VoteFragment()
+                2 -> SimpleUserFragment()
                 else -> BlankFragment()
             }
         }
