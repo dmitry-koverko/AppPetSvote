@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setUIStart()
+        //setUIStart()
     }
 
     override fun onResume() {
@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUIStart() {
+        findViewById<FrameLayout>(R.id.frame).apply {
+            visibility = View.VISIBLE
+            alpha = 1f
+        }
         object : CountDownTimer(ICON_TIME, ICON_TIME) {
             override fun onTick(millisUntilFinished: Long) {}
             override fun onFinish() {

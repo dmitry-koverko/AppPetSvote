@@ -156,12 +156,11 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
 
         binding?.scrollToTop?.setOnClickListener {
             viewModel.resetBreedId()
-            fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
-            ratingAdapter.refresh()
-            binding?.listRating?.postDelayed(
-                Runnable { binding?.listRating?.scrollToPosition(0) },
-                10
-            )
+            refresh()
+//            binding?.listRating?.postDelayed(
+//                Runnable { binding?.listRating?.scrollToPosition(0) },
+//                10
+//            )
         }
     }
 

@@ -8,5 +8,4 @@ import kotlinx.coroutines.flow.Flow
 interface RatingPagingRepository {
 
     fun getRating(): Flow<PagingData<Item>>
-
 }

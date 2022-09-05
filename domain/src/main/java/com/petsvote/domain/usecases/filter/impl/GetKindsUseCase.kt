@@ -33,7 +33,7 @@ class GetKindsUseCase @Inject constructor(
             Kind(8, resourcesRepository.getString(R.string.exotic), "exotic", 60),
             Kind(9, resourcesRepository.getString(R.string.invertebrates), "invertebrates", 100),
             Kind(10, resourcesRepository.getString(R.string.fish), "fish", 35),
-            Kind(11, resourcesRepository.getString(R.string.robot), "robots", 200), //TODO update Age and id
+            Kind(11, resourcesRepository.getString(R.string.robot), "robot", 200), //TODO update Age and id
         )
 
         if(type == 0) {

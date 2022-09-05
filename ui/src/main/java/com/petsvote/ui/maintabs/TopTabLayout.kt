@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.PorterDuff
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.FrameLayout
@@ -143,7 +144,7 @@ class TopTabLayout @JvmOverloads constructor(
 
     private fun animateSelectProfile() {
         val propertyLP: PropertyValuesHolder =
-            PropertyValuesHolder.ofInt("padding", 0, 100)
+            PropertyValuesHolder.ofInt("padding", 0, 1000)
         val animatorLP = ValueAnimator()
         animatorLP.setValues(propertyLP)
         animatorLP.setDuration(ANIMATE_DURATION)
@@ -156,7 +157,7 @@ class TopTabLayout @JvmOverloads constructor(
 
     private fun animateUnSelectProfile() {
         val propertyLP: PropertyValuesHolder =
-            PropertyValuesHolder.ofInt("padding", 0, 100)
+            PropertyValuesHolder.ofInt("padding", 0, 1000)
         val animatorLP = ValueAnimator()
         animatorLP.setValues(propertyLP)
         animatorLP.setDuration(ANIMATE_DURATION)
@@ -181,8 +182,8 @@ class TopTabLayout @JvmOverloads constructor(
         tabProfileIconSelect.alpha = if(!isViewPager) calculateAlphaSelected(position)
         else calculateAlphaSelected(position * 2)
 
-        tabProfileIcon.alpha = if(!isViewPager) calculateAlphaUnSelected(position)
-        else calculateAlphaUnSelected(position * 2)
+        tabProfileIcon.alpha = (if(!isViewPager) calculateAlphaUnSelected(position)
+        else calculateAlphaUnSelected(position * 2)) / 100
 
     }
 
@@ -198,13 +199,13 @@ class TopTabLayout @JvmOverloads constructor(
         tabProfileIconSelect.layoutParams = lpImage
 
         tabProfileIcon.alpha = calculateAlphaSelected(position)
-        tabProfileIconSelect.alpha = calculateAlphaUnSelected(position)
+        tabProfileIconSelect.alpha = calculateAlphaUnSelected(position) / 100
 
     }
 
     private fun animateSelectVote() {
         val propertyLP: PropertyValuesHolder =
-            PropertyValuesHolder.ofInt("padding", 0, 100)
+            PropertyValuesHolder.ofInt("padding", 0, 1000)
         val animatorLP = ValueAnimator()
         animatorLP.setValues(propertyLP)
         animatorLP.setDuration(ANIMATE_DURATION)
@@ -217,7 +218,7 @@ class TopTabLayout @JvmOverloads constructor(
 
     private fun animateUnSelectVote() {
         val propertyLP: PropertyValuesHolder =
-            PropertyValuesHolder.ofInt("padding", 0, 100)
+            PropertyValuesHolder.ofInt("padding", 0, 1000)
         val animatorLP = ValueAnimator()
         animatorLP.setValues(propertyLP)
         animatorLP.setDuration(ANIMATE_DURATION)
@@ -240,10 +241,10 @@ class TopTabLayout @JvmOverloads constructor(
         tabVoteIconSelect.layoutParams = lpImage
 
         tabVoteIconSelect.alpha = if(!isViewPager) calculateAlphaSelected(position)
-        else calculateAlphaSelected(position * 2)
+        else calculateAlphaSelected(position)
 
         tabVoteIcon.alpha = if(!isViewPager) calculateAlphaUnSelected(position)
-        else calculateAlphaUnSelected(position * 2)
+        else calculateAlphaUnSelected(position)/100
 
     }
 
@@ -258,17 +259,18 @@ class TopTabLayout @JvmOverloads constructor(
         tabVoteIcon.layoutParams = lpImage
         tabVoteIconSelect.layoutParams = lpImage
 
-        tabVoteIcon.alpha = if(!isViewPager) calculateAlphaSelected(position)
-        else calculateAlphaSelected(position * 2)
 
+        tabVoteIcon.alpha = if(!isViewPager) calculateAlphaSelected(position)
+        else calculateAlphaSelected(position)
+//
         tabVoteIconSelect.alpha = if(!isViewPager) calculateAlphaUnSelected(position)
-        else calculateAlphaUnSelected(position * 2)
+        else calculateAlphaUnSelected(position) / 100
 
     }
 
     private fun animateSelectRating() {
         val propertyLP: PropertyValuesHolder =
-            PropertyValuesHolder.ofInt("padding", 0, 100)
+            PropertyValuesHolder.ofInt("padding", 0, 1000)
         val animatorLP = ValueAnimator()
         animatorLP.setValues(propertyLP)
         animatorLP.setDuration(ANIMATE_DURATION)
@@ -281,7 +283,7 @@ class TopTabLayout @JvmOverloads constructor(
 
     private fun animateUnSelectRating() {
         val propertyLP: PropertyValuesHolder =
-            PropertyValuesHolder.ofInt("padding", 0, 100)
+            PropertyValuesHolder.ofInt("padding", 0, 1000)
         val animatorLP = ValueAnimator()
         animatorLP.setValues(propertyLP)
         animatorLP.setDuration(ANIMATE_DURATION)
@@ -322,8 +324,8 @@ class TopTabLayout @JvmOverloads constructor(
         tabRatingIcon.alpha = if (!isViewPager) calculateAlphaSelected(position)
         else calculateAlphaSelected(position * 2)
 
-        tabRatingIconSelect.alpha = if (!isViewPager) calculateAlphaUnSelected(position )
-        else calculateAlphaUnSelected(position * 2)
+        tabRatingIconSelect.alpha = (if (!isViewPager) calculateAlphaUnSelected(position )
+        else calculateAlphaUnSelected(position * 2)) / 100
     }
 
 

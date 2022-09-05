@@ -142,28 +142,28 @@ class VoteFragment : BaseFragment(R.layout.fragment_vote),
     @SuppressLint("NotifyDataSetChanged")
     override fun initObservers() {
         lifecycleScope.launchWhenStarted {
-            viewModel.pets.collect {
+            viewModel.pets.collect {listVoteNow ->
                 log(" ---------------- get DATA ---------------")
-                if(it != null){
+                if(listVoteNow != null){
                     log("listVote.size = ${listVote.size}")
-                    log("listVote.size = $it")
-                    if(listVote.size == 0 && it.isNotEmpty()){
+                    log("listVote.size = $listVoteNow")
+                    if(listVote.size == 0 && listVoteNow.isNotEmpty()){
                         log("init adapter ")
                         listVote.add(emptypet)
                         binding?.pager?.postDelayed( Runnable {
                             initFirst()
                         }, 200)
-                        if(it[0].cardType == 1) binding?.next?.visibility = View.VISIBLE
+                        if(listVoteNow[0].cardType == 1) binding?.next?.visibility = View.VISIBLE
                         else binding?.next?.visibility = View.GONE
                     }
-                    if(it.isNotEmpty()){
+                    if(listVoteNow.isNotEmpty()){
                         log("init not empty")
                         binding?.container?.hideAlpha()
-                        listVote.addAll(it)
+                        listVote.addAll(listVoteNow.filter { it.cardType == 2 || it.cardType == 0})
                         adapter?.notifyDataSetChanged()
                     }
 
-                    if(it.isEmpty() && listVote.size == 0) {
+                    if(listVoteNow.isEmpty() && listVote.size == 0) {
                         log("showDialog")
                         showDialog(2)
                     }

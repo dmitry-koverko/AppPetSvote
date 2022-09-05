@@ -91,7 +91,6 @@ class RatingPagingSource @Inject constructor(
             else if (repos.first().index < NETWORK_PAGE_SIZE && repos.first().index != 1) repos.first().index
             else repos.first().index - 1 - NETWORK_PAGE_SIZE
 
-            //ratingFilterRepository.setUserBredIdRatingFilter(null)
 
             Log.d("RATINGPAGINGSOURCES", "params = ${params.key} | prev = $prev | next = $nextKey | first = ${repos.first().index} | last = ${repos.last().index}")
 

@@ -47,8 +47,12 @@ class SplashFragment : BaseFragment(R.layout.fragment_splash) {
             viewModel._isLoginUser.collect { it ->
                 if (it == null) return@collect
                 if (it == false) {
+                    binding?.frame?.visibility = View.GONE
                     try {navigation.startRegister()} catch (e: Exception) {}
-                }else navigation.startTabs()//navigation.startFindPetFromSplash()//navigation.startAddPetFromSplash()//navigation.startProfileFromSplash()//navigation?.startFilterFromSplash()//navigation.startSimpleUserFromSplash()//
+                }else {
+                    binding?.frame?.visibility = View.GONE
+                    navigation.startTabs()
+                }//navigation.startFindPetFromSplash()//navigation.startAddPetFromSplash()//navigation.startProfileFromSplash()//navigation?.startFilterFromSplash()//navigation.startSimpleUserFromSplash()//
             }
         }
     }

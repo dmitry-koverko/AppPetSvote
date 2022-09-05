@@ -18,6 +18,7 @@ class RatingPagingRepository @Inject constructor(
 ) : RatingPagingRepository {
 
     override fun getRating(): Flow<PagingData<Item>> {
+
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
