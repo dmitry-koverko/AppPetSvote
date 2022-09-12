@@ -17,9 +17,7 @@ import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.ui.maintabs.BesieTabSelected
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -42,12 +40,33 @@ class RatingViewModel @Inject constructor(
     var filterType = MutableStateFlow(RatingFilterType.GLOBAL)
     var isLocationUser = MutableStateFlow(false)
     var filterText = MutableStateFlow<String?>(null)
+    var ratingList = MutableStateFlow<List<Item>?>(emptyList())
+
+    fun clearRating(){
+        ratingList.value = null
+    }
+
+    fun getRatingMore(lastIndex: Int){
+        viewModelScope.launch {
+            ratingUseCase.getRating(lastIndex, 50).collect {
+                ratingList.emit(it)
+            }
+        }
+    }
+
+    fun getRatingTop(){
+
+    }
+
+    fun findUserPetRating(){
+
+    }
 
     suspend fun getRating() = withContext(Dispatchers.IO) {
         //setBreedIdInRatingFilterUseCase.setBredIdRatingFilter(null)
-        ratingUseCase.getRating().cachedIn(viewModelScope).collect {
-            pages.emit(it)
-        }
+//        ratingUseCase.getRating().cachedIn(viewModelScope).collect {
+//            pages.emit(it)
+//        }
 
     }
 

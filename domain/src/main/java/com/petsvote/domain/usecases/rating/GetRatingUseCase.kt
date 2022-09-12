@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface GetRatingUseCase {
     suspend fun getRating(): Flow<PagingData<Item>>
+    suspend fun getRating(offset: Int, count: Int): Flow<List<Item>>
 }

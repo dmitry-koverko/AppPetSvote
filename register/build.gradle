@@ -9,13 +9,13 @@ plugins {
 android {
     signingConfigs {
         debug {
-            storeFile file('F:\\clean-petsvote\\outputs\\keypath.jks')
+            storeFile file('/Users/admin/AndroidStudioProjects/AppPetSvote/outputs/keypath.jks')
             storePassword '123456'
             keyAlias 'key'
             keyPassword '123456'
         }
         release {
-        storeFile file('F:\\clean-petsvote\\outputs\\keypath_release.jks')
+        storeFile file('/Users/admin/AndroidStudioProjects/AppPetSvote/outputs/keypath.jks')
             storePassword '12345678'
             keyAlias 'key'
             keyPassword '12345678'

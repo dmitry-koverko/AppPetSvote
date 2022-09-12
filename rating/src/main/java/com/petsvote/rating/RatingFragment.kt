@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnimationUtils
+import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.os.bundleOf
@@ -63,7 +64,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private var fragmentScope = CoroutineScope(Dispatchers.Main + Job())
 
     var binding: FragmentRatingCollapsingBinding? = null
-    private var ratingAdapter = FingerprintPagingAdapter(listOf(TopRatingFingerprint(::onClickPet)))
+    private var ratingAdapter = FingerprintListAdapter(listOf(TopRatingFingerprint(::onClickPet)))
     private val findPetAdapter = FingerprintListAdapter(listOf(FindPetFingerprint(::onFindPet)))
     private val userPetsAdapter =
         FingerprintListAdapter(listOf(UserPetFingerprint(::onClickUserPet)))
@@ -79,7 +80,7 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     private var topLinearHeight = 0
     private var check_ScrollingUp = false
     private var currentClickUserPetId = -1
-
+    private var isLoading = false
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,20 +93,20 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
         initBottomRecycler()
         initTabs()
         initFilter()
-
+//
         lifecycleScope.launchWhenStarted {
             viewModel.resetBreedId()
         }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.getRating()
-        }
+//
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.getRating()
+//        }
         lifecycleScope.launchWhenStarted {
             viewModel.getUserPets()
         }
-
+//
         lifecycleScope.launchWhenStarted {
-            viewModel.getRatingFilter()
+            viewModel.getRatingMore(0)
         }
 
         lifecycleScope.launchWhenStarted {
@@ -187,6 +188,36 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             }
         })
 
+        binding?.listRating?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrollStateChanged(@NonNull recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(@NonNull recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val linearLayoutManager: GridLayoutManager =
+                    recyclerView.getLayoutManager() as GridLayoutManager
+                if(dy != 0){
+                    if (!isLoading) {
+                        log("item count = ${ratingAdapter.itemCount}")
+                        log("last position = ${linearLayoutManager.findLastCompletelyVisibleItemPosition()}")
+                        if (linearLayoutManager != null && ratingAdapter.itemCount != 0 && linearLayoutManager.findLastCompletelyVisibleItemPosition() in ratingAdapter.itemCount - 25..ratingAdapter.itemCount - 24) {
+                            //bottom of list!
+                            viewModel.getRatingMore(
+                                (ratingAdapter.currentList.last() as? RatingPet)?.index ?: 0
+                            )
+                            isLoading = true
+                        }
+//                        }else if(linearLayoutManager != null && ratingAdapter.itemCount != 0 && linearLayoutManager.findFirstCompletelyVisibleItemPosition() < 25){
+//                            viewModel.getRatingTop()
+//                            isLoading = true
+//                        }
+                    }
+                }
+            }
+        })
+
         binding?.listRating?.setOnScrollChangeListener(
             (View.OnScrollChangeListener { p0, scrollX, scrollY, oldScrollX, oldScrollY ->
                 var offset = binding?.listRating?.computeVerticalScrollOffset()
@@ -218,21 +249,21 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             })
         )
 
-        ratingAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                if (currentClickUserPetId != -1) {
-                    var list = ratingAdapter.snapshot().items
-                    var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
-                    if(myPet != null){
-                        var first = (list[0] as RatingPet)
-                        var deff = (myPet as RatingPet).index - first.index
-                        binding?.listRating?.smoothScrollToPosition(deff + 2)
-                        currentClickUserPetId = -1
-                        binding?.progressBar?.visibility = View.GONE
-                    }
-                }
-            }
-        })
+//        ratingAdapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+//            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+//                if (currentClickUserPetId != -1) {
+//                    var list = ratingAdapter.snapshot().items
+//                    var myPet = (list.find { (it as RatingPet).pet_id == currentClickUserPetId })
+//                    if(myPet != null){
+//                        var first = (list[0] as RatingPet)
+//                        var deff = (myPet as RatingPet).index - first.index
+//                        binding?.listRating?.smoothScrollToPosition(deff + 2)
+//                        currentClickUserPetId = -1
+//                        binding?.progressBar?.visibility = View.GONE
+//                    }
+//                }
+//            }
+//        })
 
     }
 
@@ -245,15 +276,15 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
             }
         }
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.pages.collect {
-                it?.let { page ->
-                    ratingAdapter.submitData(page)
-                    binding?.progressBar?.visibility = View.GONE
-                    binding?.swipeRefresh?.isRefreshing = false
-                }
-            }
-        }
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.pages.collect {
+//                it?.let { page ->
+//                    ratingAdapter.submitData(page)
+//                    binding?.progressBar?.visibility = View.GONE
+//                    binding?.swipeRefresh?.isRefreshing = false
+//                }
+//            }
+//        }
 
         lifecycleScope.launchWhenResumed {
             viewModel.userPets.collect {
@@ -291,6 +322,17 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
                 }
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.ratingList.collect {
+                val list = ratingAdapter.currentList.toMutableList()
+                it?.let { it1 -> list.addAll(it1) }
+                binding?.progressBar?.visibility = View.GONE
+                ratingAdapter.submitList(list)
+                isLoading = false
+                binding?.swipeRefresh?.isRefreshing = false
+            }
+        }
     }
 
     override fun onAttach(context: Context) {
@@ -312,31 +354,30 @@ class RatingFragment : BaseFragment(R.layout.fragment_rating_collapsing) {
     }
 
     private fun onClickUserPet(clickItem: UserPet) {
-        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
-        binding?.listRating?.postDelayed(
-            Runnable { binding?.listRating?.scrollToPosition(0) },
-            10
-        )
-        clickItem.pets_id?.let { currentClickUserPetId = it }
-        var newList = userPetsAdapter.currentList
-        newList.onEach { item: Item? -> (item as UserPet).isClickPet = false }
-        (newList.find { (it as UserPet).pets_id == clickItem.pets_id } as UserPet).isClickPet = true
-        userPetsAdapter.notifyDataSetChanged()
-        clickItem.id?.let { viewModel.setBreedId(it) }
-        refresh()
+//        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
+//        binding?.listRating?.postDelayed(
+//            Runnable { binding?.listRating?.scrollToPosition(0) },
+//            10
+//        )
+//        clickItem.pets_id?.let { currentClickUserPetId = it }
+//        var newList = userPetsAdapter.currentList
+//        newList.onEach { item: Item? -> (item as UserPet).isClickPet = false }
+//        (newList.find { (it as UserPet).pets_id == clickItem.pets_id } as UserPet).isClickPet = true
+//        userPetsAdapter.notifyDataSetChanged()
+//        clickItem.id?.let { viewModel.setBreedId(it) }
+//        refresh()
 
     }
 
     private fun refresh(){
-        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
-        ratingAdapter.refresh()
+        viewModel.clearRating()
+        ratingAdapter.submitList(null)
         binding?.progressBar?.visibility = View.VISIBLE
+        viewModel.getRatingMore(0)
     }
 
     private fun swipeRefresh(){
-        viewModel.resetBreedId()
-        fragmentScope.launch { ratingAdapter.submitData(PagingData.from(listOf())) }
-        ratingAdapter.refresh()
+        refresh()
     }
 
     companion object {

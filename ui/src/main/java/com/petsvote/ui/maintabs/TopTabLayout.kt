@@ -2,12 +2,15 @@ package com.petsvote.ui.maintabs
 
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PorterDuff
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.HorizontalScrollView
 import android.widget.ImageView
@@ -17,6 +20,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.DrawableCompat
 import com.petsvote.ui.R
 
+@SuppressLint("ClickableViewAccessibility")
 class TopTabLayout @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : FrameLayout(context, attrs) {
@@ -69,6 +73,8 @@ class TopTabLayout @JvmOverloads constructor(
 
         initDefaultsParams()
         defaultScroll()
+
+        scroll.setOnTouchListener { p0, p1 -> true }
 
         tabRating.setOnClickListener {
             mTopTabLayoutListener?.selectTabPosition(0)

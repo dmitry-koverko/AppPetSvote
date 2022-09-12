@@ -74,8 +74,8 @@ class RatingModule {
     }
 
     @Provides
-    fun provideGetRatingUseCase(ratingRepository: RatingPagingRepository): GetRatingUseCase {
-        return GetRatingUseCaseImpl(ratingRepository = ratingRepository)
+    fun provideGetRatingUseCase(ratingPagingRepository: RatingPagingRepository, ratingRepository: RatingRepository): GetRatingUseCase {
+        return GetRatingUseCaseImpl(ratingPagingRepository = ratingPagingRepository, ratingRepository = ratingRepository)
     }
 
 }
