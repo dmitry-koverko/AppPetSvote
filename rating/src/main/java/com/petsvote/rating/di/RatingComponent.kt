@@ -7,6 +7,8 @@ import com.petsvote.domain.usecases.user.ICheckLocationUserUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.ISaveUserToLocalUseCase
 import com.petsvote.rating.RatingFragment
+import com.petsvote.rating.RatingTestFragment
+import com.petsvote.rating.childFragment.BaseChildFragment
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope
@@ -20,6 +22,8 @@ internal annotation class RatingScope
 interface RatingComponent {
 
     fun inject(fragment: RatingFragment)
+    fun inject(fragment: RatingTestFragment)
+    fun inject(fragment: BaseChildFragment)
 
     @Component.Builder
     interface Builder{

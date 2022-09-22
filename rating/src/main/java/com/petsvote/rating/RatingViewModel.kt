@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.petsvote.core.BaseViewModel
 import com.petsvote.core.adapter.Item
+import com.petsvote.core.ext.log
 import com.petsvote.domain.entity.filter.RatingFilterType
 import com.petsvote.domain.entity.user.UserPet
 import com.petsvote.domain.usecases.filter.*
@@ -43,7 +44,8 @@ class RatingViewModel @Inject constructor(
     var ratingList = MutableStateFlow<List<Item>?>(emptyList())
 
     fun clearRating(){
-        ratingList.value = null
+        ratingList.value = emptyList()
+        log("userPetsBeforeClear = ${ratingList.value.toString()}")
     }
 
     fun getRatingMore(lastIndex: Int){
@@ -54,12 +56,22 @@ class RatingViewModel @Inject constructor(
         }
     }
 
-    fun getRatingTop(){
+    fun getRatingTop(firstIndex: Int){
+
+        viewModelScope.launch {
+            ratingUseCase.getRatingTop(firstIndex).collect {
+                ratingList.emit(it)
+            }
+        }
 
     }
 
-    fun findUserPetRating(){
-
+    fun findUserPetRating(breedId: Int){
+        viewModelScope.launch {
+            ratingUseCase.getRatingByBreedId(breedId).collect {
+                ratingList.emit(it)
+            }
+        }
     }
 
     suspend fun getRating() = withContext(Dispatchers.IO) {

@@ -10,13 +10,6 @@
     android:clickable="true"
     android:focusable="true">
 
-    <ProgressBar
-        android:visibility="gone"
-        android:id="@+id/progressBar"
-        android:theme="@style/CircularProgress"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
     <com.google.android.material.appbar.AppBarLayout
 
@@ -189,7 +182,14 @@
 
     </FrameLayout>
 
-
+    <ProgressBar
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:id="@+id/progressBar"
+        android:theme="@style/CircularProgress"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

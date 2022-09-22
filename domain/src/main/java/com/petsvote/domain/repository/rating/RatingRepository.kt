@@ -15,6 +15,10 @@ interface RatingRepository {
         rating_type: String
     ): List<RatingPet>
 
+    suspend fun getRatingUserPet(
+        breedId: Int?
+    ): List<RatingPet>
+
     suspend fun getVotePets(): Flow<List<VotePet>>
     suspend fun addVote(params: AddVoteParams)
 }

@@ -107,14 +107,14 @@ class BesieTabLayout @JvmOverloads constructor(
         initListener()
     }
 
-    fun initWorldTab(){
+    fun initWorldTab(duration: Long = 300){
         if(tabWith == 0) {
             initCountryWorld = 2
             return
         }
         Log.d(TAG, "initCountryTabs = $width")
         checkCurrentTab()
-        animMove(animTranslationX, tabWith *2.toFloat())
+        animMove(animTranslationX, tabWith *2.toFloat(), duration)
         currentTab = tab3?.id!!
         tab1.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_unselected_color))
         tab3?.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
@@ -147,14 +147,14 @@ class BesieTabLayout @JvmOverloads constructor(
         }else mBesieTabLayoutSelectedListener?.selected(BesieTabSelected.NullUserLocation)
     }
 
-    fun initCountryTabs(){
+    fun initCountryTabs(duration: Long = 300){
         if(tabWith == 0) {
             initCountryWorld = 1
             return
         }
         Log.d(TAG, "initCountryTabs = $width")
         checkCurrentTab()
-        animMove(animTranslationX, tabWith.toFloat())
+        animMove(animTranslationX, tabWith.toFloat(), duration)
         currentTab = tab2.id
         tab1.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_unselected_color))
         tab2.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
@@ -208,13 +208,13 @@ class BesieTabLayout @JvmOverloads constructor(
         super.onSizeChanged(w, h, oldw, oldh)
     }
 
-    fun animMove(val1: Float, val2: Float){
+    fun animMove(val1: Float, val2: Float, duration: Long = 300){
         val propertyXLeft: PropertyValuesHolder =
             PropertyValuesHolder.ofFloat("PROPERTY_MOVE", val1, val2)
 
         animator = ValueAnimator()
         animator!!.setValues(propertyXLeft)
-        animator!!.setDuration(300)
+        animator!!.setDuration(duration)
         animator!!.addUpdateListener(ValueAnimator.AnimatorUpdateListener { animation ->
             animTranslationX = animation.getAnimatedValue("PROPERTY_MOVE") as Float
             tabIndicator.translationX = animTranslationX
@@ -244,6 +244,23 @@ class BesieTabLayout @JvmOverloads constructor(
 
     fun setTabSelectedListener(listener: BesieTabLayoutSelectedListener){
         mBesieTabLayoutSelectedListener = listener
+    }
+
+    fun initWorldTabResume() {
+        initWorldTab(1)
+        tab3?.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
+        tabIndicator.visibility = View.VISIBLE
+    }
+
+    fun initCountryResumeTabs() {
+        initCountryTabs(0)
+        tab2.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
+        tabIndicator.visibility = View.VISIBLE
+    }
+
+    fun initCityResumeTabs() {
+        tab1.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
+        tabIndicator.visibility = View.VISIBLE
     }
 }
 

@@ -21,4 +21,20 @@ class GetRatingUseCaseImpl @Inject constructor(
     override suspend fun getRating(offset: Int, count: Int): Flow<List<Item>> = flow {
         emit(ratingRepository.getRating(offset, count, null, ""))
     }
+
+    override suspend fun getRatingByBreedId(breedId: Int): Flow<List<Item>> = flow {
+        emit(ratingRepository.getRatingUserPet(breedId))
+    }
+
+    override suspend fun getRatingTop(firstIndex: Int): Flow<List<Item>> = flow {
+        var limit = 50;
+        var offset = 0;
+        if(50 - firstIndex > 0){
+            offset = firstIndex - 50
+            limit = 0
+        }else {
+            offset = firstIndex - 50
+        }
+        emit(ratingRepository.getRating(offset, limit, null, ""))
+    }
 }

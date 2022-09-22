@@ -42,6 +42,7 @@ class RatingRepository @Inject constructor(
 
         val filter =
             withContext(scoupe.coroutineContext) { ratingFilterRepository.getSimpleRatingFilter() }
+        val user = withContext(scoupe.coroutineContext) {userRepository.getCurrentUser()}
 
         val response = checkResultPaging<Rating>(
             ratingApi.getRating(
@@ -51,10 +52,38 @@ class RatingRepository @Inject constructor(
                 lang = languageCodeUseCase.getLanguage(),
                 filter.type,
                 filter.sex,
-                city_id = null,//userRepository.getCurrentUser().location?.city_id,
-                country_id = null,//userRepository.getCurrentUser().location?.country_id,
+                city_id = user.location?.city_id,
+                country_id = user.location?.country_id,
                 "${filter.age_between_min}:${filter.age_between_max}",
-                rating_type = rating_type,//ratingFilterRepository.getSimpleRatingFilter().rating_type?.nameParams,
+                rating_type = filter.rating_type?.nameParams,
+                id = breedId,
+                breed_id = null
+            )
+
+        )
+        return if (response != null) (response as Rating).pets.remoteToRatingList() else emptyList()
+    }
+
+    override suspend fun getRatingUserPet(
+        breedId: Int?
+    ): List<RatingPet> {
+
+        val filter =
+            withContext(scoupe.coroutineContext) { ratingFilterRepository.getSimpleRatingFilter() }
+        val user = withContext(scoupe.coroutineContext) {userRepository.getCurrentUser()}
+
+        val response = checkResultPaging<Rating>(
+            ratingApi.getRating(
+                userRepository.getToken(),
+                limit = 50,
+                offset = 0,
+                lang = languageCodeUseCase.getLanguage(),
+                null,
+                null,
+                city_id = user.location?.city_id,
+                country_id = user.location?.country_id,
+                "${filter.age_between_min}:${filter.age_between_max}",
+                rating_type = filter.rating_type?.nameParams,
                 id = breedId,
                 breed_id = null
             )

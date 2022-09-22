@@ -83,8 +83,9 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
         lifecycleScope.launchWhenStarted {
             viewModel.sex.collect {
                 when(it){
-                    1 -> binding?.tabs?.initCountryTabs()
-                    2 -> binding?.tabs?.initWorldTab()
+                    1 -> binding?.tabs?.initCountryResumeTabs()
+                    2 -> binding?.tabs?.initWorldTabResume()
+                    else -> binding?.tabs?.initCityResumeTabs()
                 }
             }
         }
@@ -105,6 +106,7 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
             viewModel.ageMax.collect {
                 binding?.sfMaxValue?.text = it
                 if(it.isNotEmpty()) initMax(it.toInt())
+                // if(currentMax < 200) btn_enabled ||| 200  - getFromVM getFilterKinds
             }
         }
 
@@ -210,7 +212,7 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
     }
 
     private fun initMax(maxValue: Int){
-        max = maxValue
+        max = 200//maxValue
         maxCurrent = maxValue
         binding?.blRight1?.setOnClickListener {
             maxCurrent -= 1
@@ -228,7 +230,7 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
     }
 
     private fun initMin(minValue: Int){
-        min = minValue
+        min = 0//minValue
         minCurrent = minValue
 
         binding?.blLeft1?.setOnClickListener {

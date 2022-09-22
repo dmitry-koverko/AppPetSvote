@@ -37,7 +37,7 @@ class FilterViewModel @Inject constructor(
     fun getFilter() {
         viewModelScope.launch {
             filterUseCase.getFilter().collect {
-                if(sex.value == -1) sex.emit(it.sex)
+                sex.emit(it.sex)
                 kind.emit(it.kind)
                 ageMin.emit(it.ageMin)
                 ageMax.emit(it.ageMax)

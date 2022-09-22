@@ -176,10 +176,13 @@
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/fragment_vote_empty_filter.xml" value="0.365625" />
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/item_fragment_vote.xml" value="0.15301391035548687" />
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/item_vote_fragment.xml" value="0.12" />
+        <entry key="rating/src/main/res/layout/fragment_rating_collapsing.xml" value="0.2346014492753623" />
         <entry key="rating/src/main/res/layout/fragment_rating_empty.xml" value="0.19610507246376813" />
         <entry key="rating/src/main/res/layout/item_loading.xml" value="0.19610507246376813" />
+        <entry key="rating/src/main/res/layout/item_rating_fragment.xml" value="0.2346014492753623" />
         <entry key="rating/src/main/res/layout/item_row.xml" value="0.19610507246376813" />
         <entry key="tabs/src/main/res/layout/fragment_tabs.xml" value="0.14336372847011145" />
+        <entry key="ui/src/main/res/layout/besie_tab_layout.xml" value="0.21195652173913043" />
         <entry key="ui/src/main/res/layout/top_bar_layout.xml" value="0.19610507246376813" />
       </map>
     </option>
