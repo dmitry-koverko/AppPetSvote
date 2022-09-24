@@ -4,6 +4,7 @@ import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Color
+import android.os.CountDownTimer
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity.CENTER
@@ -20,6 +21,7 @@ import androidx.core.graphics.ColorUtils
 import com.petsvote.ui.BesieLayout
 import com.petsvote.ui.R
 import com.petsvote.ui.textview.SFTextView
+import java.util.*
 import kotlin.math.roundToInt
 
 class BesieTabLayout @JvmOverloads constructor(
@@ -249,20 +251,33 @@ class BesieTabLayout @JvmOverloads constructor(
     fun initWorldTabResume() {
         initWorldTab(1)
         tab3?.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
-        tabIndicator.visibility = View.VISIBLE
+        startTimerVisibleIndicator()
     }
 
     fun initCountryResumeTabs() {
         initCountryTabs(0)
         tab2.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
-        tabIndicator.visibility = View.VISIBLE
+        startTimerVisibleIndicator()
     }
 
     fun initCityResumeTabs() {
         tab1.setTextColor(ContextCompat.getColor(context, R.color.besie_tab_text_selected_color))
-        tabIndicator.visibility = View.VISIBLE
+        startTimerVisibleIndicator()
+    }
+
+    fun startTimerVisibleIndicator(){
+        var countDownTimer = object : CountDownTimer(200, 200) {
+            override fun onTick(p0: Long) {}
+
+            override fun onFinish() {
+                tabIndicator.visibility = View.VISIBLE
+            }
+
+        }.start()
     }
 }
+
+
 
 interface BesieTabLayoutSelectedListener{
     fun selected(tab: BesieTabSelected)

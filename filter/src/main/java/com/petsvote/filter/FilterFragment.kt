@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseFragment
+import com.petsvote.core.ext.log
 import com.petsvote.domain.flow.ratingUpdate
 import com.petsvote.filter.databinding.FragmentFilterBinding
 import com.petsvote.filter.di.FilterComponentViewModel
@@ -43,6 +44,7 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
 
     private var maxCurrent: Int = 0
     private var minCurrent: Int = 0
+    private var isInitTabs = false;
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -70,7 +72,13 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
         }
 
         initTabs()
+        viewModel.getSex()
         viewModel.getFilter()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isInitTabs = false
     }
 
     private fun initTabs() {
@@ -80,12 +88,24 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
     }
 
     override fun initObservers() {
+
+        lifecycleScope.launchWhenResumed{
+            viewModel.max.collect {
+                log("filter ${it}")
+                max = it
+            }
+        }
+
         lifecycleScope.launchWhenStarted {
             viewModel.sex.collect {
-                when(it){
-                    1 -> binding?.tabs?.initCountryResumeTabs()
-                    2 -> binding?.tabs?.initWorldTabResume()
-                    else -> binding?.tabs?.initCityResumeTabs()
+                if(!isInitTabs) {
+                    log("init tabs $it")
+                    when(it){
+                        1 -> binding?.tabs?.initCountryResumeTabs()
+                        2 -> binding?.tabs?.initWorldTabResume()
+                        else -> binding?.tabs?.initCityResumeTabs()
+                    }
+                    isInitTabs = true
                 }
             }
         }
@@ -106,7 +126,15 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
             viewModel.ageMax.collect {
                 binding?.sfMaxValue?.text = it
                 if(it.isNotEmpty()) initMax(it.toInt())
-                // if(currentMax < 200) btn_enabled ||| 200  - getFromVM getFilterKinds
+                if(maxCurrent < max){
+                    binding?.blRight2?.click = true
+                    binding?.imgRightAgeP?.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            com.petsvote.ui.R.drawable.ic_add_active
+                        )
+                    )
+                }
             }
         }
 
@@ -114,6 +142,15 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
             viewModel.ageMin.collect {
                 binding?.sfMinValue?.text = it
                 if(it.isNotEmpty()) initMin(it.toInt())
+                if(minCurrent > min){
+                    binding?.blLeft1?.click = true
+                    binding?.imgLeftAgeM?.setImageDrawable(
+                        ContextCompat.getDrawable(
+                            requireContext(),
+                            com.petsvote.ui.R.drawable.ic_minus_active
+                        )
+                    )
+                }
             }
         }
 
@@ -212,7 +249,7 @@ class FilterFragment: BaseFragment(R.layout.fragment_filter), BesieTabLayoutSele
     }
 
     private fun initMax(maxValue: Int){
-        max = 200//maxValue
+        //max = 30//maxValue
         maxCurrent = maxValue
         binding?.blRight1?.setOnClickListener {
             maxCurrent -= 1

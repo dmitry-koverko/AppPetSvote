@@ -9,4 +9,5 @@ data class Filter(
     var ageMax: String = "",
     var sex: Int = 0,
     var isBreedRight: Boolean = false,
+    var filterMax: Int = 0
 )

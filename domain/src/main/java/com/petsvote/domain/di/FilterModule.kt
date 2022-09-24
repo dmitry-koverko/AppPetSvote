@@ -84,12 +84,14 @@ class FilterModule {
     fun provideFilter(
         resourcesRepository: IResourcesRepository,
         ratingFilterRepository: IRatingFilterRepository,
-        breedRepository: IBreedRepository
+        breedRepository: IBreedRepository,
+        getKindsUseCase: IGetKindsUseCase
     ): IGetFilterUseCase {
         return GetFilterUseCase(
             resourcesRepository = resourcesRepository,
             ratingFilterRepository = ratingFilterRepository,
-            breedRepository = breedRepository
+            breedRepository = breedRepository,
+            getKindsUseCase = getKindsUseCase
         )
     }
 
