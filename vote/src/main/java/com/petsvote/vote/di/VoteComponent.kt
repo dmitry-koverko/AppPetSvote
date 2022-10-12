@@ -7,9 +7,9 @@ import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
 import com.petsvote.domain.usecases.resources.GetStringResourcesUseCase
 import com.petsvote.domain.usecases.user.IGetUserPetsUseCase
 import com.petsvote.domain.usecases.user.IGetUserUseCase
-import com.petsvote.vote.BonusVoteFragment
-import com.petsvote.vote.ItemVoteFragment
-import com.petsvote.vote.VoteFragment
+import com.petsvote.vote.fragments.state.BonusVoteFragment
+import com.petsvote.vote.fragments.VoteFragment
+import com.petsvote.vote.fragments.state.ItemVoteFragment
 import dagger.Component
 import dagger.Module
 import javax.inject.Scope

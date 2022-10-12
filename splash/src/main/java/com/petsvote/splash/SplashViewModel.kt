@@ -48,10 +48,10 @@ class SplashViewModel @Inject constructor(
             checkLoginUserUseCase.checkLoginUser()
         }
 
-        val updateBreeds = async {
-            breedsUseCase.updateBreeds()
-        }
-        updateBreeds.await()
+//        val updateBreeds = async {
+//            breedsUseCase.updateBreeds()
+//        }
+        //updateBreeds.await()
         val isLogin = checkLogin.await()
 
 

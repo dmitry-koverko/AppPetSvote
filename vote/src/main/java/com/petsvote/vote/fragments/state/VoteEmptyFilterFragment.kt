@@ -1,8 +1,9 @@
-package com.petsvote.vote
+package com.petsvote.vote.fragments.state
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.petsvote.vote.R
 import com.petsvote.vote.databinding.FragmentVoteEmptyFilterBinding
 
 private const val ARG_PARAM = "id"

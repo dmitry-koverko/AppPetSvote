@@ -1,16 +1,11 @@
-package com.petsvote.vote
+package com.petsvote.vote.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.petsvote.core.BaseViewModel
 import com.petsvote.domain.entity.params.AddVoteParams
-import com.petsvote.domain.entity.pet.VotePet
 import com.petsvote.domain.usecases.rating.IAddVoteUseCase
-import com.petsvote.domain.usecases.rating.IGetVotePetsUseCase
-import com.petsvote.domain.usecases.rating.impl.AddVoteUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

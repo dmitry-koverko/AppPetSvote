@@ -1,19 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BlankFragment">
-
-    <com.petsvote.ui.parallax.ParallaxView
-        android:id="@+id/GDFG"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:backgroundTint="@color/white"
-        android:scaleType="centerCrop"
-        android:src="@drawable/cat_example"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+    android:layout_width="wrap_content"
+    android:background="@android:color/black"
+    android:layout_height="wrap_content">
 
 </FrameLayout>

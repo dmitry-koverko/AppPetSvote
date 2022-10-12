@@ -1,15 +1,15 @@
-package com.petsvote.vote
+package com.petsvote.vote.adapters
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
+import com.petsvote.vote.fragments.VoteFragment
+import com.petsvote.vote.fragments.state.BonusVoteFragment
+import com.petsvote.vote.fragments.state.ItemVoteFragment
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: VoteFragment,  private val onClick: (VotePet) -> Unit, private val onChange: (Int) -> Unit) : FragmentStateAdapter(fragment),
+class VoteAdapter(private var listPets: MutableList<VotePet>, fragment: VoteFragment, private val onClick: (VotePet) -> Unit, private val onChange: (Int) -> Unit) : FragmentStateAdapter(fragment),
     ItemVoteFragment.ItemVoteFragmentClick {
 
     override fun getItemCount(): Int = listPets.size

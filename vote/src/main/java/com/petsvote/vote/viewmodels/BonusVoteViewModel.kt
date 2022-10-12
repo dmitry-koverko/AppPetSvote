@@ -1,4 +1,4 @@
-package com.petsvote.vote
+package com.petsvote.vote.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

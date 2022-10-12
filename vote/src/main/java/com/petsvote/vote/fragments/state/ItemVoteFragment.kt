@@ -1,24 +1,21 @@
-package com.petsvote.vote
+package com.petsvote.vote.fragments.state
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.style.ImageSpan
 import android.view.View
 import androidx.constraintlayout.motion.widget.MotionLayout
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.petsvote.core.BaseItemVoteFragment
 import com.petsvote.core.ext.getMonthOnYear
 import com.petsvote.domain.entity.params.AddVoteParams
-import com.petsvote.domain.entity.pet.RatingPet
 import com.petsvote.domain.entity.pet.VotePet
+import com.petsvote.vote.R
 import com.petsvote.vote.databinding.ItemFragmentVoteBinding
 import com.petsvote.vote.di.VoteComponentViewModel
+import com.petsvote.vote.viewmodels.AddVoteViewModel
 import dagger.Lazy
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
@@ -98,18 +95,21 @@ class ItemVoteFragment : BaseItemVoteFragment(R.layout.item_fragment_vote) {
         binding?.description?.setOnClickListener {
             pet?.let { it1 -> itemVoteFragmentClick?.clickPet(it1) }
         }
+
     }
 
 
     fun setRating(rating: Int) {
         binding?.simpleSFTextView?.text = "+$rating"
-        viewModel.addVote(AddVoteParams(
+        viewModel.addVote(
+            AddVoteParams(
             mark = rating,
             to_pet_id = pet?.pet_id,
             first_vote = false,
             pet?.name,
             pet?.id
-        ))
+        )
+        )
     }
 
     fun startAnim(endAnimation: () -> Unit) {
@@ -158,5 +158,6 @@ class ItemVoteFragment : BaseItemVoteFragment(R.layout.item_fragment_vote) {
     interface ItemVoteFragmentClick{
         fun clickPet(pet: VotePet)
     }
+
 
 }

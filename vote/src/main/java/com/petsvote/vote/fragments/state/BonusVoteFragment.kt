@@ -1,4 +1,4 @@
-package com.petsvote.vote
+package com.petsvote.vote.fragments.state
 
 import android.content.Context
 import android.os.Bundle
@@ -8,13 +8,12 @@ import androidx.lifecycle.lifecycleScope
 import com.petsvote.core.BaseItemVoteFragment
 import com.petsvote.domain.entity.pet.VotePet
 import com.petsvote.ui.loadImage
+import com.petsvote.vote.viewmodels.BonusVoteViewModel
+import com.petsvote.vote.R
 import com.petsvote.vote.databinding.FragmentVoteBonusBinding
-import com.petsvote.vote.databinding.ItemFragmentVoteBinding
 import com.petsvote.vote.di.VoteComponentViewModel
 import dagger.Lazy
 import kotlinx.coroutines.flow.collect
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
 class BonusVoteFragment: BaseItemVoteFragment(R.layout.fragment_vote_bonus) {
