@@ -1,0 +1,26 @@
+<LinearLayout android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    style="@style/TextAppearance.Compat.Notification"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <ImageView
+        android:src="@drawable/icon"
+        android:layout_width="36dp"
+        android:layout_height="36dp"/>
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expanded_notification_title"
+        android:id="@+id/notification_title"
+        style="@style/TextAppearance.Compat.Notification.Title" />
+
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/expanded_notification_info"
+        android:id="@+id/notification_description"
+        style="@style/TextAppearance.Compat.Notification.Info" />
+
+</LinearLayout>

@@ -3,6 +3,7 @@ ext {
     swiperefreshlayoutVersion = '1.1.0'
     paging_version = '3.1.1'
     camerax_version = "1.1.0-beta01"
+    var = '/Users/admin/AndroidStudioProjects/AppPetSvote/outputs/keypath.jks'
 }
 buildscript {
     ext {
@@ -26,6 +27,8 @@ buildscript {
         navigationFragmentVersion = '2.4.1'
         fragmentKtxVersion = '1.4.1'
         roomVersion = '2.4.2'
+        firebaseMessagingVersion = '23.1.0'
+        firebaseCoreVersion = '21.1.1'
     }
 
     repositories {

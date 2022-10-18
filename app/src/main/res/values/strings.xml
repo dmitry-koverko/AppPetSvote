@@ -3,4 +3,10 @@
 
     <string name="title_legal">Legal</string>
     <string name="title_legalandterms">Legal</string>
+    <string name="notify_vote_description">получил(а) +%s баллов</string>
+    <string name="collapsed_notification_title">Title collapsed</string>
+    <string name="collapsed_notification_info">Description collapsed</string>
+    <string name="expanded_notification_title">expanded_notification_title</string>
+    <string name="expanded_notification_info">expanded_notification_info</string>
+    <string name="channel_description">description  empty</string>
 </resources>

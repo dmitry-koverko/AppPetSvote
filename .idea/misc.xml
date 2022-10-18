@@ -177,12 +177,17 @@
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/item_fragment_vote.xml" value="0.15301391035548687" />
         <entry key="..\:/clean-petsvote/vote/src/main/res/layout/item_vote_fragment.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/notification.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/notification_collapsed.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/notification_expanded.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="filter/src/main/res/layout/item_breeds.xml" value="0.21195652173913043" />
         <entry key="rating/src/main/res/layout/fragment_rating_collapsing.xml" value="0.2346014492753623" />
         <entry key="rating/src/main/res/layout/fragment_rating_empty.xml" value="0.19610507246376813" />
         <entry key="rating/src/main/res/layout/item_loading.xml" value="0.19610507246376813" />
         <entry key="rating/src/main/res/layout/item_rating_fragment.xml" value="0.2346014492753623" />
         <entry key="rating/src/main/res/layout/item_row.xml" value="0.19610507246376813" />
+        <entry key="splash/src/main/res/layout/fragment_splash.xml" value="0.14336372847011145" />
         <entry key="tabs/src/main/res/layout/fragment_tabs.xml" value="0.14336372847011145" />
         <entry key="ui/src/main/res/layout/besie_tab_latout_two.xml" value="0.21195652173913043" />
         <entry key="ui/src/main/res/layout/besie_tab_layout.xml" value="0.21195652173913043" />

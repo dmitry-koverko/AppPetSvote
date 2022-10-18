@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "464364548284",
+    "firebase_url": "https://long-memory-219919.firebaseio.com",
+    "project_id": "long-memory-219919",
+    "storage_bucket": "long-memory-219919.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464364548284:android:5ae8b13230a214fd28a0b9",
+        "android_client_info": {
+          "package_name": "com.petsvote.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464364548284-17cqf671rt026em45knr9qrmln8gl6fp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.app",
+            "certificate_hash": "6cc3afab8e573415d3f3545c73a4c7d263364799"
+          }
+        },
+        {
+          "client_id": "464364548284-q3usu574rfiqu47aji03osn47n5b8n44.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.app",
+            "certificate_hash": "9a9893d6f0d505c5a0153269fc5f6e1373e004ad"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOCXAgPgE_TVzksqd_Yp9GQtUSCXhgvCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464364548284:android:8098b759be68a59e28a0b9",
+        "android_client_info": {
+          "package_name": "com.petsvote.app.register"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464364548284-i3dis3nfastiaqchrmijjs4tigpu2a8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.app.register",
+            "certificate_hash": "6cc3afab8e573415d3f3545c73a4c7d263364799"
+          }
+        },
+        {
+          "client_id": "464364548284-pa9l74uhkmln5e4ndlrs0714r79nr0g0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.app.register",
+            "certificate_hash": "9a9893d6f0d505c5a0153269fc5f6e1373e004ad"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOCXAgPgE_TVzksqd_Yp9GQtUSCXhgvCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464364548284:android:fec1cd9bea5047f128a0b9",
+        "android_client_info": {
+          "package_name": "com.petsvote.register"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "464364548284-l6uboicsie3l4fhhtfk4uiddk46mk3kq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.register",
+            "certificate_hash": "9a9893d6f0d505c5a0153269fc5f6e1373e004ad"
+          }
+        },
+        {
+          "client_id": "464364548284-t87ilvgd9iefpq7n5v3ibp4ua1pfonin.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.petsvote.register",
+            "certificate_hash": "6cc3afab8e573415d3f3545c73a4c7d263364799"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOCXAgPgE_TVzksqd_Yp9GQtUSCXhgvCM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

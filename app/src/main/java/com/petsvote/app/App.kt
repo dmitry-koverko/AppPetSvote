@@ -1,5 +1,15 @@
 package com.petsvote.app
 import android.app.Application;
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.os.Build
+import android.util.Log
+import androidx.core.os.bundleOf
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.ktx.initialize
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.RemoteMessage
 import com.petsvote.app.di.AppComponent
 import com.petsvote.app.di.DaggerAppComponent
 import com.petsvote.dialog.di.DialogDeps
@@ -40,9 +50,18 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
         XInjectionManager.bindComponentToCustomLifecycle(object : IHasComponent<Navigator> {
             override fun getComponent(): Navigator = Navigator()
         })
+
+        //Firebase.initialize(this, Fire)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val token = task.result
+            Log.d(TAG, "token = $token")
+        })
     }
-
-
     override var depsSplash: SplashDeps = appComponent
     override var depsRegister: RegisterDeps = appComponent
     override var depsRoom: RoomDeps = appComponent
@@ -53,4 +72,8 @@ class App: Application(), SplashDepsProvider, RegisterDepsProvider, RoomDepsProv
     override var depsFilter: FilterDeps = appComponent
     override var depsDialog: DialogDeps = appComponent
     override var depsPet: PetDeps = appComponent
+
+    companion object{
+        const val TAG = "App"
+    }
 }
